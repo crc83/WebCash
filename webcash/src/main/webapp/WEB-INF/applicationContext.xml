@@ -10,7 +10,4 @@
 		        http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
 	<!-- Beans Declaration -->
-	<bean id="User" class="com.siriusif.model.User"/>
-	
-  
 </beans>
