@@ -1,0 +1,67 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Checks</title>
+</h:head>
+<DIV style="width: 600px; height: 800px;">
+	<h:body>
+		<p:accordionPanel multiple="true">
+			<p:tab title="Замовлення I">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:form>
+						<p:dataTable var="dishe" value="#{checksBean.checksTable}">
+							<p:column>
+								<h:outputText value="#{dishe.dish}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.number}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.price}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+					<p:button value="Редагувати замовлення"
+						href="/pages/menu.jsf" />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Замовлення II">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:form>
+						<p:dataTable var="dishe" value="#{checksBean.checksTableTwo}">
+							<p:column>
+								<h:outputText value="#{dishe.dish}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.number}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.price}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Замовлення III">
+				<h:panelGrid columns="2" cellpadding="10">
+					<h:form>
+						<p:dataTable var="dishe" value="#{checksBean.checksTableThree}">
+							<p:column>
+								<h:outputText value="#{dishe.dish}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.number}" />
+							</p:column>
+							<p:column>
+								<h:outputText value="#{dishe.price}" />
+							</p:column>
+						</p:dataTable>
+					</h:form>
+				</h:panelGrid>
+			</p:tab>
+		</p:accordionPanel>
+	</h:body>
+</DIV>
+</html>

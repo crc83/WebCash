@@ -1,0 +1,28 @@
+#head{
+    position: absolute;
+	z-index: 4 !important;
+}
+
+#layoutcenter{
+	z-index: 3 !important;
+}
+
+#layoutwest{
+	z-index: 2 !important;
+}
+
+#layout{
+	width:600px;
+	height:800px;
+}
+
+#textOrder{
+	font-weight: bold; 
+	font-size:15pt;
+	
+}
+
+.textOrder{
+	margin-left: 10px; 
+	margin-top: 50px;
+}

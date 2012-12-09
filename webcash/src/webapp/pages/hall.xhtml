@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hall</title>
+	<h:outputStylesheet library="css" name="hall.css" />
+</h:head>
+<DIV style="width: 600px; height: 800px;">
+	<h:body>
+	<div id="head">
+		<ui:insert name="header">
+			<ui:include src="/pages/head.xhtml" />
+		</ui:insert>
+	</div>
+	<h:graphicImage id="panelleft" value="/images/hall_left.png"/>
+		<h:graphicImage id="pic" value="/images/tables.png"/> 
+		<p:draggable for="pic"/>
+		<h:graphicImage id="pic1" value="/images/tables.png"/>
+		<p:draggable for="pic1"/>   
+		<h:graphicImage id="pic2" value="/images/tables.png"/>
+		<p:draggable for="pic2"/>   
+		<h:graphicImage id="pic3" value="/images/tables.png"/>  
+		<p:draggable for="pic3"/>
+		<h:graphicImage id="pic4" value="/images/tables.png"/>  
+		<p:draggable for="pic4"/>  
+		<h:graphicImage id="pic5" value="/images/tables.png"/>  
+		<p:draggable for="pic5"/>  
+		<h:graphicImage id="pic6" value="/images/tables.png"/>  
+		<p:draggable for="pic6"/>
+		<h:graphicImage id="pic7" value="/images/tables.png"/>  
+		<p:draggable for="pic7"/>
+		<h:graphicImage id="pic8" value="/images/tables.png"/>  
+		<p:draggable for="pic8"/>
+		<a href="/WebCashMockup/pages/checks.jsf">
+		<h:graphicImage id="pic9" value="/images/tables.png"/>
+		</a>
+		<p:draggable for="pic9"/>
+		<p:tooltip for="pic" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip>  
+		<p:tooltip for="pic1" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		<p:tooltip for="pic2" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		<p:tooltip for="pic3" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		<p:tooltip for="pic4" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		<p:tooltip for="pic5" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		<p:tooltip for="pic6" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip>   
+		<p:tooltip for="pic7" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip>   
+		<p:tooltip for="pic8" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip>   
+		<p:tooltip for="pic9" showEffect="fade" hideEffect="fade">
+		<h:form><p:inputText size="5"/></h:form>
+		</p:tooltip> 
+		
+	<h:graphicImage id="panelright" value="/images/hall_right.png"/>
+	</h:body>
+</DIV>
+</html>

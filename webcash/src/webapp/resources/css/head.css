@@ -1,0 +1,24 @@
+#buttonOptions{
+	position: absolute;
+	z-index: 2 !important;
+}
+
+#button{
+	margin-left: 65px !important; 
+	margin-top: -13px;
+	position: absolute !important;
+}
+
+#button1{
+	position: absolute !important;
+	margin-left: 200px;
+	margin-top: -13px;
+}
+
+.ui-panel .ui-panel-content{
+	z-index: 3 !important;
+	height: 20px !important;
+	z-index: 1 !important;
+	border-bottom:  none !important;
+	visibility: inherit !important;
+}

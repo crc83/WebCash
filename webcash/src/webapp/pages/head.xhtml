@@ -1,0 +1,37 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Web Cash</title>
+	<h:outputStylesheet library="css" name="head.css" />
+</h:head>
+<DIV style="width: 600px; height: 31px;">
+	<h:body>
+		<h:form id="buttonOptions">
+			<p:commandButton value="Опції" onclick="panel.toggle();"
+				type="button" />
+		</h:form>
+		<h:form>
+			<p:panel id="panel" widgetVar="panel" toggleable="true"
+				toggleOrientation="horizontal" collapsed="true">
+				<div id="button">
+					<p:button value="Настройки" href="/pages/options.jsf" />
+				</div>
+				<div id="button1">
+					<p:commandButton value="Звіт" onclick="dlg2.show();" type="button" />
+				</div>
+			</p:panel>
+		</h:form>
+		<p:dialog id="modalDialog" header="Продано" widgetVar="dlg2"
+			height="100">
+			<h:outputText value="Кухня: 1250грн." />
+			<br />
+			<h:outputText value="Бар: 1350грн." />
+			<br />
+			<h:outputText value="Всього: 2600грн." />
+			<br />
+		</p:dialog>
+	</h:body>
+</DIV>
+</html>

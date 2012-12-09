@@ -1,0 +1,26 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Web Cash</title>
+</h:head>
+<div style="width: 600px; height: 800px;">
+	<h:body>
+		<h:form>
+				<p:button value="Столи" href="/pages/hall.jsf"/>
+			<p:commandButton id="modalDialogButton" value="Звіт"
+				onclick="dlg2.show();" type="button" />
+		</h:form>
+		<p:dialog id="modalDialog" header="Продано" widgetVar="dlg2"
+			height="100">
+			<h:outputText value="Кухня: #{reportBean.kitchen}грн." />
+			<br />
+			<h:outputText value="Бар: #{reportBean.bar}грн." />
+			<br />
+			<h:outputText value="Всього: #{reportBean.all}грн." />
+			<br />
+		</p:dialog>
+	</h:body>
+</div>
+</html>

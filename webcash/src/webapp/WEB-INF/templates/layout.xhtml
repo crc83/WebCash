@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en"
+     xmlns="http://www.w3.org/1999/xhtml"
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:h="http://java.sun.com/jsf/html"
+     xmlns:ui="http://java.sun.com/jsf/facelets"
+     xmlns:p="http://primefaces.org/ui"
+>
+    <h:head>
+        <title>Title</title>
+    </h:head>
+    <h:body>
+    <!-- Top level menu (allways visible) -->
+		<h:form>
+	
+	    			<p:panel header="" toggleable="true" toggleOrientation="horizontal" collapsed="true"  >
+		    			<p:button value="Настройки" />
+						<f:facet name="header">
+	        	    		<h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">  
+	            	    		<h:outputText styleClass="ui-icon ui-icon-help" />  
+	            			</h:commandLink>  
+	            			<h:commandLink styleClass="ui-panel-titlebar-icon ui-corner-all ui-state-default">  
+	                			<h:outputText styleClass="ui-icon ui-icon-star" />  
+		        		    </h:commandLink>  
+				        </f:facet>
+					</p:panel>
+	
+	<!--  Content placeholder -->				
+	
+	            <ui:insert name="content">Put default content here, if any.</ui:insert>
+    <!-- Bottom margin (not defined yet) -->
+    	</h:form>
+    </h:body>
+</html>

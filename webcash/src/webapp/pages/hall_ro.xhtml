@@ -1,0 +1,73 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+	<title>Hall</title>
+	<h:outputStylesheet library="css" name="hall.css" />
+</h:head>
+<h:body>
+	
+<ui:composition template="/WEB-INF/templates/layout.xhtml">
+  <ui:define name="content">
+  	<h:panelGrid columns="2">
+		<h:graphicImage id="panelleft" value="/images/hall_left.png" />
+		<h:graphicImage id="panelright" value="/images/hall_right.png"/>
+	</h:panelGrid>
+	<p:outputPanel id="hall" layout="block"/>	
+		<h:graphicImage id="pic" value="/images/tables.png" /> 
+		<p:draggable for="pic" containment="parent"/>
+		<p:tooltip for="pic" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip>  
+		<h:graphicImage id="pic1" value="/images/tables.png"/>
+		<p:draggable for="pic1" containment="parent"/>   
+		<p:tooltip for="pic1" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip> 
+		<h:graphicImage id="pic2" value="/images/tables.png"/>
+		<p:draggable for="pic2" containment="parent"/>   
+		<p:tooltip for="pic2" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip> 
+		<h:graphicImage id="pic3" value="/images/tables.png"/>  
+		<p:draggable for="pic3" containment="parent"/>
+		<p:tooltip for="pic3" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip> 
+		<h:graphicImage id="pic4" value="/images/tables.png"/>  
+		<p:draggable for="pic4" containment="parent"/>  
+		<p:tooltip for="pic4" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip> 
+		<h:graphicImage id="pic5" value="/images/tables.png"/>  
+		<p:draggable for="pic5" containment="parent"/>  
+		<p:tooltip for="pic5" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip> 
+		<h:graphicImage id="pic6" value="/images/tables.png"/>  
+		<p:draggable for="pic6" containment="parent"/>
+		<p:tooltip for="pic6" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip>   
+		<h:graphicImage id="pic7" value="/images/tables.png"/>  
+		<p:draggable for="pic7" containment="parent"/>
+		<p:tooltip for="pic7" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip>   
+		<h:graphicImage id="pic8" value="/images/tables.png"/>  
+		<p:draggable for="pic8" containment="parent"/>
+		<p:tooltip for="pic8" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip>   
+		<h:graphicImage id="pic9" value="/images/tables.png"/> 
+		<p:draggable for="pic9" containment="parent"/>
+		<p:tooltip for="pic9" value="Fade effect is used by default" showEffect="fade" hideEffect="fade">
+		<p:inputText size="5"/>
+		</p:tooltip>   
+
+	</ui:define>
+</ui:composition>
+</h:body>
+</html>

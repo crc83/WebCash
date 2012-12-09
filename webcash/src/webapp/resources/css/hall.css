@@ -1,0 +1,79 @@
+#head{
+    position: absolute;
+	z-index: 20 !important;
+}
+
+#panelleft{
+	position: absolute;
+}
+
+#panelright{
+	margin-left: 170px;
+}
+
+#hall{
+	position: absolute !important;
+	margin-left: 170px;
+	width:430px;
+	height:780px;
+}
+
+#pic{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic1{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic2{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic3{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic4{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic5{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic6{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic7{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic8{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
+
+#pic9{
+	margin-top: 50px;
+	margin-left: 20px; 
+	position: absolute;
+}
