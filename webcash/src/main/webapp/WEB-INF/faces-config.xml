@@ -15,6 +15,14 @@
 	
 	<!-- configuration of navigation rules -->	
 	<navigation-rule>
+	    <!-- Allways start from login -->
+	    <from-view-id>/pages/default.xhtml</from-view-id> 
+	    <navigation-case>
+            <to-view-id>pages/login.xhtml</to-view-id>
+        </navigation-case>
+	</navigation-rule>
+		    
+	<navigation-rule>    
 	    <from-view-id>/pages/login.xhtml</from-view-id> 
 	    <navigation-case>
 	        <from-outcome>success</from-outcome>
