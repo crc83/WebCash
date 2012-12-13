@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class SalesTest {
+public class SaleTest {
 	
 	 /**
 	  * Given : New empty sale
