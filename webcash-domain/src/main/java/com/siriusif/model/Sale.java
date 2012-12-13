@@ -1,15 +1,15 @@
 package com.siriusif.model;
 
-import java.util.ArrayList;
 import java.util.Currency;
-import java.util.List;
-import java.math.*;
-import java.text.*;
 
 public class Sale {
+
 	private int id;
 	private double amount;
+	
+	/** () total sum of sale **/
 	private Currency sum;
+	
 	private Currency allowSum;
 	private boolean fp;
 	private boolean printed;
