@@ -8,14 +8,14 @@ public class Group {
 	private String gName;
 	
 	private List<Group> subGroups;
-	private List<Goods> goods;
+	private List<Good> goods;
 	
 	/** Group belongs to this parent group **/
 	private Group parentGroup;
 	
 	public Group(){
 		subGroups = new ArrayList<Group>();	
-		goods = new ArrayList<Goods>();
+		goods = new ArrayList<Good>();
 	}
 	
 
@@ -32,11 +32,11 @@ public class Group {
 		this.gName = gName;
 	}
 
-	public List<Goods> getGoods() {
+	public List<Good> getGoods() {
 		return goods;
 	}
 
-	public void setGoods(List<Goods> goods) {
+	public void setGoods(List<Good> goods) {
 		this.goods = goods;
 	}
 	
@@ -55,7 +55,7 @@ public class Group {
 		subGroups.add(subGroup);
 	}
 
-	public void addGood(Goods good) {
+	public void addGood(Good good) {
 		good.setParentGroup(this);
 		goods.add(good);
 	}

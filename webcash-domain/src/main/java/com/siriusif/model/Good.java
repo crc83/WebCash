@@ -5,7 +5,7 @@ import java.util.Currency;
 
 
 
-public class Goods {
+public class Good {
 	private int id;
 	private int art;
 	private String name;

@@ -6,7 +6,7 @@ import java.util.List;
 import java.math.*;
 import java.text.*;
 
-public class Sales {
+public class Sale {
 	private int id;
 	private double amount;
 	private Currency sum;
@@ -15,7 +15,7 @@ public class Sales {
 	private boolean printed;
 	private int idX;
 	private int ChIdX;
-	private Goods salesGood;
+	private Good salesGood;
 	
 	
 	public int getId() {
@@ -67,13 +67,13 @@ public class Sales {
 		ChIdX = chIdX;
 	}
 	
-	public Goods getSalesGood() {
+	public Good getSalesGood() {
 		return salesGood;
 	}
-	public void setSalesGood(Goods salesGood) {
+	public void setSalesGood(Good salesGood) {
 		this.salesGood = salesGood;
 	}
-	public void addGoodSales(Sales goodSales) {
+	public void addGoodSales(Sale goodSales) {
 		goodSales.setSalesGood(salesGood);	
 	}
 	 

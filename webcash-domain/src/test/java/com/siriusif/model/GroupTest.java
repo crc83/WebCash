@@ -18,7 +18,7 @@ public class GroupTest {
 		
 		//When
 		List<Group> subGroups =group.getSubGroups();  
-		List<Goods> goods =group.getGoods();  
+		List<Good> goods =group.getGoods();  
 		
 		//Than
 		assertEquals(0,subGroups.size());
@@ -51,7 +51,7 @@ public class GroupTest {
 	 @Test
 	 public void testGoodsAddToGroups(){
 		 Group group = new Group();
-		 Goods good = new Goods();
+		 Good good = new Good();
 		 
 		 group.addGood(good);
 		 

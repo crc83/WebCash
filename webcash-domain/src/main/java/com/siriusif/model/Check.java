@@ -3,7 +3,7 @@ package com.siriusif.model;
 import java.text.DateFormat;
 import java.util.Currency;
 
-public class Checks {
+public class Check {
 	private int num;
 	private DateFormat date;
 	private Currency sum;

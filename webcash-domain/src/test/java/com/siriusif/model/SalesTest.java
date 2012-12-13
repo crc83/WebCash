@@ -13,11 +13,11 @@ public class SalesTest {
 	  **/
 	@Test
 	public void testGetGroupGoodsToSales() {
-		Sales sale = new Sales();
+		Sale sale = new Sale();
 		
 		sale.addGoodSales(sale);
 		
-		Goods sales = sale.getSalesGood();
+		Good sales = sale.getSalesGood();
 		assertEquals(sales, sale.getSalesGood());
 	}
 	
@@ -28,8 +28,8 @@ public class SalesTest {
 	  **/
 	@Test
 	public void testPriceAmount(){
-		Goods good = new Goods();
-		Sales sale = new Sales();
+		Good good = new Good();
+		Sale sale = new Sale();
 		
 		sale.setSalesGood(good);
 		good.setPrice(3.44);
