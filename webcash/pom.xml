@@ -32,6 +32,12 @@
     </properties>
 
     <dependencies>
+		<dependency>
+			<groupId>com.siriusif</groupId>
+			<artifactId>webcash-domain</artifactId>
+			<version>m1</version>
+		</dependency>
+		
         <!-- Spring 3 dependencies -->
         <dependency>
             <groupId>org.springframework</groupId>
