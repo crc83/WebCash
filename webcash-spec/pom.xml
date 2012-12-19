@@ -93,7 +93,7 @@
 				<configuration>
 					<path>/WebCash</path>
 					<fork>true</fork>
-					<port>8081</port>
+					<port>8080</port>
 				</configuration>
 				<executions>
 					<execution>
