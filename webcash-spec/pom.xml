@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
           http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.siriusif</groupId>
-    <artifactId>webcash-spec</artifactId>
-    <packaging>war</packaging>
-    <version>m1</version>
-    <name>WebCash-specs</name>
-    <url>http://maven.apache.org</url>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.siriusif</groupId>
+	<artifactId>webcash-spec</artifactId>
+	<packaging>war</packaging>
+	<version>m1</version>
+	<name>WebCash-specs</name>
+	<url>http://maven.apache.org</url>
 
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
 
-        <repository>
-            <id>jvnet-nexus-releases</id>
-            <name>jvnet-nexus-releases</name>
-            <url>https://maven.java.net/content/repositories/releases</url>
-        </repository>
-    </repositories>
+		<repository>
+			<id>jvnet-nexus-releases</id>
+			<name>jvnet-nexus-releases</name>
+			<url>https://maven.java.net/content/repositories/releases</url>
+		</repository>
+	</repositories>
 
-    <properties>
-        <spring.version>3.1.1.RELEASE</spring.version>
-        <jsf.version>2.1.13</jsf.version>
-    </properties>
+	<properties>
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<jsf.version>2.1.13</jsf.version>
+	</properties>
 
-    <dependencies>
+	<dependencies>
 		<dependency>
 			<groupId>com.siriusif</groupId>
 			<artifactId>webcash</artifactId>
 			<type>war</type>
 			<version>m1</version>
-		</dependency>		
+		</dependency>
 		<!-- Tests -->
 
 		<dependency>
@@ -53,47 +53,81 @@
 			<version>0.9.7376</version>
 			<scope>test</scope>
 		</dependency>
-        <!-- Log4j library -->
-		
-        <dependency> 
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.5.8</version>
-        </dependency>
+		<!-- Log4j library -->
 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.5.8</version>
+		</dependency>
 
-        <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<version>4.10</version>
-        	<scope>test</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
 
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>default-cli</id>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.siriusif</groupId>
+									<artifactId>webcash</artifactId>
+									<type>war</type>
+									<version>m1</version>
+									<overWrite>true</overWrite>
+									<destFileName>webcash.war</destFileName>
+								</artifactItem>
+							</artifactItems>
+							<outputDirectory>
+								${project.build.directory}/war
+							</outputDirectory>
+							<overWriteReleases>true</overWriteReleases>
+							<overWriteSnapshots>true</overWriteSnapshots>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.0</version>
 				<configuration>
-					<path>/WebCash</path>
-					<fork>true</fork>
-					<port>8080</port>
+					<warRunDependencies>
+						<warRunDependency>
+							<dependency>
+								<groupId>com.siriusif</groupId>
+								<artifactId>webcash</artifactId>
+								<type>war</type>
+								<version>m1</version>
+							</dependency>
+							<contextPath>/WebCash</contextPath>
+						</warRunDependency>
+					</warRunDependencies>
 				</configuration>
 				<executions>
 					<execution>
@@ -112,7 +146,7 @@
 					</execution>
 				</executions>
 			</plugin>
-        </plugins>
-    </build>
+		</plugins>
+	</build>
 
 </project>
