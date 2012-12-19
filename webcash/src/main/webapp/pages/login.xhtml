@@ -11,41 +11,10 @@
 	
 	<p:growl id="growl" showDetail="true" life="3000" />  
   
-<!-- <p:dialog id="dialog" header="Login" widgetVar="dlg">  
-    <h:form>  
-  
-        <h:panelGrid columns="2" cellpadding="5">  
-            <h:outputLabel for="username" value="Username:" />  
-            <p:inputText value="#{loginBean.username}"   
-                    id="username" required="true" label="username" />  
-              
-            <h:outputLabel for="password" value="Password:" />  
-            <h:inputSecret value="#{loginBean.password}"   
-                    id="password" required="true" label="password" />  
-              
-            <f:facet name="footer">  
-                <p:commandButton id="loginButton" value="Login" update=":growl"   
-                    actionListener="#{loginBean.login}"   
-                    oncomplete="handleLoginRequest(xhr, status, args)"/>  
-            </f:facet>  
-        </h:panelGrid>  
-          
-    </h:form>  
-</p:dialog>  
-  
-<script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            jQuery('#dialog').effect("shake", { times:3 }, 100);  
-        } else {  
-            dlg.hide();  
-            jQuery('#loginLink').fadeOut();  
-        }  
-    }  
-</script>  --> 
+
 	
-		<h:form>
 		<p:dialog id="modalDialog" header="Login" visible="true">
+		<h:form>
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="Username:" />
 				<p:inputText value="#{loginBean.username}" id="username"
@@ -56,23 +25,13 @@
 					required="true" label="password"
 					style="border:1px solid #333333; height:25px; width:150px;" />
 				<f:facet name="footer">
-					<p:button id="loginButton" value="Вхід"
-						update=":growl" actionListener="#{loginBean.login}"
-						oncomplete="handleLoginRequest(xhr, status, args)" />
+					<p:commandButton id="loginButton" value="Вхід" action="#{loginBean.login}"
+						update=":growl" actionListener="#{loginBean.login}"/>
 				</f:facet>
 			</h:panelGrid>
-		</p:dialog>
 		</h:form>
-		<script type="text/javascript">  
-    function handleLoginRequest(xhr, status, args) {  
-        if(args.validationFailed || !args.loggedIn) {  
-            jQuery('#dialog').effect("shake", { times:3 }, 100);  
-        } else {  
-            dlg.hide();  
-            jQuery('#loginLink').fadeOut();  
-        }  
-    }  
-</script>  
+		</p:dialog>
+		
 	</h:body>
 </DIV>
 </html>
