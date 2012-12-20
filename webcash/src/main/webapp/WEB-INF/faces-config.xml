@@ -15,14 +15,6 @@
 	
 	<!-- configuration of navigation rules -->	
 	<navigation-rule>
-	    <!-- Allways start from login -->
-	    <from-view-id>/pages/default.xhtml</from-view-id> 
-	    <navigation-case>
-            <to-view-id>pages/login.xhtml</to-view-id>
-        </navigation-case>
-	</navigation-rule>
-		    
-	<navigation-rule>    
 	    <from-view-id>/pages/login.xhtml</from-view-id> 
 	    <navigation-case>
 	        <from-outcome>success</from-outcome>
@@ -30,7 +22,20 @@
         </navigation-case>
          <navigation-case>
 	        <from-outcome>error</from-outcome>
-            <to-view-id>/pages/login.xhtml</to-view-id>
+            <to-view-id>/pages/menu.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    	
+	<!-- configuration of navigation rules (you can copy from here) -->	
+	<navigation-rule>
+	    <from-view-id>/pages/index.xhtml</from-view-id> 
+	    <navigation-case>
+	        <from-outcome>success</from-outcome>
+            <to-view-id>/pages/success.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+	        <from-outcome>error</from-outcome>
+            <to-view-id>/pages/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     

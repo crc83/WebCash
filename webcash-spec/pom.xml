@@ -80,21 +80,11 @@
 						<id>tomcat-run</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>exec-war-only</goal>
+							<goal>exec-war</goal>
 						</goals>
 						<configuration>
-							<fork>true</fork>
-							<warRunDependencies>
-								<warRunDependency>
-									<dependency>
-										<groupId>com.siriusif</groupId>
-										<artifactId>webcash</artifactId>
-										<type>war</type>
-										<version>m1</version>
-									</dependency>
-									<contextPath>WebCash</contextPath>
-								</warRunDependency>
-							</warRunDependencies>
+							<path>/WebCash</path>
+							<warFile>target/webcash-m1.war</warFile>
 						</configuration>
 					</execution>
 					<execution>
