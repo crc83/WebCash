@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.siriusif</groupId>
 	<artifactId>webcash-spec</artifactId>
-	<packaging>jar</packaging>
+	<packaging>war</packaging>
 	<version>m1</version>
 	<name>WebCash-specs</name>
 	<url>http://maven.apache.org</url>
@@ -73,39 +73,64 @@
 			<artifactId>junit</artifactId>
 			<version>4.10</version>
 		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.6</version>
+				<executions>
+					<execution>
+						<id>copy</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.siriusif</groupId>
+									<artifactId>webcash</artifactId>
+									<type>war</type>
+									<version>m1</version>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/wars</outputDirectory>
+									<destFileName>WebCash.war</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
+			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
 				<version>2.0</version>
+				<configuration>
+					<fork>true</fork>
+					<port>8080</port>
+					<path>/WebCash</path>
+					<!-- warFile>${project.build.directory}/wars/WebCash.war</warFile -->
+				</configuration>
+
 				<executions>
 					<execution>
 						<id>tomcat-run</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<!-- goal>exec-war</goal -->
 							<goal>run</goal>
-							<goal>deploy</goal>
 						</goals>
-						<configuration>
-							<fork>true</fork>
-							<port>8080</port>
-							<addContextWarDependencies>true</addContextWarDependencies>
-							<!-- warFile>target/webcash-m1.war</warFile -->
-
-							<!-- dependencies> <dependency> <groupId>com.siriusif</groupId> <artifactId>webcash</artifactId> 
-								<type>war</type> <version>m1</version> <scope>tomcat</scope> </dependency> 
-								</dependencies -->
-						</configuration>
 					</execution>
 					<execution>
 						<id>tomcat-stop</id>
 						<phase>post-integration-test</phase>
 						<goals>
-							<goal>shutdown</goal>
+							<goal>run</goal>
 						</goals>
 					</execution>
 				</executions>
