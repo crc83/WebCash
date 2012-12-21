@@ -35,6 +35,12 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.siriusif</groupId>
+			<artifactId>webcash</artifactId>
+			<type>war</type>
+			<version>m1</version>
+		</dependency>
 		<!-- Tests -->
 
 		<dependency>
@@ -80,11 +86,19 @@
 						<id>tomcat-run</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>exec-war</goal>
+							<!-- goal>exec-war</goal -->
+							<goal>run</goal>
+							<goal>deploy</goal>
 						</goals>
 						<configuration>
-							<path>/WebCash</path>
-							<warFile>target/webcash-m1.war</warFile>
+							<fork>true</fork>
+							<port>8080</port>
+							<addContextWarDependencies>true</addContextWarDependencies>
+							<!-- warFile>target/webcash-m1.war</warFile -->
+
+							<!-- dependencies> <dependency> <groupId>com.siriusif</groupId> <artifactId>webcash</artifactId> 
+								<type>war</type> <version>m1</version> <scope>tomcat</scope> </dependency> 
+								</dependencies -->
 						</configuration>
 					</execution>
 					<execution>
@@ -102,8 +116,8 @@
 				<configuration>
 					<skipTests>false</skipTests>
 					<includes>
-            			<include>%regex[.*]</include>
-          			</includes>
+						<include>%regex[.*]</include>
+					</includes>
 				</configuration>
 				<executions>
 					<execution>
