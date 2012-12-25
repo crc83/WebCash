@@ -14,7 +14,7 @@ public class LoginPageTest {
 		WebDriver driver = new HtmlUnitDriver();
 //		FirefoxDriver driver = new FirefoxDriver();
 		// Find the text input element by its name
-		driver.get("http://localhost:8080/WebCash");
+		driver.get("http://localhost:8080/webcash");
 		assertNotNull(driver.findElement(By.id("loginForm:username")));
 		assertNotNull(driver.findElement(By.id("loginForm:password")));
 		//Close the browser

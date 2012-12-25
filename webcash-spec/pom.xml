@@ -6,7 +6,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.siriusif</groupId>
 	<artifactId>webcash-spec</artifactId>
-	<packaging>war</packaging>
+	<packaging>pom</packaging>
 	<version>m1</version>
 	<name>WebCash-specs</name>
 	<url>http://maven.apache.org</url>
@@ -28,7 +28,6 @@
 
 	<properties>
 		<!-- IMPRTANT : Only integration tests aviable -->
-		<skipTests>true</skipTests>
 
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<jsf.version>2.1.13</jsf.version>
@@ -41,7 +40,6 @@
 			<type>war</type>
 			<version>m1</version>
 		</dependency>
-		<!-- Tests -->
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -74,39 +72,20 @@
 			<version>4.10</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.siriusif</groupId>
+			<artifactId>webcash</artifactId>
+			<type>war</type>
+			<version>m1</version>
+			<scope>tomcat</scope>
+		</dependency>
+
 	</dependencies>
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.6</version>
-				<executions>
-					<execution>
-						<id>copy</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>com.siriusif</groupId>
-									<artifactId>webcash</artifactId>
-									<type>war</type>
-									<version>m1</version>
-									<overWrite>true</overWrite>
-									<outputDirectory>${project.build.directory}/wars</outputDirectory>
-									<destFileName>WebCash.war</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
 
-
+			<!-- For integration testing -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
 				<artifactId>tomcat7-maven-plugin</artifactId>
@@ -114,10 +93,8 @@
 				<configuration>
 					<fork>true</fork>
 					<port>8080</port>
-					<path>/WebCash</path>
-					<!-- warFile>${project.build.directory}/wars/WebCash.war</warFile -->
+					<addContextWarDependencies>true</addContextWarDependencies>
 				</configuration>
-
 				<executions>
 					<execution>
 						<id>tomcat-run</id>
@@ -130,25 +107,21 @@
 						<id>tomcat-stop</id>
 						<phase>post-integration-test</phase>
 						<goals>
-							<goal>run</goal>
+							<goal>shutdown</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+
+
 			<plugin>
-				<artifactId>maven-failsafe-plugin</artifactId>
-				<version>2.6</version>
-				<configuration>
-					<skipTests>false</skipTests>
-					<includes>
-						<include>%regex[.*]</include>
-					</includes>
-				</configuration>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
 				<executions>
 					<execution>
+						<phase>integration-test</phase>
 						<goals>
-							<goal>integration-test</goal>
-							<goal>verify</goal>
+							<goal>test</goal>
 						</goals>
 					</execution>
 				</executions>
