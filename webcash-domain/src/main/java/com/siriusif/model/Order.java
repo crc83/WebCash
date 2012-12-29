@@ -1,9 +1,11 @@
 package com.siriusif.model;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Currency;
+import java.util.List;
 
-public class Check {
+public class Order {
 	private int num;
 	private DateFormat date;
 	private Currency sum;
@@ -22,6 +24,11 @@ public class Check {
 	private Currency payed;
 	private boolean isCard;
 	private int chIdX;
+	private List<Suborder> suborders;
+	
+	public Order(){
+		suborders = new ArrayList<Suborder>();
+	}
 
 	// use("",0,0)
 	/*
@@ -179,6 +186,19 @@ public class Check {
 		} else {
 			return false;
 		}
+	}
+
+	public List<Suborder> getSuborders() {
+		return suborders;
+	}
+
+	public void setSuborders(List<Suborder> suborders) {
+		this.suborders = suborders;
+	}
+
+	public void addSuborder(Suborder suborder) {
+		suborder.setOrder(this);
+		suborders.add(suborder);
 	}
 
 }

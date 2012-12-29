@@ -16,6 +16,7 @@ public class Sale {
 	private int idX;
 	private int ChIdX;
 	private Good salesGood;
+	private Suborder suborder;
 	
 	
 	public int getId() {
@@ -83,6 +84,12 @@ public class Sale {
 		double am = getAmount();
 		sum = p * am;
 		return sum;
+	}
+	public Suborder getSuborder() {
+		return suborder;
+	}
+	public void setSuborder(Suborder suborder) {
+		this.suborder = suborder;
 	}
 	
 	
