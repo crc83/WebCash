@@ -51,11 +51,10 @@ public class GroupTest {
 	 @Test
 	 public void testGoodsAddToGroups(){
 		 Group group = new Group();
-		 Good good = new Good();
+		 Good good = new Good("Some good",42);
 		 
 		 group.addGood(good);
 		 
-		 Group groups = good.getParentGroup(); 
 		 assertEquals(group, good.getParentGroup());
 	 }
 

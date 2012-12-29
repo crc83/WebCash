@@ -7,7 +7,7 @@
     <groupId>com.siriusif</groupId>
     <artifactId>webcash</artifactId>
     <packaging>war</packaging>
-    <version>m1</version>
+    <version>0.1-SNAPSHOT</version>
     <name>WebCash</name>
     <url>http://maven.apache.org</url>
 
@@ -35,7 +35,7 @@
 		<dependency>
 			<groupId>com.siriusif</groupId>
 			<artifactId>webcash-domain</artifactId>
-			<version>m1</version>
+			<version>0.1-SNAPSHOT</version>
 		</dependency>
 		
         <!-- Spring 3 dependencies -->

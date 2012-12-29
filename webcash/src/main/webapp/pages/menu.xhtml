@@ -28,19 +28,13 @@
 				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ"/>
 			</div>
 			<h:form>
-				<p:dataTable var="good" value="#{disheBean.dishMenu}">
-					<p:subTable var="dishe" value="#{good.dishe}">
+				<p:dataTable var="order" value="#{orderBean.order}">
+					<p:subTable var="sale" value="#{suborder.sales}">
 						<f:facet name="header">  
-              			Подача: #{good.serve}   
+              			Подача: #{suborder.index}   
            			</f:facet>
 						<p:column>  
-                		#{dishe.dish}  
-            		</p:column>
-						<p:column>  
-                		#{dishe.number}  
-            		</p:column>
-						<p:column>  
-                		#{dishe.price}  
+                		#{sale.amount}  
             		</p:column>
 					</p:subTable>
 				</p:dataTable>
