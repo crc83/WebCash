@@ -1,110 +1,179 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
           http://maven.apache.org/maven-v4_0_0.xsd">
 
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.siriusif</groupId>
-    <artifactId>webcash-spec</artifactId>
-    <packaging>war</packaging>
-    <version>m1</version>
-    <name>WebCash-specs</name>
-    <url>http://maven.apache.org</url>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.siriusif</groupId>
+	<artifactId>webcash-spec</artifactId>
+	<packaging>jar</packaging>
+	<version>0.1-SNAPSHOT</version>
+	<name>webcash-specs</name>
+	<url>http://maven.apache.org</url>
 
-    <repositories>
-        <repository>
-            <id>prime-repo</id>
-            <name>PrimeFaces Maven Repository</name>
-            <url>http://repository.primefaces.org</url>
-            <layout>default</layout>
-        </repository>
+	<repositories>
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
 
-        <repository>
-            <id>jvnet-nexus-releases</id>
-            <name>jvnet-nexus-releases</name>
-            <url>https://maven.java.net/content/repositories/releases</url>
-        </repository>
-    </repositories>
+		<repository>
+			<id>jvnet-nexus-releases</id>
+			<name>jvnet-nexus-releases</name>
+			<url>https://maven.java.net/content/repositories/releases</url>
+		</repository>
 
-    <properties>
-        <spring.version>3.1.1.RELEASE</spring.version>
-        <jsf.version>2.1.13</jsf.version>
-    </properties>
+		<repository>
+			<id>apache-snapshots</id>
+			<name>apache-snapshots</name>
+			<url>http://repository.apache.org/snapshots</url>
+		</repository>
 
-    <dependencies>
+	</repositories>
+
+	<properties>
+		<!-- IMPRTANT : Only integration tests aviable -->
+		<skipTests>true</skipTests>
+
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<jsf.version>2.1.13</jsf.version>
+	</properties>
+
+	<dependencies>
 		<dependency>
 			<groupId>com.siriusif</groupId>
 			<artifactId>webcash</artifactId>
 			<type>war</type>
-			<version>m1</version>
-		</dependency>		
-		<!-- Tests -->
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>2.25.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-htmlunit-driver</artifactId>
 			<version>2.3.1</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.webdriver</groupId>
 			<artifactId>webdriver-firefox</artifactId>
 			<version>0.9.7376</version>
-			<scope>test</scope>
 		</dependency>
-        <!-- Log4j library -->
-		
-        <dependency> 
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.5.8</version>
-        </dependency>
 
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
-        </dependency>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
+			<version>2.25.0</version>
+		</dependency>
+		<!-- Log4j library -->
 
-        <dependency>
-        	<groupId>junit</groupId>
-        	<artifactId>junit</artifactId>
-        	<version>4.10</version>
-        	<scope>test</scope>
-        </dependency>
-    </dependencies>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.5.8</version>
+		</dependency>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.6</source>
-                    <target>1.6</target>
-                </configuration>
-            </plugin>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.6</version>
+		</dependency>
 
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>com.siriusif</groupId>
+			<artifactId>webcash</artifactId>
+			<type>war</type>
+			<version>0.1-SNAPSHOT</version>
+			<scope>tomcat</scope>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+
+			<!-- For integration testing -->
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>tomcat-maven-plugin</artifactId>
-				<version>1.1</version>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
+				<version>2.0</version>
 				<configuration>
-					<path>/WebCash</path>
 					<fork>true</fork>
 					<port>8080</port>
+					<addContextWarDependencies>true</addContextWarDependencies>
+					<extraDependencies>
+						<!-- JSF library -->
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>javax.faces-api</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>jsf-api</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>jsf-impl</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+
+						<!-- JEE -->
+						<dependency>
+							<groupId>javax.servlet</groupId>
+							<artifactId>servlet-api</artifactId>
+							<version>2.5</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax</groupId>
+							<artifactId>javaee-api</artifactId>
+							<version>6.0</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.el</groupId>
+							<artifactId>javax.el-api</artifactId>
+							<version>3.0-b02</version>
+						</dependency>
+
+						<dependency>
+							<groupId>el-impl</groupId>
+							<artifactId>el-impl</artifactId>
+							<version>3.0-b02</version>
+						</dependency>
+
+					</extraDependencies>
 				</configuration>
 				<executions>
 					<execution>
-						<id>start-tc</id>
+						<id>tomcat-run</id>
 						<phase>pre-integration-test</phase>
 						<goals>
-							<goal>run-war-only</goal>
+							<goal>run</goal>
 						</goals>
+
 					</execution>
 					<execution>
-						<id>stop-tc</id>
+						<id>tomcat-stop</id>
 						<phase>post-integration-test</phase>
 						<goals>
 							<goal>shutdown</goal>
@@ -112,7 +181,29 @@
 					</execution>
 				</executions>
 			</plugin>
-        </plugins>
-    </build>
+
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<executions>
+					<execution>
+						<configuration>
+							<skipTests>false</skipTests>
+							<includes>
+								<include>%regex[.*]</include>
+							</includes>
+						</configuration>
+
+						<id>run-specs</id>
+						<phase>integration-test</phase>
+						<goals>
+							<goal>test</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
 
 </project>
