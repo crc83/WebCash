@@ -24,11 +24,21 @@
 			<name>jvnet-nexus-releases</name>
 			<url>https://maven.java.net/content/repositories/releases</url>
 		</repository>
+
+		<repository>
+			<id>apache-snapshots</id>
+			<name>apache-snapshots</name>
+			<url>http://repository.apache.org/snapshots</url>
+		</repository>
+
 	</repositories>
 
 	<properties>
 		<!-- IMPRTANT : Only integration tests aviable -->
 		<skipTests>true</skipTests>
+
+		<spring.version>3.1.1.RELEASE</spring.version>
+		<jsf.version>2.1.13</jsf.version>
 	</properties>
 
 	<dependencies>
@@ -82,11 +92,12 @@
 			<version>4.10</version>
 		</dependency>
 
+
 		<dependency>
 			<groupId>com.siriusif</groupId>
 			<artifactId>webcash</artifactId>
 			<type>war</type>
-			<version>m1</version>
+			<version>0.1-SNAPSHOT</version>
 			<scope>tomcat</scope>
 		</dependency>
 
@@ -98,12 +109,59 @@
 			<!-- For integration testing -->
 			<plugin>
 				<groupId>org.apache.tomcat.maven</groupId>
-				<artifactId>tomcat7-maven-plugin</artifactId>
+				<artifactId>tomcat6-maven-plugin</artifactId>
 				<version>2.0</version>
 				<configuration>
 					<fork>true</fork>
 					<port>8080</port>
 					<addContextWarDependencies>true</addContextWarDependencies>
+					<extraDependencies>
+						<!-- JSF library -->
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>javax.faces-api</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>jsf-api</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.faces</groupId>
+							<artifactId>jsf-impl</artifactId>
+							<version>2.1</version>
+						</dependency>
+
+
+						<!-- JEE -->
+						<dependency>
+							<groupId>javax.servlet</groupId>
+							<artifactId>servlet-api</artifactId>
+							<version>2.5</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax</groupId>
+							<artifactId>javaee-api</artifactId>
+							<version>6.0</version>
+						</dependency>
+
+						<dependency>
+							<groupId>javax.el</groupId>
+							<artifactId>javax.el-api</artifactId>
+							<version>3.0-b02</version>
+						</dependency>
+
+						<dependency>
+							<groupId>el-impl</groupId>
+							<artifactId>el-impl</artifactId>
+							<version>3.0-b02</version>
+						</dependency>
+
+					</extraDependencies>
 				</configuration>
 				<executions>
 					<execution>
@@ -112,6 +170,7 @@
 						<goals>
 							<goal>run</goal>
 						</goals>
+
 					</execution>
 					<execution>
 						<id>tomcat-stop</id>
