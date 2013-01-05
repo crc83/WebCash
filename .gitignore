@@ -1,8 +1,6 @@
-
 /webcash/target
 /webcash/.metadata
 /webcash-domain/target
+/webcash-domain/.metadata
 /webcash-spec/target
-/webcash/.metadata
-/webcash/.metadata
-/webcash-spec/target
+/webcash-spec/.metadata
