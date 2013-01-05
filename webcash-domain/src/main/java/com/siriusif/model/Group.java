@@ -19,6 +19,12 @@ public class Group {
 	}
 	
 
+	public Group(String gName) {
+		this();
+		this.gName = gName;
+	}
+
+
 	public int getgId() {
 		return gId;
 	}

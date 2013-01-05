@@ -8,15 +8,28 @@
 	<h:outputStylesheet library="css" name="menu.css" />
 </h:head>
 <h:body>
-	<p:accordionPanel value="#{groupModel.groups}" var="groups">
-		<p:tab title="#{groups.gName}">
+				<h:form>
+	<p:accordionPanel value="#{menuBean.goods}" var="good" activeIndex="150">
+		<p:tab title="#{good.name}">
 			<h:panelGrid columns="2" cellpadding="10">
-				<h:panelGrid columns="1" cellpadding="10">
-					<h:outputText value="#{groups.gName}" style="font-weight: bold" />
+				<h:panelGrid columns="2" cellpadding="10">
+				<p:column>
+					<p:inputText value="#{menuBean.name}" style="font-weight: bold"/>
+					<p:commandLink value="add"/>
+				</p:column>
+				
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:tab>
 	</p:accordionPanel>
+	<p:panel id="display" header="Information" style="margin-top:10px;">  
+        <h:panelGrid columns="2" >  
+            <h:outputText value="Firstname: " />  
+            <h:outputText id="txt1" value="#{menuBean.name}" />  
+           
+        </h:panelGrid>  
+    </p:panel>  
+				</h:form>
 	<div id="head">
 		<ui:insert name="header">
 			<ui:include src="/pages/head.xhtml" />
