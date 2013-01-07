@@ -2,13 +2,7 @@ package com.siriusif.model;
 
 
 /**
- * 
  * User Entity
- * 
- * @author onlinetechvision.com
- * @since 25 Mar 2012
- * @version 1.0.0
- *
  */
 public class User {
 
