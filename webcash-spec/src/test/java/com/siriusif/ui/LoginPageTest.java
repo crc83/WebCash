@@ -9,6 +9,8 @@ import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+// SB : I need this in order to change web driver
+@SuppressWarnings("unused")
 public class LoginPageTest {
 
 	@Test

@@ -54,8 +54,6 @@ public class GroupTest {
 		 Good good = new Good();
 		 
 		 group.addGood(good);
-		 
-		 Group groups = good.getParentGroup(); 
 		 assertEquals(group, good.getParentGroup());
 	 }
 
