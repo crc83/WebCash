@@ -8,6 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+/*
+ * SB :
+ * For postgres we have to create database manually
+ * here is explanation.
+ * http://stackoverflow.com/questions/6245590/how-do-i-get-hibernate-to-execute-create-database-if-necessary-for-postgresql-wh
+ */
+// TODO SB : Do something wit CREATE DATABASE
 @ContextConfiguration(locations = "/persistence-beans.xml")
 public class HibernateConfigurationTest extends AbstractJUnit4SpringContextTests {
 	
