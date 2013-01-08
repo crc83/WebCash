@@ -16,6 +16,11 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>9.1-901.jdbc4</version>
+		</dependency>
 		<!-- service layer dependencies -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
