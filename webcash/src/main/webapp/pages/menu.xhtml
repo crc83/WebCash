@@ -8,39 +8,34 @@
 	<h:outputStylesheet library="css" name="menu.css" />
 </h:head>
 <h:body>
-				<h:form>
-	<p:accordionPanel value="#{menuBean.goods}" var="good" activeIndex="150">
-		<p:tab title="#{good.name}">
-			<h:panelGrid columns="2" cellpadding="10">
-				<h:panelGrid columns="2" cellpadding="10">
+				<h:form prependId="false">
+	<p:accordionPanel value="#{orderBean.groups}" var="group" activeIndex="150">
+		<p:tab title="#{group.gName}">
+			<p:dataGrid value="#{group.goods}" var="good" columns="1">
 				<p:column>
-					<p:inputText value="#{menuBean.name}" style="font-weight: bold"/>
-					<p:commandLink value="add"/>
+					<p:commandButton value="#{good.name} - #{good.price}" actionListener="#{orderBean.onClick}" update=":addGood">
+						<f:attribute name="selectedGoodName" value="#{good.name}"/>
+						<f:attribute name="selectedGood" value="#{good}"/>
+					</p:commandButton>
 				</p:column>
 				
-				</h:panelGrid>
-			</h:panelGrid>
+				</p:dataGrid>
+				
 		</p:tab>
 	</p:accordionPanel>
-	<p:panel id="display" header="Information" style="margin-top:10px;">  
-        <h:panelGrid columns="2" >  
-            <h:outputText value="Firstname: " />  
-            <h:outputText id="txt1" value="#{menuBean.name}" />  
-           
-        </h:panelGrid>  
-    </p:panel>  
+  
 				</h:form>
 	<div id="head">
 		<ui:insert name="header">
 			<ui:include src="/pages/head.xhtml" />
 		</ui:insert>
 	</div>
-	<p:layout id="layout">
-		<p:layoutUnit id="layoutwest" position="west" resizable="true" size="300" minSize="40">
+	<p:layout>
+		<p:layoutUnit id="layoutLeft" position="west" resizable="true" size="300" minSize="40">
 			<div class="textOrder">
 				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ"/>
 			</div>
-			<h:form>
+			<h:form id="addGood">
 				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
 					<p:subTable var="sales" value="#{suborder.sales}">
 						<f:facet name="header">  
