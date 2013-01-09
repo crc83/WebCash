@@ -8,32 +8,16 @@
 	<h:outputStylesheet library="css" name="menu.css" />
 </h:head>
 <h:body>
-				<h:form prependId="false">
-	<p:accordionPanel value="#{orderBean.groups}" var="group" activeIndex="150">
-		<p:tab title="#{group.gName}">
-			<p:dataGrid value="#{group.goods}" var="good" columns="1">
-				<p:column>
-					<p:commandButton value="#{good.name} - #{good.price}" actionListener="#{orderBean.onClick}" update=":addGood">
-						<f:attribute name="selectedGoodName" value="#{good.name}"/>
-						<f:attribute name="selectedGood" value="#{good}"/>
-					</p:commandButton>
-				</p:column>
-				
-				</p:dataGrid>
-				
-		</p:tab>
-	</p:accordionPanel>
-  
-				</h:form>
 	<div id="head">
 		<ui:insert name="header">
 			<ui:include src="/pages/head.xhtml" />
 		</ui:insert>
 	</div>
-	<p:layout>
-		<p:layoutUnit id="layoutLeft" position="west" resizable="true" size="300" minSize="40">
+	<p:layout id="layout">
+		<p:layoutUnit id="layoutLeft" position="west" resizable="true"
+			size="300" minSize="40">
 			<div class="textOrder">
-				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ"/>
+				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ" />
 			</div>
 			<h:form id="addGood">
 				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
@@ -41,52 +25,78 @@
 						<f:facet name="header">  
               			Подача: #{suborder.index}   
            			</f:facet>
-           			<p:column>  
+						<p:column>  
                 		#{sales.salesGood.name}  
             		</p:column>
-            		<p:column>  
+						<p:column>  
                 		#{sales.salesGood.price}  
             		</p:column>
 						<p:column>  
                 		#{sales.amount}  
             		</p:column>
-            		<p:column>  
+						<p:column>  
                 		#{sales.calculatedSum}  
             		</p:column>
+					<p:columnGroup type="footer">  
+                <p:row>  
+                    <p:column colspan="3" footerText="Totals: " style="text-align:right"/>  
+                    <p:column footerText="#{suborder.total}" />   
+                </p:row>  
+            </p:columnGroup>
 					</p:subTable>
+					<p:columnGroup type="footer">  
+                <p:row>  
+                    <p:column colspan="3" footerText="Totals: " style="text-align:right"/>  
+                    <p:column footerText="#{order.total}" />   
+                </p:row>  
+            </p:columnGroup>
 				</p:dataTable>
 			</h:form>
-			<p:button value="Зберегти" href="/pages/hall.jsf"/>
-			<p:button value="Надрукувати" href="/pages/hall.jsf"/>
-			<h:panelGrid columns="1" cellpadding="5">
-				<h:form>
-				</h:form>
-			</h:panelGrid>
+			<p:button value="Зберегти" href="/pages/hall.jsf" />
+			<p:button value="Надрукувати" href="/pages/hall.jsf" />
 		</p:layoutUnit>
-		<p:layoutUnit id="layoutcenter" position="center">
+		<p:layoutUnit id="layoutcenter" position="center" size="300">
+			<h:form>
+				<p:accordionPanel value="#{orderBean.groups}" var="group"
+					activeIndex="150">
+					<p:tab title="#{group.gName}">
+						<p:dataGrid value="#{group.goods}" var="good" columns="1">
+							<p:column>
+								<p:commandButton styleClass="buttonAccordion"
+									value="#{good.name} - #{good.price}"
+									actionListener="#{orderBean.onClick}" update=":addGood">
+									<f:attribute name="selectedGoodName" value="#{good.name}" />
+									<f:attribute name="selectedGood" value="#{good}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
 			<p:accordionPanel activeIndex="150">
 				<p:tab title="Салати">
-					<h:panelGrid columns="2" cellpadding="5" style="margin-left: -10px;">
+					<h:panelGrid columns="2" cellpadding="5"
+						style="margin-left: -10px;">
 						<h:outputText value="Сирний 200г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Домашній 280г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="З капусти 200г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Кореєць 200г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Цезар 240г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Олів'є 250г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="М'ясний Теріякі 150г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Грецький 220г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Рибний 200г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 						<h:outputText value="Мізерія 200г." />
-						<h:outputText value="7.50"/>
+						<h:outputText value="7.50" />
 					</h:panelGrid>
 				</p:tab>
 				<p:tab title="Супи">

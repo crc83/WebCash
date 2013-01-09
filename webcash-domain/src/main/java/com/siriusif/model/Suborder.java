@@ -45,7 +45,14 @@ public class Suborder {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
-
-
+	
+	public double getTotal(){
+		//TODO change from double to Currency
+		double sum = 0;
+		for(Sale s : sales){
+		sum += s.getCalculatedSum();
+		}
+		return sum;
+	}
 
 }

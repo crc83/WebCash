@@ -85,6 +85,7 @@ public class Sale {
 		sum = p * am;
 		return sum;
 	}
+	
 	public Suborder getSuborder() {
 		return suborder;
 	}
