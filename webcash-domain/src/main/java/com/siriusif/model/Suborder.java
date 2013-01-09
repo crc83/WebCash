@@ -3,6 +3,26 @@ package com.siriusif.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Администратор
+ *
+ */
+/**
+ * @author Администратор
+ *
+ */
+/**
+ * @author Администратор
+ *
+ */
+/**
+ * @author Администратор
+ *
+ */
+/**
+ * @author Администратор
+ *
+ */
 public class Suborder {
 	private int index;
 	private List<Sale> sales;
@@ -46,6 +66,10 @@ public class Suborder {
 		this.order = order;
 	}
 	
+	
+	/**
+	 * @return total suborder
+	 */
 	public double getTotal(){
 		//TODO change from double to Currency
 		double sum = 0;

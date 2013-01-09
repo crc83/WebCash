@@ -28,7 +28,7 @@
 
 .ui-datagrid-content {
 	margin-left: -30px;
-	border: none;
+	border: none !important;
 }
 
 .buttonAccordion {
