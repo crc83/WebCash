@@ -1,28 +1,37 @@
-#head{
-    position: absolute;
+#head {
+	position: absolute;
 	z-index: 4 !important;
 }
 
-#layoutcenter{
+#layoutcenter {
 	z-index: 3 !important;
 }
 
-#layoutwest{
+#layoutwest {
 	z-index: 2 !important;
 }
 
-#layout{
-	width:600px;
-	height:800px;
+#layout {
+	width: 600px;
+	height: 800px;
 }
 
-#textOrder{
-	font-weight: bold; 
-	font-size:15pt;
-	
+#textOrder {
+	font-weight: bold;
+	font-size: 15pt;
 }
 
-.textOrder{
-	margin-left: 10px; 
+.textOrder {
+	margin-left: 10px;
 	margin-top: 50px;
+}
+
+.ui-datagrid-content {
+	margin-left: -30px;
+	border: none !important;
+}
+
+.buttonAccordion {
+	width: 250px !important;
+	text-align: justify !important;
 }

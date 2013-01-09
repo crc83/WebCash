@@ -200,5 +200,17 @@ public class Order {
 		suborder.setOrder(this);
 		suborders.add(suborder);
 	}
+	
+	/**
+	 * @return total order
+	 */
+	public double getTotal(){
+		//TODO change from double to Currency
+		double sum = 0;
+		for(Suborder s : suborders){
+		sum += s.getTotal();
+		}
+		return sum;
+	}
 
 }

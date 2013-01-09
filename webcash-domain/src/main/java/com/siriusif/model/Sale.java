@@ -34,9 +34,7 @@ public class Sale {
 	public Currency getSum() {
 		return sum;
 	}
-	public void setSum(Currency sum) {
-		this.sum = sum;
-	}
+
 	public Currency getAllowSum() {
 		return allowSum;
 	}
@@ -74,11 +72,12 @@ public class Sale {
 	public void setSalesGood(Good salesGood) {
 		this.salesGood = salesGood;
 	}
-	public void addGoodSales(Sale goodSales) {
-		goodSales.setSalesGood(salesGood);	
-	}
+//	
+//	public void addGoodSales(Sale goodSales) {
+//		goodSales.setSalesGood(salesGood);	
+//	}
 	 
-	public double endPrice() {
+	public double getCalculatedSum() {
 		//TODO change from double to Currency
 		double sum = 0;
 		double p = salesGood.getPrice();
@@ -86,6 +85,7 @@ public class Sale {
 		sum = p * am;
 		return sum;
 	}
+	
 	public Suborder getSuborder() {
 		return suborder;
 	}

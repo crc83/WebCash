@@ -1,0 +1,47 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Web Cash</title>
+	
+</h:head>
+<h:body>
+	<h:form>  
+  
+ <p:accordionPanel value="soup" activeIndex="150">
+		<p:tab title="soup">
+         <h:panelGrid columns="2" cellpadding="10">
+        <h:panelGrid columns="2">  
+            <h:outputLabel for="firstname" value="Firstname: *" />  
+            <p:inputText id="firstname" value="#{onclickBean.firstname}" required="true" label="Firstname">  
+                <f:validateLength minimum="2" />  
+            </p:inputText>  
+             
+            <h:outputLabel for="surname" value="Surname: *" />  
+            <p:inputText id="surname" value="#{onclickBean.surname}" required="true" label="Surname"/>  
+            <p:message for="surname" />  
+        </h:panelGrid>
+        </h:panelGrid>  
+ </p:tab>
+  </p:accordionPanel>
+      
+    <p:commandLink update="display" actionListener="#{onclickBean.savePerson}" style="margin-right:20px;">  
+        <h:outputText value="Ajax Submit" />  
+    </p:commandLink>  
+              
+    <p:panel id="display" header="Information" style="margin-top:10px;">  
+        <h:panelGrid columns="2">  
+            <h:outputText value="Firstname: " />  
+            <h:outputText id="txt1" value="#{onclickBean.firstname}" />  
+              
+            <h:outputText value="Surname: " />  
+            <h:outputText id="txt2" value="#{onclickBean.surname}" />  
+        </h:panelGrid>  
+    </p:panel>  
+      
+</h:form>  		
+</h:body>
+</html>
+			

@@ -8,336 +8,71 @@
 	<h:outputStylesheet library="css" name="menu.css" />
 </h:head>
 <h:body>
-	<p:accordionPanel value="#{groupModel.groups}" var="groups">
-		<p:tab title="#{groups.gName}">
-			<h:panelGrid columns="2" cellpadding="10">
-				<h:panelGrid columns="1" cellpadding="10">
-					<h:outputText value="#{groups.gName}" style="font-weight: bold" />
-				</h:panelGrid>
-			</h:panelGrid>
-		</p:tab>
-	</p:accordionPanel>
 	<div id="head">
 		<ui:insert name="header">
 			<ui:include src="/pages/head.xhtml" />
 		</ui:insert>
 	</div>
 	<p:layout id="layout">
-		<p:layoutUnit id="layoutwest" position="west" resizable="true" size="300" minSize="40">
+		<p:layoutUnit id="layoutLeft" position="west" resizable="true"
+			size="300" minSize="40">
 			<div class="textOrder">
-				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ"/>
+				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ" />
 			</div>
-			<h:form>
-				<p:dataTable var="good" value="#{disheBean.dishMenu}">
-					<p:subTable var="dishe" value="#{good.dishe}">
+			<h:form id="addGood">
+				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
+					<p:subTable var="sales" value="#{suborder.sales}">
 						<f:facet name="header">  
-              			Подача: #{good.serve}   
+              			Подача: #{suborder.index}   
            			</f:facet>
 						<p:column>  
-                		#{dishe.dish}  
+                		#{sales.salesGood.name}  
             		</p:column>
 						<p:column>  
-                		#{dishe.number}  
+                		#{sales.salesGood.price}  
             		</p:column>
 						<p:column>  
-                		#{dishe.price}  
+                		#{sales.amount}  
             		</p:column>
+						<p:column>  
+                		#{sales.calculatedSum}  
+            		</p:column>
+					<p:columnGroup type="footer">  
+                <p:row>  
+                    <p:column colspan="3" footerText="Сума: " style="text-align:right"/>  
+                    <p:column footerText="#{suborder.total}" />   
+                </p:row>  
+            </p:columnGroup>
 					</p:subTable>
+					<p:columnGroup type="footer">  
+                <p:row>  
+                    <p:column colspan="3" footerText="Сума по чеку: " style="text-align:right"/>  
+                    <p:column footerText="#{order.total}" />   
+                </p:row>  
+            </p:columnGroup>
 				</p:dataTable>
 			</h:form>
-			<p:button value="Зберегти" href="/pages/hall.jsf"/>
-			<p:button value="Надрукувати" href="/pages/hall.jsf"/>
-			<h:panelGrid columns="1" cellpadding="5">
-				<h:form>
-				</h:form>
-			</h:panelGrid>
+			<p:button value="Зберегти" href="/pages/hall.jsf" />
+			<p:button value="Надрукувати" href="/pages/hall.jsf" />
 		</p:layoutUnit>
-		<p:layoutUnit id="layoutcenter" position="center">
-			<p:accordionPanel activeIndex="150">
-				<p:tab title="Салати">
-					<h:panelGrid columns="2" cellpadding="5" style="margin-left: -10px;">
-						<h:outputText value="Сирний 200г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Домашній 280г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="З капусти 200г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Кореєць 200г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Цезар 240г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Олів'є 250г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="М'ясний Теріякі 150г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Грецький 220г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Рибний 200г." />
-						<h:outputText value="7.50"/>
-						<h:outputText value="Мізерія 200г." />
-						<h:outputText value="7.50"/>
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Супи">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Суп сирний 250г." />
-						<br />
-						<h:outputText value="Мінестроне 300г." />
-						<br />
-						<h:outputText value="Солянка 300г." />
-						<br />
-						<h:outputText value="Борщ 300г." />
-						<br />
-						<h:outputText value="Бульйон курячий з домашньою локшиною 300г." />
-						<br />
-						<h:outputText value="Юшка грибна 300г." />
-						<br />
-						<h:outputText value="Окрошка 300г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Другі страви">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Стейк з курки 100г." />
-						<br />
-						<h:outputText value="Стейк телячий 100г." />
-						<br />
-						<h:outputText value="Стейк свинний 100г." />
-						<br />
-						<h:outputText value="М'ясо по французьки 200г." />
-						<br />
-						<h:outputText value="Телятина з грибами 200г." />
-						<br />
-						<h:outputText value="Пельмені 200г." />
-						<br />
-						<h:outputText value="Чинахі 300г." />
-						<br />
-						<h:outputText value="Сирні крокети" />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Страви з риби">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Стейк з лосося 100г." />
-						<br />
-						<h:outputText value="Скумбрія гриль 100г." />
-						<br />
-						<h:outputText value="Короп фрі 100г." />
-						<br />
-						<h:outputText value="Форель запечена в солі 100г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Напівфабрикати">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Голонка н/ф" />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Холдні закуски">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Сало 100г." />
-						<br />
-						<h:outputText value="Огірки квашені 100г." />
-						<br />
-						<h:outputText value="Помідори квашені 100г." />
-						<br />
-						<h:outputText value="Капуста квашена 100г." />
-						<br />
-						<h:outputText value="Оселедець з цебулею 50/100г." />
-						<br />
-						<h:outputText value="Смалець 100г." />
-						<br />
-						<h:outputText value="Часник, цибуля 50г." />
-						<br />
-						<h:outputText value="Помідори 100г" />
-						<br />
-						<h:outputText value="Огірок 100г." />
-						<br />
-						<h:outputText value="Перець болгарський 100г." />
-						<br />
-						<h:outputText value="Ковбаса 100г" />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Гарніри">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Картопля фрі 200г." />
-						<br />
-						<h:outputText value="Картопля молода з зеленню 200г." />
-						<br />
-						<h:outputText value="Картопля печена з салом 200г." />
-						<br />
-						<h:outputText value="Овочі гриль 150г." />
-						<br />
-						<h:outputText value="Хліб" />
-						<br />
-						<h:outputText value="Картопля з зеленню 200г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Соуси">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Соус Тар-тар 30г." />
-						<br />
-						<h:outputText value="Соус Теріякі 30г." />
-						<br />
-						<h:outputText value="Соус часниковий 30г." />
-						<br />
-						<h:outputText value="Майонез 30г." />
-						<br />
-						<h:outputText value="Гірциця 30г." />
-						<br />
-						<h:outputText value="Кетчуп 30г." />
-						<br />
-						<h:outputText value="Сметана 50г." />
-						<br />
-						<h:outputText value="Шкварки 50г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Дисерт">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Морозиво 150г." />
-						<br />
-						<h:outputText value="Сирник 150г." />
-						<br />
-						<h:outputText value="Штрудель 150г." />
-						<br />
-						<h:outputText value="Сорбет морквяний" />
-						<br />
-						<h:outputText value="Сорбет яблучний" />
-						<br />
-						<h:outputText value="Сорбет полуничний" />
-						<br />
-						<h:outputText value="Черешня 100г." />
-						<br />
-						<h:outputText value="Лимон 100г." />
-						<br />
-						<h:outputText value="Полуниця 100г." />
-						<br />
-						<h:outputText value="Яблуко 100г." />
-						<br />
-						<h:outputText value="Апельсин 100г." />
-						<br />
-						<h:outputText value="Банан 100г." />
-						<br />
-						<h:outputText value="Ківі 100г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="До пива">
-					<h:panelGrid columns="2" cellpadding="10">
-						<h:outputText value="Курячі крильця гриль 100г." />
-						<br />
-						<h:outputText value="Сир фрі з соусом Тар-Тар 100г." />
-						<br />
-						<h:outputText value="Ковбаски Баварські 100г." />
-						<br />
-						<h:outputText value="Крокетки 150г." />
-						<br />
-						<h:outputText value="Сир косичка 100г." />
-						<br />
-						<h:outputText value="Фісташки 70г." />
-						<br />
-						<h:outputText value="Арахіс солений 50г." />
-						<br />
-						<h:outputText value="Хлібні палички 150г." />
-						<br />
-						<h:outputText value="Ковбаски Мюнхнські 100г." />
-						<br />
-						<h:outputText value="Бастурма 50г." />
-						<br />
-					</h:panelGrid>
-				</p:tab>
-				<p:tab title="Напої">
-					<h:panelGrid columns="2" cellpadding="10" width="100%">
-						<p:accordionPanel onTabChange="true" activeIndex="150"
-							style="margin-left: -40px; !important;width:264px !important">
-							<p:tab title="Пиво">
-								<h:panelGrid columns="2" cellpadding="10">
-									<h:outputText value="Чернігівське світле розливне 500мл." />
-									<br />
-									<h:outputText value="Старопрамен розливне 500мл." />
-									<br />
-									<h:outputText value="Микуличин пляшкове" />
-									<br />
-									<h:outputText value="Микуличин 900 пляшкове" />
-									<br />
-									<h:outputText value="Безалкогольне пляшкове" />
-									<br />
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Горячі напої">
-								<h:panelGrid columns="2" cellpadding="10">
-									<h:outputText value="Кава Еспрессо 40мл." />
-									<br />
-									<h:outputText value="Кава Амерікано 100мл." />
-									<br />
-									<h:outputText value="Кава Капучіно 150мл." />
-									<br />
-									<h:outputText value="Лате класичне 200мл." />
-									<br />
-									<h:outputText value="Чай зелений" />
-									<br />
-									<h:outputText value="Чай чорний" />
-									<br />
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Фреш">
-								<h:panelGrid columns="2" cellpadding="10">
-									<h:outputText value="Узвар 250мл." />
-									<br />
-									<h:outputText value="Фреш 200мл." />
-									<br />
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Молочний коктейль">
-								<h:panelGrid columns="2" cellpadding="10">
-									<h:outputText value="Молочний коктейль шоколадний 220мл." />
-									<br />
-									<h:outputText value="Молочний коктейль фруктовий 220мл." />
-									<br />
-									<h:outputText value="Молочний коктейль класичний 220мл." />
-									<br />
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Холодні напої">
-								<h:panelGrid columns="2" cellpadding="10">
-									<h:outputText value="Сік Сандора 250мл." />
-									<br />
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Вода">
-								<h:panelGrid columns="2" cellpadding="10">
-
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Кавові холодні напої">
-								<h:panelGrid columns="2" cellpadding="10">
-
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="безалкогольні напої">
-								<h:panelGrid columns="2" cellpadding="10">
-
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Слабоалкогольні напої">
-								<h:panelGrid columns="2" cellpadding="10">
-
-								</h:panelGrid>
-							</p:tab>
-							<p:tab title="Алкогольні напої">
-								<h:panelGrid columns="2" cellpadding="10">
-
-								</h:panelGrid>
-							</p:tab>
-						</p:accordionPanel>
-
-					</h:panelGrid>
-				</p:tab>
-			</p:accordionPanel>
+		<p:layoutUnit id="layoutcenter" position="center" size="300">
+			<h:form>
+				<p:accordionPanel value="#{orderBean.groups}" var="group"
+					activeIndex="150">
+					<p:tab title="#{group.gName}">
+						<p:dataGrid value="#{group.goods}" var="good" columns="1">
+							<p:column>
+								<p:commandButton styleClass="buttonAccordion"
+									value="#{good.name} - #{good.price}"
+									actionListener="#{orderBean.onClick}" update=":addGood">
+									<f:attribute name="selectedGoodName" value="#{good.name}" />
+									<f:attribute name="selectedGood" value="#{good}" />
+								</p:commandButton>
+							</p:column>
+						</p:dataGrid>
+					</p:tab>
+				</p:accordionPanel>
+			</h:form>
 		</p:layoutUnit>
 	</p:layout>
 </h:body>

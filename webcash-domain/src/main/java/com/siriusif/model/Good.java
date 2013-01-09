@@ -22,7 +22,10 @@ public class Good {
 	private int kitchenPrinterId;
 	private Group parentGroup;
 	
-	
+	public Good(String name, double price) {
+		this.name = name;
+		this.price = price;
+	}
 	public int getId() {
 		return id;
 	}

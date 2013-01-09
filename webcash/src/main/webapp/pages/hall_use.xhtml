@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Hall</title>
+	<h:outputStylesheet library="css" name="hall.css" />
+</h:head>
+<DIV style="width: 600px; height: 800px;">
+	<h:body>
+	<div id="head">
+		<ui:insert name="header">
+			<ui:include src="/pages/head.xhtml" />
+		</ui:insert>
+	</div>
+<h3>GraphicText on-the-fly</h3>  
+<p:graphicImage value="#{tableUseBean.graphicText}" />  
+		
+	
+	</h:body>
+</DIV>
+</html>

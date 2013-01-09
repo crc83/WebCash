@@ -3,6 +3,7 @@
 	<name>webcash</name>
 	<comment></comment>
 	<projects>
+		<project>webcash-domain</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
