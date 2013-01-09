@@ -2,18 +2,10 @@ package com.siriusif.service.model;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-
 import com.siriusif.model.User;
-
-import java.util.Arrays;
-import java.util.List;
-
 import static org.junit.Assert.*;
 
-@ContextConfiguration(locations = "/persistence-beans.xml")
-public class UserDaoImplTest extends AbstractJUnit4SpringContextTests {
+public class UserDaoImplTest extends AbstractDaoImplTest {
 
     @Autowired
     private UserDao userDao;

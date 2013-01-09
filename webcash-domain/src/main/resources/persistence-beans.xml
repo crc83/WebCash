@@ -32,23 +32,27 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+	<!-- creates a java.util.Properties instance with values loaded from the 
+		supplied location -->
+	<bean id="hibernateProperties"
+		class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+		<property name="properties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.ProgressDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">auto</prop>
+			</props>
+		</property>
+	</bean>
+
 	<!-- configure hibernate session factory -->
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="annotatedClasses">
-			<list>
-				<value>com.siriusif.model.User</value>
-			</list>
-		</property>
-		<property name="hibernateProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.ProgressDialect</prop>
-				<prop key="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory
-				</prop>
-				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">create</prop>
-			</props>
+		<property name="packagesToScan" value="com.siriusif.model" />
+		<!-- property name="annotatedClasses"> <list> <value>com.siriusif.model.User</value> 
+			</list> </property -->
+		<property name="hibernateProperties" ref="hibernateProperties">
 		</property>
 	</bean>
 
