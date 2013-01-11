@@ -2,6 +2,7 @@ package com.siriusif.managed.bean;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,9 @@ public class LoginBean {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginBean.class);
 
+	@ManagedProperty(value = "#{authenticationService}")
+	private AuthenticationService authenticationService; // injected Spring defined service for bikes
+	
 	@Inject
 	private FacesMessage message;
 
