@@ -7,6 +7,8 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.siriusif.security.AuthenticationService;
+
 @ManagedBean(name = "loginBean")
 public class LoginBean {
 	
@@ -56,8 +58,8 @@ public class LoginBean {
 	public String login() {
 		String responce = "/pages/login";
 		LOGGER.debug("checking login and password");
-		if (username != null && username.equals("admin") && password != null
-				&& password.equals("admin")) {
+		boolean success = authenticationService.login(username, password);
+		if (success) {
 			//TODO : Check how to test if we have messages
 			// message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome",
 			// username);
