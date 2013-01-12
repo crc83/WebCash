@@ -2,6 +2,7 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
@@ -70,5 +71,19 @@ public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
 		Workshift wsFroDB = workshiftDao.find(workshift.getId()); 
 		assertNotNull(wsFroDB.getOpenedAt());
 	}
+	
+	@Test
+	public void testSetDaySum() {
+		int size = workshiftDao.list().size();
+		
+		Workshift workshift = new Workshift();
+		workshift.setDaySum(BigDecimal.valueOf(13.51));
+		workshiftDao.add(workshift);
+		Workshift wsFroDB = workshiftDao.find(workshift.getId()); 
+		// get this workshift from database
+		assertEquals(BigDecimal.valueOf(1351, 2) , wsFroDB.getDaySum());
+		assertTrue (size < workshiftDao.list().size());
+	}
+
 
 }
