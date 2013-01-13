@@ -48,6 +48,12 @@
 			<type>war</type>
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-api</artifactId>
+			<version>2.25.0</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

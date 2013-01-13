@@ -11,19 +11,26 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 // SB : I need this in order to change web driver
 @SuppressWarnings("unused")
-public class LoginPageTest {
+public class LoginPageTest extends AbstractWebDriverTest{
 
 	@Test
 	public void testLoginPageOnRootPath() {
-		WebDriver driver = new HtmlUnitDriver();
-		//WebDriver driver = new ChromeDriver();
-		//WebDriver driver = new FirefoxDriver();
-		// Find the text input element by its name
-		driver.get("http://localhost:8080/webcash");
-		assertNotNull(driver.findElement(By.id("loginForm:username")));
-		assertNotNull(driver.findElement(By.id("loginForm:password")));
-		//Close the browser
-        driver.quit();
+		get(""); //open root
+		assertNotNull(browser.findElement(By.id("loginForm:username")));
+		assertNotNull(browser.findElement(By.id("loginForm:password")));
+	}
+	
+	@Test
+	public void testAllOtherPagesAccessibleThroughLogin() {
+		String[] pages = { 
+			    "/pages/hall.jsf",
+			    "/pages/menu.jsf"
+			};
+		for (String page : pages) {
+			get(page);
+			assertNotNull(browser.findElement(By.id("loginForm:username")));
+			assertNotNull(browser.findElement(By.id("loginForm:password")));
+		}
 	}
 
 }
