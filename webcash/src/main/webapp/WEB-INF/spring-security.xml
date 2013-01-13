@@ -6,15 +6,15 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
-	<http auto-config="true">
-		<intercept-url pattern="/**" access="ROLE_USER" />
-		<form-login login-page="/pages/login.jsf" />
+	<http auto-config="true" access-denied-page="/login.xhtml" >
+		<intercept-url pattern="/pages/**" access="ROLE_USER" />
+		<form-login login-page="/login.jsf"/>
 	</http>
 	
 	<authentication-manager>
 	  <authentication-provider>
 	    <user-service>
-		<user name="mkyong" password="123456" authorities="ROLE_USER" />
+		<user name="admin" password="admin" authorities="ROLE_USER" />
 	    </user-service>
 	  </authentication-provider>
 	</authentication-manager>
