@@ -23,7 +23,7 @@ import javax.persistence.Transient;
  *  "Name" NVARCHAR(10) NOT NULL, );
  */
 @Entity
-@Table(name = "qwertyuiop")
+@Table(name = "orders")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -39,7 +39,7 @@ public class Order {
 	/**
 	 * sum order include discountSum
 	 */
-	@Column(name="sum", nullable = false, precision=16, scale=2)
+	@Column(name="summa", nullable = false, precision=16, scale=2)
 	private BigDecimal sum;
 	
 	@Column(name="name", nullable=false, length=100)
