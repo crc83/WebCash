@@ -13,10 +13,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
-
+/**
+ * Order Entity 
+ * CREATE TABLE "Orders" (
+ *  "id" INT NOT NULL, 
+ *  "date" DATETIME NOT NULL,
+ *  "Name" NVARCHAR(10) NOT NULL, );
+ */
 @Entity
-@Table(name = "orders")
+@Table(name = "qwertyuiop")
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -54,13 +61,13 @@ public class Order {
 	/**
 	 * order was printed on a fiscal printer
 	 */
-	@Column(name="readOnly", nullable=false, columnDefinition="boolean default false") 
+	@Column(name="readOnly", columnDefinition="boolean default false") 
 	private boolean readOnly;
 	 
 	/**
 	 * order for return
 	 */
-	@Column(name="type", nullable=true, columnDefinition="boolean default false") 
+	@Column(name="type", columnDefinition="boolean default false") 
 	private boolean type;
 	
 	/**
@@ -85,7 +92,7 @@ public class Order {
 	/**
 	 * paid with credit card
 	 */
-	@Column(name="isCard", nullable=false, columnDefinition="boolean default false") 
+	@Column(name="isCard", columnDefinition="boolean default false") 
 	private boolean isCard;
 	
 	/**
@@ -94,6 +101,7 @@ public class Order {
 	@Column(name = "daylyId", nullable = false)
 	private int dailyId;
 	
+	@Transient
 	private List<Suborder> suborders;
 
 	public Order() {
