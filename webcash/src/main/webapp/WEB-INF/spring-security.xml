@@ -7,16 +7,18 @@
 	http://www.springframework.org/schema/security/spring-security-3.1.xsd">
  
 	<http auto-config="true" access-denied-page="/login.xhtml" >
-		<intercept-url pattern="/pages/**" access="ROLE_USER" />
 		<form-login login-page="/login.jsf"/>
+		<intercept-url pattern="/pages/**" access="ROLE_USER ROLE_ADMIN" />
 	</http>
-	
-	<authentication-manager>
-	  <authentication-provider>
-	    <user-service>
-		<user name="admin" password="admin" authorities="ROLE_USER" />
-	    </user-service>
-	  </authentication-provider>
+		<!-- business logic (method) security -->
+	<global-method-security
+		secured-annotations="enabled" jsr250-annotations="enabled">
+	</global-method-security>
+
+	<!-- manager responsible for loading user account with assigned roles -->
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsService" />
 	</authentication-manager>
- 
+	
+
 </beans:beans>
