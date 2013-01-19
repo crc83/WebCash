@@ -15,7 +15,7 @@
 	
 	<!-- configuration of navigation rules -->	
 	<navigation-rule>
-	    <from-view-id>/pages/login.xhtml</from-view-id> 
+	    <from-view-id>/login.xhtml</from-view-id>
 	    <navigation-case>
 	        <from-outcome>success</from-outcome>
             <to-view-id>/pages/hall.xhtml</to-view-id>
@@ -28,7 +28,7 @@
     	
 	<!-- configuration of navigation rules (you can copy from here) -->	
 	<navigation-rule>
-	    <from-view-id>/pages/index.xhtml</from-view-id> 
+	    <from-view-id>/index.xhtml</from-view-id>
 	    <navigation-case>
 	        <from-outcome>success</from-outcome>
             <to-view-id>/pages/success.xhtml</to-view-id>

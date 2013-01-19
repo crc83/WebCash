@@ -7,7 +7,7 @@ import java.util.HashMap;
 import javax.annotation.PostConstruct;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -35,10 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   
   // sample roles  
   Collection<GrantedAuthority> adminAuthorities = new ArrayList<GrantedAuthority>();
-  adminAuthorities.add(new GrantedAuthorityImpl("ROLE_ADMIN"));
+  adminAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
   
   Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
-  userAuthorities.add(new GrantedAuthorityImpl("ROLE_REGISTERED"));
+  userAuthorities.add(new SimpleGrantedAuthority("ROLE_REGISTERED"));
   
   boolean enabled = true;
   boolean accountNonExpired = true;

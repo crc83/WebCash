@@ -72,6 +72,8 @@ public class LoginBean {
 	public String login() {
 		String responce = "/pages/login";
 		LOGGER.debug("checking login and password");
+		LOGGER.debug("Username:"+username);
+		LOGGER.debug("Password:"+password);
 		boolean success = authenticationService.login(username, password);
 		if (success) {
 			//TODO : Check how to test if we have messages
