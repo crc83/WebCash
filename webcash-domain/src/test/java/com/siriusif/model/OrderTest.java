@@ -13,7 +13,7 @@ public class OrderTest {
 
 		order.setAutor("User");
 		order.setTableNum(1);
-		order.setWorkShift(1);
+		order.setWorkShift(1L);
 
 		assertTrue(order.isValid());
 	}
