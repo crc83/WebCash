@@ -1,6 +1,8 @@
 package com.siriusif.ui;
 
+import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -9,15 +11,15 @@ public class AbstractWebDriverTest {
 	
 	public static WebDriver browser;
 	
-	@BeforeClass
-	public static void setUpBrowser(){
+	@Before
+	public void setUpBrowser(){
 		browser = new HtmlUnitDriver();
 		//WebDriver driver = new ChromeDriver();
 		//WebDriver driver = new FirefoxDriver();
 	}
 	
-	@AfterClass
-	public static void closeBrowser(){
+	@After
+	public void closeBrowser(){
 		browser.quit();
 	}
 	
