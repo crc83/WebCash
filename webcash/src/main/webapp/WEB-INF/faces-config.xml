@@ -12,19 +12,6 @@
     		org.springframework.web.jsf.el.SpringBeanFacesELResolver
     	</el-resolver>
   	</application>
-	
-	<!-- configuration of navigation rules -->	
-	<navigation-rule>
-	    <from-view-id>/login.xhtml</from-view-id>
-	    <navigation-case>
-	        <from-outcome>success</from-outcome>
-            <to-view-id>/pages/hall.xhtml</to-view-id>
-        </navigation-case>
-         <navigation-case>
-	        <from-outcome>error</from-outcome>
-            <to-view-id>/pages/menu.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
     	
 	<!-- configuration of navigation rules (you can copy from here) -->	
 	<navigation-rule>

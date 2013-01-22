@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>webcash</display-name>
 	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
+		<welcome-file>login.jsf</welcome-file>
 	</welcome-file-list>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>

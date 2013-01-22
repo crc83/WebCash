@@ -15,7 +15,7 @@
 
     <sec:http auto-config="true" access-denied-page="/login.xhtml" >
         <sec:form-login login-page="/login.jsf"/>
-        <sec:intercept-url pattern="/pages/**" access="ROLE_USER ROLE_ADMIN" />
+        <sec:intercept-url pattern="/pages/**" access="ROLE_ADMIN" />
     </sec:http>
     <!-- business logic (method) security -->
     <sec:global-method-security
