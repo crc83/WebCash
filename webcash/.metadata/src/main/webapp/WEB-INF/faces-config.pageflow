@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <pageflow:Pageflow xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:pageflow="http://www.sybase.com/suade/pageflow" id="pf13503664696710" configfile="/webcash/src/main/webapp/WEB-INF/faces-config.xml">
-  <nodes xsi:type="pageflow:PFPage" name="pages/index.xhtml" x="122" y="370" id="pf13506592100930" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13506592100931 pf13506592100932" path="/pages/index.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/success.xhtml" x="23" y="96" id="pf13506592100933" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13506592100931" path="/pages/success.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/error.xhtml" x="324" y="180" id="pf13506592100934" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13506592100932" path="/pages/error.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/l.xhtml" id="pf13559466414374" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13559466651096 pf13559469511258" path="/pages/login.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/hall.xhtml" id="pf13559466651097" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13559466651096" path="/pages/hall.xhtml"/>
-  <nodes xsi:type="pageflow:PFPage" name="pages/menu.xhtml" id="pf13559469511259" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13559469511258" path="/pages/menu.xhtml"/>
-  <links id="pf13506592100931" target="pf13506592100933" source="pf13506592100930" outcome="success"/>
-  <links id="pf13506592100932" target="pf13506592100934" source="pf13506592100930" outcome="error"/>
-  <links id="pf13559466651096" target="pf13559466651097" source="pf13559466414374" outcome="success"/>
-  <links id="pf13559469511258" target="pf13559469511259" source="pf13559466414374" outcome="error"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/index.xhtml" x="122" y="178" id="pf13506592100930" referenceLink="//@navigationRule.0/@fromViewId|" path="/pages/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/success.xhtml" x="338" y="1714" id="pf13506592100933" referenceLink="//@navigationRule.1/@navigationCase.0/@toViewId|" inlinks="pf13588454572810" path="/pages/success.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/error.xhtml" x="338" y="2098" id="pf13506592100934" referenceLink="//@navigationRule.1/@navigationCase.1/@toViewId|" inlinks="pf13588454572811" path="/pages/error.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/l.xhtml" x="122" y="562" id="pf13559466414374" referenceLink="//@navigationRule.0/@fromViewId|" path="/pages/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/menu.xhtml" x="338" y="1138" id="pf13559469511259" referenceLink="//@navigationRule.0/@navigationCase.1/@toViewId|" inlinks="pf13588454572812" path="/pages/menu.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="login.xhtml" x="122" y="946" id="pf13588454572813" referenceLink="//@navigationRule.0/@fromViewId|" outlinks="pf13588454572812 pf13588455709219" path="/login.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="index.xhtml" x="122" y="1906" id="pf13588454572815" referenceLink="//@navigationRule.1/@fromViewId|" outlinks="pf13588454572810 pf13588454572811" path="/index.xhtml"/>
+  <nodes xsi:type="pageflow:PFPage" name="pages/hall.xhtml" id="pf135884557092110" referenceLink="//@navigationRule.0/@navigationCase.0/@toViewId|" inlinks="pf13588455709219" path="hall.xhtml"/>
+  <links id="pf13588454572812" target="pf13559469511259" source="pf13588454572813" outcome="error"/>
+  <links id="pf13588454572810" target="pf13506592100933" source="pf13588454572815" outcome="success"/>
+  <links id="pf13588454572811" target="pf13506592100934" source="pf13588454572815" outcome="error"/>
+  <links id="pf13588455709219" target="pf135884557092110" source="pf13588454572813" outcome="success"/>
 </pageflow:Pageflow>

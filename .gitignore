@@ -1,8 +1,6 @@
-.metadata
-Servers
-/webcash/target
-/webcash/.metadata
-/webcash-domain/target
-/webcash-domain/.metadata
-/webcash-spec/target
-/webcash-spec/.metadata
+/*/.settings
+/*/.idea
+/*/target
+/*/.metadata
+*.iml
+.idea

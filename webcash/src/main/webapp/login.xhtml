@@ -6,27 +6,24 @@
 	<title>Login</title>
 	<h:outputStylesheet library="css" name="login.css" />
 </h:head>
-<DIV style="width: 600px; height: 800px;">
-	<h:body>
-	<p:growl id="growl" showDetail="true" life="3000" />  
-		<p:dialog id="modalDialog" header="Login" visible="true">
+<h:body>
+	<p:growl id="growl" showDetail="true" life="3000" />
+
+	<p:dialog id="modalDialog" header="Login" visible="true">
 		<h:form id="loginForm">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="Username:" />
 				<p:inputText value="#{loginBean.username}" id="username"
-					required="true" label="username"
-					style="border:1px solid #333333; height:25px; width:150px;" />
+					required="true" label="username"/>
 				<h:outputLabel for="password" value="Password:" />
 				<h:inputSecret value="#{loginBean.password}" id="password"
-					required="true" label="password"
-					style="border:1px solid #333333; height:25px; width:150px;" />
+					required="true" label="password" />
 				<f:facet name="footer">
 					<p:commandButton type="submit" id="loginButton" value="Вхід"
 						update=":growl" action="#{loginBean.login}"/>
 				</f:facet>
 			</h:panelGrid>
 		</h:form>
-		</p:dialog>
-	</h:body>
-</DIV>
+	</p:dialog>
+</h:body>
 </html>
