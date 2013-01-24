@@ -24,10 +24,11 @@ public class TablesHall {
 	@Column(name="description", nullable=true, length=100)
 	private String description;
 	
-	@Column(name = "top", nullable = true)
+	@Column(name = "ctop", nullable = true)
 	private int top;
 	
-	@Column(name = "left", nullable = true)
+	// left is reserved word in SQL
+	@Column(name = "cleft", nullable = true)
 	private int left;
 	
 	@Column(name = "height", nullable = true)
@@ -35,9 +36,6 @@ public class TablesHall {
 	
 	@Column(name = "width", nullable = true)
 	private int width;
-	
-	@Column(name = "hallNumber", nullable = false)
-	private int hallNumber;
 	
 //	@Transient
 //	private Hall hall;
@@ -99,11 +97,6 @@ public class TablesHall {
 	public void setWidth(int width) {
 		this.width = width;
 	}
-	public int getHallNumber() {
-		return hallNumber;
-	}
-	public void setHallNumber(int hallNumber) {
-		this.hallNumber = hallNumber;
-	}
+	
 
 }
