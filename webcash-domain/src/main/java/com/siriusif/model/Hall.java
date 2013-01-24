@@ -7,13 +7,13 @@ import java.util.List;
 public class Hall {
 	private Long id;
 	private String name;
-	private List<Tables> tables;
+	private List<TablesHall> tables;
 	
 	public Hall(){
-		tables = new ArrayList<Tables>();
+		tables = new ArrayList<TablesHall>();
 	}
 	
-	public void addTables(Tables table) {
+	public void addTables(TablesHall table) {
 		table.setHall(this);
 		tables.add(table);
 	}
@@ -33,10 +33,10 @@ public class Hall {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<Tables> getTables() {
+	public List<TablesHall> getTables() {
 		return tables;
 	}
-	public void setTables(List<Tables> tables) {
+	public void setTables(List<TablesHall> tables) {
 		this.tables = tables;
 	}
 

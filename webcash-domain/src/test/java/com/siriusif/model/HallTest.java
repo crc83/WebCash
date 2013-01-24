@@ -9,7 +9,7 @@ public class HallTest {
 	@Test
 	public void testTablesAddToHall() {
 		Hall hall = new Hall();
-		Tables tables = new Tables();
+		TablesHall tables = new TablesHall();
 		
 		hall.addTables(tables);
 		
