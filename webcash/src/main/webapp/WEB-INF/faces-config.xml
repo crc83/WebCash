@@ -11,6 +11,11 @@
     	<el-resolver>
     		org.springframework.web.jsf.el.SpringBeanFacesELResolver
     	</el-resolver>
+		<message-bundle>com.siriusif.messages</message-bundle>
+			<resource-bundle>
+				<base-name>com.siriusif.messages</base-name>
+				<var>msgs</var>
+			</resource-bundle>
   	</application>
     	
 	<!-- configuration of navigation rules (you can copy from here) -->	

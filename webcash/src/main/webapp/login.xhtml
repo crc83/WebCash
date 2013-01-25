@@ -12,7 +12,7 @@
 	<p:dialog id="modalDialog" header="Login" visible="true">
 		<h:form id="loginForm">
 			<h:panelGrid columns="2" cellpadding="5">
-				<h:outputLabel for="username" value="Username:" />
+				<h:outputLabel for="username" value="#{msgs.login_username}" />
 				<p:inputText value="#{loginBean.username}" id="username"
 					required="true" label="username"/>
 				<h:outputLabel for="password" value="Password:" />
