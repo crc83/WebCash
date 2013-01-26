@@ -10,14 +10,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tablesHall")
+@Table(name = "DiningTable")
 public class TablesHall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-	
-	@Column(name = "hallId", nullable = false)
-	private Long hallId;
 	
 	@Column(name="name", nullable=false, length=100)
 	private String name;
@@ -38,8 +35,7 @@ public class TablesHall {
 	@Column(name = "width", nullable = true)
 	private int width;
 	
-	@ManyToOne(targetEntity=Hall.class) 
-	@JoinColumn(name = "hallIdi")
+	@ManyToOne
 	private Hall hall;
 	
 	public TablesHall(){
@@ -69,12 +65,6 @@ public class TablesHall {
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
-	public Long getHallId() {
-		return hallId;
-	}
-	public void setHallId(Long hallId) {
-		this.hallId = hallId;
 	}
 	public String getName() {
 		return name;

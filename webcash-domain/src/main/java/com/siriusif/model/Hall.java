@@ -10,19 +10,19 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Entity
-@Table(name = "hall")
+@Table(name = "Hall")
 public class Hall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
-	@Column(name="hallIdi")
 	private Long id;
 	
 	@Column(name="name", nullable=false, length=100)
 	private String name;
 	
-	@OneToMany(mappedBy="hall")
+	@OneToMany
 	private List<TablesHall> tables;
 	
 	public Hall(){

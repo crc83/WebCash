@@ -28,7 +28,7 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 	}
 	
 	@Test
-	public void testMenyToOneHallTables(){
+	public void testManyToOneHallTables(){
 		int size = hallDao.list().size();
 		Hall hall = new Hall();
 

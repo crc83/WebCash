@@ -19,7 +19,6 @@ public class TablesDaoImplTest extends AbstractDaoImplTest{
 		TablesHall tables = new TablesHall();
 		tables.setName("Bar");
 		tables.setDescription("first");
-		tables.setHallId(2l);
 		tables.setHeight(50);
 		tables.setLeft(50);
 		tables.setTop(50);
