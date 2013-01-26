@@ -3,6 +3,7 @@ package com.siriusif.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Hall {
 	@Column(name="name", nullable=false, length=100)
 	private String name;
 	
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	private List<TablesHall> tables;
 	
 	public Hall(){

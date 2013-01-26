@@ -15,6 +15,9 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 	
 	@Autowired
 	private HallDao hallDao;
+	
+	@Autowired
+	private TablesDao tablesDao;
 
 	@Test
 	public void testAdd() {
@@ -38,8 +41,11 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 		hall.addTables(new TablesHall("Nock", "Nokky", 200, 200));
 		hall.addTables(new TablesHall("Tik", "Tikky", 250, 250));
 		hall.setName("bancket");
-		hallDao.add(hall);
 		
+		hallDao.add(hall);
+		for (TablesHall table : hall.getTables()){
+			tablesDao.add(table);
+		}
 	
 		assertTrue (size < hallDao.list().size());
 		Hall haFromDb = hallDao.find(hall.getId());
