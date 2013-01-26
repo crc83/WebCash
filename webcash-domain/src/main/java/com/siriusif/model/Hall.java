@@ -12,7 +12,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "Hall")
@@ -24,7 +23,7 @@ public class Hall {
 	@Column(name="name", nullable=false, length=100)
 	private String name;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "hall")
 	private List<TablesHall> tables;
 	
 	public Hall(){

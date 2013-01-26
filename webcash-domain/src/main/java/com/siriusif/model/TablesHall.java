@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "DiningTable")
+@Table(name = "dining_table")
 public class TablesHall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -36,6 +36,7 @@ public class TablesHall {
 	private int width;
 	
 	@ManyToOne
+	@JoinColumn(name = "hall_id")
 	private Hall hall;
 	
 	public TablesHall(){
