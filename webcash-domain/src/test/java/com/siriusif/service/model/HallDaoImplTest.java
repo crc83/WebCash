@@ -16,9 +16,6 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 	@Autowired
 	private HallDao hallDao;
 	
-	@Autowired
-	private TablesDao tablesDao;
-
 	@Test
 	public void testAdd() {
 		int size = hallDao.list().size();
@@ -43,14 +40,11 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 		hall.setName("bancket");
 		
 		hallDao.add(hall);
-		for (TablesHall table : hall.getTables()){
-			tablesDao.add(table);
-		}
-	
+
 		assertTrue (size < hallDao.list().size());
 		Hall haFromDb = hallDao.find(hall.getId());
 		assertEquals("bancket", haFromDb.getName());
-		assertEquals(size, haFromDb.getTables().size());
+		assertEquals(5, haFromDb.getTables().size());
 	}
 
 }
