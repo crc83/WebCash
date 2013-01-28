@@ -3,8 +3,6 @@ package com.siriusif.service.model;
 import static org.junit.Assert.*;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,7 +13,6 @@ import java.util.Date;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.esotericsoftware.yamlbeans.YamlException;
 import com.esotericsoftware.yamlbeans.YamlReader;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
@@ -30,7 +27,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		int size = orderDao.list().size();
 		
 		Order order = new Order();
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setCard(true);
 		order.setDailyId(size);
 		order.setDiscount(5);
@@ -49,7 +46,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 	@Test
 	public void testAddWorkshiftDate() {
 		Order order = new Order();
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setSum(BigDecimal.valueOf(14,56));
 		order.setWorkShift(5l);
@@ -68,7 +65,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		
 		Order order = new Order();
 		order.setSum(BigDecimal.valueOf(15.25));
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
@@ -85,7 +82,8 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		Reader reader = new InputStreamReader(in, "UTF-8");
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		YamlReader reader2 = new YamlReader(bufferedReader);
-		orderDao.add();
+		Order order = reader2.read(Order.class);
+		orderDao.add(order);
 	}
 
 }
