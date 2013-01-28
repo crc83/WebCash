@@ -2,8 +2,13 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -75,10 +80,12 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 	}
 	
 	@Test
-	public void testReadYaml() throws FileNotFoundException, YamlException{
-		YamlReader reader = new YamlReader(new FileReader("/order.yml"));
-		Order order = reader.read(Order.class);
-		System.out.println(order.getAutor());
+	public void testReadYaml() throws IOException{
+		InputStream in = Order.class.getResourceAsStream("/order.yml");
+		Reader reader = new InputStreamReader(in, "UTF-8");
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		YamlReader reader2 = new YamlReader(bufferedReader);
+		orderDao.add();
 	}
 
 }
