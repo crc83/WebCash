@@ -1,0 +1,10 @@
+!com.siriusif.model.Order
+order: 
+  -name: administrator
+   discount: 6
+   iscard: true
+   nomeroc:  8
+   readonly: false
+   tablenum: 9
+   type: true
+   workshift: 10

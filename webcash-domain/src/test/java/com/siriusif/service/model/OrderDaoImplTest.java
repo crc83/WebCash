@@ -2,12 +2,17 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.esotericsoftware.yamlbeans.YamlException;
+import com.esotericsoftware.yamlbeans.YamlReader;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 
@@ -68,6 +73,13 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		
 		assertEquals(BigDecimal.valueOf(1525, 2), orFromDB.getSum());
 		assertTrue (size < orderDao.list().size());
+	}
+	
+	@Test
+	public void testReadYaml() throws FileNotFoundException, YamlException{
+		YamlReader reader = new YamlReader(new FileReader("order.yml"));
+		Order order = reader.read(Order.class);
+		System.out.println(order.getAutor());
 	}
 
 }
