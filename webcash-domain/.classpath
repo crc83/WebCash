@@ -25,6 +25,5 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="Lib/yamlbeans-1.06.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

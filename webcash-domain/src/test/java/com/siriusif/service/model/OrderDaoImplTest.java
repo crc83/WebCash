@@ -2,7 +2,6 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.math.BigDecimal;
@@ -77,7 +76,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 	
 	@Test
 	public void testReadYaml() throws FileNotFoundException, YamlException{
-		YamlReader reader = new YamlReader(new FileReader("order.yml"));
+		YamlReader reader = new YamlReader(new FileReader("/order.yml"));
 		Order order = reader.read(Order.class);
 		System.out.println(order.getAutor());
 	}
