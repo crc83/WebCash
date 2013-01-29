@@ -2,12 +2,19 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.gson.Gson;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 
@@ -21,7 +28,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		int size = orderDao.list().size();
 		
 		Order order = new Order();
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setCard(true);
 		order.setDailyId(size);
 		order.setDiscount(5);
@@ -40,7 +47,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 	@Test
 	public void testAddWorkshiftDate() {
 		Order order = new Order();
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setSum(BigDecimal.valueOf(14,56));
 		order.setWorkShift(5l);
@@ -59,7 +66,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		
 		Order order = new Order();
 		order.setSum(BigDecimal.valueOf(15.25));
-		order.setAutor("admin");
+		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
@@ -68,6 +75,20 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		
 		assertEquals(BigDecimal.valueOf(1525, 2), orFromDB.getSum());
 		assertTrue (size < orderDao.list().size());
+	}
+	
+	private BufferedReader getCPFileReader(String fileName)
+			throws UnsupportedEncodingException {
+		InputStream in = this.getClass().getResourceAsStream(fileName);
+		Reader reader = new InputStreamReader(in, "UTF-8");
+		BufferedReader bufferedReader = new BufferedReader(reader);
+		return bufferedReader;
+	}
+
+	@Test
+	public void testReadJson() throws IOException{		
+		Order order = new Gson().fromJson(getCPFileReader("/order.json"), Order.class);
+		orderDao.add(order);
 	}
 
 }

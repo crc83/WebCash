@@ -42,8 +42,8 @@ public class Order {
 	@Column(name="summa", nullable = false, precision=16, scale=2)
 	private BigDecimal sum;
 	
-	@Column(name="name", nullable=false, length=100)
-	private String autor;
+	@Column(name="author", nullable=false, length=100)
+	private String author;
 	
 	@Column(name = "discount", nullable = true)
 	private int discount;
@@ -116,7 +116,7 @@ public class Order {
 	 */
 
 	public boolean isValid() {
-		if (tableNum > 0 && autor != null && workShift > 0) {
+		if (tableNum > 0 && author != null && workShift > 0) {
 			return true;
 		} else {
 			return false;
@@ -166,12 +166,12 @@ public class Order {
 		this.sum = sum;
 	}
 
-	public String getAutor() {
-		return autor;
+	public String getAuthor() {
+		return author;
 	}
 
-	public void setAutor(String autor) {
-		this.autor = autor;
+	public void setAuthor(String author) {
+		this.author = author;
 	}
 
 	public int getDiscount() {
