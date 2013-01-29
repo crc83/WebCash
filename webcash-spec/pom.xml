@@ -7,7 +7,7 @@
 	<groupId>com.siriusif</groupId>
 	<artifactId>webcash-spec</artifactId>
 	<packaging>jar</packaging>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.2-SNAPSHOT</version>
 	<name>webcash-specs</name>
 	<url>http://maven.apache.org</url>
 
@@ -42,13 +42,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.siriusif</groupId>
-			<artifactId>webcash</artifactId>
-			<type>war</type>
-			<version>0.1-SNAPSHOT</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
@@ -103,7 +96,7 @@
 			<groupId>com.siriusif</groupId>
 			<artifactId>webcash</artifactId>
 			<type>war</type>
-			<version>0.1-SNAPSHOT</version>
+			<version>0.2-SNAPSHOT</version>
 			<scope>tomcat</scope>
 		</dependency>
 
@@ -196,8 +189,11 @@
 					<execution>
 						<configuration>
 							<skipTests>false</skipTests>
+							<excludes>
+                                <exclude>none</exclude>
+                            </excludes>
 							<includes>
-								<include>%regex[.*]</include>
+								<include>**/*.java</include>
 							</includes>
 						</configuration>
 
