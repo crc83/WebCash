@@ -81,9 +81,14 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
- 			<groupId>com.esotericsoftware.yamlbeans</groupId>
+			<groupId>com.esotericsoftware.yamlbeans</groupId>
 			<artifactId>yamlbeans</artifactId>
- 			<version>1.06</version>
-		</dependency>		
+			<version>1.06</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>2.2.2</version>
+		</dependency>
 	</dependencies>
 </project>

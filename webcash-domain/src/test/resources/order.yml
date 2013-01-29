@@ -1,9 +1,7 @@
 !com.siriusif.model.Order
-
   author: administrator
-  sum: !java.math.BigDecimal {valueOf(13.51)}
   tableNum: 3
   workShift: 5
-  payed: !java.math.BigDecimal {valueOf(13.51)}
+  sum:  "13.51"
   dailyId: 8
   
