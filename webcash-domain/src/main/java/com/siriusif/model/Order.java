@@ -39,7 +39,7 @@ public class Order {
 	/**
 	 * sum order include discountSum
 	 */
-	@Column(name="summa", nullable = true, precision=16, scale=2)
+	@Column(name="summa", nullable = false, precision=16, scale=2)
 	private BigDecimal sum;
 	
 	@Column(name="author", nullable=false, length=100)
@@ -86,7 +86,7 @@ public class Order {
 	/**
 	 * money from client
 	 */
-	@Column(name="payed", nullable = true, precision=16, scale=2)
+	@Column(name="payed", nullable = false, precision=16, scale=2)
 	private BigDecimal payed;
 	
 	/**

@@ -7,13 +7,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.esotericsoftware.yamlbeans.YamlReader;
+import com.google.gson.Gson;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 
@@ -76,13 +77,17 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		assertTrue (size < orderDao.list().size());
 	}
 	
-	@Test
-	public void testReadYaml() throws IOException{
-		InputStream in = Order.class.getResourceAsStream("/order.yml");
+	private BufferedReader getCPFileReader(String fileName)
+			throws UnsupportedEncodingException {
+		InputStream in = this.getClass().getResourceAsStream(fileName);
 		Reader reader = new InputStreamReader(in, "UTF-8");
 		BufferedReader bufferedReader = new BufferedReader(reader);
-		YamlReader reader2 = new YamlReader(bufferedReader);
-		Order order = reader2.read(Order.class);
+		return bufferedReader;
+	}
+
+	@Test
+	public void testReadJson() throws IOException{		
+		Order order = new Gson().fromJson(getCPFileReader("/order.json"), Order.class);
 		orderDao.add(order);
 	}
 
