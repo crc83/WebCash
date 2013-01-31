@@ -5,7 +5,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class AbstractWebDriverTest {
 	
@@ -14,13 +18,33 @@ public class AbstractWebDriverTest {
 	@Before
 	public void setUpBrowser(){
 		browser = new HtmlUnitDriver();
-		//WebDriver driver = new ChromeDriver();
-		//WebDriver driver = new FirefoxDriver();
+		//initFirefox();
+		//initChrome();
+		//initIE();
+	}
+
+	
+	//this still doesnt work
+	private void initFirefox() {
+		FirefoxProfile fp = new FirefoxProfile();
+		fp.setPreference("webdriver.load.strategy", "unstable"); // As of 2.19. from 2.9 - 2.18 use 'fast'
+		browser = new FirefoxDriver(fp);
+	}
+
+	
+	private void initIE() {
+		//		System.setProperty("webdriver.ie.driver","/path/to/IEDriverServer.exe");
+		browser = new InternetExplorerDriver();
+	}
+
+	private void initChrome() {
+		//		System.setProperty("webdriver.chrome.driver","/path/to/chromedriver.exe");
+		browser = new ChromeDriver();
 	}
 	
 	@After
 	public void closeBrowser(){
-		browser.quit();
+//		browser.quit();
 	}
 	
 	/**

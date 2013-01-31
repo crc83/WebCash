@@ -39,37 +39,62 @@
 
 		<spring.version>3.1.1.RELEASE</spring.version>
 		<jsf.version>2.1.13</jsf.version>
+		<selenium.version>2.29.0</selenium.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
-			<version>2.25.0</version>
+			<version>${selenium.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-support</artifactId>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
-			<version>2.25.0</version>
+			<version>${selenium.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-server</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-remote-driver</artifactId>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-htmlunit-driver</artifactId>
-			<version>2.3.1</version>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.seleniumhq.webdriver</groupId>
-			<artifactId>webdriver-firefox</artifactId>
-			<version>0.9.7376</version>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-ie-driver</artifactId>
+			<version>${selenium.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-firefox-driver</artifactId>
+			<version>${selenium.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-chrome-driver</artifactId>
-			<version>2.25.0</version>
+			<version>${selenium.version}</version>
 		</dependency>
 		<!-- Log4j library -->
 
@@ -190,8 +215,8 @@
 						<configuration>
 							<skipTests>false</skipTests>
 							<excludes>
-                                <exclude>none</exclude>
-                            </excludes>
+								<exclude>none</exclude>
+							</excludes>
 							<includes>
 								<include>**/*.java</include>
 							</includes>
