@@ -2,6 +2,7 @@ package com.siriusif.ui;
 
 import static org.junit.Assert.*;
 
+import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -20,6 +21,18 @@ public class LoginPageTest extends AbstractWebDriverTest{
 		get(""); //open root
 		assertIfLoginPage();
 	}
+	
+	@Test
+	public void testSuccessfulLogin() {
+		get("");
+		String loginURL = browser.getCurrentUrl();
+		browser.findElement(By.id("loginForm:username")).clear();
+		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:password")).clear();
+		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
+		
+		assertFalse(loginURL.equals(browser.getCurrentUrl()));
+	}
 
 	private void assertIfLoginPage() {
 		assertNotNull(browser.findElement(By.id("loginForm:username")));
@@ -27,7 +40,6 @@ public class LoginPageTest extends AbstractWebDriverTest{
 	}
 	
 	// SB : Temporary solution : Uncomment and fix this test
-	/*
  	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
 		String[] pages = { 
@@ -39,5 +51,4 @@ public class LoginPageTest extends AbstractWebDriverTest{
 			assertIfLoginPage();
 		}
 	}
-*/
 }

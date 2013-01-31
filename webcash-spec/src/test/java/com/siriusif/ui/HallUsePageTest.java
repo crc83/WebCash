@@ -21,8 +21,9 @@ public class HallUsePageTest extends AbstractWebDriverTest{
 		browser.findElement(By.id("loginForm:username")).clear();
 		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:password")).clear();
-		browser.findElement(By.id("loginForm:password")).sendKeys("admin\n");
-//		browser.findElement(By.id("loginForm:loginButton")).click();
+		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:loginButton")).click();
+		System.out.println(browser.getCurrentUrl());
 		get("/pages/hall_use.jsf");
 	}
 
