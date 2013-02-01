@@ -5,17 +5,16 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;  
 import java.io.ByteArrayOutputStream;  
 import java.io.File;  
+import java.util.List;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.imageio.ImageIO;  
-import javax.inject.Inject;
   
+import org.apache.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;  
 import org.primefaces.model.StreamedContent;  
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 
 import com.siriusif.model.TablesHall;
 import com.siriusif.service.model.TablesDao;
@@ -24,6 +23,9 @@ import com.siriusif.service.model.TablesDao;
 // see here
 @ManagedBean(name = "tableUseBean")
 public class TableUseBean {
+	
+	//TODO SB : Change logger initialization in spring way
+	private Logger LOGGER = Logger.getLogger(TableUseBean.class);
   
     private StreamedContent graphicText;  
       
@@ -31,11 +33,29 @@ public class TableUseBean {
       
     private StreamedContent chart;
     
+    @ManagedProperty(value="#{tablesDao}")
     private TablesDao tablesDao;
     
-    public TableUseBean() {  
-        try {  
-        	TablesHall tablesHall = tablesDao.list().get(0);
+    /**
+	 * @return the tablesDao
+	 */
+	public TablesDao getTablesDao() {
+		return tablesDao;
+	}
+
+	/**
+	 * @param tablesDao the tablesDao to set
+	 */
+	public void setTablesDao(TablesDao tablesDao) {
+		LOGGER.debug(" >> TablesDao is set");
+		this.tablesDao = tablesDao;
+	}
+
+	public TableUseBean() {
+        try {
+        	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
+        	List<TablesHall> tables = tablesDao.list();
+        	TablesHall tablesHall = tables.get(0);
       
         	//Graphic Text 
         	  File imageSrc = null;

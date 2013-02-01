@@ -80,9 +80,10 @@ public class LoginBean {
 			// message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome",
 			// username);
 			LOGGER.debug("correct user");
-			responce = "/pages/hall?faces-redirect=true";
+			responce = "/pages/hall_use?faces-redirect=true";
 		} else {
 			LOGGER.debug("wrong user");
+			responce = "/pages/login?faces-redirect=true";
 			// message = new FacesMessage(FacesMessage.SEVERITY_WARN,
 			// "Login Error", "Invalid credentials");
 		}
