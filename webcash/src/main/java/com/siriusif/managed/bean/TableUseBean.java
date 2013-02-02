@@ -64,22 +64,33 @@ public class TableUseBean {
     public StreamedContent getGraphicText() throws IOException {  
     	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
     	List<TablesHall> tables = tablesDao.list();
-    	TablesHall tablesHall = tables.get(0);
   
     	//Graphic Text 
-    	  File imageSrc = null;
-    	  String tablesImageURL = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/images/table.png");
-        imageSrc = new File(tablesImageURL);
-        BufferedImage bi = ImageIO.read(imageSrc);
-    	BufferedImage bufferedImg = new BufferedImage(1000, 1000, BufferedImage.TYPE_INT_RGB);  
-         Graphics2D g2 = bufferedImg.createGraphics();  
-         g2.drawImage(bi, null, tablesHall.getLeft(), tablesHall.getTop());  
-         ByteArrayOutputStream os = new ByteArrayOutputStream();  
-         ImageIO.write(bufferedImg, "png", os);  
-         graphicText = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
+    	  BufferedImage bufferedImg = readImage("background");  
+    	  Graphics2D g2 = bufferedImg.createGraphics(); 
+    	  for (TablesHall table : tables){
+    		  g2.drawImage(readImage("tables"), null, table.getLeft(), table.getTop());
+    	  }	
+    	  
+    	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
+    	  ImageIO.write(bufferedImg, "png", os);  
+    	  graphicText = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
 
-        return graphicText;  
-    }  
+    	  return graphicText;  
+    }
+
+	private BufferedImage readImage(String name) {
+		BufferedImage bi = null;
+		try {
+			String tablesImageURL = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/images/"+name+".png");
+	    	File imageSrc = new File(tablesImageURL);
+	    	bi = ImageIO.read(imageSrc);
+		} catch (IOException ioe) {
+			LOGGER.error("Error during loading image : "+ name);
+			LOGGER.debug("",ioe);
+		}
+		return bi;
+	}  
           
     public StreamedContent getChart() {  
         return chart;  
