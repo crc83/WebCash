@@ -1,0 +1,34 @@
+{ 	"name": "second",
+	"tables": [
+{
+	"name": "administrator",
+	"description": "leftTable",
+	"top": "103",
+	"left": "108"
+}, {
+	"name": "Nick",
+	"description": "Nikky",
+	"top": "303",
+	"left": "108"
+}, {
+	"name": "Tim",
+	"description": "Timmy",
+	"top": "103",
+	"left": "308"
+}, {
+	"name": "Kim",
+	"description": "Kimmy",
+	"top": "303",
+	"left": "308"
+}, {
+	"name": "John",
+	"description": "Jonny",
+	"top": "103",
+	"left": "508"
+}, {
+	"name": "Don",
+	"description": "Donny",
+	"top": "303",
+	"left": "508"
+} ]
+}
