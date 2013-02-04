@@ -10,15 +10,20 @@
 </h:head>
 <DIV style="width: 600px; height: 800px;">
 	<h:body>
-	<div id="head">
-		<ui:insert name="header">
-			<ui:include src="/pages/head.xhtml" />
-		</ui:insert>
-	</div>
-	<p:graphicImage value="#{tableUseBean.graphicText}" cache="false"
-                 onclick="location.href='#{tableUseBean.responce}'"/>  
-		
-	
+		<div id="head">
+			<ui:insert name="header">
+				<ui:include src="/pages/head.xhtml" />
+			</ui:insert>
+		</div>
+		<p:graphicImage value="#{tableUseBean.graphicText}" cache="false"
+			usemap="#navigation"/>
+		<map id="navigation" name="navigation">
+			<area shape="circle" coords="108,103,50"
+				onclick="location.href='#{tableUseBean.responce}'"/>
+		</map>
+
+
+
 	</h:body>
 </DIV>
 </html>
