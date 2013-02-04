@@ -34,7 +34,10 @@ public class TableUseBean {
       
     private StreamedContent chart;
     
-    @ManagedProperty(value="#{tablesDao}")
+    private String responce;
+    
+
+	@ManagedProperty(value="#{tablesDao}")
     private TablesDao tablesDao;
     
     /**
@@ -91,10 +94,16 @@ public class TableUseBean {
 		}
 		return bi;
 	}  
+	
+	
           
     public StreamedContent getChart() {  
         return chart;  
     }  
       
+    public String getResponce() {
+    	responce = "./order.jsf";
+    	return responce;
+    }
    
 }  
