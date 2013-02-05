@@ -34,25 +34,25 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 		assertTrue (size < hallDao.list().size());
 	}
 	
-	@Test
-	public void testManyToOneHallTables(){
-		int size = hallDao.list().size();
-		Hall hall = new Hall();
-
-		hall.addTables(new TablesHall("Nic", "Nikky", 50, 50));
-		hall.addTables(new TablesHall("Tom", "Tommy", 100, 100));
-		hall.addTables(new TablesHall("Tok", "Tokky", 150, 150));
-		hall.addTables(new TablesHall("Nock", "Nokky", 200, 200));
-		hall.addTables(new TablesHall("Tik", "Tikky", 250, 250));
-		hall.setName("bancket");
-		
-		hallDao.add(hall);
-
-		assertTrue (size < hallDao.list().size());
-		Hall haFromDb = hallDao.find(hall.getId());
-		assertEquals("bancket", haFromDb.getName());
-		assertEquals(5, haFromDb.getTables().size());
-	}
+//	@Test
+//	public void testManyToOneHallTables(){
+//		int size = hallDao.list().size();
+//		Hall hall = new Hall();
+//
+//		hall.addTables(new TablesHall("Nic", "Nikky", 50, 50));
+//		hall.addTables(new TablesHall("Tom", "Tommy", 100, 100));
+//		hall.addTables(new TablesHall("Tok", "Tokky", 150, 150));
+//		hall.addTables(new TablesHall("Nock", "Nokky", 200, 200));
+//		hall.addTables(new TablesHall("Tik", "Tikky", 250, 250));
+//		hall.setName("bancket");
+//		
+//		hallDao.add(hall);
+//
+//		assertTrue (size < hallDao.list().size());
+//		Hall haFromDb = hallDao.find(hall.getId());
+//		assertEquals("bancket", haFromDb.getName());
+//		assertEquals(5, haFromDb.getTables().size());
+//	}
 	
 	private BufferedReader getCPFileReader(String fileName)
 			throws UnsupportedEncodingException {
