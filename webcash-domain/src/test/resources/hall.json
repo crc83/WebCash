@@ -1,67 +1,67 @@
 { 	"name": "second",
 	"tables": [
 {
-	"name": "administrator",
+	"name": "Стіл 1",
 	"description": "leftTable",
 	"top": "200",
 	"left": "100"
 }, {
-	"name": "Nick",
+	"name": "Стіл 2",
 	"description": "Nikky",
 	"top": "200",
 	"left": "341"
 }, {
-	"name": "Tim",
+	"name": "Стіл 3",
 	"description": "Timmy",
 	"top": "200",
 	"left": "582"
 }, {
-	"name": "Kim",
+	"name": "Стіл 4",
 	"description": "Kimmy",
 	"top": "400",
 	"left": "221"
 }, {
-	"name": "John",
+	"name": "Стіл 5",
 	"description": "Jonny",
 	"top": "400",
 	"left": "461"
 }, {
-	"name": "Don",
+	"name": "Стіл 6",
 	"description": "Donny",
 	"top": "600",
 	"left": "100"
 }, {
-	"name": "Table",
+	"name": "Стіл 7",
 	"description": "Table",
 	"top": "600",
 	"left": "341"
 }, {
-	"name": "Table1",
+	"name": "Стіл 8",
 	"description": "Table1",
 	"top": "600",
 	"left": "582"
 }, {
-	"name": "Table2",
+	"name": "Стіл 9",
 	"description": "Table2",
 	"top": "800",
 	"left": "221"
 }, {
-	"name": "Table3",
+	"name": "Стіл 10",
 	"description": "Table3",
 	"top": "800",
 	"left": "461"
 }, {
-	"name": "Table4",
+	"name": "Стіл 11",
 	"description": "Table4",
 	"top": "1000",
 	"left": "100"
 }, {
-	"name": "Table4",
+	"name": "Стіл 12",
 	"description": "Table4",
 	"top": "1000",
 	"left": "341"
 }, {
-	"name": "Table5",
+	"name": "Стіл 13",
 	"description": "Table5",
 	"top": "1000",
 	"left": "582"
