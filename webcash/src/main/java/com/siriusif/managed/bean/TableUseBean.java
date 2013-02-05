@@ -73,6 +73,7 @@ public class TableUseBean {
     	  Graphics2D g2 = bufferedImg.createGraphics(); 
     	  for (TablesHall table : tables){
     		  g2.drawImage(readImage("tables"), null, table.getLeft(), table.getTop());
+    		  g2.drawString(table.getName(), table.getLeft(), table.getTop());
     	  }	
     	  
     	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
