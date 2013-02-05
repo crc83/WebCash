@@ -77,3 +77,10 @@
 	margin-left: 20px; 
 	position: absolute;
 }
+
+.ui-tabs .ui-tabs-panel {
+	padding-bottom: 0 !important;
+    margin-left: -28px !important;
+    padding-right: 0 !important;
+    padding-top: 0 !important;
+}
