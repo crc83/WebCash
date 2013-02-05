@@ -10,7 +10,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	    /WEB-INF/application-context.xml
+		classpath*:webcash-persistance-beans.xml,
+	    /WEB-INF/webcash-application-context.xml
 	</param-value>
 	</context-param>
 	<listener>
