@@ -2,19 +2,11 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.google.gson.Gson;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
 import com.siriusif.model.TablesHall;
@@ -53,6 +45,13 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 		Hall haFromDb = hallDao.find(hall.getId());
 		assertEquals("bancket", haFromDb.getName());
 		assertEquals(5, haFromDb.getTables().size());
+	}
+	
+	@Test
+	public void testAddJsonToDb()throws IOException{		
+		Hall hall = Helper.fromJson("/hall.json", Hall.class);
+		hallDao.add(hall);
+		
 	}
 
 }
