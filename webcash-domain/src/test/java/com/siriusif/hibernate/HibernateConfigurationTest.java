@@ -16,8 +16,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  * http://stackoverflow.com/questions/6245590/how-do-i-get-hibernate-to-execute-create-database-if-necessary-for-postgresql-wh
  */
 // TODO SB : Do something wit CREATE DATABASE
-@PropertySource("classpath*:test_db.properties")
-@ContextConfiguration(locations = "/persistence-beans.xml")
+@PropertySource("classpath*:database.properties")
+@ContextConfiguration(locations = { "/webcash-persistance-beans.xml"})
 public class HibernateConfigurationTest extends AbstractJUnit4SpringContextTests {
 	
 	@Autowired

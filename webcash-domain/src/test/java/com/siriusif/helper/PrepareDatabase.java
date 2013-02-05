@@ -8,7 +8,9 @@ import com.siriusif.model.Hall;
 import com.siriusif.service.model.HallDao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.support.AbstractContextLoader;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
@@ -19,14 +21,16 @@ import org.springframework.test.context.support.GenericXmlContextLoader;
  * for demonstration and testing
  *
  */
-@ContextConfiguration(locations = "/webcash-persistance-beans.xml")
+@ContextConfiguration(locations="/webcash-persistence-beans.xml")
 public class PrepareDatabase
 {
-	@Autowired
+	private ApplicationContext ctx;
+	
     private HallDao hallDao;
 	
-	public PrepareDatabase() {
-//		new GenericXmlContextLoader().loadContext("/persistence-beans.xml");		
+	public PrepareDatabase() throws Exception {
+		ctx = new GenericXmlContextLoader().loadContext("/webcash-persistence-beans.xml");
+		hallDao = (HallDao) ctx.getBean("hallDao");
 	}
 	
 	public void loadHalls() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
@@ -36,6 +40,7 @@ public class PrepareDatabase
 
     public static void main( String[] args ) throws Exception
     {
+    	
     	PrepareDatabase main = new PrepareDatabase();
     	System.out.println("Import started");
     	main.loadHalls();
