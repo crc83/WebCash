@@ -1,5 +1,7 @@
 package com.siriusif.managed.bean;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics2D;  
 import java.awt.image.BufferedImage;  
 import java.io.ByteArrayInputStream;  
@@ -72,8 +74,13 @@ public class TableUseBean {
     	  BufferedImage bufferedImg = readImage("background");  
     	  Graphics2D g2 = bufferedImg.createGraphics(); 
     	  for (TablesHall table : tables){
+    		  int textBottom = table.getTop() + 121;
+    		  int textLeft = table.getLeft() + 20;
     		  g2.drawImage(readImage("tables"), null, table.getLeft(), table.getTop());
-    		  g2.drawString(table.getName(), table.getLeft(), table.getTop());
+    		  Font font = new Font("Arial", Font.ITALIC, 18);
+    		  g2.setFont(font);
+    		  g2.setColor(Color.green);
+    		  g2.drawString(table.getName(), textLeft, textBottom);
     	  }	
     	  
     	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
