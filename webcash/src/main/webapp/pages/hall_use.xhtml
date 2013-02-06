@@ -15,19 +15,22 @@
 				<ui:include src="/pages/head.xhtml" />
 			</ui:insert>
 		</div>
-		<p:tabView orientation="bottom">  
-    <p:tab title="Зал 1"> 
-		<p:graphicImage value="#{tableUseBean.graphicText}" cache="false"
-			usemap="#navigation"/>
-		<map id="navigation" name="navigation">
-			<area shape="circle" coords="108,103,50"
-				onclick="location.href='#{tableUseBean.responce}'"/>
-		</map>
-		</p:tab>
-		<p:tab title="Зал 2">
-		</p:tab>
-<p:tab title="Зал 3">
-		</p:tab>
+		<p:tabView orientation="bottom">
+			<p:tab title="Зал 1">
+				<p:graphicImage value="#{tableUseBean.graphicText}" cache="false"
+					usemap="#navigation" />
+				<map id="navigation" name="navigation">
+					<ui:repeat var="tableUseBean" value="#{tableUseBean}">
+					<area shape="circle" coords="#{tableUseBean.x},#{tableUseBean.y},#{tableUseBean.r}"
+						onclick="location.href='#{tableUseBean.responce}'" />
+						</ui:repeat>
+				</map>
+				
+			</p:tab>
+			<p:tab title="Зал 2">
+			</p:tab>
+			<p:tab title="Зал 3">
+			</p:tab>
 		</p:tabView>
 
 

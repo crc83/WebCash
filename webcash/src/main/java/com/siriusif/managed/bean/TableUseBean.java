@@ -36,7 +36,25 @@ public class TableUseBean {
       
     private StreamedContent chart;
     
+    /**
+     * response of click
+     */
     private String responce;
+    
+    /**
+     * location of click(left position)
+     */
+    private int x;
+    
+    /**
+     * location of click(top position)
+     */
+    private int y;
+    
+    /**
+     * radius of click
+     */
+    private int r;
     
 
 	@ManagedProperty(value="#{tablesDao}")
@@ -111,10 +129,33 @@ public class TableUseBean {
     public StreamedContent getChart() {  
         return chart;  
     }  
-      
+    
+    
+    
     public String getResponce() {
     	responce = "./order.jsf";
     	return responce;
+    }
+    
+    public int getR() {
+    	r = 118/2;
+    	return r;
+    }
+    
+    public int getX() {
+    	List<TablesHall> tables = tablesDao.list();
+    	for (TablesHall table : tables){
+    		x = table.getLeft() + 59;
+    	}
+    	return x;
+    }
+    
+    public int getY() {
+    	List<TablesHall> tables = tablesDao.list();
+    	for (TablesHall table : tables){
+    		y = table.getTop() + 59;
+    	}
+    	return y;
     }
    
 }  
