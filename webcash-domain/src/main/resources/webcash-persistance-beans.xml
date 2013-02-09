@@ -10,7 +10,10 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
 
-    <context:property-placeholder location="classpath:/database.properties" />
+    <context:property-placeholder
+    	ignore-resource-not-found="true" 
+    	location="classpath*:database.properties"
+    	order="10" />
 
 	<!-- we can use annotations -->
 	<context:annotation-config />
