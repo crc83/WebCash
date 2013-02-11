@@ -8,9 +8,14 @@
 		<welcome-file>login.jsf</welcome-file>
 	</welcome-file-list>
 	<context-param>
+		<param-name>spring.profiles.active</param-name>
+		<param-value>web-dev</param-value>
+	</context-param>
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-	    /WEB-INF/application-context.xml
+	    WEB-INF/webcash-application-context.xml,
+		classpath*:webcash-persistence-beans.xml
 	</param-value>
 	</context-param>
 	<listener>
