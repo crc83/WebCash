@@ -12,7 +12,7 @@
 
     <context:property-placeholder
     	ignore-resource-not-found="true" 
-    	location="classpath*:database.properties"
+    	location="classpath:*database.properties"
     	order="10" />
 
 	<!-- we can use annotations -->
