@@ -10,11 +10,6 @@
 		        http://www.springframework.org/schema/context/spring-context-3.0.xsd
 		        http://www.springframework.org/schema/security
 		        http://www.springframework.org/schema/security/spring-security.xsd">
-		        
-	<context:property-placeholder
-    	ignore-resource-not-found="true" 
-    	location="WEB-INF/webcash.properties"
-    	order="0" />
 	
 	<context:component-scan base-package="com.siriusif.security" />
 	 
