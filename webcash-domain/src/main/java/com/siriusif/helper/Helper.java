@@ -35,14 +35,16 @@ public class Helper {
 		return today;
 	}
 
-	private static BufferedReader getCPFileReader(String fileName)
+	//TODO SB : Add javadoc
+	public static BufferedReader getCPFileReader(String fileName)
 			throws UnsupportedEncodingException {
 		InputStream in = Helper.class.getResourceAsStream(fileName);
 		Reader reader = new InputStreamReader(in, "UTF-8");
 		BufferedReader bufferedReader = new BufferedReader(reader);
 		return bufferedReader;
 	}
-	
+
+	//TODO SB : Add javadoc
 	public static <T> T fromJson(String fileName, Class<T> classOfT) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
 		return new Gson().fromJson(getCPFileReader(fileName), classOfT);
 	}
