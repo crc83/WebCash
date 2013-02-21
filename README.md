@@ -11,11 +11,16 @@ Project build status : [![Build Status](https://buildhive.cloudbees.com/job/crc8
 
 demo-environment
 ========
-CI-server for demo environment : https://sbelei.ci.cloudbees.com/job/webcash/
+* CI-server for demo environment : https://sbelei.ci.cloudbees.com/job/webcash/
+* demo URL : http://webcash.sbelei.cloudbees.net (login:admin password:admin)
+* branch for demo version : demo
 
-demo URL : http://webcash.sbelei.cloudbees.net (login:admin password:admin)
-
-branch for demo version : demo
+tips
+========
+ To load sample data in db, use in webcash projec
+ ```sh
+ mvn clean compile exec:java
+ ```
 
 webcash-spec
 ========
