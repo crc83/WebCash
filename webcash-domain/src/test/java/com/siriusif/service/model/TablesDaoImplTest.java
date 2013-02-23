@@ -13,9 +13,10 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.TablesHall;
 
-public class TablesDaoImplTest extends AbstractDaoImplTest{
+public class TablesDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private TablesDao tablesDao;

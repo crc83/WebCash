@@ -1,13 +1,16 @@
 [
 	{"dailyId": "12",
 	 "openedAt": "31/12/2012",
-	 "closedAt": "01/01/2013"}
+	 "closedAt": "01/01/2013",
+	 "daySum"  : "11.10"}
 ,
 	{"dailyId": "13",
-	 "openedAt": "31/01/2013",
-	 "closedAt": "01/02/2013"}
+	 "openedAt": "31/12/2012",
+	 "closedAt": "01/01/2013",
+	 "daySum"  : "12"}
 ,
 	{"dailyId": "14",
 	 "openedAt": "01/02/2013",
-	 "closedAt": "02/02/2013"}
+	 "closedAt": "02/02/2013",
+	 "daySum"  : "13.51"}
 ]

@@ -15,10 +15,11 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.Gson;
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 
-public class OrderDaoImplTest extends AbstractDaoImplTest{
+public class OrderDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private OrderDao orderDao;

@@ -7,11 +7,12 @@ import java.io.IOException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
 import com.siriusif.model.TablesHall;
 
-public class HallDaoImplTest extends AbstractDaoImplTest{
+public class HallDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private HallDao hallDao;
