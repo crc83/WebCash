@@ -1,6 +1,7 @@
 package com.siriusif.helper;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.model.Hall;
@@ -46,6 +47,7 @@ public class Helper {
 
 	//TODO SB : Add javadoc
 	public static <T> T fromJson(String fileName, Class<T> classOfT) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
-		return new Gson().fromJson(getCPFileReader(fileName), classOfT);
+		Gson gson = new GsonBuilder().setDateFormat("dd/mm/yyyy").create();
+		return gson.fromJson(getCPFileReader(fileName), classOfT);
 	}
 }
