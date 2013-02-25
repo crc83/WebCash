@@ -3,6 +3,7 @@ package com.siriusif.process;
 import static org.junit.Assert.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,13 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 		}
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		assertNotNull(newWorkshift);//workshift should be created
+		
+		Date today = new Date(); 
+		assertEquals(today, newWorkshift.getOpenedAt());
+		
 		assertNull(newWorkshift.getClosedAt());
+		
 		assertNull(newWorkshift.getDaySum());
-		fail("Not yet implemented");
 	}
 
 }
