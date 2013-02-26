@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class Helper {
@@ -34,6 +35,26 @@ public class Helper {
 			e.printStackTrace();
 		}
 		return today;
+	}
+	
+	/**
+	 * Cut's time part from java.util.Date value
+	 * @param date
+	 * @return date without time part
+	 */
+	public static Date getDateOnly(Date date) {
+		// Get Calendar object set to the date and time of the given Date object
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+
+		// Set time fields to zero
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+
+		// Put it back in the Date object
+		return cal.getTime();
 	}
 
 	//TODO SB : Add javadoc
