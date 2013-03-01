@@ -32,6 +32,7 @@ public class ImportDatabase {
 		session.save(hall);
 		session.getTransaction().commit();
 		session.close();
+		((ClassPathXmlApplicationContext) context).close(); 
 	}
 
 }
