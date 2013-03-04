@@ -1,6 +1,6 @@
 package com.siriusif.managed.bean;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -29,7 +29,6 @@ public class OrderBean {
 		HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
 		Object maybeOrder = session.getAttribute("order");
 		// end
-		System.out.println("!!!!! CONSTRUCTOR !!!!");
 		if (maybeOrder == null) {
 			orderView();
 		} else {
@@ -43,27 +42,26 @@ public class OrderBean {
 		
 		Suborder first = new Suborder(1);
 		
-		first.addSale(buildSale("Юшка грибна", 0.280, 12.50));
-		first.addSale(buildSale("Салат домашній", 0.280, 12.00));
+		first.addSale(buildSale("Юшка грибна", 0.280, 10.50));
+		first.addSale(buildSale("Салат домашній", 0.280, 11.00));
 		first.addSale(buildSale("М'ясо по французьки", 0.200, 20.00));
 		first.addSale(buildSale("Картопля молода з зеленню", 0.200, 8.00));
 		order.addSuborder(first);
 
 		Suborder second = new Suborder(2);
-		second.addSale(buildSale("Смалець", 0.100, 8.00));
+		second.addSale(buildSale("Картопля молода з зеленню", 0.100, 8.00));
 		second.addSale(buildSale("Сметана", 1, 4.00));
-		second.addSale(buildSale("Фреш", 0.200, 16.00));
 		order.addSuborder(second);
 
 		Suborder third = new Suborder(3);
-		third.addSale(buildSale("Хліб", 10, 0.50));
+		third.addSale(buildSale("Фреш", 0.200, 16.00));
 		third.addSale(buildSale("Кава Еспрессо", 0.040, 9.00));
 		third.addSale(buildSale("Штрудель", 0.150, 14.00));
 		order.addSuborder(third);
 	}
 	
 	private void menuView() {
-		groups = new ArrayList<Group>();
+		groups = new LinkedList<Group>();
 		
 		Group first = new Group("Салати");
 		first.getGoods().add(new Good("Сирний 200г.", 7.50));
@@ -77,7 +75,7 @@ public class OrderBean {
 		first.getGoods().add(new Good("Рибний 200г.", 7.50));
 		groups.add(first);
 		
-		Group two = new Group("Суп");
+		Group two = new Group("Перші страви");
 		two.getGoods().add(new Good("Сирний 200г.", 7.50));
 		two.getGoods().add(new Good("Домашній 280г.", 7.50));
 		two.getGoods().add(new Good("З капусти 200г.", 7.50));
@@ -88,13 +86,12 @@ public class OrderBean {
 		two.getGoods().add(new Good("Грецький 220г.", 7.50));
 		two.getGoods().add(new Good("Рибний 200г.", 7.50));
 		groups.add(two);
+		groups.add(new Group("Другі страви"));
+		groups.add(new Group("Десерти"));
 	}
 	
 	public void onClick(ActionEvent evt){
-		 System.out.println("SB : onClick");
 		 Good good = (Good)evt.getComponent().getAttributes().get("selectedGood");
-		 System.out.println("SB : "+good.getName());
-		 System.out.println("SB : "+good.getPrice());
 		 Sale sale = new Sale();
 		 sale.setSalesGood(good);
 		 sale.setAmount(5);

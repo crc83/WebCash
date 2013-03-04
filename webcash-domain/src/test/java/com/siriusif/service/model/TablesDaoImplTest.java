@@ -35,7 +35,8 @@ public class TablesDaoImplTest extends AbstractDaoImplTest{
 		
 		assertTrue (size < tablesDao.list().size());
 	}
-	
+
+
 	private BufferedReader getCPFileReader(String fileName)
 			throws UnsupportedEncodingException {
 		InputStream in = this.getClass().getResourceAsStream(fileName);

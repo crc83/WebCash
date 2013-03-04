@@ -17,9 +17,9 @@ public class AbstractWebDriverTest {
 	
 	@Before
 	public void setUpBrowser(){
-		browser = new HtmlUnitDriver();
+//		browser = new HtmlUnitDriver();
 		//initFirefox();
-		//initChrome();
+		initChrome();
 		//initIE();
 	}
 

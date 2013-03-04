@@ -24,21 +24,6 @@ public class HallUsePageTest extends AbstractWebDriverTest{
 		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:loginButton")).click();
 		System.out.println(browser.getCurrentUrl());
-		get("/pages/hall_use.jsf");
 	}
 
-	// SB : Temporary solution : Uncomment and fix this test
-	/*
- 	@Test
-	public void testAllOtherPagesAccessibleThroughLogin() {
-		String[] pages = { 
-			    "/pages/hall.jsf",
-			    "/pages/menu.jsf"
-			};
-		for (String page : pages) {
-			get(page);
-			assertIfLoginPage();
-		}
-	}
-*/
 }
