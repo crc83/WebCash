@@ -26,18 +26,48 @@ public class ImportDatabase {
 	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
-
-		ApplicationContext context = new ClassPathXmlApplicationContext("webcash-persistence-beans.xml");
-//		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
-//		 ctx.getEnvironment().setActiveProfiles("dev");
-//		 ctx.load("webcash-persistence-beans.xml");
-//		 ctx.refresh();
-		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
-		Session session = sessionFactory.openSession();
-		session.beginTransaction();
+		
+		String profile=null;
+		//define profile as invocation parameter
+		if (args.length>0) {
+			profile = args[0];
+		}
+		GenericXmlApplicationContext context = initAppContext(profile);
+		Session session = initHibernateSession(context);
+		
+		session.delete(hall);
 		session.save(hall);
 		session.getTransaction().commit();
 		session.close();
+	}
+
+	/**
+	 * Instantiates hibernate session from preloaded Spring context.
+	 * @param context - preloaded spring context
+	 * @return ready to use Hibernate session object
+	 */
+	private static Session initHibernateSession(
+			GenericXmlApplicationContext context) {
+		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+		Session session = sessionFactory.openSession();
+		session.beginTransaction();
+		return session;
+	}
+
+	/**
+	 * Loads Spring context from <code>webcash-persistence-beans.xml</code>. 
+	 * Sets active profile to <code>profile</code>, if defined. 
+	 * @param profile - active profile. possible values "dev", "test", or <code>null</code>
+	 * @return loaded Spring context
+	 */
+	private static GenericXmlApplicationContext initAppContext(String profile) {
+		GenericXmlApplicationContext context = new GenericXmlApplicationContext();
+		if (profile != null) {
+			context.getEnvironment().setActiveProfiles(profile);
+		}
+		context.load("webcash-persistence-beans.xml");
+		context.refresh();
+		return context;
 	}
 
 }
