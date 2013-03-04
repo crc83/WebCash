@@ -9,6 +9,8 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.support.GenericXmlApplicationContext;
+import org.springframework.core.env.ConfigurableEnvironment;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -26,6 +28,10 @@ public class ImportDatabase {
 		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("webcash-persistence-beans.xml");
+//		GenericXmlApplicationContext ctx = new GenericXmlApplicationContext();
+//		 ctx.getEnvironment().setActiveProfiles("dev");
+//		 ctx.load("webcash-persistence-beans.xml");
+//		 ctx.refresh();
 		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();

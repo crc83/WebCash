@@ -1,6 +1,7 @@
 package com.siriusif.model;
 
 
+import java.math.BigDecimal;
 import java.util.Currency;
 
 
@@ -9,7 +10,7 @@ public class Good {
 	private int id;
 	private int art;
 	private String name;
-	private double price;//TODO change from double to Currency
+	private BigDecimal price;
 	private boolean kitchen;
 	private boolean bar;
 	private boolean pdv;
@@ -22,7 +23,7 @@ public class Good {
 	private int kitchenPrinterId;
 	private Group parentGroup;
 	
-	public Good(String name, double price) {
+	public Good(String name, BigDecimal price) {
 		this.name = name;
 		this.price = price;
 	}
@@ -47,10 +48,10 @@ public class Good {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public boolean isKitchen() {
