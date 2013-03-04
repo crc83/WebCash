@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.Gson;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
+import com.siriusif.model.Suborder;
 
 public class OrderDaoImplTest extends AbstractDaoImplTest{
 	
@@ -76,6 +77,32 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		assertEquals(BigDecimal.valueOf(1525, 2), orFromDB.getSum());
 		assertTrue (size < orderDao.list().size());
 	}
+	
+	@Test
+	public void testOneToMenyOrderSuborders(){
+		int size = orderDao.list().size();
+		Order order = new Order();
+		
+		order.addSuborder(new Suborder(1));
+		order.addSuborder(new Suborder(2));
+		order.addSuborder(new Suborder(3));
+		order.addSuborder(new Suborder(5));
+		order.setTableNum(8);
+		order.setSum(BigDecimal.valueOf(15.25));
+		order.setAuthor("admin");
+		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setWorkShift(5l);
+		order.setDailyId(size);
+		orderDao.add(order);
+		
+		orderDao.add(order);
+		
+		assertTrue (size < orderDao.list().size());
+		Order orFromDB = orderDao.find(order.getId());
+		assertEquals(8, orFromDB.getTableNum());
+		assertEquals(4, orFromDB.getSuborders().size());
+	}
+
 	
 	private BufferedReader getCPFileReader(String fileName)
 			throws UnsupportedEncodingException {
