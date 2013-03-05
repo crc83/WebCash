@@ -2,8 +2,7 @@ package com.siriusif.model;
 
 
 import java.math.BigDecimal;
-import java.util.Currency;
-
+import java.math.RoundingMode;
 
 
 public class Good {
@@ -18,7 +17,7 @@ public class Good {
 	private int group;
 	private String shortName;
 	private boolean piece;
-	private Currency minPrice;
+	private BigDecimal minPrice;
 	private boolean billiard;
 	private int kitchenPrinterId;
 	private Group parentGroup;
@@ -49,6 +48,8 @@ public class Good {
 		this.name = name;
 	}
 	public BigDecimal getPrice() {
+		 //TODO CS : Scale hardcoded!!!
+	
 		return price;
 	}
 	public void setPrice(BigDecimal price) {
@@ -96,10 +97,12 @@ public class Good {
 	public void setPiece(boolean piece) {
 		this.piece = piece;
 	}
-	public Currency getMinPrice() {
+	public BigDecimal getMinPrice() {
+		//TODO CS : Scale hardcoded!!!
+		minPrice.setScale(2, RoundingMode.HALF_UP);
 		return minPrice;
 	}
-	public void setMinPrice(Currency minPrice) {
+	public void setMinPrice(BigDecimal minPrice) {
 		this.minPrice = minPrice;
 	}
 	public boolean isBilliard() {

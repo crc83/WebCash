@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  * Order Entity 
@@ -134,11 +133,11 @@ public class Order {
 	/**
 	 * @return total order
 	 */
-	public double getTotal() {
+	public BigDecimal getTotal() {
 		// TODO change from double to Currency
-		double sum = 0;
+		BigDecimal sum = null;
 		for (Suborder s : suborders) {
-			sum += s.getTotal();
+			sum = sum.add(s.getTotal());
 		}
 		return sum;
 	}

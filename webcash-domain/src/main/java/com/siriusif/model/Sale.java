@@ -1,6 +1,8 @@
 package com.siriusif.model;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.Currency;
 
 import javax.persistence.Column;
@@ -20,8 +22,8 @@ public class Sale {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
-	@Column(name = "amount", nullable = false)
-	private double amount;
+	@Column(name = "amount", nullable = false, precision=16, scale=3)
+	private BigDecimal amount;
 
 	/** () total sum of sale **/
 	private Currency sum;
@@ -48,11 +50,11 @@ public class Sale {
 	// }
 
 	public BigDecimal getCalculatedSum() {
-		// TODO change from double to Currency
-		BigDecimal sum = null;
+		BigDecimal sum = BigDecimal.ZERO;
 		BigDecimal p = salesGood.getPrice();
-		double am = getAmount();
-		sum = p * am;
+		BigDecimal am = getAmount();
+		//TODO CS : Scale hardcoded!!!
+		sum = p.multiply(am).setScale(2, BigDecimal.ROUND_HALF_UP);		
 		return sum;
 	}
 
@@ -66,11 +68,13 @@ public class Sale {
 		this.id = id;
 	}
 
-	public double getAmount() {
+	public BigDecimal getAmount() {
+		//TODO CS : Scale hardcoded!!!
+		
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
 	}
 

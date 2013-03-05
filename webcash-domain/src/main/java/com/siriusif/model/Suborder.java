@@ -1,5 +1,6 @@
 package com.siriusif.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "suborder")
@@ -50,11 +50,11 @@ public class Suborder {
 	/**
 	 * @return total suborder
 	 */
-	public double getTotal() {
+	public BigDecimal getTotal() {
 		// TODO change from double to Currency
-		double sum = 0;
+		BigDecimal sum = BigDecimal.ZERO;
 		for (Sale s : sales) {
-			sum += s.getCalculatedSum();
+			sum = sum.add(s.getCalculatedSum()).setScale(2, BigDecimal.ROUND_HALF_UP);
 		}
 		return sum;
 	}
