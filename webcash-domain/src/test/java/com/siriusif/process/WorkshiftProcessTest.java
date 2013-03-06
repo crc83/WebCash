@@ -6,7 +6,11 @@ import java.io.UnsupportedEncodingException;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.JsonIOException;
@@ -18,11 +22,16 @@ import com.siriusif.service.model.WorkshiftDao;
 
 public class WorkshiftProcessTest extends AbstractSpringTest{
 
-	@Autowired
+	@Mock
 	private WorkshiftDao workshiftDao;
 	
-	@Autowired
+	@InjectMocks
 	private WorkshiftProcess wsProcess; 
+	
+	@Before
+	public void setUp() {
+		MockitoAnnotations.initMocks(this);
+	}
 	
 	/*
 	 * Given : We have couple of workshifts 
@@ -30,13 +39,8 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	 * Than  : We get it in initial state
 	 */
 	@Test
-	public void testOpenWorkshift() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
-		Workshift[] worksifts = Helper.fromJson("/workshift.json", Workshift[].class);
-		for (Workshift ws : worksifts){
-			workshiftDao.add(ws);
-			//because we cannot write close date during workshift creation
-			workshiftDao.update(ws);
-		}
+	public void testOpenWorkshift() {
+		
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		
 		assertNotNull(newWorkshift);//workshift should be created
@@ -52,16 +56,8 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	 * Than  : We get it in initial state with dailyId=3
 	 */
 	@Test
-	public void testOpenWorkshiftWhenWeHaveThreeClosed() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
-		Workshift[] worksifts = Helper.fromJson("/workshift.json", Workshift[].class);
+	public void testOpenWorkshiftWhenWeHaveThreeClosed() {
 		Date today =  Helper.getDateOnly(new Date());
-		for (Workshift ws : worksifts){
-			ws.setOpenedAt(today);
-			ws.setClosedAt(today);
-			workshiftDao.add(ws);
-			//because we cannot write close date during workshift creation
-			workshiftDao.update(ws);
-		}
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		
 		assertNotNull(newWorkshift);//workshift should be created
