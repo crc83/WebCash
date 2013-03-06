@@ -48,7 +48,8 @@ public class Suborder {
 	}
 
 	/**
-	 * @return total suborder
+	 * Sum of sales (not including discount) in suborder
+	 * @return total sum of suborder
 	 */
 	public BigDecimal getTotal() {
 		// TODO change from double to Currency
