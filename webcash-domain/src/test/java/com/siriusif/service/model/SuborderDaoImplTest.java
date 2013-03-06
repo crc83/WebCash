@@ -2,9 +2,13 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.math.BigDecimal;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 
 public class SuborderDaoImplTest extends AbstractDaoImplTest{
@@ -21,6 +25,26 @@ public class SuborderDaoImplTest extends AbstractDaoImplTest{
 		suborderDao.add(suborder);
 		
 		assertTrue (size < suborderDao.list().size());
+	}
+	
+	@Test
+	public void testOneToManySuborderSale(){
+		int size = suborderDao.list().size();
+		Suborder suborder = new Suborder(5);
+		
+		Sale sale = new Sale();
+		sale.setAmount(BigDecimal.valueOf(15.25));
+		suborder.addSale(sale);
+		
+		Sale sale1 = new Sale();
+		sale1.setAmount(BigDecimal.valueOf(16.25));
+		suborder.addSale(sale1);
+		suborderDao.add(suborder);
+		
+		assertTrue (size < suborderDao.list().size());
+		Suborder orFromDB = suborderDao.find(suborder.getId());
+		assertEquals(5, orFromDB.getIndex());
+		assertEquals(2, orFromDB.getSales().size());
 	}
 	
 }

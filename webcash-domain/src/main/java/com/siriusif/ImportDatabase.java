@@ -16,6 +16,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
+import com.siriusif.model.Order;
 
 /**
  * This console app allow us to create database with initial data
@@ -25,7 +26,8 @@ import com.siriusif.model.Hall;
 public class ImportDatabase {
 	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
-		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
+//		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
+		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
 		//define profile as invocation parameter
@@ -35,8 +37,8 @@ public class ImportDatabase {
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
 		
-		session.delete(hall);
-		session.save(hall);
+		session.delete(order);
+		session.save(order);
 		session.getTransaction().commit();
 		session.close();
 	}
