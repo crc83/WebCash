@@ -103,7 +103,7 @@ public class Order {
 	@Column(name = "daylyId", nullable = false)
 	private int dailyId;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "order")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "order")
 	private List<Suborder> suborders;
 
 	public Order() {

@@ -95,8 +95,6 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		order.setDailyId(size);
 		orderDao.add(order);
 		
-		orderDao.add(order);
-		
 		assertTrue (size < orderDao.list().size());
 		Order orFromDB = orderDao.find(order.getId());
 		assertEquals(8, orFromDB.getTableNum());

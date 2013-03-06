@@ -1,12 +1,10 @@
 package com.siriusif.model;
 
 import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.util.Currency;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +24,8 @@ public class Sale {
 	private BigDecimal amount;
 
 	/** () total sum of sale **/
-	private Currency sum;
+	@Transient
+	private BigDecimal sum;
 	
 	@Column(name="allowsum", nullable = true, precision=16, scale=2)
 	private BigDecimal allowSum;
@@ -69,8 +68,6 @@ public class Sale {
 	}
 
 	public BigDecimal getAmount() {
-		//TODO CS : Scale hardcoded!!!
-		
 		return amount;
 	}
 
@@ -78,7 +75,7 @@ public class Sale {
 		this.amount = amount;
 	}
 
-	public Currency getSum() {
+	public BigDecimal getSum() {
 		return sum;
 	}
 

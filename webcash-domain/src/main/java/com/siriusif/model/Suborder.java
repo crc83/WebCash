@@ -15,7 +15,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 @Entity
 @Table(name = "suborder")
 public class Suborder {
@@ -23,6 +22,7 @@ public class Suborder {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
+
 	@Column(name = "index", nullable = true)
 	private int index;
 	
@@ -85,4 +85,11 @@ public class Suborder {
 		this.order = order;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 }
