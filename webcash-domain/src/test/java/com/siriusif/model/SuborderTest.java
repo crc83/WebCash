@@ -31,13 +31,6 @@ public class SuborderTest {
 		assertEquals(1, suborder.getSales().size());	
 	}
 	
-//	@Test
-//	public void testGetCalculateSumNotNull(){
-//		Sale sale = new Sale();
-//		
-//		assertNotNull(sale.getCalculatedSum());
-//	}
-	
 	@Test
 	public void testTotal() {
 		Suborder first = new Suborder(1);
