@@ -41,4 +41,7 @@ public class SaleBuiledr {
 		return new BigDecimal(money).setScale(2, RoundingMode.HALF_UP);	
 	}
 
+	public static BigDecimal amount(double amount){
+		return new BigDecimal(amount).setScale(3, RoundingMode.HALF_UP);	
+	}
 }
