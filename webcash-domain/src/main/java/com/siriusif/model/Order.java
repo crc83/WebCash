@@ -135,7 +135,7 @@ public class Order {
 	 */
 	public BigDecimal getTotal() {
 		// TODO change from double to Currency
-		BigDecimal sum = null;
+		BigDecimal sum = BigDecimal.ZERO;
 		for (Suborder s : suborders) {
 			sum = sum.add(s.getTotal());
 		}
