@@ -9,8 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "good")
@@ -55,7 +56,8 @@ public class Good {
 	@Column(name = "kitchenPrinterId", nullable = true)
 	private int kitchenPrinterId;
 	
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "group_id")
 	private Group parentGroup;
 	
 	public Good(){
@@ -89,8 +91,6 @@ public class Good {
 		this.name = name;
 	}
 	public BigDecimal getPrice() {
-		 //TODO CS : Scale hardcoded!!!
-	
 		return price;
 	}
 	public void setPrice(BigDecimal price) {
