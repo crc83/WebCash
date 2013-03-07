@@ -42,9 +42,9 @@ public class SuborderDaoImplTest extends AbstractDaoImplTest{
 		suborderDao.add(suborder);
 		
 		assertTrue (size < suborderDao.list().size());
-		Suborder orFromDB = suborderDao.find(suborder.getId());
-		assertEquals(5, orFromDB.getIndex());
-		assertEquals(2, orFromDB.getSales().size());
+		Suborder suborderFromDB = suborderDao.find(suborder.getId());
+		assertEquals(5, suborderFromDB.getIndex());
+		assertEquals(2, suborderFromDB.getSales().size());
 	}
 	
 }

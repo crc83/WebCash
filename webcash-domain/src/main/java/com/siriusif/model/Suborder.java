@@ -26,7 +26,7 @@ public class Suborder {
 	@Column(name = "index", nullable = true)
 	private int index;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "suborder")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "suborder")
 	private List<Sale> sales;
 	
 	@ManyToOne
