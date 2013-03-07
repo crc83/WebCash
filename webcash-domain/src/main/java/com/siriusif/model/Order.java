@@ -103,7 +103,7 @@ public class Order {
 	@Column(name = "daylyId", nullable = false)
 	private int dailyId;
 	
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "order")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "order")
 	private List<Suborder> suborders;
 
 	public Order() {
@@ -131,10 +131,10 @@ public class Order {
 	}
 
 	/**
-	 * @return total order
+	 * Return total sum of all suborders in order
+	 * @return total sum
 	 */
 	public BigDecimal getTotal() {
-		// TODO change from double to Currency
 		BigDecimal sum = BigDecimal.ZERO;
 		for (Suborder s : suborders) {
 			sum = sum.add(s.getTotal());

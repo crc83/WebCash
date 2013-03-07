@@ -10,11 +10,11 @@ import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.google.gson.Gson;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
@@ -79,7 +79,7 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 	}
 	
 	@Test
-	public void testOneToMenyOrderSuborders(){
+	public void testOneToManyOrderSuborders(){
 		int size = orderDao.list().size();
 		Order order = new Order();
 		
@@ -100,20 +100,22 @@ public class OrderDaoImplTest extends AbstractDaoImplTest{
 		assertEquals(8, orFromDB.getTableNum());
 		assertEquals(4, orFromDB.getSuborders().size());
 	}
-
 	
-	private BufferedReader getCPFileReader(String fileName)
-			throws UnsupportedEncodingException {
-		InputStream in = this.getClass().getResourceAsStream(fileName);
-		Reader reader = new InputStreamReader(in, "UTF-8");
-		BufferedReader bufferedReader = new BufferedReader(reader);
-		return bufferedReader;
-	}
-
-	@Test
-	public void testReadJson() throws IOException{		
-		Order order = new Gson().fromJson(getCPFileReader("/order.json"), Order.class);
-		orderDao.add(order);
-	}
+//TODO CS : Remove these comments when we don't need this code.
+//
+//	
+//	private BufferedReader getCPFileReader(String fileName)
+//			throws UnsupportedEncodingException {
+//		InputStream in = this.getClass().getResourceAsStream(fileName);
+//		Reader reader = new InputStreamReader(in, "UTF-8");
+//		BufferedReader bufferedReader = new BufferedReader(reader);
+//		return bufferedReader;
+//	}
+//
+//	@Test
+//	public void testReadJson() throws IOException{		
+//		Order order = new Gson().fromJson(getCPFileReader("/order.json"), Order.class);
+//		orderDao.add(order);
+//	}
 
 }

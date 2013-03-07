@@ -1,6 +1,5 @@
 package com.siriusif.model;
 
-import static com.siriusif.model.helpers.SaleBuiledr.buildSale;
 import static com.siriusif.model.helpers.SaleBuiledr.buildSaleOld;
 import static com.siriusif.model.helpers.SaleBuiledr.money;
 import static org.junit.Assert.*;

@@ -24,6 +24,7 @@ public class Sale {
 	private BigDecimal amount;
 
 	/** () total sum of sale **/
+//	TODO What does it work?????? 
 	@Transient
 	private BigDecimal sum;
 	
@@ -42,6 +43,10 @@ public class Sale {
 	@ManyToOne
 	@JoinColumn(name = "suborder_id")
 	private Suborder suborder;
+	
+	public Sale(){
+		amount = BigDecimal.ZERO;
+	}
 
 	//
 	// public void addGoodSales(Sale goodSales) {
@@ -50,10 +55,13 @@ public class Sale {
 
 	public BigDecimal getCalculatedSum() {
 		BigDecimal sum = BigDecimal.ZERO;
-		BigDecimal p = salesGood.getPrice();
+		BigDecimal price = BigDecimal.ZERO;
+		if (salesGood != null) {
+			price = salesGood.getPrice();
+		}
 		BigDecimal am = getAmount();
 		//TODO CS : Scale hardcoded!!!
-		sum = p.multiply(am).setScale(2, BigDecimal.ROUND_HALF_UP);		
+		sum = price.multiply(am).setScale(2, BigDecimal.ROUND_HALF_UP);		
 		return sum;
 	}
 
