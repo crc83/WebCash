@@ -1,15 +1,15 @@
 package com.siriusif.model;
 
 
-import java.util.Currency;
-
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 
 public class Good {
 	private int id;
 	private int art;
 	private String name;
-	private double price;//TODO change from double to Currency
+	private BigDecimal price;
 	private boolean kitchen;
 	private boolean bar;
 	private boolean pdv;
@@ -17,12 +17,12 @@ public class Good {
 	private int group;
 	private String shortName;
 	private boolean piece;
-	private Currency minPrice;
+	private BigDecimal minPrice;
 	private boolean billiard;
 	private int kitchenPrinterId;
 	private Group parentGroup;
 	
-	public Good(String name, double price) {
+	public Good(String name, BigDecimal price) {
 		this.name = name;
 		this.price = price;
 	}
@@ -47,10 +47,12 @@ public class Good {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public double getPrice() {
+	public BigDecimal getPrice() {
+		 //TODO CS : Scale hardcoded!!!
+	
 		return price;
 	}
-	public void setPrice(double price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 	public boolean isKitchen() {
@@ -95,10 +97,12 @@ public class Good {
 	public void setPiece(boolean piece) {
 		this.piece = piece;
 	}
-	public Currency getMinPrice() {
+	public BigDecimal getMinPrice() {
+		//TODO CS : Scale hardcoded!!!
+		minPrice.setScale(2, RoundingMode.HALF_UP);
 		return minPrice;
 	}
-	public void setMinPrice(Currency minPrice) {
+	public void setMinPrice(BigDecimal minPrice) {
 		this.minPrice = minPrice;
 	}
 	public boolean isBilliard() {

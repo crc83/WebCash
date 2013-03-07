@@ -1,31 +1,36 @@
 package com.siriusif.model;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * @author Администратор
- *
- */
-/**
- * @author Администратор
- *
- */
-/**
- * @author Администратор
- *
- */
-/**
- * @author Администратор
- *
- */
-/**
- * @author Администратор
- * 
- */
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+@Entity
+@Table(name = "suborder")
 public class Suborder {
+	@Id
+	@GeneratedValue(strategy = GenerationType.TABLE)
+	private Long id;
+	
+
+	@Column(name = "index", nullable = true)
 	private int index;
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "suborder")
 	private List<Sale> sales;
+	
+	@ManyToOne
+	@JoinColumn(name = "order_id")
 	private Order order;
 
 	public Suborder() {
@@ -43,13 +48,14 @@ public class Suborder {
 	}
 
 	/**
-	 * @return total suborder
+	 * Sum of sales (not including discount) in suborder
+	 * @return total sum of suborder
 	 */
-	public double getTotal() {
+	public BigDecimal getTotal() {
 		// TODO change from double to Currency
-		double sum = 0;
+		BigDecimal sum = BigDecimal.ZERO;
 		for (Sale s : sales) {
-			sum += s.getCalculatedSum();
+			sum = sum.add(s.getCalculatedSum()).setScale(2, BigDecimal.ROUND_HALF_UP);
 		}
 		return sum;
 	}
@@ -80,4 +86,11 @@ public class Suborder {
 		this.order = order;
 	}
 
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 }

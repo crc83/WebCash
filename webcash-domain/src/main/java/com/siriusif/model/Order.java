@@ -5,15 +5,17 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  * Order Entity 
@@ -101,7 +103,7 @@ public class Order {
 	@Column(name = "daylyId", nullable = false)
 	private int dailyId;
 	
-	@Transient
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "order")
 	private List<Suborder> suborders;
 
 	public Order() {
@@ -129,13 +131,13 @@ public class Order {
 	}
 
 	/**
-	 * @return total order
+	 * Return total sum of all suborders in order
+	 * @return total sum
 	 */
-	public double getTotal() {
-		// TODO change from double to Currency
-		double sum = 0;
+	public BigDecimal getTotal() {
+		BigDecimal sum = BigDecimal.ZERO;
 		for (Suborder s : suborders) {
-			sum += s.getTotal();
+			sum = sum.add(s.getTotal());
 		}
 		return sum;
 	}

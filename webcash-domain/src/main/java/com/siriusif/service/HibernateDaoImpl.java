@@ -9,6 +9,7 @@ import com.siriusif.service.GenericDao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.List;
 /**
  * Basic DAO operations dependent with Hibernate's specific classes
@@ -56,5 +57,13 @@ public class HibernateDaoImpl<E, K extends Serializable> implements GenericDao<E
     @SuppressWarnings("unchecked")
 	public List<E> list() {
         return currentSession().createCriteria(daoType).list();
+    }
+    
+    protected void initializeCollection(Collection<?> collection) {
+        // works with Hibernate EM 3.6.1-SNAPSHOT
+        if(collection == null) {
+            return;
+        }
+        collection.iterator().hasNext();
     }
 }
