@@ -54,9 +54,7 @@ public class WorkshiftProcess {
 	 * @return count of closed workshifts today
 	 */
 	private int getTodayWorkshiftsCount() {
-		//select all with date = getCurrentWorkshiftDate()
-		// TODO Auto-generated method stub
-		return 0;
+		return workshiftDao.countForDate(getCurrentWorkshiftDate());
 	}
 
 	/**

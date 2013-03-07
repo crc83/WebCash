@@ -4,6 +4,7 @@ import java.io.UnsupportedEncodingException;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
 import com.siriusif.service.model.HallDao;
 

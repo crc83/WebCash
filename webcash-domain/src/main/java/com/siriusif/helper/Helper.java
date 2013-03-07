@@ -42,7 +42,7 @@ public class Helper {
 	 * @param date
 	 * @return date without time part
 	 */
-	public static Date getDateOnly(Date date) {
+	public static Date dateOnly(Date date) {
 		// Get Calendar object set to the date and time of the given Date object
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);

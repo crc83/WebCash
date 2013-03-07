@@ -10,7 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.matchers.Any;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.google.gson.JsonIOException;
@@ -43,10 +45,11 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 		
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		
-		assertNotNull(newWorkshift);//workshift should be created
 		Date today = new Date();
 		
-		assertEquals(today, newWorkshift.getOpenedAt());
+		assertNotNull(newWorkshift);//workshift should be created
+		assertEquals(Helper.dateOnly(today), 
+					Helper.dateOnly(newWorkshift.getOpenedAt()));
 		assertNull(newWorkshift.getClosedAt());
 		assertNull(newWorkshift.getDaySum());
 	}
@@ -57,12 +60,13 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	 */
 	@Test
 	public void testOpenWorkshiftWhenWeHaveThreeClosed() {
-		Date today =  Helper.getDateOnly(new Date());
+		Mockito.stub(workshiftDao.countForDate(Mockito.any(Date.class))).toReturn(3);
+		Date today =  Helper.dateOnly(new Date());
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		
 		assertNotNull(newWorkshift);//workshift should be created
-		
-		assertEquals(today, Helper.getDateOnly(newWorkshift.getOpenedAt()));
+		assertEquals(Helper.dateOnly(today), 
+				Helper.dateOnly(newWorkshift.getOpenedAt()));
 		assertNull(newWorkshift.getClosedAt());
 		assertNull(newWorkshift.getDaySum());
 		assertEquals(3, newWorkshift.getDailyId());
