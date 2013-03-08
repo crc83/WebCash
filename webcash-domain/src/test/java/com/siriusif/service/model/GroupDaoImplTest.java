@@ -55,5 +55,32 @@ public class GroupDaoImplTest extends AbstractDaoImplTest {
 		assertEquals("Овочі", groupFromBd.getgName());
 		assertEquals(3, groupFromBd.getGoods().size());
 	}
+	
+	@Test
+	public void testOneToManyGroupSubgroup(){
+		int size = groupDao.list().size();
+		Group group = new Group("Напої");
+		
+		Group subGroup = new Group("Гарячі напої");
+		group.addSubGroup(subGroup);
+		
+		Group subGroup1 = new Group("Холдні напої");
+		group.addSubGroup(subGroup1);
+		
+		Group subGroup2 = new Group("Соки");
+		group.addSubGroup(subGroup2);
+		
+		Group subGroup3 = new Group("Вода");
+		group.addSubGroup(subGroup3);
+		
+		groupDao.add(group);
+		
+		assertTrue(size < groupDao.list().size());
+		Group groupFromBd = groupDao.find(group.getgId());
+		assertEquals("Напої", groupFromBd.getgName());
+		assertEquals(4, groupFromBd.getSubGroups().size());
+		Group subgroupFromBd = groupDao.find(subGroup.getgId());
+		assertEquals("Гарячі напої", subgroupFromBd.getgName());
+	}
 
 }

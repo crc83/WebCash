@@ -10,9 +10,10 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "groupofgood")
@@ -23,14 +24,16 @@ public class Group {
 	
 	@Column(name="name", nullable=false, length=100)
 	private String gName;
-	@Transient
+	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "parentGroup")
 	private List<Group> subGroups;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "parentGroup")
 	private List<Good> goods;
 	
 	/** Group belongs to this parent group **/
-	@Transient
+	@ManyToOne
+	@JoinColumn(name = "parentgroup_id")
 	private Group parentGroup;
 	
 	public Group(){

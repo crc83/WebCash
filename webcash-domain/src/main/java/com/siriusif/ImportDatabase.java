@@ -26,7 +26,7 @@ import com.siriusif.model.Order;
 public class ImportDatabase {
 	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
-//		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
+		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
 		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
@@ -38,7 +38,9 @@ public class ImportDatabase {
 		Session session = initHibernateSession(context);
 		
 		session.delete(order);
+		session.delete(hall);
 		session.save(order);
+		session.save(hall);
 		session.getTransaction().commit();
 		session.close();
 	}
