@@ -24,65 +24,31 @@ import com.siriusif.service.model.TablesDao;
 
 // http://www.primefaces.org/showcase/ui/dynamicImage.jsf
 // see here
-@ManagedBean(name = "tableUseBean")
-public class TableUseBean {
+@ManagedBean(name = "hallUseBean")
+public class HallUseBean {
 	
 	//TODO SB : Change logger initialization in spring way
-	private Logger LOGGER = Logger.getLogger(TableUseBean.class);
+	private Logger LOGGER = Logger.getLogger(HallUseBean.class);
   
     private StreamedContent graphicText;  
-      
-    private StreamedContent barcode;  
-      
-    private StreamedContent chart;
     
     /**
      * response of click
      */
     private String responce;
     
-    /**
-     * location of click(left position)
-     */
-    private int x;
-    
-    /**
-     * location of click(top position)
-     */
-    private int y;
-    
-    /**
-     * radius of click
-     */
-    private int r;
-    
+      
 
 	@ManagedProperty(value="#{tablesDao}")
     private TablesDao tablesDao;
     
-    /**
-	 * @return the tablesDao
-	 */
-	public TablesDao getTablesDao() {
-		return tablesDao;
+	private List<TablesHall> tables;
+
+	public List<TablesHall> getTables() {
+		tables = tablesDao.list();
+		return tables;
 	}
 
-	/**
-	 * @param tablesDao the tablesDao to set
-	 */
-	public void setTablesDao(TablesDao tablesDao) {
-		LOGGER.debug(" >> TablesDao is set");
-		this.tablesDao = tablesDao;
-	}
-
-	public TableUseBean() {
-		super();
-		//NOTE : Dao is not accessible here
-    }  
-      
-    public StreamedContent getBarcode() {  
-        return barcode;  
-    }  
   
     public StreamedContent getGraphicText() throws IOException {  
     	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
@@ -123,39 +89,27 @@ public class TableUseBean {
 		}
 		return bi;
 	}  
-	
-	
-          
-    public StreamedContent getChart() {  
-        return chart;  
-    }  
-    
-    
     
     public String getResponce() {
     	responce = "./order.jsf";
     	return responce;
     }
+
+
+	/**
+	 * @return the tablesDao
+	 */
+	public TablesDao getTablesDao() {
+		return tablesDao;
+	}
+
+
+	/**
+	 * @param tablesDao the tablesDao to set
+	 */
+	public void setTablesDao(TablesDao tablesDao) {
+		this.tablesDao = tablesDao;
+	}
     
-    public int getR() {
-    	r = 118/2;
-    	return r;
-    }
-    
-    public int getX() {
-    	List<TablesHall> tables = tablesDao.list();
-    	for (TablesHall table : tables){
-    		x = table.getLeft() + 59;
-    	}
-    	return x;
-    }
-    
-    public int getY() {
-    	List<TablesHall> tables = tablesDao.list();
-    	for (TablesHall table : tables){
-    		y = table.getTop() + 59;
-    	}
-    	return y;
-    }
-   
+      
 }  
