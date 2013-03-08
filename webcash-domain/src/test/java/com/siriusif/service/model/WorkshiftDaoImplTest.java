@@ -5,28 +5,19 @@ import static org.junit.Assert.*;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
-
-import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
-import com.siriusif.model.TablesHall;
 import com.siriusif.model.Workshift;
 
 public class WorkshiftDaoImplTest extends AbstractSpringTest{
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(WorkshiftDaoImplTest.class);
-
 	@Autowired
 	private WorkshiftDao workshiftDao;
 	
@@ -101,6 +92,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 		workshiftDao.add(workshift);
 		Workshift wsFroDB = workshiftDao.find(workshift.getId()); 
 		// get this workshift from database
+		// TODO SB : Read day sum from JSON correctly
 		assertEquals(BigDecimal.valueOf(1351, 2) , wsFroDB.getDaySum());
 		assertTrue (size < workshiftDao.list().size());
 	}

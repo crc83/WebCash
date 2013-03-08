@@ -2,8 +2,6 @@ package com.siriusif.process;
 
 import static org.junit.Assert.*;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Before;
@@ -12,11 +10,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.internal.matchers.Any;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Workshift;

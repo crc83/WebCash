@@ -8,13 +8,8 @@ import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
 import com.siriusif.service.model.HallDao;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Repository;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.support.AbstractContextLoader;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import org.springframework.test.context.support.GenericXmlContextLoader;
 
 /**

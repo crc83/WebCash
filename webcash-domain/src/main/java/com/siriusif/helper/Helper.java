@@ -4,7 +4,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
-import com.siriusif.model.Hall;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
