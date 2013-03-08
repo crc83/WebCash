@@ -32,14 +32,23 @@ public class Workshift {
 	@Column(name = "dailyId", nullable = true)
 	private int dailyId;
 
+	/**
+	 * time of work shift opening
+	 */
 	@Column(name = "openedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date openedAt;
 
+	/**
+	 * time of work shift closing
+	 */
 	@Column(name = "closedAt", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
 	private Date closedAt;
 	
+	/**
+	 * sum per work shift
+	 */
 	@Column(name="daySum", nullable = true, precision=16, scale=2)
 	private BigDecimal daySum;
 

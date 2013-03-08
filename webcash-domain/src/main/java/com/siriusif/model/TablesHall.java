@@ -16,22 +16,40 @@ public class TablesHall {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
+	/**
+	 * name of table
+	 */
 	@Column(name="name", nullable=false, length=100)
 	private String name;
 	
+	/**
+	 * description of table
+	 */
 	@Column(name="description", nullable=true, length=100)
 	private String description;
 	
+	/**
+	 * location of table(distance from the top)
+	 */
 	@Column(name = "ctop", nullable = true)
 	private int top;
 	
 	// left is reserved word in SQL
+	/**
+	 * location of table(distance from the left)
+	 */
 	@Column(name = "cleft", nullable = true)
 	private int left;
 	
+	/**
+	 * height of table
+	 */
 	@Column(name = "height", nullable = true)
 	private int height;
 	
+	/**
+	 * width of table
+	 */
 	@Column(name = "width", nullable = true)
 	private int width;
 	

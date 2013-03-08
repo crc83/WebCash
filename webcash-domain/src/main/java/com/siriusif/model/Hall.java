@@ -20,9 +20,15 @@ public class Hall {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
+	/**
+	 * name of hall 
+	 */
 	@Column(name="name", nullable=false, length=100)
 	private String name;
 	
+	/**
+	 * list of tables
+	 */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "hall")
 	private List<TablesHall> tables;
 	

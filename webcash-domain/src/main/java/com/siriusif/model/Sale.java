@@ -21,6 +21,9 @@ public class Sale {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
 	
+	/**
+	 * amount of good
+	 */
 	@Column(name = "amount", nullable = false, precision=16, scale=3)
 	private BigDecimal amount;
 
@@ -32,9 +35,15 @@ public class Sale {
 	@Column(name="allowsum", nullable = true, precision=16, scale=2)
 	private BigDecimal allowSum;
 	
+	/**
+	 * fiscal printer or not
+	 */
 	@Column(name="fp", columnDefinition="boolean default false") 
 	private boolean fp;
 	
+	/**
+	 * printed or not
+	 */
 	@Column(name="printed", columnDefinition="boolean default false") 
 	private boolean printed;
 	

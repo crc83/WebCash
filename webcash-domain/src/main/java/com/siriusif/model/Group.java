@@ -22,12 +22,21 @@ public class Group {
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long gId;
 	
+	/**
+	 * name of group 
+	 */
 	@Column(name="name", nullable=false, length=100)
 	private String gName;
 	
+	/**
+	 * subgroup of group
+	 */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "parentGroup")
 	private List<Group> subGroups;
 	
+	/**
+	 * list of goods
+	 */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "parentGroup")
 	private List<Good> goods;
 	
