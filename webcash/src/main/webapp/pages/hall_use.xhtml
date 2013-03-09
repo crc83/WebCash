@@ -24,7 +24,7 @@
 				<map id="navigation" name="navigation">
 					<ui:repeat var="table" value="#{hallUseBean.tables}">
 					<area shape="circle" coords="#{table.left},#{table.top},#{table.height}"
-						onclick="location.href='./{table.id}/ordef.jsf'" />
+						onclick="location.href='./#{table.id}/ordef.jsf'" />
 						</ui:repeat>
 				</map>
 				

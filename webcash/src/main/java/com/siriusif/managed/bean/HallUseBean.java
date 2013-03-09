@@ -46,6 +46,11 @@ public class HallUseBean {
 
 	public List<TablesHall> getTables() {
 		tables = tablesDao.list();
+		LOGGER.debug("getting tables list");
+		LOGGER.debug("tables size :"+tables.size());
+		for (TablesHall table : tables){
+			LOGGER.debug("	| "+table);
+		}
 		return tables;
 	}
 
