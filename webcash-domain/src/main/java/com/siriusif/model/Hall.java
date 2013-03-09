@@ -55,6 +55,9 @@ public class Hall {
 	}
 	public void setTables(List<TablesHall> tables) {
 		this.tables = tables;
+		for (TablesHall table : tables){
+			table.setHall(this);
+		}
 	}
 
 }
