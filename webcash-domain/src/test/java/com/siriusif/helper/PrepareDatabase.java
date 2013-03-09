@@ -21,6 +21,7 @@ import org.springframework.test.context.support.GenericXmlContextLoader;
  * for demonstration and testing
  *
  */
+//TODO SB : Do I need this class?
 @ContextConfiguration(locations="/webcash-persistence-beans.xml")
 public class PrepareDatabase
 {

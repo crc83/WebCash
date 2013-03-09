@@ -1,5 +1,7 @@
 package com.siriusif.managed.bean;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -42,21 +44,21 @@ public class OrderBean {
 		
 		Suborder first = new Suborder(1);
 		
-		first.addSale(buildSale("Юшка грибна", 0.280, 10.50));
-		first.addSale(buildSale("Салат домашній", 0.280, 11.00));
-		first.addSale(buildSale("М'ясо по французьки", 0.200, 20.00));
-		first.addSale(buildSale("Картопля молода з зеленню", 0.200, 8.00));
+		first.addSale(buildSaleOld("Юшка грибна", 0.280, 10.50));
+		first.addSale(buildSaleOld("Салат домашній", 0.280, 11.00));
+		first.addSale(buildSaleOld("М'ясо по французьки", 0.200, 20.00));
+		first.addSale(buildSaleOld("Картопля молода з зеленню", 0.200, 8.00));
 		order.addSuborder(first);
 
 		Suborder second = new Suborder(2);
-		second.addSale(buildSale("Картопля молода з зеленню", 0.100, 8.00));
-		second.addSale(buildSale("Сметана", 1, 4.00));
+		second.addSale(buildSaleOld("Картопля молода з зеленню", 0.100, 8.00));
+		second.addSale(buildSaleOld("Сметана", 1, 4.00));
 		order.addSuborder(second);
 
 		Suborder third = new Suborder(3);
-		third.addSale(buildSale("Фреш", 0.200, 16.00));
-		third.addSale(buildSale("Кава Еспрессо", 0.040, 9.00));
-		third.addSale(buildSale("Штрудель", 0.150, 14.00));
+		third.addSale(buildSaleOld("Фреш", 0.200, 16.00));
+		third.addSale(buildSaleOld("Кава Еспрессо", 0.040, 9.00));
+		third.addSale(buildSaleOld("Штрудель", 0.150, 14.00));
 		order.addSuborder(third);
 	}
 	
@@ -64,27 +66,27 @@ public class OrderBean {
 		groups = new LinkedList<Group>();
 		
 		Group first = new Group("Салати");
-		first.getGoods().add(new Good("Сирний 200г.", 7.50));
-		first.getGoods().add(new Good("Домашній 280г.", 7.50));
-		first.getGoods().add(new Good("З капусти 200г.", 7.50));
-		first.getGoods().add(new Good("Кореєць 200г.", 7.50));
-		first.getGoods().add(new Good("Цезар 240г.", 7.50));
-		first.getGoods().add(new Good("Олів'є 250г.", 7.50));
-		first.getGoods().add(new Good("М'ясний Теріякі 150г.", 7.50));
-		first.getGoods().add(new Good("Грецький 220г.", 7.50));
-		first.getGoods().add(new Good("Рибний 200г.", 7.50));
+		first.getGoods().add(new Good("Сирний 200г.", money(7.50)));
+		first.getGoods().add(new Good("Домашній 280г.", money(7.50)));
+		first.getGoods().add(new Good("З капусти 200г.", money(7.50)));
+		first.getGoods().add(new Good("Кореєць 200г.", money(7.50)));
+		first.getGoods().add(new Good("Цезар 240г.", money(7.50)));
+		first.getGoods().add(new Good("Олів'є 250г.", money(7.50)));
+		first.getGoods().add(new Good("М'ясний Теріякі 150г.", money(7.50)));
+		first.getGoods().add(new Good("Грецький 220г.", money(7.50)));
+		first.getGoods().add(new Good("Рибний 200г.", money(7.50)));
 		groups.add(first);
 		
 		Group two = new Group("Перші страви");
-		two.getGoods().add(new Good("Сирний 200г.", 7.50));
-		two.getGoods().add(new Good("Домашній 280г.", 7.50));
-		two.getGoods().add(new Good("З капусти 200г.", 7.50));
-		two.getGoods().add(new Good("Кореєць 200г.", 7.50));
-		two.getGoods().add(new Good("Цезар 240г.", 7.50));
-		two.getGoods().add(new Good("Олів'є 250г.", 7.50));
-		two.getGoods().add(new Good("М'ясний Теріякі 150г.", 7.50));
-		two.getGoods().add(new Good("Грецький 220г.", 7.50));
-		two.getGoods().add(new Good("Рибний 200г.", 7.50));
+		two.getGoods().add(new Good("Сирний 200г.", money(7.50)));
+		two.getGoods().add(new Good("Домашній 280г.", money(7.50)));
+		two.getGoods().add(new Good("З капусти 200г.", money(7.50)));
+		two.getGoods().add(new Good("Кореєць 200г.", money(7.50)));
+		two.getGoods().add(new Good("Цезар 240г.", money(7.50)));
+		two.getGoods().add(new Good("Олів'є 250г.", money(7.50)));
+		two.getGoods().add(new Good("М'ясний Теріякі 150г.", money(7.50)));
+		two.getGoods().add(new Good("Грецький 220г.", money(7.50)));
+		two.getGoods().add(new Good("Рибний 200г.", money(7.50)));
 		groups.add(two);
 		groups.add(new Group("Другі страви"));
 		groups.add(new Group("Десерти"));
@@ -94,7 +96,7 @@ public class OrderBean {
 		 Good good = (Good)evt.getComponent().getAttributes().get("selectedGood");
 		 Sale sale = new Sale();
 		 sale.setSalesGood(good);
-		 sale.setAmount(5);
+		 sale.setAmount(new BigDecimal(0.505).setScale(3, RoundingMode.HALF_UP));
 		 order.getSuborders().get(0).addSale(sale);
 		//TODO SB : Remove this when we will have DB connection
 		// begin
