@@ -2,54 +2,39 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
-
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.siriusif.helper.Helper;
 import com.siriusif.model.TablesHall;
 
-public class TablesDaoImplTest extends AbstractDaoImplTest{
-	
+public class TablesDaoImplTest extends AbstractDaoImplTest {
+
 	@Autowired
 	private TablesDao tablesDao;
 
+	/*
+	 * When : I add table to db
+	 * Then :
+	 * 1) I should see that number of entities in DB increased 
+	 * 2) I should read all fields from DB correctly
+	 */
 	@Test
-	public void testAdd() {
+	public void testAdd() throws JsonSyntaxException, JsonIOException,
+			UnsupportedEncodingException {
 		int size = tablesDao.list().size();
+		TablesHall table = Helper.fromJson("/tables.json", TablesHall.class);
+		tablesDao.add(table);
+		assertTrue(size < tablesDao.list().size());
+		TablesHall tableFromDB = tablesDao.find(table.getId());
 		
-		TablesHall tables = new TablesHall();
-		tables.setName("Bar");
-		tables.setDescription("first");
-		tables.setHeight(50);
-		tables.setLeft(50);
-		tables.setTop(50);
-		tables.setWidth(50);
-		tablesDao.add(tables);
-		
-		assertTrue (size < tablesDao.list().size());
+		assertEquals("administrator", tableFromDB.getName());
+		assertEquals("leftTable", tableFromDB.getDescription());
+		assertEquals(50, tableFromDB.getTop());
+		assertEquals(60, tableFromDB.getLeft());
+		assertEquals(123, tableFromDB.getHeight());
+		assertEquals(321, tableFromDB.getWidth());
 	}
-
-
-	private BufferedReader getCPFileReader(String fileName)
-			throws UnsupportedEncodingException {
-		InputStream in = this.getClass().getResourceAsStream(fileName);
-		Reader reader = new InputStreamReader(in, "UTF-8");
-		BufferedReader bufferedReader = new BufferedReader(reader);
-		return bufferedReader;
-	}
-
-	@Test
-	public void testAddJsonToDb()throws IOException{		
-		TablesHall tablesHall = new Gson().fromJson(getCPFileReader("/tables.json"), TablesHall.class);
-		tablesDao.add(tablesHall);
-		
-	}
-
 }

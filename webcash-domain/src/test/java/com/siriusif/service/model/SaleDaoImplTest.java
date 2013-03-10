@@ -15,6 +15,13 @@ public class SaleDaoImplTest extends AbstractDaoImplTest {
 	@Autowired
 	private SaleDao saleDao;
 
+	/*
+	 * When : I add table to db
+	 * Then :
+	 * 1) I should see that number of entities in DB increased 
+	 * 2) I should read all fields from DB correctly
+	 */
+	//TODO SB : Check if sale read correctly
 	@Test
 	public void testAdd() {
 		int size = saleDao.list().size();
