@@ -17,14 +17,13 @@
 		</div>
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
-				<p:graphicImage id="bground" value="/images/background.png"/>
-				<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<p:graphicImage value="/images/tables.png"/>
-				</ui:repeat>
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="false"
+					usemap="#navigation" />
 				<map id="navigation" name="navigation">
 					<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<area shape="circle" coords="#{table.left},#{table.top},#{table.height}"
-						onclick="location.href='./#{table.id}/ordef.jsf'" />
+					<area shape="rect" coords="#{table.left},#{table.top},70,70"
+						onclick="location.href='./#{table.id}/ordef.jsf'"
+						/>
 						</ui:repeat>
 				</map>
 				

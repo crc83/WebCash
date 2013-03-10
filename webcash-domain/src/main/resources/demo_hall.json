@@ -4,92 +4,92 @@
 	"name": "Стіл 1",
 	"description": "leftTable",
 	"top": "200",
-	"left": "100"
-	"height": "70"
+	"left": "100",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 2",
 	"description": "Nikky",
 	"top": "200",
-	"left": "341"
-	"height": "70"
+	"left": "341",
+	"height": "70",
 	"width": "70"	
 }, {
 	"name": "Стіл 3",
 	"description": "Timmy",
 	"top": "200",
-	"left": "582"
-	"height": "70"
+	"left": "582",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 4",
 	"description": "Kimmy",
 	"top": "400",
-	"left": "221"
-	"height": "70"
+	"left": "221",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 5",
 	"description": "Jonny",
 	"top": "400",
-	"left": "461"
-	"height": "70"
+	"left": "461",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 6",
 	"description": "Donny",
 	"top": "600",
-	"left": "100"
-	"height": "70"
+	"left": "100",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 7",
 	"description": "Table",
 	"top": "600",
-	"left": "341"
-	"height": "70"
+	"left": "341",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 8",
 	"description": "Table1",
 	"top": "600",
-	"left": "582"
-	"height": "70"
+	"left": "582",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 9",
 	"description": "Table2",
 	"top": "800",
-	"left": "221"
-	"height": "70"
+	"left": "221",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 10",
 	"description": "Table3",
 	"top": "800",
-	"left": "461"
-	"height": "70"
+	"left": "461",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 11",
 	"description": "Table4",
 	"top": "1000",
-	"left": "100"
-	"height": "70"
+	"left": "100",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 12",
 	"description": "Table4",
 	"top": "1000",
-	"left": "341"
-	"height": "70"
+	"left": "341",
+	"height": "70",
 	"width": "70"
 }, {
 	"name": "Стіл 13",
 	"description": "Table5",
 	"top": "1000",
-	"left": "582"
-	"height": "70"
+	"left": "582",
+	"height": "70",
 	"width": "70"
 } ]
 }

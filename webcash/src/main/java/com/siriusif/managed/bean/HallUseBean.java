@@ -55,7 +55,7 @@ public class HallUseBean {
 	}
 
   
-    public StreamedContent getGraphicText() throws IOException {  
+    public StreamedContent getHallPlan() throws IOException {  
     	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
     	List<TablesHall> tables = tablesDao.list();
   
