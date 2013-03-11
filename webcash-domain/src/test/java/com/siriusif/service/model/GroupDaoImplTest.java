@@ -3,9 +3,15 @@ package com.siriusif.service.model;
 import static com.siriusif.model.helpers.SaleBuiledr.money;
 import static org.junit.Assert.*;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.siriusif.helper.Helper;
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
 
@@ -81,6 +87,17 @@ public class GroupDaoImplTest extends AbstractDaoImplTest {
 		assertEquals(4, groupFromBd.getSubGroups().size());
 		Group subgroupFromBd = groupDao.find(subGroup.getgId());
 		assertEquals("Гарячі напої", subgroupFromBd.getgName());
+	}
+	
+	@Test
+	public void testGroupGoodsFromDb()throws IOException{
+		Group group = Helper.fromJson("/group_goods.json", Group.class);
+		groupDao.add(group);
+		
+		Group groupFromBd = groupDao.find(group.getgId());
+		assertEquals("Напої", groupFromBd.getgName());
+//		assertEquals(2, groupFromBd.getGoods().size());
+//		assertEquals(2, groupFromBd.getSubGroups().size());
 	}
 
 }

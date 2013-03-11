@@ -87,6 +87,9 @@ public class Group {
 
 	public void setGoods(List<Good> goods) {
 		this.goods = goods;
+		for(Good good : goods){
+			good.setParentGroup(this);
+		}
 	}
 	
 	public List<Group> getSubGroups() {
@@ -95,6 +98,9 @@ public class Group {
 
 	public void setSubGroups(List<Group> subGroups) {
 		this.subGroups = subGroups;
+		for(Group group : subGroups){
+			group.setParentGroup(this);
+		}
 	}
 
 	private void setParentGroup(Group group) {

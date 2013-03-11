@@ -15,6 +15,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
+import com.siriusif.model.Group;
 import com.siriusif.model.Hall;
 import com.siriusif.model.Order;
 
@@ -28,6 +29,7 @@ public class ImportDatabase {
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
 		Order order = Helper.fromJson("/order.json", Order.class);
+		Group group = Helper.fromJson("/demo_group_goods.json", Group.class);
 		
 		String profile=null;
 		//define profile as invocation parameter
@@ -39,8 +41,10 @@ public class ImportDatabase {
 		
 		session.delete(order);
 		session.delete(hall);
+		session.delete(group);
 		session.save(order);
 		session.save(hall);
+		session.save(group);
 		session.getTransaction().commit();
 		session.close();
 	}
