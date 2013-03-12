@@ -30,7 +30,7 @@ public class Hall {
 		tables = new ArrayList<TablesHall>();
 	}
 	
-	public void addTables(TablesHall table) {
+	public void addTable(TablesHall table) {
 		table.setHall(this);
 		tables.add(table);
 	}

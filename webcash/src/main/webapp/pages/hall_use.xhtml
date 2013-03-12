@@ -21,10 +21,11 @@
 					usemap="#navigation" />
 				<map id="navigation" name="navigation">
 					<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<area shape="rect" coords="#{table.left},#{table.top},70,70"
-						onclick="location.href='./#{table.id}/ordef.jsf'"
-						/>
-						</ui:repeat>
+						<area shape="rect" coords="#{table.left},#{table.top},#{table.right},#{table.bottom}"
+							onclick="#{hallUseBean.onSelectTable}">
+							<f:param name="selectedTable" value="#{table.id}"/>
+						</area>
+					</ui:repeat>
 				</map>
 				
 			</p:tab>

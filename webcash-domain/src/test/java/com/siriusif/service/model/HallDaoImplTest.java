@@ -36,11 +36,11 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 		int size = hallDao.list().size();
 		Hall hall = new Hall();
 
-		hall.addTables(new TablesHall("Nic", "Nikky", 50, 50));
-		hall.addTables(new TablesHall("Tom", "Tommy", 100, 100));
-		hall.addTables(new TablesHall("Tok", "Tokky", 150, 150));
-		hall.addTables(new TablesHall("Nock", "Nokky", 200, 200));
-		hall.addTables(new TablesHall("Tik", "Tikky", 250, 250));
+		hall.addTable(new TablesHall("Nic", "Nikky", 50, 50));
+		hall.addTable(new TablesHall("Tom", "Tommy", 100, 100));
+		hall.addTable(new TablesHall("Tok", "Tokky", 150, 150));
+		hall.addTable(new TablesHall("Nock", "Nokky", 200, 200));
+		hall.addTable(new TablesHall("Tik", "Tikky", 250, 250));
 		hall.setName("bancket");
 		
 		hallDao.add(hall);
@@ -59,7 +59,7 @@ public class HallDaoImplTest extends AbstractDaoImplTest{
 	@Test
 	public void testAddHallWithTables()throws IOException{	
 		LOGGER.info("Getting data from JSON");
-		Hall hall = Helper.fromJson("/hall.json", Hall.class);
+		Hall hall = Helper.fromJsonHall("/hall.json");
 		LOGGER.info("Saving data to DB");
 		hallDao.add(hall);
 		LOGGER.info("Getting data from DB");

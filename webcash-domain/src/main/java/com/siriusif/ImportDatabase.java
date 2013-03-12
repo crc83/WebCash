@@ -29,7 +29,7 @@ public class ImportDatabase {
 	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		LOGGER.info("Import started.");
-		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
+		Hall hall = Helper.fromJsonHall("/demo_hall.json");
 //		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;

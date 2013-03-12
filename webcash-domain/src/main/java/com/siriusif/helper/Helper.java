@@ -3,6 +3,7 @@ package com.siriusif.helper;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
+import com.siriusif.model.Hall;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -46,5 +47,13 @@ public class Helper {
 	//TODO SB : Add javadoc
 	public static <T> T fromJson(String fileName, Class<T> classOfT) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
 		return new Gson().fromJson(getCPFileReader(fileName), classOfT);
+	}
+	
+	public static Hall fromJsonHall(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		Hall hall = fromJson(fileName, Hall.class);
+		//because links aren't set automatically
+		hall.setTables(hall.getTables());			
+		return hall;
+		
 	}
 }
