@@ -92,8 +92,13 @@ public class HallUseBean {
      * Will it be new check or list of existing checks.
      * @return
      */
-    public String onSelectTable(){
-    	return "./pages/checks";
+    public String getOnSelectTable(){
+    	LOGGER.debug("getOnSelectTable invoked");
+    	String parameter = FacesContext.getCurrentInstance()
+    		    .getExternalContext().getRequestParameterMap()
+    		    .get("selectedTable");
+    	LOGGER.debug("Selected table:"+parameter);
+    	return "./checks.jsf";
     }
 
 	private BufferedImage readImage(String name) {

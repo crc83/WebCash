@@ -22,8 +22,7 @@
 				<map id="navigation" name="navigation">
 					<ui:repeat var="table" value="#{hallUseBean.tables}">
 						<area shape="rect" coords="#{table.left},#{table.top},#{table.right},#{table.bottom}"
-							onclick="#{hallUseBean.onSelectTable}">
-							<f:param name="selectedTable" value="#{table.id}"/>
+							onclick="location.href='#{hallUseBean.onSelectTable}'">
 						</area>
 					</ui:repeat>
 				</map>
