@@ -6,7 +6,7 @@ import java.util.Properties;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.slf4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
@@ -25,22 +25,27 @@ import com.siriusif.model.Order;
  */
 public class ImportDatabase {
 	
+	private static Logger LOGGER = Logger.getLogger(ImportDatabase.class);
+	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
-//		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
-		Order order = Helper.fromJson("/order.json", Order.class);
+		LOGGER.info("Import started.");
+		Hall hall = Helper.fromJsonHall("/demo_hall.json");
+//		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
 		//define profile as invocation parameter
 		if (args.length>0) {
 			profile = args[0];
+			LOGGER.info("Using profile :"+profile);
 		}
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
-		
-		session.delete(order);
-		session.save(order);
+		session.save(hall);
+//		session.delete(order);
+//		session.save(order);
 		session.getTransaction().commit();
 		session.close();
+		LOGGER.info("Import compleate.");
 	}
 
 	/**

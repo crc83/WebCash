@@ -48,4 +48,12 @@ public class Helper {
 	public static <T> T fromJson(String fileName, Class<T> classOfT) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
 		return new Gson().fromJson(getCPFileReader(fileName), classOfT);
 	}
+	
+	public static Hall fromJsonHall(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		Hall hall = fromJson(fileName, Hall.class);
+		//because links aren't set automatically
+		hall.setTables(hall.getTables());			
+		return hall;
+		
+	}
 }
