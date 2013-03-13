@@ -16,6 +16,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Group;
+import com.siriusif.model.GroupsList;
 import com.siriusif.model.Hall;
 import com.siriusif.model.Order;
 
@@ -31,6 +32,7 @@ public class ImportDatabase {
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		LOGGER.info("Import started.");
 		Hall hall = Helper.fromJsonHall("/demo_hall.json");
+//		GroupsList groupsList = Helper.fromJsonGroupsList("/demo_groupslist.json");
 		Group group = Helper.fromJsonGroup("/demo_group_goods.json");
 //		Order order = Helper.fromJson("/order.json", Order.class);
 		
@@ -43,6 +45,7 @@ public class ImportDatabase {
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
 		session.save(hall);
+//		session.save(groupsList);
 		session.save(group);
 //		session.delete(order);
 //		session.save(order);

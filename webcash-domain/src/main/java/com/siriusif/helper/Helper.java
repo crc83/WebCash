@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.model.Group;
+import com.siriusif.model.GroupsList;
 import com.siriusif.model.Hall;
 
 import java.io.BufferedReader;
@@ -64,6 +65,14 @@ public class Helper {
 		group.setSubGroups(group.getSubGroups());
 		group.setGoods(group.getGoods());
 		return group;
+		
+	}
+	
+	public static GroupsList fromJsonGroupsList(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		GroupsList groupsList = fromJson(fileName, GroupsList.class);
+		//because links aren't set automatically
+		groupsList.setGroups(groupsList.getGroups());
+		return groupsList;
 		
 	}
 }
