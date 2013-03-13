@@ -105,6 +105,9 @@ public class Group {
 
 	private void setParentGroup(Group group) {
 		parentGroup = group;
+		for(Good good : goods){
+			good.setParentGroup(this);
+		}
 	}
 
 	public Group getParentGroup() {
