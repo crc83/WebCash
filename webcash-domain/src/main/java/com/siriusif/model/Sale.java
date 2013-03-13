@@ -47,7 +47,7 @@ public class Sale {
 	@Column(name="printed", columnDefinition="boolean default false") 
 	private boolean printed;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne
 	private Good salesGood;
 	
 	@ManyToOne
