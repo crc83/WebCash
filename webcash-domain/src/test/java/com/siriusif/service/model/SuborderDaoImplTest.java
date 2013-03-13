@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.siriusif.model.Order;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 

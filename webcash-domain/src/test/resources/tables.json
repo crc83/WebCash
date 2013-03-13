@@ -2,5 +2,7 @@
 	"name": "administrator",
 	"description": "leftTable",
 	"top": "50",
-	"left": "60"
+	"left": "60",
+	"height":"123",
+	"width":"321"
 }

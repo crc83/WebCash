@@ -36,7 +36,7 @@ public class Hall {
 		tables = new ArrayList<TablesHall>();
 	}
 	
-	public void addTables(TablesHall table) {
+	public void addTable(TablesHall table) {
 		table.setHall(this);
 		tables.add(table);
 	}
@@ -61,6 +61,9 @@ public class Hall {
 	}
 	public void setTables(List<TablesHall> tables) {
 		this.tables = tables;
+		for (TablesHall table : tables){
+			table.setHall(this);
+		}
 	}
 
 }
