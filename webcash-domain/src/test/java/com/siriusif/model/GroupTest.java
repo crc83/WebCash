@@ -1,6 +1,8 @@
 package com.siriusif.model;
 
 import static org.junit.Assert.*;
+
+import java.math.BigDecimal;
 import java.util.List;
 import org.junit.Test;
 
@@ -51,7 +53,7 @@ public class GroupTest {
 	 @Test
 	 public void testGoodsAddToGroups(){
 		 Group group = new Group();
-		 Good good = new Good("Some good",42);
+		 Good good = new Good("Some good", new BigDecimal(42));
 		 
 		 group.addGood(good);
 		 

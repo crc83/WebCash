@@ -4,12 +4,16 @@ import java.io.IOException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.apache.log4j.Logger;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.GenericXmlApplicationContext;
 
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
+import com.siriusif.model.Order;
 
 /**
  * This console app allow us to create database with initial data
@@ -18,21 +22,27 @@ import com.siriusif.model.Hall;
  */
 public class ImportDatabase {
 	
+	private static Logger LOGGER = Logger.getLogger(ImportDatabase.class);
+	
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
-		Hall hall = Helper.fromJson("/demo_hall.json", Hall.class);
+		LOGGER.info("Import started.");
+		Hall hall = Helper.fromJsonHall("/demo_hall.json");
+//		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
 		//define profile as invocation parameter
 		if (args.length>0) {
 			profile = args[0];
+			LOGGER.info("Using profile :"+profile);
 		}
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
-		
-		session.delete(hall);
 		session.save(hall);
+//		session.delete(order);
+//		session.save(order);
 		session.getTransaction().commit();
 		session.close();
+		LOGGER.info("Import compleate.");
 	}
 
 	/**

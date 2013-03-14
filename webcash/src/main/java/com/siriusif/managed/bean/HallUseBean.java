@@ -24,64 +24,58 @@ import com.siriusif.service.model.TablesDao;
 
 // http://www.primefaces.org/showcase/ui/dynamicImage.jsf
 // see here
-@ManagedBean(name = "tableUseBean")
-public class TableUseBean {
+@ManagedBean(name = "hallUseBean")
+public class HallUseBean {
 	
 	//TODO SB : Change logger initialization in spring way
-	private Logger LOGGER = Logger.getLogger(TableUseBean.class);
+	private Logger LOGGER = Logger.getLogger(HallUseBean.class);
   
     private StreamedContent graphicText;  
-      
-    private StreamedContent barcode;  
-      
-    private StreamedContent chart;
     
+    /**
+     * response of click
+     */
     private String responce;
     
+      
 
 	@ManagedProperty(value="#{tablesDao}")
     private TablesDao tablesDao;
     
-    /**
-	 * @return the tablesDao
-	 */
-	public TablesDao getTablesDao() {
-		return tablesDao;
+	private List<TablesHall> tables;
+
+	public List<TablesHall> getTables() {
+		tables = tablesDao.list();
+		LOGGER.debug("getting tables list");
+		LOGGER.debug("tables size :"+tables.size());
+		for (TablesHall table : tables){
+			LOGGER.debug("	| "+table);
+		}
+		return tables;
 	}
 
-	/**
-	 * @param tablesDao the tablesDao to set
-	 */
-	public void setTablesDao(TablesDao tablesDao) {
-		LOGGER.debug(" >> TablesDao is set");
-		this.tablesDao = tablesDao;
-	}
-
-	public TableUseBean() {
-		super();
-		//NOTE : Dao is not accessible here
-    }  
-      
-    public StreamedContent getBarcode() {  
-        return barcode;  
-    }  
   
-    public StreamedContent getGraphicText() throws IOException {  
+    public StreamedContent getHallPlan() throws IOException {  
     	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
     	List<TablesHall> tables = tablesDao.list();
   
     	//Graphic Text 
     	  BufferedImage bufferedImg = readImage("background");  
-    	  Graphics2D g2 = bufferedImg.createGraphics(); 
+    	  Graphics2D g2 = bufferedImg.createGraphics();
+    	  
+    	  BufferedImage imageOfTable =readImage("table");
+		  Font font = new Font("Arial", Font.ITALIC, 18);    	  
     	  for (TablesHall table : tables){
-    		  // TODO 121 change to height of table + 3
-    		  int textBottom = table.getTop() + 121;
-    		  int textLeft = table.getLeft() + 20;
-    		  g2.drawImage(readImage("tables"), null, table.getLeft(), table.getTop());
-    		  Font font = new Font("Arial", Font.ITALIC, 18);
+    		  //let's ajust table height and width
+    		   table.setWidth(imageOfTable.getWidth());
+    		   table.setHeight(imageOfTable.getHeight());
+    		  // TODO CS : Later we will made custom tag for table
+    		  int textBottom = table.getBottom();
+    		  int textLeft = table.getLeft();
+    		  g2.drawImage(imageOfTable, null, table.getLeft(), table.getTop());
     		  g2.setFont(font);
     		  // color of name table
-    		  g2.setColor(Color.green);
+    		  g2.setColor(Color.lightGray);
     		  // location of tables name. We can change to top(textBottom to getTop())
     		  g2.drawString(table.getName(), textLeft, textBottom);
     	  }	
@@ -91,6 +85,20 @@ public class TableUseBean {
     	  graphicText = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
 
     	  return graphicText;  
+    }
+    
+    /**
+     * Here we will decide what to show after user click on table.
+     * Will it be new check or list of existing checks.
+     * @return
+     */
+    public String getOnSelectTable(){
+    	LOGGER.debug("getOnSelectTable invoked");
+    	String parameter = FacesContext.getCurrentInstance()
+    		    .getExternalContext().getRequestParameterMap()
+    		    .get("selectedTable");
+    	LOGGER.debug("Selected table:"+parameter);
+    	return "./checks.jsf";
     }
 
 	private BufferedImage readImage(String name) {
@@ -105,16 +113,27 @@ public class TableUseBean {
 		}
 		return bi;
 	}  
-	
-	
-          
-    public StreamedContent getChart() {  
-        return chart;  
-    }  
-      
+    
     public String getResponce() {
     	responce = "./order.jsf";
     	return responce;
     }
-   
+
+
+	/**
+	 * @return the tablesDao
+	 */
+	public TablesDao getTablesDao() {
+		return tablesDao;
+	}
+
+
+	/**
+	 * @param tablesDao the tablesDao to set
+	 */
+	public void setTablesDao(TablesDao tablesDao) {
+		this.tablesDao = tablesDao;
+	}
+    
+      
 }  

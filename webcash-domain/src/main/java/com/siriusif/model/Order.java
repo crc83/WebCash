@@ -129,13 +129,13 @@ public class Order {
 	}
 
 	/**
-	 * @return total order
+	 * Return total sum of all suborders in order
+	 * @return total sum
 	 */
-	public double getTotal() {
-		// TODO change from double to Currency
-		double sum = 0;
+	public BigDecimal getTotal() {
+		BigDecimal sum = BigDecimal.ZERO;
 		for (Suborder s : suborders) {
-			sum += s.getTotal();
+			sum = sum.add(s.getTotal());
 		}
 		return sum;
 	}

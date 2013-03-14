@@ -9,7 +9,6 @@ import com.siriusif.service.model.WorkshiftDao;
 @Repository("workshiftDao")
 public class WorkshiftDaoImpl extends HibernateDaoImpl<Workshift, Long> implements WorkshiftDao{
 
-	@Override
 	public int countForDate(Date currentWorkshiftDate) {
 		// TODO Auto-generated method stub
 		return 0;
