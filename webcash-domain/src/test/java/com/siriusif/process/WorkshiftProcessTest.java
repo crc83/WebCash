@@ -2,7 +2,10 @@ package com.siriusif.process;
 
 import static org.junit.Assert.*;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Workshift;
@@ -47,13 +53,17 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 		assertNull(newWorkshift.getDaySum());
 	}
 	/*
-	 * Given : We have three closed for today workshifts 
+	 * Given : We have three closed for today workshifts. And we have two not closed workshifts at all 
 	 * When  : We open workshift
 	 * Than  : We get it in initial state with dailyId=3
 	 */
 	@Test
-	public void testOpenWorkshiftWhenWeHaveThreeClosed() {
+	public void testOpenWorkshiftWhenWeHaveThreeClosed() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
 		Mockito.stub(workshiftDao.countForDate(Mockito.any(Date.class))).toReturn(3);
+		Workshift[] openedWorkshifts = Helper.fromJson("/opened_workshifts.json", Workshift[].class);
+		Mockito.stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(Arrays.asList(openedWorkshifts));
+		//TODO SB: add expectations of invocation WorkshiftDao.setCloseDate
+		
 		Date today =  Helper.dateOnly(new Date());
 		Workshift newWorkshift = wsProcess.openWorkshift();
 		

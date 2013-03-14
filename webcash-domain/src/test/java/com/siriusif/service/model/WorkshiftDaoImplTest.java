@@ -5,6 +5,8 @@ import static org.junit.Assert.*;
 import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -24,8 +26,13 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 	private static Workshift[] workshifts;
 
 	@BeforeClass
-	public static void setUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
-		workshifts = Helper.fromJson("/workshift.json", Workshift[].class);
+	public static void globalSetUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		workshifts = Helper.fromJson("/workshifts.json", Workshift[].class);
+	}
+	
+	@Before
+	public void setUp(){
+		workshiftDao.clearAll();
 	}
 	
 	@Test
@@ -95,6 +102,16 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 		// TODO SB : Read day sum from JSON correctly
 		assertEquals(BigDecimal.valueOf(1351, 2) , wsFroDB.getDaySum());
 		assertTrue (size < workshiftDao.list().size());
+	}
+	
+	@Test
+	public void testGetOpenedWorkshiftsList() {
+		for (Workshift workshift : workshifts){
+			workshiftDao.add(workshift);
+			//because we ca't set closedAt during item creation
+			workshiftDao.update(workshift);
+		}
+		assertEquals(2, workshiftDao.getOpenedWorkshiftsList().size());
 	}
 
 

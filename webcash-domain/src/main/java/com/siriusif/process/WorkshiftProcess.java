@@ -74,10 +74,7 @@ public class WorkshiftProcess {
 	 * @return list of unclosed workshifts
 	 */
 	private List<Workshift> getOpenedWorkshifts() {
-		List<Workshift> result = new LinkedList<Workshift>();
-		LOGGER.warn("getOpenedWorkshifts - not implemented");
-		// TODO Auto-generated method stub
-		//select all opened with date <= getCurrentWorkshiftDate()
+		List<Workshift> result = workshiftDao.getOpenedWorkshiftsList();
 		return result;
 	}
 
