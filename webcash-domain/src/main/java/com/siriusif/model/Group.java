@@ -14,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "groupofgood")
@@ -45,9 +44,6 @@ public class Group {
 	@ManyToOne
 	@JoinColumn(name = "parentgroup_id")
 	private Group parentGroup;
-
-	@Transient
-	private GroupsList groupsList;
 	
 	public Group(){
 		subGroups = new ArrayList<Group>();	
@@ -116,16 +112,6 @@ public class Group {
 
 	public Group getParentGroup() {
 		return parentGroup;
-	}
-
-
-	public GroupsList getGroupsList() {
-		return groupsList;
-	}
-
-
-	public void setGroupsList(GroupsList groupsList) {
-		this.groupsList = groupsList;
 	}
 
 
