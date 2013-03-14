@@ -29,3 +29,10 @@ To run integration test on different browsers.
 Download appropriate binaries from:
 * IE     : http://code.google.com/p/selenium/downloads/list
 * Chrome : http://code.google.com/p/chromedriver/downloads/list
+
+cobertura
+=========
+Generate Cobertura report
+mvn cobertura:cobertura site
+To open file of report:
+webcash-domain/target/site/index.html
