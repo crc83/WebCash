@@ -19,6 +19,9 @@ public class LoadGroupWithGoodsTest {
 	@BeforeClass
 	public static void globalSetUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
 		groups = Helper.fromJson("/demo_groupslist.json",Group[].class);
+		for(Group group : groups){
+			group.fixReferencesToParentGroup();
+		}
 	}
 
 	@Test
