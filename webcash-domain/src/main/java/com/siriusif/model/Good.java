@@ -65,7 +65,7 @@ public class Good {
 	/**
 	 * short name of good
 	 */
-	@Column(name="shortname", nullable=false, length=100)
+	@Column(name="shortname", nullable=true, length=100)
 	private String shortName;
 	
 	/**
