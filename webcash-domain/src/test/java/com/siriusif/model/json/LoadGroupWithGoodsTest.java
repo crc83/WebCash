@@ -18,10 +18,7 @@ public class LoadGroupWithGoodsTest {
 	
 	@BeforeClass
 	public static void globalSetUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
-		groups = Helper.fromJson("/demo_groupslist.json",Group[].class);
-		for(Group group : groups){
-			group.fixReferencesToParentGroup();
-		}
+		groups = Helper.fromJsonGroup("/demo_groupslist.json");
 	}
 
 	@Test
@@ -50,14 +47,17 @@ public class LoadGroupWithGoodsTest {
 	}
 
 	@Test
-	public void testIfReferencesInGoodsToSubGroupAreCoorrect(){
-		for(int j=0;j<2;j++){
-			Group subGroup = groups[1].getSubGroups().get(j);
-			for(int i=0; i<6; i++){
-				assertEquals("Error in subgroup:"+j+" with good:"+i,subGroup, subGroup.getGoods().get(i).getParentGroup());
+	public void testIfReferencesInGoodsToSubGroupAreCoorrect() {
+		for (int s = 0; s < groups[1].getSubGroups().size(); s++) {
+			for (int j = 0; j < 2; j++) {
+				Group subGroup = groups[1].getSubGroups().get(j);
+				for (int i = 0; i < 3; i++) {
+					assertEquals("Error in subgroup:" + j + " with good:" + i,
+							subGroup, subGroup.getGoods().get(i)
+									.getParentGroup());
+				}
 			}
 		}
-		
 	}
 
 	@Test

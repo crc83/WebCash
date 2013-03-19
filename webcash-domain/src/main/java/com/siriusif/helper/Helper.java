@@ -58,11 +58,13 @@ public class Helper {
 		
 	}
 	
-	public static Group fromJsonGroup(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
-		Group group = fromJson(fileName, Group.class);
+	public static Group[] fromJsonGroup(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		Group[] groups = fromJson(fileName, Group[].class);
 		//because links aren't set automatically
-		group.fixReferencesToParentGroup();
-		return group;
+		for(Group group : groups){
+			group.fixReferencesToParentGroup();
+		}
+		return groups;
 		
 	}
 }
