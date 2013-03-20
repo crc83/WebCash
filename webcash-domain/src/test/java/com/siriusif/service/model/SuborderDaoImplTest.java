@@ -7,10 +7,11 @@ import java.math.BigDecimal;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 
-public class SuborderDaoImplTest extends AbstractDaoImplTest{
+public class SuborderDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private SuborderDao suborderDao;

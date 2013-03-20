@@ -9,11 +9,12 @@ import org.apache.log4j.Logger;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
 import com.siriusif.model.TablesHall;
 
-public class HallDaoImplTest extends AbstractDaoImplTest{
+public class HallDaoImplTest extends AbstractSpringTest{
 	
 	private static Logger LOGGER = Logger.getLogger(HallDaoImplTest.class);
 	

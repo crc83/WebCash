@@ -8,9 +8,10 @@ import java.math.RoundingMode;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.Sale;
 
-public class SaleDaoImplTest extends AbstractDaoImplTest {
+public class SaleDaoImplTest extends AbstractSpringTest {
 	
 	@Autowired
 	private SaleDao saleDao;

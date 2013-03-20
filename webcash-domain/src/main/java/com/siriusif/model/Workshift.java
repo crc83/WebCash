@@ -25,6 +25,9 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "workshifts")
 public class Workshift {
+	
+	public static final String CLOSED_AT = "closedAt";
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
@@ -32,11 +35,16 @@ public class Workshift {
 	@Column(name = "dailyId", nullable = true)
 	private int dailyId;
 
+	@Column(name = "workngDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
+	private Date workingDate;
+
+	
 	@Column(name = "openedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date openedAt;
 
-	@Column(name = "closedAt", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
+	@Column(name = CLOSED_AT, nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
 	private Date closedAt;
 	
@@ -83,5 +91,19 @@ public class Workshift {
 	
 	public void setDaySum(BigDecimal daySum) {
 		this.daySum = daySum;
+	}
+
+	/**
+	 * @return the workingDate
+	 */
+	public Date getWorkingDate() {
+		return workingDate;
+	}
+
+	/**
+	 * @param workingDate the workingDate to set
+	 */
+	public void setWorkingDate(Date workingDate) {
+		this.workingDate = workingDate;
 	}
 }

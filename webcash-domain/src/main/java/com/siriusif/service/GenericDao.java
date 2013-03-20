@@ -37,5 +37,12 @@ public interface GenericDao<E, K> {
 	 * List all entities
 	 * @return list of entities
 	 */
-	List<E> list();	
+	List<E> list();
+	
+	/**
+	 * Removes all entities from DB.
+	 * NOTE : Use this method only for test purposes
+	 * @return 
+	 */
+	void clearAll();
 }
