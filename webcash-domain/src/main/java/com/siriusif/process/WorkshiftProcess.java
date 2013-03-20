@@ -40,12 +40,15 @@ public class WorkshiftProcess {
 		}
 		//we should close all opened workshifts
 		for (Workshift ws : openedWorkshifts){
+			LOGGER.debug("Automatically closing workshift :"+ws);
 			closeWorkshift(ws);
 		}
-		//we shuld create new workshift
+		//we should create new workshift
 		Workshift ws = new Workshift();
-		ws.setOpenedAt(getCurrentWorkshiftDate());
+		ws.setOpenedAt(new Date());
+		ws.setWorkingDate(getCurrentWorkshiftDate());
 		ws.setDailyId(getTodayWorkshiftsCount());
+		LOGGER.debug("Opened workshift :"+ws);
 		return ws;
 	}
 	
@@ -85,9 +88,10 @@ public class WorkshiftProcess {
 	public void closeWorkshift(Workshift ws){
 		if ( ws != null ) {
 			// TODO Auto-generated method stub
+			ws.setClosedAt(new Date());
 			LOGGER.debug("Closing workshift:"+ws.toString());
 		} else {
-			LOGGER.warn("closeWorkshift: null instead of workshift");
+			LOGGER.warn("closeWorkshift: workshift is null");
 		}
 	}
 	

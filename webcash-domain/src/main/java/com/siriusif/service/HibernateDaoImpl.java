@@ -11,9 +11,6 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceUnit;
 /**
  * Basic DAO operations dependent with Hibernate's specific classes
  * 

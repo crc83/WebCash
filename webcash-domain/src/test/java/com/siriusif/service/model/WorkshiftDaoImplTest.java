@@ -9,8 +9,6 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
@@ -36,7 +34,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 	}
 	
 	@Test
-	public void testAdd() {
+	public final void testAdd() {
 		int size = workshiftDao.list().size();
 		workshiftDao.add(workshifts[0]);
 		assertTrue (size < workshiftDao.list().size());
@@ -76,7 +74,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 
 	
 	@Test
-	public void testSetOpenDateNotNull() {
+	public final void testSetOpenDateNotNull() {
 		Workshift workshift = new Workshift();
 		workshift.setDailyId(12);
 		workshiftDao.add(workshift);
@@ -91,7 +89,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 	 * THen  : I should have correct sum
 	 */
 	@Test
-	public void testSetDaySum() {
+	public final void testSetDaySum() {
 		int size = workshiftDao.list().size();
 		
 		Workshift workshift = workshifts[2];
@@ -105,7 +103,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 	}
 	
 	@Test
-	public void testGetOpenedWorkshiftsList() {
+	public final void testGetOpenedWorkshiftsList() {
 		for (Workshift workshift : workshifts){
 			workshiftDao.add(workshift);
 			//because we ca't set closedAt during item creation
@@ -114,5 +112,15 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 		assertEquals(2, workshiftDao.getOpenedWorkshiftsList().size());
 	}
 
-
+	@Test
+	public final void testGetTodayWorkshiftsCount() {
+		Date now = new Date();
+		for (Workshift workshift : workshifts){
+			workshiftDao.add(workshift);
+			workshift.setOpenedAt(now);
+			workshift.setClosedAt(now);
+			workshiftDao.update(workshift);
+		}
+		assertEquals(5, workshiftDao.countForDate(now));
+	}
 }

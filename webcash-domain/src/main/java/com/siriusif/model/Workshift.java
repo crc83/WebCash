@@ -35,6 +35,11 @@ public class Workshift {
 	@Column(name = "dailyId", nullable = true)
 	private int dailyId;
 
+	@Column(name = "workngDate", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	@Temporal(TemporalType.DATE)
+	private Date workingDate;
+
+	
 	@Column(name = "openedAt", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date openedAt;
@@ -86,5 +91,19 @@ public class Workshift {
 	
 	public void setDaySum(BigDecimal daySum) {
 		this.daySum = daySum;
+	}
+
+	/**
+	 * @return the workingDate
+	 */
+	public Date getWorkingDate() {
+		return workingDate;
+	}
+
+	/**
+	 * @param workingDate the workingDate to set
+	 */
+	public void setWorkingDate(Date workingDate) {
+		this.workingDate = workingDate;
 	}
 }
