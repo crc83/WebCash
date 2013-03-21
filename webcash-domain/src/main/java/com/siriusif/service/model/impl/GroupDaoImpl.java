@@ -16,7 +16,8 @@ public class GroupDaoImpl extends HibernateDaoImpl<Group, Long> implements Group
 	@Override
 	@Transactional
 	public Group find(Long key) {
-		Group so = super.find(key); 
+		Group so = super.find(key);
+		initializeCollection(so.getSubGroups());
 		initializeCollection(so.getGoods());
 		return so; 
 	}

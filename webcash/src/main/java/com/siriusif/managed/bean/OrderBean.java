@@ -19,6 +19,7 @@ import com.siriusif.model.Group;
 import com.siriusif.model.Order;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
+import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.GroupDao;
 
 import static com.siriusif.model.helpers.SaleBuiledr.*;
@@ -33,15 +34,25 @@ public class OrderBean {
 
 	@ManagedProperty(value="#{groupDao}")
 	private GroupDao groupDao;
+	@ManagedProperty(value="#{goodDao}")
+	private GoodDao goodDao;
 	
 	private List<Group> groups;
+	private List<Good> goods;
 	
+
 	public List<Group> getGroups() {
 		groups = groupDao.list();
 		for(Group group : groups){
 			LOGGER.debug(" | "+group.getgName());
 		}
+		LOGGER.debug(" || "+groups.size());
 		return groups;
+	}
+	
+	public List<Good> getGoods() {
+		goods = goodDao.list();
+		return goods;
 	}
 	
 	public OrderBean(){
@@ -81,6 +92,7 @@ public class OrderBean {
 		order.addSuborder(third);
 	}
 	
+
 	public void onClick(ActionEvent evt){
 		 Good good = (Good)evt.getComponent().getAttributes().get("selectedGood");
 		 Sale sale = new Sale();
@@ -104,5 +116,16 @@ public class OrderBean {
 
 	public GroupDao getGroupDao() {
 		return groupDao;
+	}
+	public void setGroupDao(GroupDao groupDao) {
+		this.groupDao = groupDao;
+	}
+
+	public GoodDao getGoodDao() {
+		return goodDao;
+	}
+
+	public void setGoodDao(GoodDao goodDao) {
+		this.goodDao = goodDao;
 	}
 }

@@ -31,7 +31,7 @@ public class Group {
 	/**
 	 * subgroup of group
 	 */
-	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "parentGroup")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "parentGroup")
 	private List<Group> subGroups;
 	
 	/**
