@@ -1,29 +1,49 @@
 package com.siriusif.managed.bean;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.Logger;
 
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
 import com.siriusif.model.Order;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
+import com.siriusif.service.model.GroupDao;
+
 import static com.siriusif.model.helpers.SaleBuiledr.*;
 
 @ManagedBean(name="orderBean")
 public class OrderBean {
+	
+	private static Logger LOGGER = Logger.getLogger(OrderBean.class);
+	
 	private Order order;
-	private List<Group> groups;
 	
 
-
+	@ManagedProperty(value="#{groupDao}")
+	private GroupDao groupDao;
+	
+	private List<Group> groups;
+	
+	public List<Group> getGroups() {
+		groups = groupDao.list();
+		for(Group group : groups){
+			LOGGER.debug(" | "+group.getgName());
+		}
+		return groups;
+	}
+	
 	public OrderBean(){
 		//TODO SB : Remove this when we will have DB connection
 		// begin
@@ -36,7 +56,6 @@ public class OrderBean {
 		} else {
 			order =(Order)maybeOrder;
 		}
-		menuView();
 	}
 
 	private void orderView() {
@@ -62,36 +81,6 @@ public class OrderBean {
 		order.addSuborder(third);
 	}
 	
-	private void menuView() {
-		groups = new LinkedList<Group>();
-		
-		Group first = new Group("Салати");
-		first.getGoods().add(new Good("Сирний 200г.", money(7.50)));
-		first.getGoods().add(new Good("Домашній 280г.", money(7.50)));
-		first.getGoods().add(new Good("З капусти 200г.", money(7.50)));
-		first.getGoods().add(new Good("Кореєць 200г.", money(7.50)));
-		first.getGoods().add(new Good("Цезар 240г.", money(7.50)));
-		first.getGoods().add(new Good("Олів'є 250г.", money(7.50)));
-		first.getGoods().add(new Good("М'ясний Теріякі 150г.", money(7.50)));
-		first.getGoods().add(new Good("Грецький 220г.", money(7.50)));
-		first.getGoods().add(new Good("Рибний 200г.", money(7.50)));
-		groups.add(first);
-		
-		Group two = new Group("Перші страви");
-		two.getGoods().add(new Good("Сирний 200г.", money(7.50)));
-		two.getGoods().add(new Good("Домашній 280г.", money(7.50)));
-		two.getGoods().add(new Good("З капусти 200г.", money(7.50)));
-		two.getGoods().add(new Good("Кореєць 200г.", money(7.50)));
-		two.getGoods().add(new Good("Цезар 240г.", money(7.50)));
-		two.getGoods().add(new Good("Олів'є 250г.", money(7.50)));
-		two.getGoods().add(new Good("М'ясний Теріякі 150г.", money(7.50)));
-		two.getGoods().add(new Good("Грецький 220г.", money(7.50)));
-		two.getGoods().add(new Good("Рибний 200г.", money(7.50)));
-		groups.add(two);
-		groups.add(new Group("Другі страви"));
-		groups.add(new Group("Десерти"));
-	}
-	
 	public void onClick(ActionEvent evt){
 		 Good good = (Good)evt.getComponent().getAttributes().get("selectedGood");
 		 Sale sale = new Sale();
@@ -112,8 +101,8 @@ public class OrderBean {
 	public Order getOrder() {
 		return order;
 	}
-	public List<Group> getGroups() {
-		return groups;
-	}
 
+	public GroupDao getGroupDao() {
+		return groupDao;
+	}
 }

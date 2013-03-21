@@ -31,7 +31,7 @@ public class ImportDatabase {
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		LOGGER.info("Import started.");
 		Hall hall = Helper.fromJsonHall("/demo_hall.json");
-		Group[] groups = Helper.fromJsonGroup("/demo_groupslist.json");
+		Group[] groups = Helper.fromJsonGroup("/grouplist.json");
 //		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
