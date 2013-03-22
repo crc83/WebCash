@@ -15,6 +15,7 @@ import org.springframework.core.env.ConfigurableEnvironment;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
+import com.siriusif.model.Group;
 import com.siriusif.model.Hall;
 import com.siriusif.model.Order;
 
@@ -30,6 +31,7 @@ public class ImportDatabase {
 	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, IOException {
 		LOGGER.info("Import started.");
 		Hall hall = Helper.fromJsonHall("/demo_hall.json");
+		Group[] groups = Helper.fromJsonGroup("/grouplist.json");
 //		Order order = Helper.fromJson("/order.json", Order.class);
 		
 		String profile=null;
@@ -41,6 +43,9 @@ public class ImportDatabase {
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
 		session.save(hall);
+		for (Group group : groups){
+			session.save(group);
+		}
 //		session.delete(order);
 //		session.save(order);
 		session.getTransaction().commit();

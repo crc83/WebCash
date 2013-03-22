@@ -37,19 +37,21 @@
 						<p:column>  
                 		#{sales.calculatedSum}  
             		</p:column>
-					<p:columnGroup type="footer">  
-                <p:row>  
-                    <p:column colspan="3" footerText="Сума: " style="text-align:right"/>  
-                    <p:column footerText="#{suborder.total}" />   
-                </p:row>  
-            </p:columnGroup>
+						<p:columnGroup type="footer">
+							<p:row>
+								<p:column colspan="3" footerText="Сума: "
+									style="text-align:right" />
+								<p:column footerText="#{suborder.total}" />
+							</p:row>
+						</p:columnGroup>
 					</p:subTable>
-					<p:columnGroup type="footer">  
-                <p:row>  
-                    <p:column colspan="3" footerText="Сума по чеку: " style="text-align:right"/>  
-                    <p:column footerText="#{order.total}" />   
-                </p:row>  
-            </p:columnGroup>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="3" footerText="Сума по чеку: "
+								style="text-align:right" />
+							<p:column footerText="#{order.total}" />
+						</p:row>
+					</p:columnGroup>
 				</p:dataTable>
 			</h:form>
 			<p:button value="Зберегти" href="/pages/hall.jsf" />

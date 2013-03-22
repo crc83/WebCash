@@ -23,6 +23,9 @@ public class Suborder {
 	private Long id;
 	
 
+	/**
+	 * index of suborder 
+	 */
 	@Column(name = "index", nullable = true)
 	private int index;
 	
