@@ -8,11 +8,12 @@ import java.util.Date;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
 
-public class OrderDaoImplTest extends AbstractDaoImplTest{
+public class OrderDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private OrderDao orderDao;

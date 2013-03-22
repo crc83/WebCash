@@ -2,29 +2,41 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
+import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.util.Date;
 
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Workshift;
 
-public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
-
+public class WorkshiftDaoImplTest extends AbstractSpringTest{
+	
 	@Autowired
 	private WorkshiftDao workshiftDao;
 	
+	private static Workshift[] workshifts;
+
+	@BeforeClass
+	public static void globalSetUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+		workshifts = Helper.fromJson("/workshifts.json", Workshift[].class);
+	}
+	
+	@Before
+	public void setUp(){
+		workshiftDao.clearAll();
+	}
+	
 	@Test
-	public void testAdd() {
+	public final void testAdd() {
 		int size = workshiftDao.list().size();
-		
-		Workshift workshift = new Workshift();
-		workshift.setDailyId(12);
-		workshift.setClosedAt(Helper.stringToDate("22/01/2013"));
-		workshiftDao.add(workshift);
-		
+		workshiftDao.add(workshifts[0]);
 		assertTrue (size < workshiftDao.list().size());
 	}
 
@@ -33,9 +45,7 @@ public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
 	 */
 	@Test
 	public void testEmptyCloseDateDuringInsert() {
-		Workshift workshift = new Workshift();
-		workshift.setDailyId(12);
-		workshift.setClosedAt(Helper.stringToDate("22/01/2013"));
+		Workshift workshift =workshifts[1]; 
 		workshiftDao.add(workshift);
 		// get this workshift from database
 		Workshift wsFroDB = workshiftDao.find(workshift.getId()); 
@@ -47,6 +57,7 @@ public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
 		Workshift workshift = new Workshift();
 		workshift.setDailyId(12);
 		workshiftDao.add(workshift);
+		
 		// get this workshift from db
 		Date closedAt = Helper.stringToDate("22/01/2013");
 		workshift.setClosedAt(closedAt);
@@ -63,7 +74,7 @@ public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
 
 	
 	@Test
-	public void testSetOpenDateNotNull() {
+	public final void testSetOpenDateNotNull() {
 		Workshift workshift = new Workshift();
 		workshift.setDailyId(12);
 		workshiftDao.add(workshift);
@@ -72,18 +83,44 @@ public class WorkshiftDaoImplTest extends AbstractDaoImplTest{
 		assertNotNull(wsFroDB.getOpenedAt());
 	}
 	
+	/**
+	 * Given : workshift with defined day sum
+	 * When  : I read this workshift
+	 * THen  : I should have correct sum
+	 */
 	@Test
-	public void testSetDaySum() {
+	public final void testSetDaySum() {
 		int size = workshiftDao.list().size();
 		
-		Workshift workshift = new Workshift();
-		workshift.setDaySum(BigDecimal.valueOf(13.51));
+		Workshift workshift = workshifts[2];
+//		workshift.setDaySum(BigDecimal.valueOf(13.51));
 		workshiftDao.add(workshift);
 		Workshift wsFroDB = workshiftDao.find(workshift.getId()); 
 		// get this workshift from database
+		// TODO SB : Read day sum from JSON correctly
 		assertEquals(BigDecimal.valueOf(1351, 2) , wsFroDB.getDaySum());
 		assertTrue (size < workshiftDao.list().size());
 	}
+	
+	@Test
+	public final void testGetOpenedWorkshiftsList() {
+		for (Workshift workshift : workshifts){
+			workshiftDao.add(workshift);
+			//because we ca't set closedAt during item creation
+			workshiftDao.update(workshift);
+		}
+		assertEquals(2, workshiftDao.getOpenedWorkshiftsList().size());
+	}
 
-
+	@Test
+	public final void testGetTodayWorkshiftsCount() {
+		Date now = new Date();
+		for (Workshift workshift : workshifts){
+			workshiftDao.add(workshift);
+			workshift.setOpenedAt(now);
+			workshift.setClosedAt(now);
+			workshiftDao.update(workshift);
+		}
+		assertEquals(5, workshiftDao.countForDate(now));
+	}
 }

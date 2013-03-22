@@ -1,6 +1,5 @@
 package com.siriusif.service.model.impl;
 
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 

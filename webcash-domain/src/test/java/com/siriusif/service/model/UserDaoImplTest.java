@@ -2,10 +2,12 @@ package com.siriusif.service.model;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.User;
 import static org.junit.Assert.*;
 
-public class UserDaoImplTest extends AbstractDaoImplTest {
+public class UserDaoImplTest extends AbstractSpringTest {
 
     @Autowired
     private UserDao userDao;

@@ -5,10 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.Sale;
 import static com.siriusif.model.helpers.SaleBuiledr.amount;
 
-public class SaleDaoImplTest extends AbstractDaoImplTest {
+public class SaleDaoImplTest extends AbstractSpringTest {
 	
 	@Autowired
 	private SaleDao saleDao;

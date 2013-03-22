@@ -8,10 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.TablesHall;
 
-public class TablesDaoImplTest extends AbstractDaoImplTest {
-
+public class TablesDaoImplTest extends AbstractSpringTest{
+	
 	@Autowired
 	private TablesDao tablesDao;
 
@@ -27,9 +28,9 @@ public class TablesDaoImplTest extends AbstractDaoImplTest {
 		int size = tablesDao.list().size();
 		TablesHall table = Helper.fromJson("/tables.json", TablesHall.class);
 		tablesDao.add(table);
-		assertTrue(size < tablesDao.list().size());
+		assertTrue (size < tablesDao.list().size());
 		TablesHall tableFromDB = tablesDao.find(table.getId());
-		
+
 		assertEquals("administrator", tableFromDB.getName());
 		assertEquals("leftTable", tableFromDB.getDescription());
 		assertEquals(50, tableFromDB.getTop());
@@ -37,4 +38,4 @@ public class TablesDaoImplTest extends AbstractDaoImplTest {
 		assertEquals(123, tableFromDB.getHeight());
 		assertEquals(321, tableFromDB.getWidth());
 	}
-}
+	}
