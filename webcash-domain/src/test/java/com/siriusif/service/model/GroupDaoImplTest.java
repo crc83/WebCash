@@ -4,18 +4,16 @@ import static com.siriusif.model.helpers.SaleBuiledr.money;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
 
-public class GroupDaoImplTest extends AbstractDaoImplTest {
+public class GroupDaoImplTest extends AbstractSpringTest {
 	
 	@Autowired
 	private GroupDao groupDao;

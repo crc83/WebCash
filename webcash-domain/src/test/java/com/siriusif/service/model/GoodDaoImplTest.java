@@ -5,10 +5,11 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.Good;
 import static com.siriusif.model.helpers.SaleBuiledr.money;
 
-public class GoodDaoImplTest extends AbstractDaoImplTest {
+public class GoodDaoImplTest extends AbstractSpringTest {
 	
 	@Autowired
 	private GoodDao goodDao;
