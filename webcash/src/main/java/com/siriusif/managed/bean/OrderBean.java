@@ -1,9 +1,7 @@
 package com.siriusif.managed.bean;
 
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -19,7 +17,6 @@ import com.siriusif.model.Group;
 import com.siriusif.model.Order;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
-import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.GroupDao;
 
 import static com.siriusif.model.helpers.SaleBuiledr.*;
@@ -34,25 +31,18 @@ public class OrderBean {
 
 	@ManagedProperty(value="#{groupDao}")
 	private GroupDao groupDao;
-	@ManagedProperty(value="#{goodDao}")
-	private GoodDao goodDao;
 	
 	private List<Group> groups;
-	private List<Good> goods;
 	
 
 	public List<Group> getGroups() {
 		groups = groupDao.list();
 		for(Group group : groups){
 			LOGGER.debug(" | "+group.getgName());
+			LOGGER.debug(" | "+group.getGoods().size());
 		}
 		LOGGER.debug(" || "+groups.size());
 		return groups;
-	}
-	
-	public List<Good> getGoods() {
-		goods = goodDao.list();
-		return goods;
 	}
 	
 	public OrderBean(){
@@ -97,7 +87,7 @@ public class OrderBean {
 		 Good good = (Good)evt.getComponent().getAttributes().get("selectedGood");
 		 Sale sale = new Sale();
 		 sale.setSalesGood(good);
-		 sale.setAmount(new BigDecimal(0.505).setScale(3, RoundingMode.HALF_UP));
+		 sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));
 		 order.getSuborders().get(0).addSale(sale);
 		//TODO SB : Remove this when we will have DB connection
 		// begin
@@ -121,11 +111,4 @@ public class OrderBean {
 		this.groupDao = groupDao;
 	}
 
-	public GoodDao getGoodDao() {
-		return goodDao;
-	}
-
-	public void setGoodDao(GoodDao goodDao) {
-		this.goodDao = goodDao;
-	}
 }
