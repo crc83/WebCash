@@ -3,10 +3,10 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Checks</title>
+	<title>#{msgs.order_list_title}</title>
 </h:head>
-<DIV style="width: 600px; height: 800px;">
 	<h:body>
+	<h:outputLabel>#{ordersList.tableId}</h:outputLabel>
 		<p:accordionPanel multiple="true">
 			<p:tab title="Замовлення I">
 				<h:panelGrid columns="2" cellpadding="10">
@@ -63,5 +63,4 @@
 			</p:tab>
 		</p:accordionPanel>
 	</h:body>
-</DIV>
 </html>

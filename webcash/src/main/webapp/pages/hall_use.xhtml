@@ -17,12 +17,22 @@
 		</div>
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
+				<ui:repeat var="table" value="#{hallUseBean.tables}">
+					<h:graphicImage style="
+						margin-top: #{table.top}px;
+						margin-left: #{table.left}px; 
+						position: absolute;" 
+					value="/images/table.png"
+					onclick="location.href='orders_list.jsf?table=#{table.id}'">
+					</h:graphicImage>
+				</ui:repeat>
+
 				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="false"
 					usemap="#navigation" />
 				<map id="navigation" name="navigation">
 					<ui:repeat var="table" value="#{hallUseBean.tables}">
 						<area shape="rect" coords="#{table.left},#{table.top},#{table.right},#{table.bottom}"
-							onclick="location.href='#{hallUseBean.onSelectTable}'">
+							onclick="location.href='selectedtable?table=#{table.id}'">
 						</area>
 					</ui:repeat>
 				</map>

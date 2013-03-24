@@ -40,11 +40,9 @@ public class ImportDatabase {
 		GenericXmlApplicationContext context = initAppContext(profile);
 		Session session = initHibernateSession(context);
 		session.save(hall);
-		for (Group group : groups){
-			session.save(group);
-		}
-//		session.delete(order);
-//		session.save(order);
+//		for (Group group : groups){
+//			session.save(group);
+//		}
 		session.getTransaction().commit();
 		session.close();
 		LOGGER.info("Import compleate.");
