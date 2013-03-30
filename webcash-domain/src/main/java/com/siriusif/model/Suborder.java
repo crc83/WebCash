@@ -24,7 +24,7 @@ public class Suborder {
 	
 
 	/**
-	 * index of suborder 
+	 * index of suborder in order
 	 */
 	@Column(name = "index", nullable = true)
 	private int index;
