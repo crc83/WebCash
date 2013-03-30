@@ -8,4 +8,10 @@ import com.siriusif.service.model.UserDao;
 @Repository("userDao")
 public class UserDaoImpl extends HibernateDaoImpl<User, Long> implements UserDao {
 
+	@Override
+	public boolean login(String username, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

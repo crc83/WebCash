@@ -3,34 +3,23 @@ package com.siriusif.managed.bean;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.siriusif.security.AuthenticationService;
+import com.siriusif.service.model.UserDao;
 
 @ManagedBean(name = "loginBean")
+@SessionScoped
 public class LoginBean {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginBean.class);
-
-	@ManagedProperty(value = "#{authenticationService}")
-	private AuthenticationService authenticationService; // injected Spring defined service for bikes
+    
+    @ManagedProperty(value = "userDao")
+    private UserDao userDao;
 	
-	/**
-	 * @return the authenticationService
-	 */
-	public AuthenticationService getAuthenticationService() {
-		return authenticationService;
-	}
-
-	/**
-	 * @param authenticationService the authenticationService to set
-	 */
-	public void setAuthenticationService(AuthenticationService authenticationService) {
-		this.authenticationService = authenticationService;
-	}
-
 	@Inject
 	private FacesMessage message;
 
@@ -74,7 +63,7 @@ public class LoginBean {
 		LOGGER.debug("checking login and password");
 		LOGGER.debug("Username:"+username);
 		LOGGER.debug("Password:"+password);
-		boolean success = authenticationService.login(username, password);
+		boolean success = userDao.login(username, password);
 		if (success) {
 			//TODO : Check how to test if we have messages
 			// message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome",
@@ -89,6 +78,14 @@ public class LoginBean {
 		}
 
 		return responce;
+	}
+
+	public UserDao getUserDao() {
+		return userDao;
+	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
 	}
 
 }

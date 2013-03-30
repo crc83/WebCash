@@ -5,4 +5,6 @@ import com.siriusif.service.GenericDao;
 
 public interface UserDao extends GenericDao<User, Long>{
 
+	boolean login(String username, String password);
+
 }
