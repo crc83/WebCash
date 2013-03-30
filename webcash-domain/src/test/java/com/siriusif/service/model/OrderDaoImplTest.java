@@ -30,7 +30,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setNomerok(2);
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setReadOnly(true);
-		order.setSum(BigDecimal.valueOf(14,56));
 		order.setTableNum(5);
 		order.setType(false);
 		order.setWorkShift(5l);
@@ -44,7 +43,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		Order order = new Order();
 		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
-		order.setSum(BigDecimal.valueOf(14,56));
 		order.setWorkShift(5l);
 		orderDao.add(order);
 		Date workingDate = Helper.stringToDate("22/01/2013");
@@ -60,15 +58,12 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		int size = orderDao.list().size();
 		
 		Order order = new Order();
-		order.setSum(BigDecimal.valueOf(15.25));
 		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
-		Order orFromDB = orderDao.find(order.getId());
 		
-		assertEquals(BigDecimal.valueOf(1525, 2), orFromDB.getSum());
 		assertTrue (size < orderDao.list().size());
 	}
 	
@@ -82,7 +77,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.addSuborder(new Suborder(3));
 		order.addSuborder(new Suborder(5));
 		order.setTableNum(8);
-		order.setSum(BigDecimal.valueOf(15.25));
 		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);

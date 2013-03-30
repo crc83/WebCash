@@ -38,12 +38,6 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
-	/**
-	 * sum order include discountSum
-	 */
-	@Column(name="summa", nullable = false, precision=16, scale=2)
-	private BigDecimal sum;
-	
 	@Column(name="author", nullable=false, length=100)
 	private String author;
 	
@@ -158,14 +152,6 @@ public class Order {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public BigDecimal getSum() {
-		return sum;
-	}
-
-	public void setSum(BigDecimal sum) {
-		this.sum = sum;
 	}
 
 	public String getAuthor() {

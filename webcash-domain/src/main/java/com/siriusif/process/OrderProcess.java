@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.siriusif.model.Order;
+import com.siriusif.model.Suborder;
 import com.siriusif.service.model.OrderDao;
 
 @Component
@@ -15,10 +16,16 @@ public class OrderProcess {
 	private OrderDao orderDao;
 	
 	public Order newOrder() {
-		Order order = new Order();
+		Order newOrder = new Order();
+		Date workingDate = new Date(); 
+		newOrder.setDate(workingDate);
+		newOrder.setAuthor("admin");
+		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
+		newOrder.setWorkShift(5l);
+		newOrder.addSuborder(new Suborder(1));
 		
-		order.setDate(new Date());
-		return order;
+		orderDao.add(newOrder);
+		return newOrder;
 	}
 
 }
