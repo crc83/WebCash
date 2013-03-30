@@ -63,22 +63,22 @@ public class HallUseBean {
     	  BufferedImage bufferedImg = readImage("background");  
     	  Graphics2D g2 = bufferedImg.createGraphics();
     	  
-    	  BufferedImage imageOfTable =readImage("table");
-		  Font font = new Font("Arial", Font.ITALIC, 18);    	  
-    	  for (TablesHall table : tables){
-    		  //let's ajust table height and width
-    		   table.setWidth(imageOfTable.getWidth());
-    		   table.setHeight(imageOfTable.getHeight());
-    		  // TODO CS : Later we will made custom tag for table
-    		  int textBottom = table.getBottom();
-    		  int textLeft = table.getLeft();
-    		  g2.drawImage(imageOfTable, null, table.getLeft(), table.getTop());
-    		  g2.setFont(font);
-    		  // color of name table
-    		  g2.setColor(Color.lightGray);
-    		  // location of tables name. We can change to top(textBottom to getTop())
-    		  g2.drawString(table.getName(), textLeft, textBottom);
-    	  }	
+//    	  BufferedImage imageOfTable =readImage("table");
+//		  Font font = new Font("Arial", Font.ITALIC, 18);    	  
+//    	  for (TablesHall table : tables){
+//    		  //let's ajust table height and width
+//    		   table.setWidth(imageOfTable.getWidth());
+//    		   table.setHeight(imageOfTable.getHeight());
+//    		  // TODO CS : Later we will made custom tag for table
+//    		  int textBottom = table.getBottom();
+//    		  int textLeft = table.getLeft();
+//    		  g2.drawImage(imageOfTable, null, table.getLeft(), table.getTop());
+//    		  g2.setFont(font);
+//    		  // color of name table
+//    		  g2.setColor(Color.lightGray);
+//    		  // location of tables name. We can change to top(textBottom to getTop())
+//    		  g2.drawString(table.getName(), textLeft, textBottom);
+//    	  }	
     	  
     	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
     	  ImageIO.write(bufferedImg, "png", os);  
