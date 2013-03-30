@@ -16,7 +16,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.Transient;
 
 /**
  * Order Entity 
@@ -39,12 +38,6 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
-	/**
-	 * sum order include discountSum
-	 */
-	@Column(name="summa", nullable = false, precision=16, scale=2)
-	private BigDecimal sum;
-	
 	@Column(name="author", nullable=false, length=100)
 	private String author;
 	
@@ -56,7 +49,7 @@ public class Order {
 	/**
 	 * number of table
 	 */
-	@Column(name = "tableNum", nullable = false)
+	@Column(name = "tableNum", nullable = true)
 	private int tableNum;
 	
 //	private String originalAutor;??????
@@ -80,7 +73,7 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date workingDate;
 	
-	@Column(name = "workshift", nullable = false)
+	@Column(name = "workshift", nullable = true)
 	private Long workShift;
 	
 	@Column(name = "nomeroc", nullable = true)
@@ -89,7 +82,7 @@ public class Order {
 	/**
 	 * money from client
 	 */
-	@Column(name="payed", nullable = false, precision=16, scale=2)
+	@Column(name="payed", nullable = true, precision=16, scale=2)
 	private BigDecimal payed;
 	
 	/**
@@ -159,14 +152,6 @@ public class Order {
 
 	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public BigDecimal getSum() {
-		return sum;
-	}
-
-	public void setSum(BigDecimal sum) {
-		this.sum = sum;
 	}
 
 	public String getAuthor() {
