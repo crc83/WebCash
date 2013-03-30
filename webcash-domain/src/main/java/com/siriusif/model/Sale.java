@@ -11,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 
 @Entity
 @Table(name = "sale")
@@ -26,11 +25,6 @@ public class Sale {
 	@Column(name = "amount", nullable = false, precision=16, scale=3)
 	private BigDecimal amount;
 
-	/** () total sum of sale **/
-//	TODO What does it work?????? 
-	@Transient
-	private BigDecimal sum;
-	
 	@Column(name="allowsum", nullable = true, precision=16, scale=2)
 	private BigDecimal allowSum;
 	
@@ -62,6 +56,7 @@ public class Sale {
 	// goodSales.setSalesGood(salesGood);
 	// }
 
+	/** () total sum of sale **/
 	public BigDecimal getCalculatedSum() {
 		BigDecimal sum = BigDecimal.ZERO;
 		BigDecimal price = BigDecimal.ZERO;
@@ -90,10 +85,6 @@ public class Sale {
 
 	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
-	}
-
-	public BigDecimal getSum() {
-		return sum;
 	}
 
 	public BigDecimal getAllowSum() {

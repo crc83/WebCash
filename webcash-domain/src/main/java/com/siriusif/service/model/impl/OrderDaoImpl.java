@@ -2,6 +2,8 @@ package com.siriusif.service.model.impl;
 
 import java.util.List;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,11 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements Order
 		return o; 
 	}
 
+	@Override
+	public int conutDailyId(Date workingDate) {
+		// TODO CS : Implement it later
+		return 0;
+	}
 	/*
 	 * (non-Javadoc)
 	 * @see com.siriusif.service.model.OrderDao#listForTableId(long)
