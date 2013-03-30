@@ -30,5 +30,5 @@
             <to-view-id>/pages/error.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    
+        
 </faces-config>
