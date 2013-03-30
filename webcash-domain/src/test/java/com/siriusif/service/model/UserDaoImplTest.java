@@ -3,6 +3,7 @@ package com.siriusif.service.model;
 import java.io.UnsupportedEncodingException;
 
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +26,7 @@ public class UserDaoImplTest extends AbstractSpringTest {
     @Before
     public void setUp() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
     	users = Helper.fromJson("/users.json", User[].class);
+    	userDao.clearAll();
     	for (User user : users){
     		userDao.add(user);
     	}

@@ -30,7 +30,7 @@ public class User {
 	
 	/** user role */
 	@Column(name="role", nullable=false)
-	private int role;
+	private String role;
 	
 	/** user password */
 	@Column(name="psw", nullable=false, length=100)
@@ -74,14 +74,14 @@ public class User {
 	/**
 	 * @return the role
 	 */
-	public int getRole() {
+	public String getRole() {
 		return role;
 	}
 	
 	/**
 	 * @param role the role to set
 	 */
-	public void setRole(int role) {
+	public void setRole(String role) {
 		this.role = role;
 	}
 	
