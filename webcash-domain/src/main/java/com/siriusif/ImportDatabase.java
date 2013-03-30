@@ -1,9 +1,11 @@
 package com.siriusif;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.apache.log4j.Logger;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -55,7 +57,10 @@ public class ImportDatabase {
 	 */
 	private static Session initHibernateSession(
 			GenericXmlApplicationContext context) {
-		SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+		Properties hibernateProperties = context.getBean("hibernateProperties",Properties.class);
+		hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
+		SessionFactory sessionFactory = context.getBean("sessionFactory", SessionFactory.class);
+		
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 		return session;

@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.siriusif.model.Order;
+import com.siriusif.process.OrderProcess;
 import com.siriusif.service.model.OrderDao;
 
 @ManagedBean(name = "ordersList")
@@ -27,12 +28,17 @@ public class OrdersListBean {
 	
 	private List<Order> ordersForTable;
 	
+	//TODO SB : Remove access to dao clases here
 	@ManagedProperty(value="#{orderDao}")
 	private OrderDao orderDao;
+	
+	@ManagedProperty(value="#{orderProcess}")
+	private OrderProcess orderProcess;
 
 	@PostConstruct
 	public void init() {
 		LOGGER.error("starting view");
+//		orderProcess.setCurrentUser(curentUser)
 		
 		HttpServletRequest request = (HttpServletRequest)FacesContext.getCurrentInstance().getExternalContext().getRequest();
 		String value=request.getParameter("table");
@@ -40,9 +46,9 @@ public class OrdersListBean {
 		tableId = Long.parseLong(value);
 		if(skipAndOpenNewOrder()) {
 			try {
-				//TODO SB : ask order process to create new order
+				Order order = orderProcess.newOrder();
 				//since order list and order are at the same level in /pages
-				FacesContext.getCurrentInstance().getExternalContext().redirect("order.jsf");
+				FacesContext.getCurrentInstance().getExternalContext().redirect("order.jsf?order_id="+order.getId());
 			} catch (IOException e) {
 				LOGGER.error("I can't open new order");
 				LOGGER.debug("Error while redirecting to new check", e);
@@ -86,6 +92,14 @@ public class OrdersListBean {
 
 	public void setOrderDao(OrderDao orderDao) {
 		this.orderDao = orderDao;
+	}
+
+	public OrderProcess getOrderProcess() {
+		return orderProcess;
+	}
+
+	public void setOrderProcess(OrderProcess orderProcess) {
+		this.orderProcess = orderProcess;
 	}
 
 }
