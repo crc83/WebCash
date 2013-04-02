@@ -41,7 +41,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 		
 		verify(orderDao).add(newOrder);
 		
-		assertNotNull("..",newOrder);
+		assertNotNull("New order not null",newOrder);
 		assertEquals(Helper.dateOnly(today), 
 				Helper.dateOnly(newOrder.getDate()));
 		
@@ -64,6 +64,18 @@ public class OrderProcessTest extends AbstractSpringTest {
 		
 //		TODO "admin" change to current user
 		assertEquals("admin", newOrder.getAuthor());
+	}
+	
+	@Test
+	public void testAddNewSuborder(){
+		Order newSuborder = orderProcess.addSuborder(42l);
+		stub(orderDao.find(newSuborder.getId())).toReturn(newSuborder);
+		
+		Order order = orderDao.find(1l);
+//		verify(orderDao).update(newSuborder);
+//		assertNotNull("New Suborder not null",newSuborder);
+		
+		assertEquals("administrator", newSuborder.getAuthor());
 	}
 
 }

@@ -2,6 +2,7 @@ package com.siriusif.process;
 
 import java.util.Date;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,6 +12,8 @@ import com.siriusif.service.model.OrderDao;
 
 @Component
 public class OrderProcess {
+	
+	private static Logger LOGGER = Logger.getLogger(OrderProcess.class);
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -26,6 +29,18 @@ public class OrderProcess {
 		
 		orderDao.add(newOrder);
 		return newOrder;
+	}
+	
+	public Order addSuborder(Long orderId) {
+		Order order = orderDao.find(orderId);
+		Suborder suborder = new Suborder();
+		suborder.setIndex(2);
+		LOGGER.info("CS Order: " + order);
+		LOGGER.info("CS Suborder: " + suborder);
+		order.addSuborder(suborder);
+		
+		orderDao.update(order);
+		return order;
 	}
 
 }
