@@ -87,5 +87,24 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		Order orFromDB = orderDao.find(order.getId());
 		assertEquals(8, orFromDB.getTableNum());
 		assertEquals(4, orFromDB.getSuborders().size());
-	}	
+	}
+	
+	@Test
+	public void tsetCountOfsubordersInOrder(){
+		int size = orderDao.list().size();
+		Order order = new Order();
+		
+		order.addSuborder(new Suborder(1));
+		order.addSuborder(new Suborder(2));
+		order.addSuborder(new Suborder(3));
+		order.addSuborder(new Suborder(4));
+		order.setTableNum(8);
+		order.setAuthor("adminic");
+		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setWorkShift(5l);
+		order.setDailyId(size);
+		orderDao.add(order);
+		
+		assertEquals(5, orderDao.countOfSuborders(5l));
+	}
 }
