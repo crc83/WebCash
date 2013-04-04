@@ -68,14 +68,12 @@ public class OrderProcessTest extends AbstractSpringTest {
 	
 	@Test
 	public void testAddNewSuborder(){
-		Order newSuborder = orderProcess.addSuborder(42l);
-		stub(orderDao.find(newSuborder.getId())).toReturn(newSuborder);
+		Order order = new Order();
+		stub(orderDao.find(any(Long.class))).toReturn(order);
+		order = orderProcess.addSuborder(1l);
 		
-		Order order = orderDao.find(1l);
-//		verify(orderDao).update(newSuborder);
-//		assertNotNull("New Suborder not null",newSuborder);
-		
-		assertEquals("administrator", newSuborder.getAuthor());
+		verify(orderDao).update(order);
+		assertNotNull("New Suborder not null",order);
 	}
 
 }
