@@ -72,7 +72,7 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 		return currentSession()
 				.createQuery(
 						"SELECT o, COUNT(s) FROM Order o JOIN o.suborders s GROUP BY o HAVING o.id = :orderId")
-				.setParameter("orderId", orderId).list().size()+1;
+				.setParameter("orderId", orderId).list().size();
 	}
 
 }

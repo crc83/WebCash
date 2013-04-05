@@ -34,7 +34,7 @@ public class OrderProcess {
 	public Order addSuborder(Long orderId) {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
-		suborder.setIndex(orderDao.countOfSuborders(orderId));
+		suborder.setIndex(orderDao.countOfSuborders(orderId)+1);
 		LOGGER.info("CS Order: " + order);
 		LOGGER.info("CS Suborder: " + suborder);
 		order.addSuborder(suborder);
