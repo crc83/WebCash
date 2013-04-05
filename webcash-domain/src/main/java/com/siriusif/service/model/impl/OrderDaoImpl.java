@@ -71,7 +71,7 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 	public int countOfSuborders(long orderId) {
 		return currentSession()
 				.createQuery(
-						"SELECT o, COUNT(s) FROM Order o JOIN o.suborders s GROUP BY o HAVING o.id = :orderId")
+						"SELECT o, s FROM Order o JOIN o.suborders s WHERE o.id = :orderId")
 				.setParameter("orderId", orderId).list().size();
 	}
 
