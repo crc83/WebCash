@@ -19,5 +19,11 @@ public interface OrderDao extends GenericDao<Order, Long> {
 	 * @return count of OPENED orders for table 
 	 */
 	int countOpenedForTableId(long tableId);
+	
+	/**
+	 * @param orderId of Order
+	 * @return count suborders of order
+	 */
+	int countOfSuborders(long orderId);
 
 }
