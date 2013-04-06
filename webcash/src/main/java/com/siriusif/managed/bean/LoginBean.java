@@ -16,6 +16,12 @@ import com.siriusif.service.model.UserDao;
 public class LoginBean {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoginBean.class);
+	
+	/** where to go if login correct */
+	public static final String LOGIN_CORRECT_URL="/pages/hall_use?faces-redirect=true";
+	/** where to go if login fails */
+	public static final String LOGIN_WRONG_URL="/pages/login?faces-redirect=true";
+
     
     @ManagedProperty(value = "userDao")
     private UserDao userDao;
@@ -69,10 +75,10 @@ public class LoginBean {
 			// message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome",
 			// username);
 			LOGGER.debug("correct user");
-			responce = "/pages/hall_use?faces-redirect=true";
+			responce = LOGIN_CORRECT_URL;
 		} else {
 			LOGGER.debug("wrong user");
-			responce = "/pages/login?faces-redirect=true";
+			responce = LOGIN_WRONG_URL;
 			// message = new FacesMessage(FacesMessage.SEVERITY_WARN,
 			// "Login Error", "Invalid credentials");
 		}
