@@ -123,5 +123,28 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		assertEquals(0, orderDao.countOfSuborders(order.getId()));
 	}
 	
-	
+	/**
+	 * When: updating of order 
+	 * Than: open date doesn't update and set close date
+	 */
+	@Test
+	public void testCloseDeteOfOrder(){
+		int size = orderDao.list().size();
+		Order order = new Order();
+		
+		Date closeDate = Helper.stringToDate("22/01/2013");
+		order.setCloseDate(closeDate);
+		order.setTableNum(8);
+		order.setAuthor("admin");
+		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setWorkShift(5l);
+		order.setDailyId(size);
+		orderDao.add(order);
+		
+		assertNull(order.getOpenDate());
+		orderDao.update(order);
+		
+		Order orFromDb = orderDao.find(order.getId());
+		assertEquals(closeDate, orFromDb.getCloseDate());
+	}
 }
