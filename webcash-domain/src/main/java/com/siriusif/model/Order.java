@@ -32,12 +32,19 @@ public class Order {
 	private Long id;
 	
 	/**
-	 * date of order
+	 * date and time of order creation
 	 */
 	@Column(name = "date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
+	/**
+	 * date and time of order closed
+	 */
+	@Column(name = "closedate", nullable = true,  columnDefinition = "TIMESTAMP", insertable = false)
+	@Temporal(TemporalType.DATE)
+	private Date closeDate;
+
 	@Column(name="author", nullable=false, length=100)
 	private String author;
 	
@@ -67,7 +74,7 @@ public class Order {
 	private boolean type;
 	
 	/**
-	 * working date
+	 * working date (filled at creation)
 	 */
 	@Column(name = "workingDate", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
@@ -96,6 +103,9 @@ public class Order {
 	 */
 	@Column(name = "daylyId", nullable = false)
 	private int dailyId;
+	
+	@Column(name = "status", nullable = false)
+	private int status;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "order")
 	private List<Suborder> suborders;
@@ -248,6 +258,22 @@ public class Order {
 
 	public void setSuborders(List<Suborder> suborders) {
 		this.suborders = suborders;
+	}
+	
+	public Date getCloseDate() {
+		return closeDate;
+	}
+	
+	public void setCloseDate(Date closeDate) {
+		this.closeDate = closeDate;
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+	
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }
