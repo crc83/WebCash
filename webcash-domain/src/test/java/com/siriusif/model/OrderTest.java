@@ -20,6 +20,15 @@ public class OrderTest {
 	}
 
 	@Test
+	public void testIsValidforClose() {
+		Order order = new Order();
+
+		order.setPayed(money(10.00));
+
+		assertTrue(order.isValidForClose());
+	}
+
+	@Test
 	public void testInvalidationOrder() {
 		Order order = new Order();
 
@@ -35,19 +44,19 @@ public class OrderTest {
 
 		assertEquals(1, order.getSuborders().size());
 	}
-	
+
 	@Test
 	public void testTotal() {
 		Order order = new Order();
-		
+
 		Suborder first = new Suborder(1);
-		
+
 		first.addSale(buildSaleOld("Юшка грибна", 0.280, 12.50));
 		first.addSale(buildSaleOld("Салат домашній", 0.280, 12.00));
 		first.addSale(buildSaleOld("М'ясо по французьки", 0.200, 20.00));
 		first.addSale(buildSaleOld("Картопля молода з зеленню", 0.200, 8.00));
 		order.addSuborder(first);
-		
+
 		Suborder second = new Suborder(2);
 		second.addSale(buildSaleOld("Смалець", 0.100, 8.00));
 		second.addSale(buildSaleOld("Сметана", 1, 4.00));
@@ -59,9 +68,11 @@ public class OrderTest {
 		third.addSale(buildSaleOld("Кава Еспрессо", 0.040, 9.00));
 		third.addSale(buildSaleOld("Штрудель", 0.150, 14.00));
 		order.addSuborder(third);
-		
-		assertTrue(order.getTotal().equals(money(27.92)));	
-	}
+		order.setPayed(money(28.00));
 
+		assertTrue(order.getTotal().equals(money(27.92)));
+		// TODO this test move to testIsValidforClose()
+		assertTrue("payed more total", order.isValidForClose());
+	}
 
 }
