@@ -3,7 +3,6 @@ package com.siriusif.service.model;
 import java.io.UnsupportedEncodingException;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -12,7 +11,6 @@ import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.User;
-import com.siriusif.model.Workshift;
 
 import static org.junit.Assert.*;
 
@@ -40,6 +38,7 @@ public class UserDaoImplTest extends AbstractSpringTest {
         user.setLogin("admin");
         user.setPassword("admin");
         user.setName("Administrator");
+        user.setRole("ROLE_USER");
         userDao.add(user);
 
         // list should have one more employee now
