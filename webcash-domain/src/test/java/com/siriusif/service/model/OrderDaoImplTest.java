@@ -141,12 +141,10 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setDailyId(size);
 		orderDao.add(order);
 		
-		assertNull(order.getDate());
+		assertNull(order.getOpenDate());
 		orderDao.update(order);
 		
 		Order orFromDb = orderDao.find(order.getId());
 		assertEquals(closeDate, orFromDb.getCloseDate());
 	}
-	
-	
 }
