@@ -1,6 +1,7 @@
 package com.siriusif;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 
 import org.apache.log4j.Logger;
 
@@ -9,6 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
+import static com.siriusif.model.helpers.SaleBuiledr.money;
 
 /**
  * This console app present here only for quick and dirty testing
@@ -18,7 +20,7 @@ public class App {
 	private static Logger LOGGER = Logger.getLogger(App.class);
 	public static Group[] groups;
 	
-	public static void main(String[] args) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+	public static void main1(String[] args) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
 		LOGGER.info("Import started.");
 		groups = Helper.fromJson("/grouplist.json",Group[].class);
 		for(Group group : groups){
@@ -53,4 +55,10 @@ public class App {
 		}
 	}
 	
+	public static void main(String[] args){
+		BigDecimal val1 = money(15.25);
+		BigDecimal val2 = money(10.00);
+		int val3 = val1.compareTo(val1);
+		System.out.println(val3);
+	}
 }
