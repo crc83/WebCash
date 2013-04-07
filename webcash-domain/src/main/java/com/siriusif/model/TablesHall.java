@@ -10,7 +10,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "dining_table")
+@Table(name = "`dining_table`")
 public class TablesHall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -19,42 +19,42 @@ public class TablesHall {
 	/**
 	 * name of table
 	 */
-	@Column(name="name", nullable=false, length=100)
+	@Column(name="`name`", nullable=false, length=100)
 	private String name;
 	
 	/**
 	 * description of table
 	 */
-	@Column(name="description", nullable=true, length=100)
+	@Column(name="`description`", nullable=true, length=100)
 	private String description;
 	
 	/**
 	 * location of table(distance from the top)
 	 */
-	@Column(name = "ctop", nullable = true)
+	@Column(name = "`ctop`", nullable = true)
 	private int top;
 	
 	// left is reserved word in SQL
 	/**
 	 * location of table(distance from the left)
 	 */
-	@Column(name = "cleft", nullable = true)
+	@Column(name = "`cleft`", nullable = true)
 	private int left;
 	
 	/**
 	 * height of table
 	 */
-	@Column(name = "height", nullable = true)
+	@Column(name = "`height`", nullable = true)
 	private int height;
 	
 	/**
 	 * width of table
 	 */
-	@Column(name = "width", nullable = true)
+	@Column(name = "`width`", nullable = true)
 	private int width;
 	
 	@ManyToOne
-	@JoinColumn(name = "hall_id")
+	@JoinColumn(name = "`hall_id`")
 	private Hall hall;
 	
 	public TablesHall(){

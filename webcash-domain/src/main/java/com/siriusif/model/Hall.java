@@ -14,7 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Hall")
+@Table(name = "`hall`")
 public class Hall {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -23,7 +23,7 @@ public class Hall {
 	/**
 	 * name of hall 
 	 */
-	@Column(name="name", nullable=false, length=100)
+	@Column(name="`name`", nullable=false, length=100)
 	private String name;
 	
 	/**

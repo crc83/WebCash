@@ -16,7 +16,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 @Entity
-@Table(name = "suborder")
+@Table(name = "`suborder`")
 public class Suborder {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -26,14 +26,14 @@ public class Suborder {
 	/**
 	 * index of suborder in order
 	 */
-	@Column(name = "index", nullable = true)
+	@Column(name = "`index`", nullable = true)
 	private int index;
 	
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "suborder")
 	private List<Sale> sales;
 	
 	@ManyToOne
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "`order_id`")
 	private Order order;
 
 	public Suborder() {

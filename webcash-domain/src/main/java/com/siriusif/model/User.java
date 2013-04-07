@@ -17,7 +17,7 @@ import javax.persistence.Table;
 	"FullName" NVARCHAR(50) NULL
  */
 @Entity
-@Table(name="users")
+@Table(name="`users`")
 public class User {
 
 	@Id
@@ -25,19 +25,19 @@ public class User {
 	private Long id;
 	
 	/** user login */
-	@Column(name="name", nullable=false, length=100)
+	@Column(name="`name`", nullable=false, length=100)
 	private String login;
 	
 	/** user role */
-	@Column(name="role", nullable=false)
+	@Column(name="`role`", nullable=false, length=100)
 	private String role;
 	
 	/** user password */
-	@Column(name="psw", nullable=false, length=100)
+	@Column(name="`psw`", nullable=false, length=100)
 	private String password;
 	
 	/** full user name which displayed everywhere */
-	@Column(name="fullName", nullable=false, length=100)
+	@Column(name="`fullName`", nullable=false, length=100)
 	private String name;
 	
 	

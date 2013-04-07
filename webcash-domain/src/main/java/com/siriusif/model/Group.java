@@ -16,7 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "groupofgood")
+@Table(name = "`groupofgood`")
 public class Group {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -25,7 +25,7 @@ public class Group {
 	/**
 	 * name of group 
 	 */
-	@Column(name="name", nullable=false, length=100)
+	@Column(name="`name`", nullable=false, length=100)
 	private String gName;
 	
 	/**
@@ -42,7 +42,7 @@ public class Group {
 	
 	/** Group belongs to this parent group **/
 	@ManyToOne
-	@JoinColumn(name = "parentgroup_id")
+	@JoinColumn(name = "`parentgroup_id`")
 	private Group parentGroup;
 	
 	public Group(){

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.siriusif.model.Order;
-import com.siriusif.model.Suborder;
 import com.siriusif.service.HibernateDaoImpl;
 import com.siriusif.service.model.OrderDao;
 
