@@ -1,5 +1,6 @@
 package com.siriusif.process;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.apache.log4j.Logger;
@@ -21,9 +22,10 @@ public class OrderProcess {
 	public Order newOrder() {
 		Order newOrder = new Order();
 		Date workingDate = new Date(); 
-		newOrder.setDate(workingDate);
+		newOrder.setOpenDate(workingDate);
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
+		newOrder.setStatus(Order.STATUS_OPEN_DATA);
 		newOrder.setWorkShift(5l);
 		newOrder.addSuborder(new Suborder(1));
 		
@@ -41,6 +43,17 @@ public class OrderProcess {
 		
 		orderDao.update(order);
 		return order;
+	}
+	
+	public Order closeOrder(Long orderId, BigDecimal payed){
+		Order closeOrder = orderDao.find(orderId);
+		Date closeDate = new Date();
+		closeOrder.setCloseDate(closeDate);
+		closeOrder.setStatus(Order.STATUS_CLOSE_DATA);
+		closeOrder.setPayed(payed);
+		
+		orderDao.update(closeOrder);
+		return closeOrder;
 	}
 
 }
