@@ -23,7 +23,7 @@ public class LoginBean {
 	public static final String LOGIN_WRONG_URL="/pages/login?faces-redirect=true";
 
     
-    @ManagedProperty(value = "userDao")
+    @ManagedProperty(value = "#{userDao}")
     private UserDao userDao;
 	
 	@Inject
