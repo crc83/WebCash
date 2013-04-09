@@ -1,6 +1,7 @@
 package com.siriusif.ui;
 
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -79,22 +80,20 @@ public class AbstractWebDriverTest {
 	 * @return true if element present
 	 */
 	public boolean isElementPresent(By by){
-		return browser.findElement(by) != null;
+		boolean result = false;
+		try {
+			result = ( browser.findElement(by) != null );
+		} catch (Exception e) {
+			// ok there is no such elements
+		}
+		return result;
 	}
 	
 	public boolean isNoFatalErrors() {
-		boolean errorsPresent = false;
-		// if any of them present' we have error page
-		errorsPresent |= isElementPresent(By.id("trace"));
-		errorsPresent |= isElementPresent(By.id("varsOn"));
-		errorsPresent |= isElementPresent(By.id("varsOff"));
-		errorsPresent |= isElementPresent(By.id("traceOn"));
-		errorsPresent |= isElementPresent(By.id("traceOff"));
+		boolean errorsPresent = isElementPresent(By.id("trace"));
 		if (errorsPresent) {
 			LOGGER.info("Error page detected at:"+getCaller(2));
-			// save error page
 			String html = browser.getPageSource();
-			//and log it
 			LOGGER.debug(html);
 			saveToFile(html);
 		}
