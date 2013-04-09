@@ -2,26 +2,31 @@ package com.siriusif.ui;
 
 import static org.junit.Assert.*;
 
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.internal.seleniumemulation.WaitForPageToLoad;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 
-// SB : I need this in order to change web driver
-@SuppressWarnings("unused")
+/**
+ * Integration tests for login page
+ * @author sbelei
+ */
 public class LoginPageTest extends AbstractWebDriverTest{
 
-	
+	/**
+	 * when : I open root path
+	 * than : I will see login page 
+	 */
 	@Test
 	public void testLoginPageOnRootPath() {
 		get(""); //open root
+		assertTrue(isNoFatalErrors());
 		assertIfLoginPage();
 	}
 	
+	/**
+	 * given : I'm on a root path
+	 * when  : I login with correct credentials
+	 * than  : I will not be on a login page 
+	 */
 	@Test
 	public void testSuccessfulLogin() {
 		get("");
@@ -30,17 +35,27 @@ public class LoginPageTest extends AbstractWebDriverTest{
 		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:password")).clear();
 		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
-		
+		browser.findElement(By.id("loginForm:loginButton")).click();
+		assertTrue(isNoFatalErrors());
 		assertFalse(loginURL.equals(browser.getCurrentUrl()));
 	}
 
+	/**
+	 * Check if it's login page. 
+	 * (login and password inputs should present) 
+	 */
 	private void assertIfLoginPage() {
+		assertTrue(isNoFatalErrors());
 		assertNotNull(browser.findElement(By.id("loginForm:username")));
 		assertNotNull(browser.findElement(By.id("loginForm:password")));
 	}
 	
-	// SB : Temporary solution : Uncomment and fix this test
- 	@Test
+	/**
+	 * given : I'm on a root path
+	 * when  : I try to open any page without credentials
+	 * than  : I will see login page anyway 
+	 */
+	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
 		String[] pages = { 
 			    "/pages/hall.jsf",
@@ -48,6 +63,7 @@ public class LoginPageTest extends AbstractWebDriverTest{
 			};
 		for (String page : pages) {
 			get(page);
+			assertTrue(isNoFatalErrors());
 			assertIfLoginPage();
 		}
 	}

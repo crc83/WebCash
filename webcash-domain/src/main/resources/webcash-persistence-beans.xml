@@ -44,6 +44,7 @@
 				<prop key="hibernate.dialect">${db.dialect}</prop>
 				<prop key="hibernate.show_sql">${db.showsql}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${db.schema}</prop>
+				<prop key="org.hibernate.tool.hbm2ddl">true</prop>
 			</props>
 		</property>
 	</bean>

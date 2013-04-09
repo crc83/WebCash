@@ -22,7 +22,7 @@ import javax.persistence.TemporalType;
  * NULL, "Name" NVARCHAR(10) NOT NULL, );
  */
 @Entity
-@Table(name = "orders")
+@Table(name = "`orders`")
 public class Order {
 	public static final int STATUS_OPEN_DATA = 0;
 
@@ -31,14 +31,14 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
-
+	
 	/**
 	 * date and time of order creation
 	 */
-	@Column(name = "date", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
+	@Column(name = "`date`", nullable = false, columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP", insertable = false, updatable = false)
 	@Temporal(TemporalType.DATE)
 	private Date openDate;
-
+	
 	/**
 	 * date and time of order closed
 	 */
@@ -46,69 +46,67 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date closeDate;
 
-	@Column(name = "author", nullable = false, length = 100)
+	@Column(name="`author`", nullable=false, length=100)
 	private String author;
-
-	@Column(name = "discount", nullable = true)
+	
+	@Column(name = "`discount`", nullable = true)
 	private int discount;
-
-	// private int status; ENUM
-
+	
+//	private int status; ENUM
+	
 	/**
 	 * number of table
 	 */
-	@Column(name = "tableNum", nullable = true)
+	@Column(name = "`tableNum`", nullable = true)
 	private int tableNum;
-
-	// private String originalAutor;??????
-
+	
 	/**
 	 * order was printed on a fiscal printer
 	 */
-	@Column(name = "readOnly", columnDefinition = "boolean default false")
+	@Column(name="`readOnly`", columnDefinition="boolean default false") 
 	private boolean readOnly;
-
+	 
 	/**
 	 * order for return
 	 */
-	@Column(name = "type", columnDefinition = "boolean default false")
+	@Column(name="`type`", columnDefinition="boolean default false") 
 	private boolean type;
-
+	
 	/**
 	 * working date (filled at creation)
 	 */
-	@Column(name = "workingDate", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
+	@Column(name = "`workingDate`", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
 	private Date workingDate;
-
-	@Column(name = "workshift", nullable = true)
+	
+	@Column(name = "`workshift`", nullable = true)
 	private Long workShift;
-
-	@Column(name = "nomeroc", nullable = true)
+	
+	@Column(name = "`nomeroc`", nullable = true)
 	private int nomerok;
-
+	
 	/**
 	 * money from client
 	 */
-	@Column(name = "payed", nullable = true, precision = 16, scale = 2)
+	@Column(name="`payed`", nullable = true, precision=16, scale=2)
 	private BigDecimal payed;
-
+	
 	/**
 	 * paid with credit card
 	 */
-	@Column(name = "isCard", columnDefinition = "boolean default false")
+	@Column(name="`isCard`", columnDefinition="boolean default false") 
 	private boolean isCard;
-
+	
 	/**
 	 * number of order for workshift
 	 */
-	@Column(name = "daylyId", nullable = false)
+	@Column(name = "`daylyId`", nullable = false)
 	private int dailyId;
-
+	
 	@Column(name = "status", nullable = false)
 	private int status;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "order")
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "order")
 	private List<Suborder> suborders;
 
 	public Order() {
@@ -265,7 +263,7 @@ public class Order {
 
 	public Date getCloseDate() {
 		return closeDate;
-	}
+}
 
 	public void setCloseDate(Date closeDate) {
 		this.closeDate = closeDate;

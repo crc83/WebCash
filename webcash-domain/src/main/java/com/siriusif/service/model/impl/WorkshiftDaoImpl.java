@@ -23,7 +23,7 @@ public class WorkshiftDaoImpl extends HibernateDaoImpl<Workshift, Long> implemen
 		//
 		Criteria criteria = currentSession()
 				.createCriteria(Workshift.class)
-				.add(Restrictions.eq(Workshift.CLOSED_AT,currentWorkshiftDate))
+				.add(Restrictions.eq("closedAt",currentWorkshiftDate))
 				.setProjection(Projections.rowCount());
 		return ((Long)criteria.list().get(0)).intValue();
 	}
@@ -32,7 +32,7 @@ public class WorkshiftDaoImpl extends HibernateDaoImpl<Workshift, Long> implemen
 	public List<Workshift> getOpenedWorkshiftsList() {
 		return currentSession()
 			.createCriteria(Workshift.class)
-			.add(Restrictions.isNull(Workshift.CLOSED_AT))
+			.add(Restrictions.isNull("closedAt"))
 			.list();
 	}
 
