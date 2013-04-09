@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,43 +14,44 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.siriusif.model.User;
+import com.siriusif.service.model.UserDao;
+
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
- private HashMap<String, org.springframework.security.core.userdetails.User> users 
-		 	= new HashMap<String, org.springframework.security.core.userdetails.User>();
- 
- public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
-	org.springframework.security.core.userdetails.User user = users.get(username);
-  
-  if (user == null) {
-   throw new UsernameNotFoundException("UserAccount for name \""
-     + username + "\" not found.");
-  }
-  
-  return user;
- }
+	@Autowired
+	private UserDao userDao;
+	
+	//TODO SB : Cover with tests
+	public UserDetails loadUserByUsername(String username)
+			throws UsernameNotFoundException {
+		User user = userDao.findByLogin(username);
+		if (user == null) {
+			throw new UsernameNotFoundException("UserAccount for name \""
+					+ username + "\" not found.");
+		}
 
- @PostConstruct
- public void init() {
-  
-  // sample roles  
-  Collection<GrantedAuthority> adminAuthorities = new ArrayList<GrantedAuthority>();
-  adminAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-  
-  Collection<GrantedAuthority> userAuthorities = new ArrayList<GrantedAuthority>();
-  userAuthorities.add(new SimpleGrantedAuthority("ROLE_REGISTERED"));
-  
-  boolean enabled = true;
-  boolean accountNonExpired = true;
-  boolean credentialsNonExpired = true;
-  boolean accountNonLocked = true;
-  
-  // sample users with roles set
-  users.put("admin", new org.springframework.security.core.userdetails.User("admin", "admin", enabled, accountNonExpired,
-    credentialsNonExpired, accountNonLocked, adminAuthorities));
-  
-  users.put("user", new org.springframework.security.core.userdetails.User("user", "user", enabled, accountNonExpired,
-    credentialsNonExpired, accountNonLocked, userAuthorities));
- }
+		org.springframework.security.core.userdetails.User userSpring = convertToUserDetails(user);
+		return userSpring;
+	}
+
+	//TODO SB : Cover with tests
+	private org.springframework.security.core.userdetails.User convertToUserDetails(
+			User user) {
+		boolean enabled = true;
+		boolean accountNonExpired = true;
+		boolean credentialsNonExpired = true;
+		boolean accountNonLocked = true;
+
+		// role wrapper
+		Collection<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		authorities.add(new SimpleGrantedAuthority(user.getRole()));
+
+		
+		return new org.springframework.security.core.userdetails.User(user.getLogin(),
+				user.getPassword(), enabled, accountNonExpired,
+				credentialsNonExpired, accountNonLocked,
+				authorities);
+	}
 }

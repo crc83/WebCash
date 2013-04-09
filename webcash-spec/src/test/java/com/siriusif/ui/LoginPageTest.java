@@ -35,7 +35,7 @@ public class LoginPageTest extends AbstractWebDriverTest{
 		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:password")).clear();
 		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
-		
+		browser.findElement(By.id("loginForm:loginButton")).click();
 		assertTrue(isNoFatalErrors());
 		assertFalse(loginURL.equals(browser.getCurrentUrl()));
 	}

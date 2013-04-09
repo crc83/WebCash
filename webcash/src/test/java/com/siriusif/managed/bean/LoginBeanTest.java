@@ -3,6 +3,7 @@ package com.siriusif.managed.bean;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.siriusif.security.AuthenticationService;
 import com.siriusif.service.model.UserDao;
 
 import static org.junit.Assert.*;
@@ -15,15 +16,15 @@ import static org.mockito.Mockito.*;
 public class LoginBeanTest {
 	
 	private LoginBean loginBean = new LoginBean();
-	private UserDao mockedUserDao;
+	private AuthenticationService mockedAS;
 	
 	
 	@Before
 	public void setUp() {
-		mockedUserDao = mock(UserDao.class);
-		stub(mockedUserDao.login(anyString(), anyString())).toReturn(false);
-		stub(mockedUserDao.login("admin", "password")).toReturn(true);
-		loginBean.setUserDao(mockedUserDao);
+		mockedAS = mock(AuthenticationService.class);
+		stub(mockedAS.login(anyString(), anyString())).toReturn(false);
+		stub(mockedAS.login("admin", "password")).toReturn(true);
+		loginBean.setAuthenticationService(mockedAS);
 	}
 	
 	/**
