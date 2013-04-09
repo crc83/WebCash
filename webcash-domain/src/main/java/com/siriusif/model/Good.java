@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "good")
+@Table(name = "`good`")
 public class Good {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -23,80 +23,80 @@ public class Good {
 	/**
 	 * article of good
 	 */
-	@Column(name = "art", nullable = true)
+	@Column(name = "`art`", nullable = true)
 	private Long art;
 	
 	/**
 	 *name of good 
 	 */
-	@Column(name="name", nullable=false, length=100)
+	@Column(name="`name`", nullable=false, length=100)
 	private String name;
 	
 	/**
 	 * price of good
 	 */
-	@Column(name="price", nullable = false, precision=16, scale=2)
+	@Column(name="`price`", nullable = false, precision=16, scale=2)
 	private BigDecimal price;
 	
 	/**
 	 * kitchen or not
 	 */
-	@Column(name="kitchen", columnDefinition="boolean default false") 
+	@Column(name="`kitchen`", columnDefinition="boolean default false") 
 	private boolean kitchen;
 	
 	/**
 	 * bar or not
 	 */
-	@Column(name="bar", columnDefinition="boolean default false") 
+	@Column(name="`bar`", columnDefinition="boolean default false") 
 	private boolean bar;
 	
 	/**
 	 * pdv or not
 	 */
-	@Column(name="pdv", columnDefinition="boolean default false") 
+	@Column(name="`pdv`", columnDefinition="boolean default false") 
 	private boolean pdv;
 	
 	/**
 	 * weight good or not
 	 */
-	@Column(name="weight", columnDefinition="boolean default false") 
+	@Column(name="`weight`", columnDefinition="boolean default false") 
 	private boolean weight;
 	
 	/**
 	 * short name of good
 	 */
-	@Column(name="shortname", nullable=true, length=100)
+	@Column(name="`shortname`", nullable=true, length=100)
 	private String shortName;
 	
 	/**
 	 * piece good or not
 	 */
-	@Column(name="piece", columnDefinition="boolean default false") 
+	@Column(name="`piece`", columnDefinition="boolean default false") 
 	private boolean piece;
 	
 	/**
 	 * minimal price of good
 	 */
-	@Column(name="minprice", nullable = true, precision=16, scale=2)
+	@Column(name="`minprice`", nullable = true, precision=16, scale=2)
 	private BigDecimal minPrice;
 	
 	/**
 	 * billiard or not
 	 */
-	@Column(name="billiard", columnDefinition="boolean default false") 
+	@Column(name="`billiard`", columnDefinition="boolean default false") 
 	private boolean billiard;
 	
 	/**
 	 * number of printer
 	 */
-	@Column(name = "kitchenPrinterId", nullable = true)
+	@Column(name = "`kitchenPrinterId`", nullable = true)
 	private int kitchenPrinterId;
 	
 	/**
 	 * id of parent group
 	 */
 	@ManyToOne
-	@JoinColumn(name = "group_id")
+	@JoinColumn(name = "`group_id`")
 	private Group parentGroup;
 	
 	public Good(){

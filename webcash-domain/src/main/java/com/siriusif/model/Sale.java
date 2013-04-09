@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "sale")
+@Table(name = "`sale`")
 public class Sale {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
@@ -22,29 +22,29 @@ public class Sale {
 	/**
 	 * amount of good
 	 */
-	@Column(name = "amount", nullable = false, precision=16, scale=3)
+	@Column(name = "`amount`", nullable = false, precision=16, scale=3)
 	private BigDecimal amount;
 
-	@Column(name="allowsum", nullable = true, precision=16, scale=2)
+	@Column(name="`allowsum`", nullable = true, precision=16, scale=2)
 	private BigDecimal allowSum;
 	
 	/**
 	 * fiscal printer or not
 	 */
-	@Column(name="fp", columnDefinition="boolean default false") 
+	@Column(name="`fp`", columnDefinition="boolean default false") 
 	private boolean fp;
 	
 	/**
 	 * printed or not
 	 */
-	@Column(name="printed", columnDefinition="boolean default false") 
+	@Column(name="`printed`", columnDefinition="boolean default false") 
 	private boolean printed;
 	
 	@OneToOne
 	private Good salesGood;
 	
 	@ManyToOne
-	@JoinColumn(name = "suborder_id")
+	@JoinColumn(name = "`suborder_id`")
 	private Suborder suborder;
 	
 	public Sale(){
