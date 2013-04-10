@@ -9,12 +9,12 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.helper.AbstractSpringTest;
-import com.siriusif.model.TablesHall;
+import com.siriusif.model.DinnerTable;
 
-public class TablesDaoImplTest extends AbstractSpringTest{
+public class DinnerTableDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
-	private TablesDao tablesDao;
+	private DinnerTableDao tablesDao;
 
 	/*
 	 * When : I add table to db
@@ -26,10 +26,10 @@ public class TablesDaoImplTest extends AbstractSpringTest{
 	public void testAdd() throws JsonSyntaxException, JsonIOException,
 			UnsupportedEncodingException {
 		int size = tablesDao.list().size();
-		TablesHall table = Helper.fromJson("/tables.json", TablesHall.class);
+		DinnerTable table = Helper.fromJson("/tables.json", DinnerTable.class);
 		tablesDao.add(table);
 		assertTrue (size < tablesDao.list().size());
-		TablesHall tableFromDB = tablesDao.find(table.getId());
+		DinnerTable tableFromDB = tablesDao.find(table.getId());
 
 		assertEquals("administrator", tableFromDB.getName());
 		assertEquals("leftTable", tableFromDB.getDescription());

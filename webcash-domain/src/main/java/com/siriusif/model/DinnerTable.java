@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "dining_table")
-public class TablesHall {
+public class DinnerTable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
@@ -57,11 +57,11 @@ public class TablesHall {
 	@JoinColumn(name = "hall_id")
 	private Hall hall;
 	
-	public TablesHall(){
+	public DinnerTable(){
 		
 	}
 	
-	public TablesHall(String name, String description, int left, int top) {
+	public DinnerTable(String name, String description, int left, int top) {
 		this();
 		this.name = name;
 		this.description = description;

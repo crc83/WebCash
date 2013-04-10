@@ -19,8 +19,8 @@ import org.apache.log4j.Logger;
 import org.primefaces.model.DefaultStreamedContent;  
 import org.primefaces.model.StreamedContent;  
 
-import com.siriusif.model.TablesHall;
-import com.siriusif.service.model.TablesDao;
+import com.siriusif.model.DinnerTable;
+import com.siriusif.service.model.DinnerTableDao;
 
 // http://www.primefaces.org/showcase/ui/dynamicImage.jsf
 // see here
@@ -40,15 +40,15 @@ public class HallUseBean {
       
 
 	@ManagedProperty(value="#{tablesDao}")
-    private TablesDao tablesDao;
+    private DinnerTableDao tablesDao;
     
-	private List<TablesHall> tables;
+	private List<DinnerTable> tables;
 
-	public List<TablesHall> getTables() {
+	public List<DinnerTable> getTables() {
 		tables = tablesDao.list();
 		LOGGER.debug("getting tables list");
 		LOGGER.debug("tables size :"+tables.size());
-		for (TablesHall table : tables){
+		for (DinnerTable table : tables){
 			LOGGER.debug("	| "+table);
 		}
 		return tables;
@@ -57,7 +57,7 @@ public class HallUseBean {
   
     public StreamedContent getHallPlan() throws IOException {  
     	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
-    	List<TablesHall> tables = tablesDao.list();
+    	List<DinnerTable> tables = tablesDao.list();
   
     	//Graphic Text 
     	  BufferedImage bufferedImg = readImage("background");  
@@ -123,7 +123,7 @@ public class HallUseBean {
 	/**
 	 * @return the tablesDao
 	 */
-	public TablesDao getTablesDao() {
+	public DinnerTableDao getTablesDao() {
 		return tablesDao;
 	}
 
@@ -131,7 +131,7 @@ public class HallUseBean {
 	/**
 	 * @param tablesDao the tablesDao to set
 	 */
-	public void setTablesDao(TablesDao tablesDao) {
+	public void setTablesDao(DinnerTableDao tablesDao) {
 		this.tablesDao = tablesDao;
 	}
     

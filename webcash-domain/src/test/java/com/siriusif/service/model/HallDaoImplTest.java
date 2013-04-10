@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Hall;
-import com.siriusif.model.TablesHall;
+import com.siriusif.model.DinnerTable;
 
 public class HallDaoImplTest extends AbstractSpringTest{
 	
@@ -37,11 +37,11 @@ public class HallDaoImplTest extends AbstractSpringTest{
 		int size = hallDao.list().size();
 		Hall hall = new Hall();
 
-		hall.addTable(new TablesHall("Nic", "Nikky", 50, 50));
-		hall.addTable(new TablesHall("Tom", "Tommy", 100, 100));
-		hall.addTable(new TablesHall("Tok", "Tokky", 150, 150));
-		hall.addTable(new TablesHall("Nock", "Nokky", 200, 200));
-		hall.addTable(new TablesHall("Tik", "Tikky", 250, 250));
+		hall.addTable(new DinnerTable("Nic", "Nikky", 50, 50));
+		hall.addTable(new DinnerTable("Tom", "Tommy", 100, 100));
+		hall.addTable(new DinnerTable("Tok", "Tokky", 150, 150));
+		hall.addTable(new DinnerTable("Nock", "Nokky", 200, 200));
+		hall.addTable(new DinnerTable("Tik", "Tikky", 250, 250));
 		hall.setName("bancket");
 		
 		hallDao.add(hall);
@@ -66,10 +66,10 @@ public class HallDaoImplTest extends AbstractSpringTest{
 		LOGGER.info("Getting data from DB");
 		Hall hallFromDb = hallDao.find(hall.getId());
 		assertEquals("Test hall", hallFromDb.getName());
-		List<TablesHall> tablesFromDB = hallFromDb.getTables();
+		List<DinnerTable> tablesFromDB = hallFromDb.getTables();
 		assertEquals("Not all tables read for Hall", 3, tablesFromDB.size());
 		//let's validate all fields for second table
-		TablesHall table = tablesFromDB.get(1);
+		DinnerTable table = tablesFromDB.get(1);
 		assertEquals("Table2", table.getName());
 		assertEquals("The second table", table.getDescription());
 		assertEquals(200, table.getTop());
