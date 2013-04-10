@@ -11,10 +11,11 @@ public class OrderTest {
 	@Test
 	public void testValidationOrder() {
 		Order order = new Order();
+		DinnerTable table = new DinnerTable();
 
 		order.setAuthor("User");
-		order.setTableNum(1);
 		order.setWorkShift(5l);
+		order.setTable(table);
 
 		assertTrue(order.isValid());
 	}

@@ -57,8 +57,8 @@ public class Order {
 	/**
 	 * number of table
 	 */
-	@Column(name = "tableNum", nullable = true)
-	private int tableNum;
+	@Column(name = "dinnertable", nullable = true)
+	private DinnerTable table;
 
 	// private String originalAutor;??????
 
@@ -116,7 +116,7 @@ public class Order {
 	}
 
 	public boolean isValid() {
-		if (tableNum > 0 && author != null && workShift > 0) {
+		if (table != null && author != null && workShift > 0) {
 			return true;
 		} else {
 			return false;
@@ -183,12 +183,12 @@ public class Order {
 		this.discount = discount;
 	}
 
-	public int getTableNum() {
-		return tableNum;
+	public DinnerTable getTable() {
+		return table;
 	}
 
-	public void setTableNum(int tableNum) {
-		this.tableNum = tableNum;
+	public void setTable(DinnerTable table) {
+		this.table = table;
 	}
 
 	public boolean isReadOnly() {
