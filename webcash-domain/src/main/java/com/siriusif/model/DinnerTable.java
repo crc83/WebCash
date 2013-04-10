@@ -1,12 +1,18 @@
 package com.siriusif.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -57,8 +63,11 @@ public class DinnerTable {
 	@JoinColumn(name = "hall_id")
 	private Hall hall;
 	
+	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "table")
+	private List<Order> orders;
+	
 	public DinnerTable(){
-		
+		orders = new ArrayList<Order>();
 	}
 	
 	public DinnerTable(String name, String description, int left, int top) {
@@ -67,6 +76,11 @@ public class DinnerTable {
 		this.description = description;
 		this.left = left;
 		this.top = top;
+	}
+	
+	public void addOrder(Order order){
+		order.setTable(this);
+		orders.add(order);
 	}
 
 	/*
@@ -133,6 +147,17 @@ public class DinnerTable {
 	}
 	public void setWidth(int width) {
 		this.width = width;
+	}
+
+	public List<Order> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+		for(Order order : orders){
+			order.setTable(this);
+		}
 	}
 
 }

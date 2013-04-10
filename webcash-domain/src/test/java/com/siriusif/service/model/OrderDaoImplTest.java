@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
-import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
 
@@ -24,7 +23,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		int size = orderDao.list().size();
 		
 		Order order = new Order();
-		DinnerTable table = new DinnerTable();
 		order.setAuthor("admin");
 		order.setCard(true);
 		order.setDailyId(size);
@@ -32,7 +30,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setNomerok(2);
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setReadOnly(true);
-		order.setTable(table);
 		order.setType(false);
 		order.setWorkShift(5l);
 		orderDao.add(order);
@@ -73,13 +70,11 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 	public void testOneToManyOrderSuborders(){
 		int size = orderDao.list().size();
 		Order order = new Order();
-		DinnerTable table = new DinnerTable();
 		
 		order.addSuborder(new Suborder(1));
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
 		order.addSuborder(new Suborder(5));
-		order.setTable(table);
 		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
@@ -88,7 +83,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		
 		assertTrue (size < orderDao.list().size());
 		Order orFromDB = orderDao.find(order.getId());
-//		assertEquals(8, orFromDB.getTable());
 		assertEquals(4, orFromDB.getSuborders().size());
 	}
 	
@@ -96,13 +90,11 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 	public void tsetCountOfsubordersInOrder(){
 		int size = orderDao.list().size();
 		Order order = new Order();
-		DinnerTable table = new DinnerTable();
 		
 		order.addSuborder(new Suborder(1));
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
 		order.addSuborder(new Suborder(4));
-		order.setTable(table);
 		order.setAuthor("adminic");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
@@ -116,9 +108,7 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 	public void tsetCountOfsubordersInOrderIsZero(){
 		int size = orderDao.list().size();
 		Order order = new Order();
-		DinnerTable table = new DinnerTable();
 		
-		order.setTable(table);
 		order.setAuthor("adminic");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
@@ -136,11 +126,9 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 	public void testCloseDeteOfOrder(){
 		int size = orderDao.list().size();
 		Order order = new Order();
-		DinnerTable table = new DinnerTable();
 		
 		Date closeDate = Helper.stringToDate("22/01/2013");
 		order.setCloseDate(closeDate);
-		order.setTable(table);
 		order.setAuthor("admin");
 		order.setPayed(BigDecimal.valueOf(13.51));
 		order.setWorkShift(5l);
