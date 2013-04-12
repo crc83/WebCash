@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-public class TableTest {
+public class DinnerTableTest {
 
 	@Test
 	public void testGetBottom(){
-		TablesHall table = new TablesHall();
+		DinnerTable table = new DinnerTable();
 		table.setTop(42);
 		table.setHeight(37);
 		assertEquals(42+37, table.getBottom());
@@ -16,7 +16,7 @@ public class TableTest {
 	
 	@Test
 	public void testGetRight(){
-		TablesHall table = new TablesHall();
+		DinnerTable table = new DinnerTable();
 		table.setLeft(31);
 		table.setWidth(88);
 		assertEquals(31+88, table.getRight());

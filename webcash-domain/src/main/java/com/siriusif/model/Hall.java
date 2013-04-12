@@ -30,13 +30,13 @@ public class Hall {
 	 * list of tables
 	 */
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "hall")
-	private List<TablesHall> tables;
+	private List<DinnerTable> tables;
 	
 	public Hall(){
-		tables = new ArrayList<TablesHall>();
+		tables = new ArrayList<DinnerTable>();
 	}
 	
-	public void addTable(TablesHall table) {
+	public void addTable(DinnerTable table) {
 		table.setHall(this);
 		tables.add(table);
 	}
@@ -56,12 +56,12 @@ public class Hall {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<TablesHall> getTables() {
+	public List<DinnerTable> getTables() {
 		return tables;
 	}
-	public void setTables(List<TablesHall> tables) {
+	public void setTables(List<DinnerTable> tables) {
 		this.tables = tables;
-		for (TablesHall table : tables){
+		for (DinnerTable table : tables){
 			table.setHall(this);
 		}
 	}
