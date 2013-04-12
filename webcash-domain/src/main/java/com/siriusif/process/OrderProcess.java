@@ -24,11 +24,16 @@ public class OrderProcess {
 	@Autowired
 	private DinnerTableDao tableDao;
 	
+	/**
+	 * @param idTable
+	 * @return new Order with one Suborder
+	 */
 	public Order newOrder(Long idTable) {
 		DinnerTable table = tableDao.find(idTable);
 		Order newOrder = new Order();
 		Date workingDate = new Date(); 
 		newOrder.setOpenDate(workingDate);
+//		TODO "admin" change to current user
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
@@ -40,6 +45,10 @@ public class OrderProcess {
 		return newOrder;
 	}
 	
+	/**
+	 * @param orderId
+	 * @return new suborder add in open order and doesn't create new Order
+	 */
 	public Order addSuborder(Long orderId) {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
@@ -52,12 +61,17 @@ public class OrderProcess {
 		return order;
 	}
 	
-	public Order closeOrder(Long orderId, BigDecimal payed){
+	/**
+	 * @param orderId
+	 * @param paid
+	 * @return closing of open order
+	 */
+	public Order closeOrder(Long orderId, BigDecimal paid){
 		Order closeOrder = orderDao.find(orderId);
 		Date closeDate = new Date();
 		closeOrder.setCloseDate(closeDate);
 		closeOrder.setStatus(Order.STATUS_CLOSE_DATA);
-		closeOrder.setPayed(payed);
+		closeOrder.setPayed(paid);
 		
 		orderDao.update(closeOrder);
 		return closeOrder;

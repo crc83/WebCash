@@ -36,6 +36,13 @@ public class OrderProcessTest extends AbstractSpringTest {
 		MockitoAnnotations.initMocks(this);
 	}
 
+	/**
+	 * When: new Order created
+	 * Than: new Order not null;
+	 * 		 today's date equals date of new Order;
+	 * 		 total of order equals 0;
+	 * 		 new Order has only one Suborder
+	 */
 	@Test
 	public void testNewOrder() {
 		Order newOrder = orderProcess.newOrder(1l);
@@ -44,7 +51,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 	
 		verify(orderDao).add(newOrder);
 		
-		assertNotNull("New order not null",newOrder);
+		assertNotNull("New order not null", newOrder);
 		assertEquals(Helper.dateOnly(today), 
 				Helper.dateOnly(newOrder.getOpenDate()));
 		
@@ -52,6 +59,10 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertEquals("We need at least one suborder in new order" ,1, newOrder.getSuborders().size());		
 	}
 	
+	/**
+	 * When: stub conutDailyId 42
+	 * Than: DailyId of new Order return 43
+	 */
 	@Test
 	public void testNewOrderWithCorrectDailyId() {
 		//42
@@ -61,6 +72,10 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertEquals(43,newOrder.getDailyId());
 	}
 	
+	/**
+	 * When: current user add in Order
+	 * Than: current user equals user of new Order
+	 */
 	@Test
 	public void testAuthorForOrder(){
 		Order newOrder = orderProcess.newOrder(1l);
@@ -69,6 +84,10 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertEquals("admin", newOrder.getAuthor());
 	}
 	
+	/**
+	 * When: new Suborder add in Order
+	 * Than: Suborder add in open order and order only update
+	 */
 	@Test
 	public void testAddNewSuborder(){
 		Order order = new Order();
@@ -76,9 +95,13 @@ public class OrderProcessTest extends AbstractSpringTest {
 		order = orderProcess.addSuborder(1l);
 		
 		verify(orderDao).update(order);
-		assertNotNull("New Suborder not null",order);
+		assertNotNull("New Suborder not null" ,order);
 	}
 	
+	/**
+	 * When: Order to close
+	 * Than: Order status is close
+	 */
 	@Test
 	public void testCloseOrder(){
 		Order order = new Order();
@@ -88,6 +111,10 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertEquals(Order.STATUS_CLOSE_DATA, closeOrder.getStatus());
 	}
 	
+	/**
+	 * When: Table set in order
+	 * Than: Table is not null in Order
+	 */
 	@Test
 	public void testIfFindTableId(){
 		DinnerTable table = new DinnerTable();
