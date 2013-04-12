@@ -47,14 +47,15 @@ public class OrdersListBean {
 		String tableIdStr = request.getParameter("table");
 		redirectTo(urlToNewOrderIfNoOrdersForTable(tableIdStr));
 	}
-
+//  TODO SB: Javadoc add here
+//	TODO SB: return "I can't create new order"
 	public String urlToNewOrderIfNoOrdersForTable(String tableIdStr) {
 		String redirectTo ="";
 		LOGGER.info("Recieved table id :" + tableIdStr);
 		tableId = Long.parseLong(tableIdStr);
 		//Here is rule to open new order immediately
 		if (orderDao.countOpenedForTableId(tableId) < 1) {
-			Order order = orderProcess.newOrder();
+			Order order = orderProcess.newOrder(tableId);
 			if (order != null) {
 				// since order list and order are at the same level in /pages
 				redirectTo = "order.jsf?order_id=" + order.getId();
