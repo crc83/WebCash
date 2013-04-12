@@ -49,20 +49,17 @@ public class DinnerTableDaoImplTest extends AbstractSpringTest {
 		Order order = new Order(); 
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		table.setName("table");
 		table.addOrder(order);
 		
 		Order order2 = new Order();
 		order2.setAuthor("sonya");
 		order2.setPaid(money(15.55));
-		order2.setWorkShift(5l);
 		table.addOrder(order2);
 		
 		Order order3 = new Order();
 		order3.setAuthor("sanya");
 		order3.setPaid(money(25.51));
-		order3.setWorkShift(5l);
 		table.addOrder(order3);
 		
 		tablesDao.add(table);

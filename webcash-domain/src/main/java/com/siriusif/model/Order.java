@@ -18,6 +18,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 /**
  * Order Entity CREATE TABLE "Orders" ( "id" INT NOT NULL, "date" DATETIME NOT
@@ -60,7 +61,6 @@ public class Order {
 	@ManyToOne
 	@JoinColumn(name = "`table_id`")
 	private DinnerTable table;
-	// private String originalAutor;??????
 	
 	/**
 	 * order was printed on a fiscal printer
@@ -81,8 +81,8 @@ public class Order {
 	@Temporal(TemporalType.DATE)
 	private Date workingDate;
 
-	@Column(name = "`workshift`", nullable = true)
-	private Long workShift;
+	@Transient
+	private Workshift workShift;
 	
 	@Column(name = "`nomeroc`", nullable = true)
 	private int nomerok;
@@ -116,7 +116,7 @@ public class Order {
 	}
 
 	public boolean isValid() {
-		if (table != null && author != null && workShift > 0) {
+		if (table != null && author != null && workShift != null) {
 			return true;
 		} else {
 			return false;
@@ -215,11 +215,11 @@ public class Order {
 		this.workingDate = workingDate;
 	}
 
-	public Long getWorkShift() {
+	public Workshift getWorkShift() {
 		return workShift;
 	}
 
-	public void setWorkShift(Long workShift) {
+	public void setWorkShift(Workshift workShift) {
 		this.workShift = workShift;
 	}
 

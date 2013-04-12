@@ -37,7 +37,7 @@ public class OrderProcess {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-		newOrder.setWorkShift(5l);
+//		newOrder.setWorkShift(5l);
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 		

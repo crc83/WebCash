@@ -35,7 +35,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setPaid(money(13.51));
 		order.setReadOnly(true);
 		order.setType(false);
-		order.setWorkShift(5l);
 		orderDao.add(order);
 		
 		assertTrue (size < orderDao.list().size());
@@ -50,7 +49,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		Order order = new Order();
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		orderDao.add(order);
 		Date workingDate = Helper.stringToDate("22/01/2013");
 		order.setWorkingDate(workingDate);
@@ -71,7 +69,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		Order order = new Order();
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
@@ -93,7 +90,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.addSuborder(new Suborder(5));
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
@@ -117,7 +113,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.addSuborder(new Suborder(4));
 		order.setAuthor("adminic");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
@@ -135,7 +130,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		
 		order.setAuthor("adminic");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
@@ -155,7 +149,6 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setCloseDate(closeDate);
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
-		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
