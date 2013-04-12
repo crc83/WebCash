@@ -15,13 +15,18 @@ import org.mockito.MockitoAnnotations;
 
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
+import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.OrderDao;
 
 public class OrderProcessTest extends AbstractSpringTest {
 	
 	@Mock
 	private OrderDao orderDao;
+	
+	@Mock
+	private DinnerTableDao tableDao;
 	
 	@InjectMocks
 	private OrderProcess orderProcess; 
@@ -33,12 +38,10 @@ public class OrderProcessTest extends AbstractSpringTest {
 
 	@Test
 	public void testNewOrder() {
-		Order newOrder = orderProcess.newOrder();
+		Order newOrder = orderProcess.newOrder(1l);
 		
 		Date today = new Date();
 	
-//		Order order = orderDao.find(newOrder.getId());
-		
 		verify(orderDao).add(newOrder);
 		
 		assertNotNull("New order not null",newOrder);
@@ -54,13 +57,13 @@ public class OrderProcessTest extends AbstractSpringTest {
 		//42
 		stub(orderDao.conutDailyId(any(Date.class))).toReturn(42);
 		
-		Order newOrder = orderProcess.newOrder();
+		Order newOrder = orderProcess.newOrder(1l);
 		assertEquals(43,newOrder.getDailyId());
 	}
 	
 	@Test
 	public void testAuthorForOrder(){
-		Order newOrder = orderProcess.newOrder();
+		Order newOrder = orderProcess.newOrder(1l);
 		
 //		TODO "admin" change to current user
 		assertEquals("admin", newOrder.getAuthor());
@@ -83,6 +86,18 @@ public class OrderProcessTest extends AbstractSpringTest {
 		Order closeOrder = orderProcess.closeOrder(order.getId(), money(10.00));
 		
 		assertEquals(Order.STATUS_CLOSE_DATA, closeOrder.getStatus());
+	}
+	
+	@Test
+	public void testIfFindTableId(){
+		DinnerTable table = new DinnerTable();
+		table.setName("Tim");
+		stub(tableDao.find(any(Long.class))).toReturn(table);
+		Order newOrder = orderProcess.newOrder(1l);
+		
+		assertNotNull(newOrder.getTable());
+		assertEquals("Tim", newOrder.getTable().getName());
+//		TODO equals if tableId correctly 
 	}
 
 }
