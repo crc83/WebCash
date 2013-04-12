@@ -90,8 +90,8 @@ public class Order {
 	/**
 	 * money from client
 	 */
-	@Column(name = "payed", nullable = true, precision = 16, scale = 2)
-	private BigDecimal payed;
+	@Column(name = "paid", nullable = true, precision = 16, scale = 2)
+	private BigDecimal paid;
 
 	/**
 	 * paid with credit card
@@ -124,7 +124,7 @@ public class Order {
 	}
 
 	public boolean isValidForClose() {
-		if (payed.compareTo(getTotal()) >= 0) {
+		if (paid.compareTo(getTotal()) >= 0) {
 			return true;
 		} else {
 			return false;
@@ -231,12 +231,12 @@ public class Order {
 		this.nomerok = nomerok;
 	}
 
-	public BigDecimal getPayed() {
-		return payed;
+	public BigDecimal getPaid() {
+		return paid;
 	}
 
-	public void setPayed(BigDecimal payed) {
-		this.payed = payed;
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
 	}
 
 	public boolean isCard() {

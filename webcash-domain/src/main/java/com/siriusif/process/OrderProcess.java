@@ -71,7 +71,7 @@ public class OrderProcess {
 		Date closeDate = new Date();
 		closeOrder.setCloseDate(closeDate);
 		closeOrder.setStatus(Order.STATUS_CLOSE_DATA);
-		closeOrder.setPayed(paid);
+		closeOrder.setPaid(paid);
 		
 		orderDao.update(closeOrder);
 		return closeOrder;

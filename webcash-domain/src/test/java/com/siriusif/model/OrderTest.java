@@ -25,7 +25,7 @@ public class OrderTest {
 //		when will be load from JSON change this test
 		Order order = new Order();
 
-		order.setPayed(money(10.00));
+		order.setPaid(money(10.00));
 
 		assertTrue(order.isValidForClose());
 	}
@@ -70,7 +70,7 @@ public class OrderTest {
 		third.addSale(buildSaleOld("Кава Еспрессо", 0.040, 9.00));
 		third.addSale(buildSaleOld("Штрудель", 0.150, 14.00));
 		order.addSuborder(third);
-		order.setPayed(money(28.00));
+		order.setPaid(money(28.00));
 
 		assertTrue(order.getTotal().equals(money(27.92)));
 		// TODO this test move to testIsValidforClose()

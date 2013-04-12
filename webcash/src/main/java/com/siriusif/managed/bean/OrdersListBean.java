@@ -46,7 +46,8 @@ public class OrdersListBean {
 		tableId = Long.parseLong(value);
 		if(skipAndOpenNewOrder()) {
 			try {
-				Order order = orderProcess.newOrder();
+//				TODO newOrder(1l) change to tableId
+				Order order = orderProcess.newOrder(1l);
 				//since order list and order are at the same level in /pages
 				FacesContext.getCurrentInstance().getExternalContext().redirect("order.jsf?order_id="+order.getId());
 			} catch (IOException e) {
