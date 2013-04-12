@@ -41,6 +41,10 @@ public class DinnerTableDaoImplTest extends AbstractSpringTest {
 		assertEquals(321, tableFromDB.getWidth());
 	}
 	
+	/**
+	 * When: 3 Orders add in Table
+	 * That: List of Order in Table is 3
+	 */
 	@Test
 	public void testManyToOneTableOrders(){
 		int size = tablesDao.list().size();

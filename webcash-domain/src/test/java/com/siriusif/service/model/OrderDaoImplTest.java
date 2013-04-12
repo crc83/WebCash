@@ -13,19 +13,18 @@ import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
 import static com.siriusif.model.helpers.SaleBuiledr.money;
 
-public class OrderDaoImplTest extends AbstractSpringTest{
-	
+public class OrderDaoImplTest extends AbstractSpringTest {
+
 	@Autowired
 	private OrderDao orderDao;
 
 	/**
-	 * When: add order
-	 * Than: list of orders in DB increase
+	 * When: add order Than: list of orders in DB increase
 	 */
 	@Test
 	public void testAdd() {
 		int size = orderDao.list().size();
-		
+
 		Order order = new Order();
 		order.setAuthor("admin");
 		order.setCard(true);
@@ -36,13 +35,12 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setReadOnly(true);
 		order.setType(false);
 		orderDao.add(order);
-		
-		assertTrue (size < orderDao.list().size());
+
+		assertTrue(size < orderDao.list().size());
 	}
-	
+
 	/**
-	 * When: add static working Date
-	 * Than: working Date of order find in DB
+	 * When: add static working Date Than: working Date of order find in DB
 	 */
 	@Test
 	public void testAddWorkshiftDate() {
@@ -53,37 +51,35 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		Date workingDate = Helper.stringToDate("22/01/2013");
 		order.setWorkingDate(workingDate);
 		orderDao.update(order);
-		
+
 		Order orFromDB = orderDao.find(order.getId());
 		assertEquals(workingDate, orFromDB.getWorkingDate());
 	}
-	
+
 	/**
-	 * When: add money in paid
-	 * Than: money add correctly in order
+	 * When: add money in paid Than: money add correctly in order
 	 */
 	@Test
-	public void testSetSumma(){
+	public void testSetSumma() {
 		int size = orderDao.list().size();
-		
+
 		Order order = new Order();
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
 		order.setDailyId(size);
 		orderDao.add(order);
-		
-		assertTrue (size < orderDao.list().size());
+
+		assertTrue(size < orderDao.list().size());
 	}
-	
+
 	/**
-	 * When: 4 Suborders add in order
-	 * Than: 4 Suborders find in DB by Order Id
+	 * When: 4 Suborders add in order Than: 4 Suborders find in DB by Order Id
 	 */
 	@Test
-	public void testOneToManyOrderSuborders(){
+	public void testOneToManyOrderSuborders() {
 		int size = orderDao.list().size();
 		Order order = new Order();
-		
+
 		order.addSuborder(new Suborder(1));
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
@@ -92,21 +88,20 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setPaid(money(13.51));
 		order.setDailyId(size);
 		orderDao.add(order);
-		
-		assertTrue (size < orderDao.list().size());
+
+		assertTrue(size < orderDao.list().size());
 		Order orFromDB = orderDao.find(order.getId());
 		assertEquals(4, orFromDB.getSuborders().size());
 	}
-	
+
 	/**
-	 * When: 4 Suborders add in Order
-	 * Than: count of Suborders in Order 4
+	 * When: 4 Suborders add in Order Than: count of Suborders in Order 4
 	 */
 	@Test
-	public void tsetCountOfsubordersInOrder(){
+	public void tsetCountOfsubordersInOrder() {
 		int size = orderDao.list().size();
 		Order order = new Order();
-		
+
 		order.addSuborder(new Suborder(1));
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
@@ -115,46 +110,44 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setPaid(money(13.51));
 		order.setDailyId(size);
 		orderDao.add(order);
-		
+
 		assertEquals(4, orderDao.countOfSuborders(order.getId()));
 	}
-	
+
 	/**
-	 * When: Suborder doesn't add in Order
-	 * Than: count of Suborders in Order 0
+	 * When: Suborder doesn't add in Order Than: count of Suborders in Order 0
 	 */
 	@Test
-	public void tsetCountOfsubordersInOrderIsZero(){
+	public void tsetCountOfsubordersInOrderIsZero() {
 		int size = orderDao.list().size();
 		Order order = new Order();
-		
+
 		order.setAuthor("adminic");
 		order.setPaid(money(13.51));
 		order.setDailyId(size);
 		orderDao.add(order);
-		
+
 		assertEquals(0, orderDao.countOfSuborders(order.getId()));
 	}
-	
+
 	/**
-	 * When: updating of order 
-	 * Than: open date doesn't update and set close date
+	 * When: updating of order Than: open date doesn't update and set close date
 	 */
 	@Test
-	public void testCloseDeteOfOrder(){
+	public void testCloseDeteOfOrder() {
 		int size = orderDao.list().size();
 		Order order = new Order();
-		
+
 		Date closeDate = Helper.stringToDate("22/01/2013");
 		order.setCloseDate(closeDate);
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
 		order.setDailyId(size);
 		orderDao.add(order);
-		
+
 		assertNull(order.getOpenDate());
 		orderDao.update(order);
-		
+
 		Order orFromDb = orderDao.find(order.getId());
 		assertEquals(closeDate, orFromDb.getCloseDate());
 	}
