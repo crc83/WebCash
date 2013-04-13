@@ -46,7 +46,7 @@ public class OrdersListBeanTest {
 	 */
 	@Test
 	public void testIfCreationOfOrderFails() {
-		stub(mockedOrderProcess.newOrder()).toReturn(null);
+		stub(mockedOrderProcess.newOrder(1l)).toReturn(null);
 		assertEquals("", ordersList.urlToNewOrderIfNoOrdersForTable("32"));
 	}
 	
@@ -59,7 +59,7 @@ public class OrdersListBeanTest {
 	public void testIfThereAreNoOrders() {
 		Order order = new Order();
 		order.setId(13l);
-		stub(mockedOrderProcess.newOrder()).toReturn(order);
+		stub(mockedOrderProcess.newOrder(any(Long.class))).toReturn(order);
 		stub(mockedOrderDao.countOpenedForTableId(32)).toReturn(0);
 		assertEquals("order.jsf?order_id=13", ordersList.urlToNewOrderIfNoOrdersForTable("32"));
 	}

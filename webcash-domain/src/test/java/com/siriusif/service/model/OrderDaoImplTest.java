@@ -2,7 +2,6 @@ package com.siriusif.service.model;
 
 import static org.junit.Assert.*;
 
-import java.math.BigDecimal;
 import java.util.Date;
 
 import org.junit.Test;
@@ -12,12 +11,17 @@ import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
+import static com.siriusif.model.helpers.SaleBuiledr.money;
 
 public class OrderDaoImplTest extends AbstractSpringTest{
 	
 	@Autowired
 	private OrderDao orderDao;
 
+	/**
+	 * When: add order
+	 * Than: list of orders in DB increase
+	 */
 	@Test
 	public void testAdd() {
 		int size = orderDao.list().size();
@@ -28,9 +32,8 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.setDailyId(size);
 		order.setDiscount(5);
 		order.setNomerok(2);
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setReadOnly(true);
-		order.setTableNum(5);
 		order.setType(false);
 		order.setWorkShift(5l);
 		orderDao.add(order);
@@ -38,11 +41,15 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		assertTrue (size < orderDao.list().size());
 	}
 	
+	/**
+	 * When: add static working Date
+	 * Than: working Date of order find in DB
+	 */
 	@Test
 	public void testAddWorkshiftDate() {
 		Order order = new Order();
 		order.setAuthor("admin");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		orderDao.add(order);
 		Date workingDate = Helper.stringToDate("22/01/2013");
@@ -53,13 +60,17 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		assertEquals(workingDate, orFromDB.getWorkingDate());
 	}
 	
+	/**
+	 * When: add money in paid
+	 * Than: money add correctly in order
+	 */
 	@Test
 	public void testSetSumma(){
 		int size = orderDao.list().size();
 		
 		Order order = new Order();
 		order.setAuthor("admin");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
@@ -67,6 +78,10 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		assertTrue (size < orderDao.list().size());
 	}
 	
+	/**
+	 * When: 4 Suborders add in order
+	 * Than: 4 Suborders find in DB by Order Id
+	 */
 	@Test
 	public void testOneToManyOrderSuborders(){
 		int size = orderDao.list().size();
@@ -76,19 +91,21 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
 		order.addSuborder(new Suborder(5));
-		order.setTableNum(8);
 		order.setAuthor("admin");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
 		
 		assertTrue (size < orderDao.list().size());
 		Order orFromDB = orderDao.find(order.getId());
-		assertEquals(8, orFromDB.getTableNum());
 		assertEquals(4, orFromDB.getSuborders().size());
 	}
 	
+	/**
+	 * When: 4 Suborders add in Order
+	 * Than: count of Suborders in Order 4
+	 */
 	@Test
 	public void tsetCountOfsubordersInOrder(){
 		int size = orderDao.list().size();
@@ -98,9 +115,8 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		order.addSuborder(new Suborder(2));
 		order.addSuborder(new Suborder(3));
 		order.addSuborder(new Suborder(4));
-		order.setTableNum(8);
 		order.setAuthor("adminic");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
@@ -108,14 +124,17 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		assertEquals(4, orderDao.countOfSuborders(order.getId()));
 	}
 	
+	/**
+	 * When: Suborder doesn't add in Order
+	 * Than: count of Suborders in Order 0
+	 */
 	@Test
 	public void tsetCountOfsubordersInOrderIsZero(){
 		int size = orderDao.list().size();
 		Order order = new Order();
 		
-		order.setTableNum(8);
 		order.setAuthor("adminic");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);
@@ -134,9 +153,8 @@ public class OrderDaoImplTest extends AbstractSpringTest{
 		
 		Date closeDate = Helper.stringToDate("22/01/2013");
 		order.setCloseDate(closeDate);
-		order.setTableNum(8);
 		order.setAuthor("admin");
-		order.setPayed(BigDecimal.valueOf(13.51));
+		order.setPaid(money(13.51));
 		order.setWorkShift(5l);
 		order.setDailyId(size);
 		orderDao.add(order);

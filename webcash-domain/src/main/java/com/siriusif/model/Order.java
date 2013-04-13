@@ -12,6 +12,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -31,6 +33,7 @@ public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
+
 	
 	/**
 	 * date and time of order creation
@@ -52,13 +55,12 @@ public class Order {
 	@Column(name = "`discount`", nullable = true)
 	private int discount;
 	
-//	private int status; ENUM
+	// private int status; ENUM
 	
-	/**
-	 * number of table
-	 */
-	@Column(name = "`tableNum`", nullable = true)
-	private int tableNum;
+	@ManyToOne
+	@JoinColumn(name = "`table_id`")
+	private DinnerTable table;
+	// private String originalAutor;??????
 	
 	/**
 	 * order was printed on a fiscal printer
@@ -78,7 +80,7 @@ public class Order {
 	@Column(name = "`workingDate`", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
 	private Date workingDate;
-	
+
 	@Column(name = "`workshift`", nullable = true)
 	private Long workShift;
 	
@@ -88,8 +90,8 @@ public class Order {
 	/**
 	 * money from client
 	 */
-	@Column(name="`payed`", nullable = true, precision=16, scale=2)
-	private BigDecimal payed;
+	@Column(name = "`paid`", nullable = true, precision = 16, scale = 2)
+	private BigDecimal paid;
 	
 	/**
 	 * paid with credit card
@@ -103,7 +105,7 @@ public class Order {
 	@Column(name = "`daylyId`", nullable = false)
 	private int dailyId;
 	
-	@Column(name = "status", nullable = false)
+	@Column(name = "`status`", nullable = false)
 	private int status;
 
 	@OneToMany(cascade=CascadeType.ALL, fetch=FetchType.LAZY, mappedBy = "order")
@@ -114,7 +116,7 @@ public class Order {
 	}
 
 	public boolean isValid() {
-		if (tableNum > 0 && author != null && workShift > 0) {
+		if (table != null && author != null && workShift > 0) {
 			return true;
 		} else {
 			return false;
@@ -122,7 +124,7 @@ public class Order {
 	}
 
 	public boolean isValidForClose() {
-		if (payed.compareTo(getTotal()) >= 0) {
+		if (paid.compareTo(getTotal()) >= 0) {
 			return true;
 		} else {
 			return false;
@@ -181,12 +183,12 @@ public class Order {
 		this.discount = discount;
 	}
 
-	public int getTableNum() {
-		return tableNum;
+	public DinnerTable getTable() {
+		return table;
 	}
 
-	public void setTableNum(int tableNum) {
-		this.tableNum = tableNum;
+	public void setTable(DinnerTable table) {
+		this.table = table;
 	}
 
 	public boolean isReadOnly() {
@@ -229,12 +231,12 @@ public class Order {
 		this.nomerok = nomerok;
 	}
 
-	public BigDecimal getPayed() {
-		return payed;
+	public BigDecimal getPaid() {
+		return paid;
 	}
 
-	public void setPayed(BigDecimal payed) {
-		this.payed = payed;
+	public void setPaid(BigDecimal paid) {
+		this.paid = paid;
 	}
 
 	public boolean isCard() {
