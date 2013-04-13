@@ -63,9 +63,8 @@
 	</beans>
 
 	<beans profile="dev">
-		<context:property-placeholder location="classpath:/database.properties"/>
+		<context:property-placeholder location="classpath:/dev-database.properties"/>
 	</beans>
-	
 	
 	<beans profile="!dev, !test">
 		<context:property-placeholder

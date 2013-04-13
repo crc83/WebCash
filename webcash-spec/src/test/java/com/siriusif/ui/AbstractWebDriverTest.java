@@ -131,4 +131,12 @@ public class AbstractWebDriverTest {
 		// +1 to include this method in depth
 		return stackTraceElements[correctedDepth];
 	}
+	
+	public void doLoginAsAdmin() {
+		browser.findElement(By.id("loginForm:username")).clear();
+		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:password")).clear();
+		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:loginButton")).click();
+	}
 }
