@@ -62,7 +62,7 @@ public class AbstractWebDriverTest {
 	
 	@After
 	public void closeBrowser(){
-		//browser.quit();
+		browser.quit();
 	}
 	
 	/**
