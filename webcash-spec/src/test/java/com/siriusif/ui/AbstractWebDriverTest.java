@@ -62,7 +62,7 @@ public class AbstractWebDriverTest {
 	
 	@After
 	public void closeBrowser(){
-		browser.quit();
+		//browser.quit();
 	}
 	
 	/**
@@ -130,5 +130,13 @@ public class AbstractWebDriverTest {
 		int correctedDepth = Math.min(stackTraceElements.length, depth + 1);
 		// +1 to include this method in depth
 		return stackTraceElements[correctedDepth];
+	}
+	
+	public void doLoginAsAdmin() {
+		browser.findElement(By.id("loginForm:username")).clear();
+		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:password")).clear();
+		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
+		browser.findElement(By.id("loginForm:loginButton")).click();
 	}
 }

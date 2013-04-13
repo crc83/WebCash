@@ -2,9 +2,6 @@ package com.siriusif.security;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
-
-import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
