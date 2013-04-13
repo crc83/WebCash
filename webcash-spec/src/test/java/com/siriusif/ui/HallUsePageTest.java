@@ -20,12 +20,10 @@ public class HallUsePageTest extends AbstractWebDriverTest{
 	public void testOpenHallUse() {
 		get("");
 		assertTrue(isNoFatalErrors());
-		browser.findElement(By.id("loginForm:username")).clear();
-		browser.findElement(By.id("loginForm:username")).sendKeys("admin");
-		browser.findElement(By.id("loginForm:password")).clear();
-		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
-		browser.findElement(By.id("loginForm:loginButton")).click();
+		doLoginAsAdmin();
 		System.out.println(browser.getCurrentUrl());
 	}
+
+
 
 }
