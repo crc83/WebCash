@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.siriusif.model.Workshift;
+import com.siriusif.proces.model.WorkshiftInterface;
 import com.siriusif.service.model.WorkshiftDao;
 
 /**
@@ -20,7 +21,7 @@ import com.siriusif.service.model.WorkshiftDao;
  * - closeWorkshift
  */
 @Component
-public class WorkshiftProcess {
+public class WorkshiftProcess implements WorkshiftInterface {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(WorkshiftProcess.class);
 	
@@ -93,6 +94,12 @@ public class WorkshiftProcess {
 		} else {
 			LOGGER.warn("closeWorkshift: workshift is null");
 		}
+	}
+
+	public Workshift getOpenWorkshiftNow() {
+		// TODO SB: Correct open workshift now
+		Workshift workshift = new Workshift();
+		return workshift;
 	}
 	
 }
