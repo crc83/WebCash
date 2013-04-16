@@ -16,7 +16,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.siriusif.model.Order;
-import com.siriusif.process.OrderProcess;
+import com.siriusif.process.impl.OrderProcessImpl;
 import com.siriusif.service.model.OrderDao;
 
 @ManagedBean(name = "ordersList")
@@ -35,7 +35,7 @@ public class OrdersListBean {
 	private OrderDao orderDao;
 
 	@ManagedProperty(value = "#{orderProcess}")
-	private OrderProcess orderProcess;
+	private OrderProcessImpl orderProcess;
 
 	@PostConstruct
 	public void init() {
@@ -115,11 +115,11 @@ public class OrdersListBean {
 		this.orderDao = orderDao;
 	}
 
-	public OrderProcess getOrderProcess() {
+	public OrderProcessImpl getOrderProcess() {
 		return orderProcess;
 	}
 
-	public void setOrderProcess(OrderProcess orderProcess) {
+	public void setOrderProcess(OrderProcessImpl orderProcess) {
 		this.orderProcess = orderProcess;
 	}
 
