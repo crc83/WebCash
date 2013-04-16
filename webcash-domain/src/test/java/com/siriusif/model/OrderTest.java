@@ -12,9 +12,10 @@ public class OrderTest {
 	public void testValidationOrder() {
 		Order order = new Order();
 		DinnerTable table = new DinnerTable();
+		Workshift workshift = new Workshift();
 
 		order.setAuthor("User");
-		order.setWorkShift(5l);
+		order.setWorkShift(workshift);
 		order.setTable(table);
 
 		assertTrue(order.isValid());
