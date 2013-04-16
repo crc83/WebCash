@@ -98,8 +98,8 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 
 	public Workshift getOpenWorkshiftNow() {
 		// TODO SB: Correct open workshift now
-		Workshift workshift = new Workshift();
-		return workshift;
+//		Workshift workshift = new Workshift();
+		return null;
 	}
 	
 }

@@ -58,6 +58,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 		verify(orderDao).add(newOrder);
 		
 		assertNotNull("New order not null", newOrder);
+		assertNotNull("WorkShift not null", newOrder.getWorkShift());
 		assertEquals(Helper.dateOnly(today), 
 				Helper.dateOnly(newOrder.getOpenDate()));
 		
