@@ -1,4 +1,4 @@
-package com.siriusif.process;
+package com.siriusif.process.impl;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -10,14 +10,14 @@ import org.springframework.stereotype.Component;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
-import com.siriusif.proces.model.WorkshiftInterface;
+import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.OrderDao;
 
 @Component
-public class OrderProcess {
+public class OrderProcessImpl {
 	
-	private static Logger LOGGER = Logger.getLogger(OrderProcess.class);
+	private static Logger LOGGER = Logger.getLogger(OrderProcessImpl.class);
 	
 	@Autowired
 	private OrderDao orderDao;
@@ -26,7 +26,7 @@ public class OrderProcess {
 	private DinnerTableDao tableDao;
 	
 	@Autowired
-	private WorkshiftInterface workshiftInterface;
+	private WorkshiftProcess workshiftProcess;
 	
 	/**
 	 * @param idTable
@@ -41,7 +41,7 @@ public class OrderProcess {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-		newOrder.setWorkShift(workshiftInterface.getOpenWorkshiftNow());
+		newOrder.setWorkShift(workshiftProcess.getOpenWorkshiftNow());
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 		
