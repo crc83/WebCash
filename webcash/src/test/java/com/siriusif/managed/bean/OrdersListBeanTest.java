@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.siriusif.model.Order;
-import com.siriusif.process.OrderProcess;
+import com.siriusif.process.impl.OrderProcessImpl;
 import com.siriusif.service.model.OrderDao;
 import static org.mockito.Mockito.*;
 
@@ -17,12 +17,12 @@ public class OrdersListBeanTest {
 	
 	private OrdersListBean ordersList = new OrdersListBean();
 	private OrderDao mockedOrderDao;
-	private OrderProcess mockedOrderProcess;
+	private OrderProcessImpl mockedOrderProcess;
 
 	@Before
 	public void setUp() throws Exception {
 		mockedOrderDao = mock(OrderDao.class);
-		mockedOrderProcess = mock(OrderProcess.class);
+		mockedOrderProcess = mock(OrderProcessImpl.class);
 		ordersList.setOrderDao(mockedOrderDao);
 		ordersList.setOrderProcess(mockedOrderProcess);
 	}

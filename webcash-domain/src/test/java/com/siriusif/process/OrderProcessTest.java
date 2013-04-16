@@ -17,6 +17,8 @@ import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
+import com.siriusif.model.Workshift;
+import com.siriusif.process.impl.OrderProcessImpl;
 import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.OrderDao;
 
@@ -28,8 +30,11 @@ public class OrderProcessTest extends AbstractSpringTest {
 	@Mock
 	private DinnerTableDao tableDao;
 	
+	@Mock
+	private WorkshiftProcess workshiftProcess;
+	
 	@InjectMocks
-	private OrderProcess orderProcess; 
+	private OrderProcessImpl orderProcess; 
 	
 	@Before
 	public void setUp() {
@@ -45,6 +50,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 	 */
 	@Test
 	public void testNewOrder() {
+		stub(workshiftProcess.getOpenWorkshiftNow()).toReturn(new Workshift());
 		Order newOrder = orderProcess.newOrder(1l);
 		
 		Date today = new Date();
@@ -52,6 +58,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 		verify(orderDao).add(newOrder);
 		
 		assertNotNull("New order not null", newOrder);
+		assertNotNull("WorkShift not null", newOrder.getWorkShift());
 		assertEquals(Helper.dateOnly(today), 
 				Helper.dateOnly(newOrder.getOpenDate()));
 		

@@ -1,5 +1,6 @@
 package com.siriusif.service.model;
 
+import static com.siriusif.model.helpers.SaleBuiledr.money;
 import static org.junit.Assert.*;
 
 import java.io.UnsupportedEncodingException;
@@ -14,6 +15,7 @@ import com.google.gson.JsonIOException;
 import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
+import com.siriusif.model.Order;
 import com.siriusif.model.Workshift;
 
 public class WorkshiftDaoImplTest extends AbstractSpringTest{
@@ -122,5 +124,37 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 			workshiftDao.update(workshift);
 		}
 		assertEquals(5, workshiftDao.countForDate(now));
+	}
+	
+	/**
+	 * When: 3 Orders add in workshift
+	 * Than: List of Orders in Workshift is 3
+	 */
+	@Test
+	public void testOneToManyWrkshiftOrders(){
+		int size = workshiftDao.list().size();
+		Workshift workshift = new Workshift();
+
+		Order order = new Order(); 
+		order.setAuthor("admin");
+		order.setPaid(money(13.51));
+		workshift.addOrder(order);
+		
+		Order order2 = new Order();
+		order2.setAuthor("sonya");
+		order2.setPaid(money(15.55));
+		workshift.addOrder(order2);
+		
+		Order order3 = new Order();
+		order3.setAuthor("sanya");
+		order3.setPaid(money(25.51));
+		workshift.addOrder(order3);
+		
+		workshiftDao.add(workshift);
+		
+		assertTrue(size < workshiftDao.list().size());
+		Workshift workshiftFromDB = workshiftDao.find(workshift.getId());
+		assertEquals(3, workshiftFromDB.getOrders().size());
+		assertEquals("sonya", workshiftFromDB.getOrders().get(1).getAuthor());
 	}
 }

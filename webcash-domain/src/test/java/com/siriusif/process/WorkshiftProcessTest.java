@@ -17,6 +17,7 @@ import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Workshift;
+import com.siriusif.process.impl.WorkshiftProcessImpl;
 import com.siriusif.service.model.WorkshiftDao;
 
 public class WorkshiftProcessTest extends AbstractSpringTest{
@@ -25,7 +26,7 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	private WorkshiftDao workshiftDao;
 	
 	@InjectMocks
-	private WorkshiftProcess wsProcess; 
+	private WorkshiftProcessImpl wsProcess; 
 	
 	@Before
 	public void setUp() {

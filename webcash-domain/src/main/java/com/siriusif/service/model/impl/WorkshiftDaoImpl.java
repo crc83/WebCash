@@ -7,12 +7,26 @@ import org.hibernate.Criteria;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.siriusif.model.Workshift;
 import com.siriusif.service.HibernateDaoImpl;
 import com.siriusif.service.model.WorkshiftDao;
 
 @Repository("workshiftDao")
 public class WorkshiftDaoImpl extends HibernateDaoImpl<Workshift, Long> implements WorkshiftDao{
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see com.siriusif.service.HibernateDaoImpl#find(java.io.Serializable)
+	 */
+	@Override
+	@Transactional
+	public Workshift find(Long key) {
+		Workshift w = super.find(key);
+		initializeCollection(w.getOrders());
+		return w;
+	}
 
 	
 	public int countForDate(Date currentWorkshiftDate) {
