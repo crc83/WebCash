@@ -2,6 +2,7 @@ package com.siriusif.ui;
 
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -14,16 +15,19 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 
+import com.gargoylesoftware.htmlunit.WebClient;
+
 public class AbstractWebDriverTest {
 	private static final String BROWSER_TYPE = "test.browser.type";
 	private static final String DAMP_FOLDER = "test.damp.folder";
 	
 	public static Logger LOGGER = Logger.getLogger(AbstractWebDriverTest.class);
 	public static WebDriver browser;
+	public static WebClient webClient;
 	
 	@Before
 	public void setUpBrowser(){
-		String browserType = System.getenv(BROWSER_TYPE);
+		String browserType = "";//System.getenv(BROWSER_TYPE);
 		if ("firefox".equals(browserType)) {
 			initFirefox();
 		} else if ("iexplorer".equals(browserType)) {
@@ -38,7 +42,7 @@ public class AbstractWebDriverTest {
 	
 	private void initHtmlUnit() {
 		LOGGER.info("Starting HTMLUnit");
-		browser = new HtmlUnitDriver();
+		browser = new HtmlUnitDriver(true);
 	}
 	
 	//this still doesnt work
@@ -90,14 +94,20 @@ public class AbstractWebDriverTest {
 	}
 	
 	public boolean isNoFatalErrors() {
+		browser.getPageSource();
 		boolean errorsPresent = isElementPresent(By.id("trace"));
 		if (errorsPresent) {
 			LOGGER.info("Error page detected at:"+getCaller(2));
-			String html = browser.getPageSource();
-			LOGGER.debug(html);
-			saveToFile(html);
+			debugPageSource();
 		}
 		return !errorsPresent;
+	}
+
+
+	public void debugPageSource() {
+		String html = browser.getPageSource();
+		LOGGER.debug(html);
+		saveToFile(html);
 	}
 
 
@@ -138,5 +148,10 @@ public class AbstractWebDriverTest {
 		browser.findElement(By.id("loginForm:password")).clear();
 		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:loginButton")).click();
+		waitSomeTime();
+	}
+	
+	public void waitSomeTime(){
+		browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 }

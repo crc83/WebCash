@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -27,8 +26,6 @@ public class OrdersListBean {
 			.getLogger(OrdersListBean.class);
 
 	private long tableId;
-
-	private List<Order> ordersForTable;
 
 	// TODO SB : Remove access to dao clases here
 	@ManagedProperty(value = "#{orderDao}")

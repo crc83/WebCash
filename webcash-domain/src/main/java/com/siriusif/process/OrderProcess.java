@@ -29,7 +29,14 @@ public class OrderProcess {
 	 * @return new Order with one Suborder
 	 */
 	public Order newOrder(Long idTable) {
-		DinnerTable table = tableDao.find(idTable);
+		DinnerTable table;
+		try {
+			table = tableDao.find(idTable);
+		} catch (Exception e){
+			//we can't find table for some reason
+			LOGGER.info("Can't find table in database",e);
+			return null;
+		}
 		Order newOrder = new Order();
 		Date workingDate = new Date(); 
 		newOrder.setOpenDate(workingDate);

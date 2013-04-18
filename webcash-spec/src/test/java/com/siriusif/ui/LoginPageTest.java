@@ -33,7 +33,9 @@ public class LoginPageTest extends AbstractWebDriverTest{
 		String loginURL = browser.getCurrentUrl();
 		doLoginAsAdmin();
 		assertTrue(isNoFatalErrors());
-		assertFalse(loginURL.equals(browser.getCurrentUrl()));
+		String url = browser.getCurrentUrl();
+		LOGGER.debug("recieved url:"+url);
+		assertFalse(loginURL.equals(url));
 	}
 
 	/**

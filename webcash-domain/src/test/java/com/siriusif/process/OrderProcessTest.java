@@ -126,5 +126,16 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertEquals("Tim", newOrder.getTable().getName());
 //		TODO equals if tableId correctly 
 	}
+	
+	/**
+	 * When: TableDao throws an exception
+	 * Than: Error should be logged. orderProcess should return null instead of order
+	 */
+	@Test
+	public void testIfTableDaoThrowsException(){
+		stub(tableDao.find(any(Long.class))).toThrow(new org.hibernate.exception.SQLGrammarException(null, null));
+		Order newOrder = orderProcess.newOrder(1l);
+		assertNull(newOrder);
+	}
 
 }
