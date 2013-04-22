@@ -51,7 +51,7 @@ public class ImportDatabase {
 	private static final void importGroups(Session session) {
 		try {
 			session.beginTransaction();
-			Group[] groups = Helper.fromJsonGroup("/grouplist.json");
+			Group[] groups = Helper.fromJsonGroups("/grouplist.json");
 			for (Group group : groups){
 				session.save(group);
 			}

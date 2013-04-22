@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,13 +18,18 @@ public class GroupDaoImplTest extends AbstractSpringTest {
 	
 	@Autowired
 	private GroupDao groupDao;
+	
+	@Before
+	public void setUp(){
+		groupDao.clearAll();
+	}
 
 	@Test
 	public void testAdd() {
 		int size = groupDao.list().size();
 		
 		Group group = new Group();
-		group.setgName("Супи");
+		group.setName("Супи");
 		groupDao.add(group);
 		
 		assertTrue(size < groupDao.list().size());
@@ -55,8 +61,8 @@ public class GroupDaoImplTest extends AbstractSpringTest {
 		groupDao.add(group);
 		
 		assertTrue(size < groupDao.list().size());
-		Group groupFromBd = groupDao.find(group.getgId());
-		assertEquals("Овочі", groupFromBd.getgName());
+		Group groupFromBd = groupDao.find(group.getId());
+		assertEquals("Овочі", groupFromBd.getName());
 		assertEquals(3, groupFromBd.getGoods().size());
 	}
 	
@@ -80,22 +86,41 @@ public class GroupDaoImplTest extends AbstractSpringTest {
 		groupDao.add(group);
 		
 		assertTrue(size < groupDao.list().size());
-		Group groupFromBd = groupDao.find(group.getgId());
-		assertEquals("Напої", groupFromBd.getgName());
+		Group groupFromBd = groupDao.find(group.getId());
+		assertEquals("Напої", groupFromBd.getName());
 		assertEquals(4, groupFromBd.getSubGroups().size());
-		Group subgroupFromBd = groupDao.find(subGroup.getgId());
-		assertEquals("Гарячі напої", subgroupFromBd.getgName());
+		Group subgroupFromBd = groupDao.find(subGroup.getId());
+		assertEquals("Гарячі напої", subgroupFromBd.getName());
 	}
 	
+	/**
+	 * Given : Group with subgroups and goods in each subgroup saved in database
+	 * When  : I read subgroup (which is second)
+	 * Than  : I read from database list of goods as well
+	 */
 	@Test
-	public void testGroupGoodsFromDb()throws IOException{
-		Group group = Helper.fromJson("/group_goods.json", Group.class);
-		groupDao.add(group);
+	public void testReadGroupWithGoodsAndSubgroups()throws IOException{
+		// set up data for tests
+		Group[] groups = Helper.fromJsonGroups("/model_group.json");
+		Long index = null;
+		for (Group group : groups){
+			index = groupDao.add(group);
+		}
 		
-		Group groupFromBd = groupDao.find(group.getgId());
-		assertEquals("Напої", groupFromBd.getgName());
-//		assertEquals(2, groupFromBd.getGoods().size());
-//		assertEquals(2, groupFromBd.getSubGroups().size());
+		Group groupFromBd = groupDao.find(index);
+		assertEquals("Напої", groupFromBd.getName());
+		assertEquals(0, groupFromBd.getGoods().size());
+		assertEquals(2, groupFromBd.getSubGroups().size());		
 	}
-
+	
+	/**
+	 * Given : Empty database
+	 * When  : I try to fetch any Group
+	 * Than  : I recieve null and no exceptions
+	 */
+	@Test
+	public void testIfFindNonexistingGroup(){
+		Group group = groupDao.find(1l);
+		assertNull(group);
+	}
 }
