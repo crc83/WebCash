@@ -42,7 +42,7 @@ public class App {
 	private static void printSubgroupsAndTheirGoods(Group currentGroup) {
 		for(int s = 0; s < currentGroup.getSubGroups().size(); s++){
 			Group currentSubGroup = currentGroup.getSubGroups().get(s);
-			LOGGER.info(currentSubGroup.getParentGroup().getName() + ">>" + currentSubGroup.getgName());
+			LOGGER.info(currentSubGroup.getParentGroup().getName() + ">>" + currentSubGroup.getName());
 			printSubgroupsAndTheirGoods(currentSubGroup);
 			printGoodsOfGroup(currentSubGroup);
 		}
