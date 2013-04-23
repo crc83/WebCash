@@ -20,7 +20,7 @@ import com.siriusif.service.model.WorkshiftDao;
  * - openWorkshift
  * - closeWorkshift
  */
-@Component
+@Component(value="workshiftProcess")
 public class WorkshiftProcessImpl implements WorkshiftProcess {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(WorkshiftProcessImpl.class);

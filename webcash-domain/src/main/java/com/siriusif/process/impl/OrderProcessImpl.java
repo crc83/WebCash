@@ -101,4 +101,9 @@ public class OrderProcessImpl implements OrderProcess {
 		return orderDao.listForTableId(tableId);
 	}
 
+	@Override
+	public Order getOrder(long orderId) {
+		return orderDao.find(orderId);
+	}
+
 }

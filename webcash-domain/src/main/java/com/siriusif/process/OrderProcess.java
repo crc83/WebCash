@@ -12,4 +12,6 @@ public interface OrderProcess {
 	
 	List<Order> listForTableId(long tableId);
 
+	Order getOrder(long orderId);
+
 }

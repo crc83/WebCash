@@ -16,8 +16,6 @@ import org.slf4j.LoggerFactory;
 
 import com.siriusif.model.Order;
 import com.siriusif.process.OrderProcess;
-import com.siriusif.process.impl.OrderProcessImpl;
-import com.siriusif.service.model.OrderDao;
 
 @ManagedBean(name = "ordersList")
 @ViewScoped
@@ -37,40 +35,60 @@ public class OrdersListBean {
 		// orderProcess.setCurrentUser(curentUser)
 
 		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();	
+				.getCurrentInstance().getExternalContext().getRequest();
 		String tableIdStr = request.getParameter("table");
 		redirectTo(urlToNewOrderIfNoOrdersForTable(tableIdStr));
 	}
-	
-//  TODO SB: Javadoc add here
-//	TODO SB: return "I can't create new order"
+
+	// TODO SB: Javadoc add here
+	// TODO SB: return "I can't create new order"
 	public String urlToNewOrderIfNoOrdersForTable(String tableIdStr) {
-		String redirectTo ="";
+		String redirectTo = "";
 		LOGGER.info("Recieved table id :" + tableIdStr);
 		tableId = Long.parseLong(tableIdStr);
-		//Here is rule to open new order immediately
+		// Here is rule to open new order immediately
 		if (orderProcess.countOpenedForTableId(tableId) < 1) {
 			Order order = orderProcess.newOrder(tableId);
 			if (order != null) {
 				// since order list and order are at the same level in /pages
 				redirectTo = "order.jsf?order_id=" + order.getId();
 			} else {
-				//order hasn't been created for some reason
+				// order hasn't been created for some reason
 				notifyUser("I can't create new order");
 				LOGGER.error("I can't create new order");
 			}
 		}
 		return redirectTo;
 	}
-	
+
+	/**
+	 * for button (new Order create and redirect to order.jsf)
+	 * 
+	 * @return url redirect to order view
+	 */
+	public String urlToNewOrder() {
+		String redirectTo = "";
+		LOGGER.info("urlToNewOrder:||Recieved table id :" + tableId);
+		Order order = orderProcess.newOrder(tableId);
+		if (order != null) {
+			redirectTo = "order.jsf?order_id=" + order.getId()
+					+ "faces-redirect=true";
+		} else {
+			notifyUser("I can't create new order");
+			LOGGER.error("I can't create new order");
+		}
+		return redirectTo;
+	}
+
 	private void notifyUser(String message) {
-		//TODO SB : Implement
+		// TODO SB : Implement
 	}
 
 	private void redirectTo(String url) {
 		try {
-			if (StringUtils.isNotBlank(url)){
-				FacesContext.getCurrentInstance().getExternalContext().redirect(url);
+			if (StringUtils.isNotBlank(url)) {
+				FacesContext.getCurrentInstance().getExternalContext()
+						.redirect(url);
 			}
 		} catch (IOException e) {
 			LOGGER.error("I can't open new order");
