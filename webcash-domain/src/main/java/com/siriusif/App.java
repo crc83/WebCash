@@ -10,7 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 
 /**
  * This console app present here only for quick and dirty testing

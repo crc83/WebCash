@@ -1,6 +1,6 @@
 package com.siriusif.service.model;
 
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
