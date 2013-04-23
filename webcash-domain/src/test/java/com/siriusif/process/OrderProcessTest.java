@@ -39,6 +39,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 	@Before
 	public void setUp() {
 		MockitoAnnotations.initMocks(this);
+		stub(workshiftProcess.getOpenWorkshift()).toReturn(new Workshift());
 	}
 
 	/**
@@ -50,7 +51,6 @@ public class OrderProcessTest extends AbstractSpringTest {
 	 */
 	@Test
 	public void testNewOrder() {
-		stub(workshiftProcess.getOpenWorkshift()).toReturn(new Workshift());
 		Order newOrder = orderProcess.newOrder(1l);
 		
 		Date today = new Date();
@@ -132,6 +132,16 @@ public class OrderProcessTest extends AbstractSpringTest {
 		assertNotNull(newOrder.getTable());
 		assertEquals("Tim", newOrder.getTable().getName());
 //		TODO equals if tableId correctly 
+	}
+	
+	/**
+	 * When : We get null instead of opened workshift
+	 * Than : We get null for new order
+	 */
+	@Test
+	public void testIfOpenedWorkshiftIsNull(){
+		stub(workshiftProcess.getOpenWorkshift()).toReturn(null);
+		assertNull(orderProcess.newOrder(1l));
 	}
 
 }
