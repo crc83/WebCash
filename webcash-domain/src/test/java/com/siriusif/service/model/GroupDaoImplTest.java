@@ -116,7 +116,7 @@ public class GroupDaoImplTest extends AbstractSpringTest {
 	/**
 	 * Given : Empty database
 	 * When  : I try to fetch any Group
-	 * Than  : I recieve null and no exceptions
+	 * Than  : I receive null and no exceptions
 	 */
 	@Test
 	public void testIfFindNonexistingGroup(){
