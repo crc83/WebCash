@@ -1,15 +1,18 @@
 package com.siriusif.process;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
 import com.google.gson.JsonIOException;
@@ -26,7 +29,7 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	private WorkshiftDao workshiftDao;
 	
 	@InjectMocks
-	private WorkshiftProcess wsProcess; 
+	private WorkshiftProcess wsProcess = new WorkshiftProcessImpl(); 
 	
 	@Before
 	public void setUp() {
@@ -58,9 +61,9 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	 */
 	@Test
 	public void testOpenWorkshiftWhenWeHaveThreeClosed() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
-		Mockito.stub(workshiftDao.countForDate(Mockito.any(Date.class))).toReturn(3);
+		stub(workshiftDao.countForDate(any(Date.class))).toReturn(3);
 		Workshift[] openedWorkshifts = Helper.fromJson("/opened_workshifts.json", Workshift[].class);
-		Mockito.stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(Arrays.asList(openedWorkshifts));
+		stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(Arrays.asList(openedWorkshifts));
 		//TODO SB: add expectations of invocation WorkshiftDao.setCloseDate
 		
 		Date today =  Helper.dateOnly(new Date());
@@ -73,5 +76,59 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 		assertNull(newWorkshift.getDaySum());
 		assertEquals(3, newWorkshift.getDailyId());
 	}
+	
+	/*
+	 * Given : There is no workshifts in the database
+	 * Than  : I receive null as opened workshift 
+	 */
+	@Test
+	public void testGetOpenedWorkshiftWhenDBEmpty() {
+		assertNull(wsProcess.getOpenWorkshift());
+	}
+
+	/*
+	 * Given : There is 3 closed and no opened workshifts in the database
+	 * Than  : I receive null as opened workshift 
+	 */
+	@Test
+	public void testGetOpenedWorkshiftWhenWorkshiftsClosed() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
+		List<Workshift> listOfClosedWorkshifts = Arrays.asList(Helper.fromJson("/closed_workshifts.json", Workshift[].class));
+		stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(listOfClosedWorkshifts);
+		assertNull(wsProcess.getOpenWorkshift());
+	}
+	
+	/*
+	 * Given : Error occurs while getting data from DB
+	 * Than  : I receive null as opened workshift 
+	 */
+	@Test
+	public void testGetOpenedWorkshiftWhenDBError() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
+		stub(workshiftDao.getOpenedWorkshiftsList()).toThrow(new RuntimeException("Stub exception"));
+		assertNull(wsProcess.getOpenWorkshift());
+	}
+	
+	/*
+	 * Given : (normal situation) There is only one opened workshift
+	 * Than  : I receive this opened workshift 
+	 */
+	@Test
+	public void testGetOpenedWorkshiftWhenOnlyOneOpenedWorkshift() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
+		List<Workshift> oneOpenedWorkshift = Arrays.asList(Helper.fromJson("/one_opened_workshift.json", Workshift[].class));
+		stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(oneOpenedWorkshift);
+		assertEquals(oneOpenedWorkshift.get(0), wsProcess.getOpenWorkshift());
+	}
+	
+	/*
+	 * Given : There is two opened workshifts
+	 * Than  : I receive null 
+	 */
+	@Test
+	public void testGetOpenedWorkshiftWhenTwoOpenedWorkshift() throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException {
+		List<Workshift> oneOpenedWorkshift = Arrays.asList(Helper.fromJson("/opened_workshifts.json", Workshift[].class));
+		stub(workshiftDao.getOpenedWorkshiftsList()).toReturn(oneOpenedWorkshift);
+		assertNull(wsProcess.getOpenWorkshift());
+	}
+	
+	
 	
 }

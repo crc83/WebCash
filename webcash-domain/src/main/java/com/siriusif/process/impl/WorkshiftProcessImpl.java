@@ -98,7 +98,8 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 	}
 
 	// TODO SB: Cower with tests
-	public Workshift getOpenWorkshiftNow() {
+	@Override
+	public Workshift getOpenWorkshift() {
 //		Workshift workshift = new Workshift();
 		return null;
 	}

@@ -15,6 +15,6 @@ public interface WorkshiftProcess {
 	 * Or null if there is no open workshift.
 	 * @return open workshift today
 	 */
-	Workshift getOpenWorkshiftNow();
+	Workshift getOpenWorkshift();
 
 }

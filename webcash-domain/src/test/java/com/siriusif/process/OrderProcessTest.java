@@ -50,7 +50,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 	 */
 	@Test
 	public void testNewOrder() {
-		stub(workshiftProcess.getOpenWorkshiftNow()).toReturn(new Workshift());
+		stub(workshiftProcess.getOpenWorkshift()).toReturn(new Workshift());
 		Order newOrder = orderProcess.newOrder(1l);
 		
 		Date today = new Date();
