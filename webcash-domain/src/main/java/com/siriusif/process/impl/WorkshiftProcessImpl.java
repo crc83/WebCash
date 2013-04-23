@@ -28,10 +28,11 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 	@Autowired
 	private WorkshiftDao workshiftDao;
 	
-	/**
-	 * Opens workshift for current working date.
-	 * @return workshift object for new workshift
+	/*
+	 * (non-Javadoc)
+	 * @see com.siriusif.process.WorkshiftProcess#openWorkshift()
 	 */
+	@Override
 	public Workshift openWorkshift(){
 		List<Workshift> openedWorkshifts = getOpenedWorkshifts();
 		//if we have more than one opened session
@@ -96,8 +97,8 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 		}
 	}
 
+	// TODO SB: Cower with tests
 	public Workshift getOpenWorkshiftNow() {
-		// TODO SB: Correct open workshift now
 //		Workshift workshift = new Workshift();
 		return null;
 	}

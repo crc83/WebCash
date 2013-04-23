@@ -26,7 +26,7 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 	private WorkshiftDao workshiftDao;
 	
 	@InjectMocks
-	private WorkshiftProcessImpl wsProcess; 
+	private WorkshiftProcess wsProcess; 
 	
 	@Before
 	public void setUp() {
@@ -73,6 +73,5 @@ public class WorkshiftProcessTest extends AbstractSpringTest{
 		assertNull(newWorkshift.getDaySum());
 		assertEquals(3, newWorkshift.getDailyId());
 	}
-
 	
 }
