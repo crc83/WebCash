@@ -10,7 +10,7 @@ import com.google.gson.JsonSyntaxException;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 
 /**
  * This console app present here only for quick and dirty testing
@@ -29,7 +29,7 @@ public class App {
 		LOGGER.info("Import allready.");
 		for (int i=0; i< groups.length; i++){
 			Group currentGroup = groups[i];
-			LOGGER.info("Група "+i+" : " + currentGroup.getgName());
+			LOGGER.info("Група "+i+" : " + currentGroup.getName());
 			printGoodsOfGroup(currentGroup);
 			printSubgroupsAndTheirGoods(currentGroup);
 		}
@@ -42,7 +42,7 @@ public class App {
 	private static void printSubgroupsAndTheirGoods(Group currentGroup) {
 		for(int s = 0; s < currentGroup.getSubGroups().size(); s++){
 			Group currentSubGroup = currentGroup.getSubGroups().get(s);
-			LOGGER.info(currentSubGroup.getParentGroup().getgName() + ">>" + currentSubGroup.getgName());
+			LOGGER.info(currentSubGroup.getParentGroup().getName() + ">>" + currentSubGroup.getName());
 			printSubgroupsAndTheirGoods(currentSubGroup);
 			printGoodsOfGroup(currentSubGroup);
 		}
@@ -51,7 +51,7 @@ public class App {
 	private static void printGoodsOfGroup(Group currentGroup) {
 		for(int g = 0; g < currentGroup.getGoods().size(); g++){
 			Good currentGood =currentGroup.getGoods().get(g);
-			LOGGER.info(currentGood.getParentGroup().getgName()+":" + currentGood.getName());
+			LOGGER.info(currentGood.getParentGroup().getName()+":" + currentGood.getName());
 		}
 	}
 	

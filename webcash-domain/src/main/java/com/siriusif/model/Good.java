@@ -197,6 +197,12 @@ public class Good {
 	public void setParentGroup(Group parentGroup) {
 		this.parentGroup = parentGroup;
 	}
+
+	@Override
+	public String toString() {
+		return "Good [\n\tid=" + id + ", \n\tname=" + name + ", \n\tprice="
+				+ price + "\n]";
+	}
 	
 
 }

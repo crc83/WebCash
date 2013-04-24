@@ -80,7 +80,7 @@ public class Helper {
 		return hall;
 	}	
 	
-	public static Group[] fromJsonGroup(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
+	public static Group[] fromJsonGroups(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
 		Group[] groups = fromJson(fileName, Group[].class);
 		//because links aren't set automatically
 		for(Group group : groups){

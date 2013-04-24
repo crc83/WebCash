@@ -13,7 +13,7 @@ import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 
 public class DinnerTableDaoImplTest extends AbstractSpringTest {
 

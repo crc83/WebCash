@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.model.Good;
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 
 public class GoodDaoImplTest extends AbstractSpringTest {
 	
