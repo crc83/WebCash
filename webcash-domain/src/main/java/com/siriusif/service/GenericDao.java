@@ -1,5 +1,6 @@
 package com.siriusif.service;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -11,8 +12,9 @@ public interface GenericDao<E, K> {
 	/**
 	 * Add new entity
 	 * @param entity
+	 * @return key of added entity 
 	 */
-	void add(E entity);
+	K add(E entity);
 	
 	/**
 	 * Update existing entity

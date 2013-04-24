@@ -44,8 +44,9 @@ public class HibernateDaoImpl<E, K extends Serializable> implements GenericDao<E
     	}
     }
  
-    public void add(E entity) {
-        currentSession().save(entity);
+    @SuppressWarnings("unchecked")
+	public K add(E entity) {
+        return (K) currentSession().save(entity);
     }
  
     public void update(E entity) {

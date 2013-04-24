@@ -64,7 +64,7 @@
 			<h:form>
 				<p:accordionPanel value="#{orderBean.groups}" var="group"
 					activeIndex="150">
-					<p:tab title="#{group.gName}">
+					<p:tab title="#{group.name}">
 						<p:dataGrid value="#{group.goods}" var="good" columns="1">
 							<p:column>
 								<p:commandButton styleClass="buttonAccordion"

@@ -27,8 +27,6 @@ import javax.persistence.TemporalType;
 @Table(name = "`workshifts`")
 public class Workshift {
 
-	public static final String CLOSED_AT = "`closedAt`";
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.TABLE)
 	private Long id;
@@ -44,7 +42,7 @@ public class Workshift {
 	@Temporal(TemporalType.DATE)
 	private Date openedAt;
 
-	@Column(name = CLOSED_AT, nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
+	@Column(name = "`closedAt`", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
 	@Temporal(TemporalType.DATE)
 	private Date closedAt;
 

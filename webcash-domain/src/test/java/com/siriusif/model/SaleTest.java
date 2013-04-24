@@ -1,8 +1,8 @@
 package com.siriusif.model;
 
 import static org.junit.Assert.*;
-import static com.siriusif.model.helpers.SaleBuiledr.money;
-import static com.siriusif.model.helpers.SaleBuiledr.amount;
+import static com.siriusif.model.helpers.TestHelper.money;
+import static com.siriusif.model.helpers.TestHelper.amount;
 
 import java.math.BigDecimal;
 

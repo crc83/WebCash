@@ -22,7 +22,7 @@ import com.siriusif.model.Suborder;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.service.model.GroupDao;
 
-import static com.siriusif.model.helpers.SaleBuiledr.*;
+//import static com.siriusif.model.helpers.TestHelper.*;
 
 @ManagedBean(name = "orderBean")
 public class OrderBean {
@@ -53,9 +53,9 @@ public class OrderBean {
 
 	public List<Group> getGroups() {
 		groups = groupDao.list();
-		for (Group group : groups) {
-			LOGGER.debug(" | " + group.getgName());
-			LOGGER.debug(" | " + group.getGoods().size());
+		for(Group group : groups){
+			LOGGER.debug(" | "+group.getName());
+			LOGGER.debug(" | "+group.getGoods().size());
 		}
 		LOGGER.debug(" || " + groups.size());
 		return groups;
