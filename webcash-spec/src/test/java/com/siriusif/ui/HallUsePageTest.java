@@ -41,7 +41,7 @@ public class HallUsePageTest extends AbstractWebDriverTest {
 	 * @throws MalformedURLException
 	 * @throws FailingHttpStatusCodeException
 	 */
-	@Test
+//	@Test
 	public void testSelectTableFromFirstHall()
 			throws FailingHttpStatusCodeException, MalformedURLException,
 			IOException {
