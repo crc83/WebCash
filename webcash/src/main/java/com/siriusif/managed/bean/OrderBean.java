@@ -38,7 +38,7 @@ public class OrderBean {
 	public List<Group> getGroups() {
 		groups = groupDao.list();
 		for(Group group : groups){
-			LOGGER.debug(" | "+group.getgName());
+			LOGGER.debug(" | "+group.getName());
 			LOGGER.debug(" | "+group.getGoods().size());
 		}
 		LOGGER.debug(" || "+groups.size());
