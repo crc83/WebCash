@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
+import com.siriusif.model.Workshift;
 import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.OrderDao;
@@ -33,6 +34,11 @@ public class OrderProcessImpl {
 	 * @return new Order with one Suborder
 	 */
 	public Order newOrder(Long idTable) {
+		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
+		if (currentWorkshift == null){
+			LOGGER.debug("We have some troubles with getting new workshift for some reason");
+			return null;
+		}
 		DinnerTable table = tableDao.find(idTable);
 		Order newOrder = new Order();
 		Date workingDate = new Date(); 
@@ -41,7 +47,7 @@ public class OrderProcessImpl {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate)+1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-		newOrder.setWorkShift(workshiftProcess.getOpenWorkshiftNow());
+		newOrder.setWorkShift(currentWorkshift);
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 		

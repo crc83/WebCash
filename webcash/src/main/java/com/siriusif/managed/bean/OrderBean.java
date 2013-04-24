@@ -19,7 +19,7 @@ import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.service.model.GroupDao;
 
-import static com.siriusif.model.helpers.SaleBuiledr.*;
+import static com.siriusif.model.helpers.TestHelper.*;
 
 @ManagedBean(name="orderBean")
 public class OrderBean {
@@ -38,7 +38,7 @@ public class OrderBean {
 	public List<Group> getGroups() {
 		groups = groupDao.list();
 		for(Group group : groups){
-			LOGGER.debug(" | "+group.getgName());
+			LOGGER.debug(" | "+group.getName());
 			LOGGER.debug(" | "+group.getGoods().size());
 		}
 		LOGGER.debug(" || "+groups.size());
@@ -63,22 +63,23 @@ public class OrderBean {
 		order = new Order();
 		
 		Suborder first = new Suborder(1);
-		
-		first.addSale(buildSaleOld("Юшка грибна", 0.280, 10.50));
-		first.addSale(buildSaleOld("Салат домашній", 0.280, 11.00));
-		first.addSale(buildSaleOld("М'ясо по французьки", 0.200, 20.00));
-		first.addSale(buildSaleOld("Картопля молода з зеленню", 0.200, 8.00));
+
+		first.addSale(buildSale("Юшка грибна", amount(0.280), money(12.50)));
+		first.addSale(buildSale("Салат домашній", amount(0.280), money(12.00)));
+		first.addSale(buildSale("М'ясо по французьки", amount(0.200), money(20.00)));
+		first.addSale(buildSale("Картопля молода з зеленню", amount(0.200), money(8.00)));
 		order.addSuborder(first);
 
 		Suborder second = new Suborder(2);
-		second.addSale(buildSaleOld("Картопля молода з зеленню", 0.100, 8.00));
-		second.addSale(buildSaleOld("Сметана", 1, 4.00));
+		second.addSale(buildSale("Смалець", amount(0.100), money(8.00)));
+		second.addSale(buildSale("Сметана", amount(1), money(4.00)));
+		second.addSale(buildSale("Фреш", amount(0.200), money(16.00)));
 		order.addSuborder(second);
 
 		Suborder third = new Suborder(3);
-		third.addSale(buildSaleOld("Фреш", 0.200, 16.00));
-		third.addSale(buildSaleOld("Кава Еспрессо", 0.040, 9.00));
-		third.addSale(buildSaleOld("Штрудель", 0.150, 14.00));
+		third.addSale(buildSale("Хліб", amount(10), money(0.50)));
+		third.addSale(buildSale("Кава Еспрессо", amount(0.040), money(9.00)));
+		third.addSale(buildSale("Штрудель", amount(0.150), money(14.00)));
 		order.addSuborder(third);
 	}
 	

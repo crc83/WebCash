@@ -28,16 +28,17 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 	@Autowired
 	private WorkshiftDao workshiftDao;
 	
-	/**
-	 * Opens workshift for current working date.
-	 * @return workshift object for new workshift
+	/*
+	 * (non-Javadoc)
+	 * @see com.siriusif.process.WorkshiftProcess#openWorkshift()
 	 */
+	@Override
 	public Workshift openWorkshift(){
 		List<Workshift> openedWorkshifts = getOpenedWorkshifts();
 		//if we have more than one opened session
 		if (openedWorkshifts.size()>1) {
 			//we should log the state and continue work
-			LOGGER.warn("There is more than one opened session. Closing them all anyway.");
+			LOGGER.warn("There is more than one opened workshift. Closing them all anyway.");
 		}
 		//we should close all opened workshifts
 		for (Workshift ws : openedWorkshifts){
@@ -96,10 +97,26 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 		}
 	}
 
-	public Workshift getOpenWorkshiftNow() {
-		// TODO SB: Correct open workshift now
-//		Workshift workshift = new Workshift();
-		return null;
+	// TODO SB: Cower with tests
+	@Override
+	public Workshift getOpenWorkshift() {
+		List<Workshift> openedWorkshifts = null;
+		try {
+			openedWorkshifts = workshiftDao.getOpenedWorkshiftsList();
+		} catch (Exception e){
+			LOGGER.error("Error while getting opened workshift from DB. Caused by",e);
+			return null;
+		}
+		
+		if (openedWorkshifts == null || openedWorkshifts.size()==0){
+			LOGGER.debug("There is no opened workshifts. Return null");
+			return null;
+		} else if (openedWorkshifts.size()>1){
+			LOGGER.warn("There is more than one opened workshift. Fix it in workshifts view.");
+			return null;
+		} else {
+			return openedWorkshifts.get(0);
+		}
 	}
 	
 }

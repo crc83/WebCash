@@ -11,7 +11,7 @@ import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
-import static com.siriusif.model.helpers.SaleBuiledr.money;
+import static com.siriusif.model.helpers.TestHelper.money;
 
 public class OrderDaoImplTest extends AbstractSpringTest {
 
