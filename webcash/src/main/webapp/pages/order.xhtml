@@ -19,6 +19,7 @@
 			<div class="textOrder">
 				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ" />
 			</div>
+			<!-- begin table order view -->
 			<h:form id="addGood">
 				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
 					<p:subTable var="sales" value="#{suborder.sales}">
@@ -54,14 +55,16 @@
 					</p:columnGroup>
 				</p:dataTable>
 			</h:form>
+			<!-- end table order view -->
 			<p:button value="Зберегти" href="/pages/hall.jsf" />
 			<p:button value="Надрукувати" href="/pages/hall.jsf" />
 		</p:layoutUnit>
 		<p:layoutUnit id="layoutcenter" position="center" size="300">
+			<!-- bigin menu view Groups and Goods -->
 			<h:form>
 				<p:accordionPanel value="#{orderBean.groups}" var="group"
 					activeIndex="150">
-					<p:tab title="#{group.gName}">
+					<p:tab title="#{group.name}">
 						<p:dataGrid value="#{group.goods}" var="good" columns="1">
 							<p:column>
 								<p:commandButton styleClass="buttonAccordion"
@@ -75,6 +78,7 @@
 					</p:tab>
 				</p:accordionPanel>
 			</h:form>
+			<!-- end menu view Groups and Goods -->
 		</p:layoutUnit>
 	</p:layout>
 </h:body>
