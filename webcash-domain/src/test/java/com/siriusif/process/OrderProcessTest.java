@@ -16,11 +16,17 @@ import org.mockito.MockitoAnnotations;
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
 import com.siriusif.model.DinnerTable;
+import com.siriusif.model.Good;
 import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
+import com.siriusif.model.Suborder;
 import com.siriusif.model.Workshift;
 import com.siriusif.process.impl.OrderProcessImpl;
 import com.siriusif.service.model.DinnerTableDao;
+import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
+import com.siriusif.service.model.SaleDao;
+import com.siriusif.service.model.SuborderDao;
 
 public class OrderProcessTest extends AbstractSpringTest {
   
@@ -29,6 +35,15 @@ public class OrderProcessTest extends AbstractSpringTest {
   
   @Mock
   private DinnerTableDao tableDao;
+  
+  @Mock
+  private GoodDao goodDao;
+  
+  @Mock
+  private SaleDao saleDao;
+  
+  @Mock
+  private SuborderDao suborderDao;
   
   @Mock
   private WorkshiftProcess workshiftProcess;
@@ -138,11 +153,11 @@ public class OrderProcessTest extends AbstractSpringTest {
 	 * When : We get null instead of opened workshift
 	 * Than : We get null for new order
 	 */
-//	@Test
-//	public void testIfOpenedWorkshiftIsNull(){
-//		stub(workshiftProcess.getOpenWorkshift()).toReturn(null);
-//		assertNull(orderProcess.newOrder(1l));
-//	}
+	@Test
+	public void testIfOpenedWorkshiftIsNull(){
+		stub(workshiftProcess.getOpenWorkshift()).toReturn(null);
+		assertNull(orderProcess.newOrder(1l));
+	}
 
 	/**
 	 * When: TableDao throws an exception Than: Error should be logged.
@@ -154,6 +169,25 @@ public class OrderProcessTest extends AbstractSpringTest {
 				new org.hibernate.exception.SQLGrammarException(null, null));
 		Order newOrder = orderProcess.newOrder(1l);
 		assertNull(newOrder);
+	}
+	
+	@Test
+	public void testAddGoodsToOrder(){
+		Good good = new Good();
+		good.setName("Butter");
+		good.setPrice(money(10.00));
+		stub(goodDao.find(any(Long.class))).toReturn(good);
+		Order order = new Order();
+	    stub(orderDao.find(any(Long.class))).toReturn(order);
+	    Suborder suborder = new Suborder();
+	    stub(suborderDao.find(any(Long.class))).toReturn(suborder);
+	    suborder.setIndex(1);
+	    order.addSuborder(suborder);
+	    order = orderProcess.addGoodsToOrder(good.getId(), order.getId());
+	    
+	    verify(orderDao).update(order);
+	    assertNotNull(order.getSuborders().get(0).getSales().get(0).getSalesGood());
+	    assertEquals("Butter", order.getSuborders().get(0).getSales().get(0).getSalesGood().getName());
 	}
 
 }

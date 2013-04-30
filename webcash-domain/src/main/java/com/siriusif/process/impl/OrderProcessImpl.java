@@ -9,13 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.siriusif.model.DinnerTable;
+import com.siriusif.model.Good;
 import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.model.Workshift;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
+import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
+import com.siriusif.service.model.SaleDao;
+import com.siriusif.service.model.SuborderDao;
+
+import static com.siriusif.model.helpers.TestHelper.amount;
 
 @Component(value="orderProcess")
 public class OrderProcessImpl implements OrderProcess {
@@ -27,6 +34,15 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Autowired
 	private DinnerTableDao tableDao;
+	
+	@Autowired
+	private GoodDao goodDao;
+	
+	@Autowired
+	private SaleDao saleDao;
+	
+	@Autowired
+	private SuborderDao suborderDao;
 
 	@Autowired
 	private WorkshiftProcess workshiftProcess;
@@ -95,6 +111,18 @@ public class OrderProcessImpl implements OrderProcess {
 
 		orderDao.update(closeOrder);
 		return closeOrder;
+	}
+	
+	public Order addGoodsToOrder(Long goodId, Long orderId){
+		Sale sale = new Sale();
+		Good good = goodDao.find(goodId);
+		Order order = orderDao.find(orderId);
+		sale.setAmount(amount(1.00));
+		sale.setSalesGood(good);
+		order.getSuborders().get(0).addSale(sale);
+		
+		orderDao.update(order);
+		return order;
 	}
 
 	@Override
