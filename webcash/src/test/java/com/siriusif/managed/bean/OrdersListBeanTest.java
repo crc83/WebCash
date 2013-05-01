@@ -8,22 +8,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.siriusif.model.Order;
-import com.siriusif.process.impl.OrderProcessImpl;
-import com.siriusif.service.model.OrderDao;
+import com.siriusif.process.OrderProcess;
 import static org.mockito.Mockito.*;
 
 public class OrdersListBeanTest {
 	
 	
 	private OrdersListBean ordersList = new OrdersListBean();
-	private OrderDao mockedOrderDao;
-	private OrderProcessImpl mockedOrderProcess;
+	private OrderProcess mockedOrderProcess;
 
 	@Before
 	public void setUp() throws Exception {
-		mockedOrderDao = mock(OrderDao.class);
-		mockedOrderProcess = mock(OrderProcessImpl.class);
-		ordersList.setOrderDao(mockedOrderDao);
+		mockedOrderProcess = mock(OrderProcess.class);
 		ordersList.setOrderProcess(mockedOrderProcess);
 	}
 
@@ -34,7 +30,7 @@ public class OrdersListBeanTest {
 	 */
 	@Test
 	public void testIfThereAreOrdersForTable() {
-		stub(mockedOrderDao.countOpenedForTableId(32)).toReturn(42);
+		stub(mockedOrderProcess.countOpenedForTableId(32)).toReturn(42);
 		assertEquals("", ordersList.urlToNewOrderIfNoOrdersForTable("32"));
 	}
 
@@ -60,7 +56,7 @@ public class OrdersListBeanTest {
 		Order order = new Order();
 		order.setId(13l);
 		stub(mockedOrderProcess.newOrder(any(Long.class))).toReturn(order);
-		stub(mockedOrderDao.countOpenedForTableId(32)).toReturn(0);
+		stub(mockedOrderProcess.countOpenedForTableId(32)).toReturn(0);
 		assertEquals("order.jsf?order_id=13", ordersList.urlToNewOrderIfNoOrdersForTable("32"));
 	}
 
@@ -70,7 +66,7 @@ public class OrdersListBeanTest {
 	 */
 	@Test
 	public void testSetOrdersForTable() {	
-		stub(mockedOrderDao.listForTableId(any(Long.class))).toReturn(null);
+		stub(mockedOrderProcess.listForTableId(any(Long.class))).toReturn(null);
 		ordersList.setOrdersForTable(new ArrayList<Order>());
 		assertNull("this property should be read only",ordersList.getOrdersForTable());
 	}
