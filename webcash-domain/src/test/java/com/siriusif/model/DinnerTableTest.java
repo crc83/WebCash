@@ -4,21 +4,19 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.siriusif.helper.ModelFactory;
+
 public class DinnerTableTest {
 
 	@Test
 	public void testGetBottom(){
-		DinnerTable table = new DinnerTable();
-		table.setTop(42);
-		table.setHeight(37);
+		DinnerTable table = ModelFactory.getDinnerTableInstance();
 		assertEquals(42+37, table.getBottom());
 	}
 	
 	@Test
 	public void testGetRight(){
-		DinnerTable table = new DinnerTable();
-		table.setLeft(31);
-		table.setWidth(88);
+		DinnerTable table = ModelFactory.getDinnerTableInstance();
 		assertEquals(31+88, table.getRight());
 	}
 }
