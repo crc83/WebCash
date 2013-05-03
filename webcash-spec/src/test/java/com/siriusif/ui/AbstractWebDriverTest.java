@@ -156,6 +156,6 @@ public class AbstractWebDriverTest {
 	}
 
 	public void waitSomeTime() {
-		browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		browser.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 	}
 }

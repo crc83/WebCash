@@ -30,7 +30,6 @@ public class LoginPageTest extends AbstractWebDriverTest {
 	 * than  : I will not be on a login page
 	 */
 	@Test
-	@Ignore
 	public void testSuccessfulLogin() {
 		get("");
 		String loginURL = browser.getCurrentUrl();
