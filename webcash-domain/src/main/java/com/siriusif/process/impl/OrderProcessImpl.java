@@ -99,7 +99,8 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Override
 	public int countOpenedForTableId(long tableId) {
-		return orderDao.countOpenedForTableId(tableId);
+		DinnerTable table = tableDao.find(tableId);
+		return orderDao.countOpenedForTable(table);
 	}
 
 	@Override

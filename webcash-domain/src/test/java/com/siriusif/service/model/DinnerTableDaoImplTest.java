@@ -71,6 +71,7 @@ public class DinnerTableDaoImplTest extends AbstractSpringTest {
 		assertTrue(size < tablesDao.list().size());
 		DinnerTable tableFromDb = tablesDao.find(table.getId());
 		assertEquals(3, tableFromDb.getOrders().size());
-		assertEquals("admin", tableFromDb.getOrders().get(0).getAuthor());
+		//SB : Since list is not ordered, this assertion will not allways work
+		//assertEquals("admin", tableFromDb.getOrders().get(0).getAuthor());
 	}
 }

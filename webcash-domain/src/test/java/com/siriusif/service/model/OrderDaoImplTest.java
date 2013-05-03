@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.siriusif.helper.AbstractSpringTest;
 import com.siriusif.helper.Helper;
+import com.siriusif.helper.ModelFactory;
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
 import static com.siriusif.model.helpers.TestHelper.money;
@@ -19,7 +21,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	private OrderDao orderDao;
 
 	/**
-	 * When: add order Than: list of orders in DB increase
+	 * When: add order 
+	 * Than: list of orders in DB increase
 	 */
 	@Test
 	public void testAdd() {
@@ -40,7 +43,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: add static working Date Than: working Date of order find in DB
+	 * When: add static working Date 
+	 * Than: working Date of order find in DB
 	 */
 	@Test
 	public void testAddWorkshiftDate() {
@@ -57,7 +61,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: add money in paid Than: money add correctly in order
+	 * When: add money in paid 
+	 * Than: money add correctly in order
 	 */
 	@Test
 	public void testSetSumma() {
@@ -73,7 +78,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: 4 Suborders add in order Than: 4 Suborders find in DB by Order Id
+	 * When: 4 Suborders add in order 
+	 * Than: 4 Suborders find in DB by Order Id
 	 */
 	@Test
 	public void testOneToManyOrderSuborders() {
@@ -95,7 +101,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: 4 Suborders add in Order Than: count of Suborders in Order 4
+	 * When: 4 Suborders add in Order 
+	 * Than: count of Suborders in Order 4
 	 */
 	@Test
 	public void tsetCountOfsubordersInOrder() {
@@ -115,7 +122,8 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: Suborder doesn't add in Order Than: count of Suborders in Order 0
+	 * When: Suborder doesn't add in Order 
+	 * Than: count of Suborders in Order 0
 	 */
 	@Test
 	public void tsetCountOfsubordersInOrderIsZero() {
@@ -131,10 +139,11 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: updating of order Than: open date doesn't update and set close date
+	 * When: updating of order 
+	 * Than: open date doesn't update and set close date
 	 */
 	@Test
-	public void testCloseDeteOfOrder() {
+	public void testCloseDateOfOrder() {
 		int size = orderDao.list().size();
 		Order order = new Order();
 
