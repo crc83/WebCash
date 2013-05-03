@@ -30,7 +30,7 @@ public class HallUsePageTest extends AbstractWebDriverTest {
 		get("");
 		assertTrue(isNoFatalErrors());
 		doLoginAsAdmin();
-		System.out.println(browser.getCurrentUrl());
+		isElementPresent(By.id("hall_use"));
 	}
 
 	/**

@@ -32,12 +32,9 @@ public class LoginPageTest extends AbstractWebDriverTest {
 	@Test
 	public void testSuccessfulLogin() {
 		get("");
-		String loginURL = browser.getCurrentUrl();
 		doLoginAsAdmin();
 		assertTrue(isNoFatalErrors());
-		String url = browser.getCurrentUrl();
-		LOGGER.debug("recieved url:" + url);
-		assertFalse(loginURL.equals(url));
+		isElementPresent(By.id("hall_use"));
 	}
 
 	/**
