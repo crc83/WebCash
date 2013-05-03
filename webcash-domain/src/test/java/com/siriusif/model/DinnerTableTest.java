@@ -11,7 +11,7 @@ public class DinnerTableTest {
 	@Test
 	public void testGetBottom(){
 		DinnerTable table = ModelFactory.getDinnerTableInstance();
-		assertEquals(42+37, table.getBottom());
+		assertEquals(47+37, table.getBottom());
 	}
 	
 	@Test
