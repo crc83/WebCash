@@ -9,13 +9,18 @@ import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.google.common.base.Function;
 
 public class AbstractWebDriverTest {
 	private static final String BROWSER_TYPE = "test.browser.type";
@@ -152,10 +157,5 @@ public class AbstractWebDriverTest {
 		browser.findElement(By.id("loginForm:password")).clear();
 		browser.findElement(By.id("loginForm:password")).sendKeys("admin");
 		browser.findElement(By.id("loginForm:loginButton")).click();
-		waitSomeTime();
-	}
-
-	public void waitSomeTime() {
-		browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 	}
 }

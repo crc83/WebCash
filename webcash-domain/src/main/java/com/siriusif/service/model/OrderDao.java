@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Date;
 
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.service.GenericDao;
 
@@ -18,7 +19,7 @@ public interface OrderDao extends GenericDao<Order, Long> {
 	 * @param tableId id of table
 	 * @return count of OPENED orders for table 
 	 */
-	int countOpenedForTableId(long tableId);
+	int countOpenedForTable(DinnerTable table);
 	
 	/**
 	 * @param orderId of Order
