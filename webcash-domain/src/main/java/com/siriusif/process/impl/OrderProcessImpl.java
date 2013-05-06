@@ -53,11 +53,11 @@ public class OrderProcessImpl implements OrderProcess {
 	 */
 	@Override
 	public Order newOrder(Long idTable) {
-//		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
-//		if (currentWorkshift == null){
-//			LOGGER.debug("We have some troubles with getting new workshift for some reason");
-//			return null;
-//		}
+		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
+		if (currentWorkshift == null){
+			LOGGER.debug("We have some troubles with getting new workshift for some reason");
+			return null;
+		}
 		DinnerTable table;
 		try {
 			table = tableDao.find(idTable);
@@ -74,7 +74,7 @@ public class OrderProcessImpl implements OrderProcess {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate) + 1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-//		newOrder.setWorkShift(currentWorkshift);
+		newOrder.setWorkShift(currentWorkshift);
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 

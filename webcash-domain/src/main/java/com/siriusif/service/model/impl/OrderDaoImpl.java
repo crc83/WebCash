@@ -57,7 +57,7 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 	@Override
 	public int countOpenedForTableId(long tableId) {
 		// TODO SB : Implement
-		return 3;
+		return 0;
 	}
 
 	/*
