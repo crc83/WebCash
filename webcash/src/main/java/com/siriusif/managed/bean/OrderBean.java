@@ -89,7 +89,7 @@ public class OrderBean {
 				.get("selectedGood");
 		goodId = good.getId();
 		LOGGER.info("Good id is: " + goodId);
-//		order = orderProcess.addGoodsToOrder(goodId, orderId);
+		order = orderProcess.addGoodsToOrder(goodId, orderId);
 //		Sale sale = new Sale();
 //		sale.setSalesGood(good);
 //		sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));

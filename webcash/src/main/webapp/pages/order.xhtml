@@ -69,7 +69,7 @@
 							<p:column>
 								<p:commandButton styleClass="buttonAccordion"
 									value="#{good.name} - #{good.price}"
-									actionListener="#{orderBean.onClick}">
+									actionListener="#{orderBean.onClick}" update=":addGood">
 									<f:attribute name="selectedGoodName" value="#{good.name}" />
 									<f:attribute name="selectedGood" value="#{good}" />
 								</p:commandButton>
