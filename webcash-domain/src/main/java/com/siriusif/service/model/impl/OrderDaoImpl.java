@@ -7,12 +7,13 @@ import java.util.Date;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.service.HibernateDaoImpl;
 import com.siriusif.service.model.OrderDao;
 
 /**
- * @author Администратор
+ * @author colyas
  * 
  */
 @Repository("orderDao")
@@ -27,9 +28,9 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 	@Override
 	@Transactional
 	public Order find(Long key) {
-		Order o = super.find(key);
-		initializeCollection(o.getSuborders());
-		return o;
+		Order order = super.find(key);
+		initializeCollection(order.getSuborders());
+		return order;
 	}
 
 	@Override
@@ -54,10 +55,12 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 	 * 
 	 * @see com.siriusif.service.model.OrderDao#countOpenedForTableId(long)
 	 */
-	@Override
-	public int countOpenedForTableId(long tableId) {
-		// TODO SB : Implement
-		return 0;
+	public int countOpenedForTable(DinnerTable table) {
+		return currentSession()
+				.createQuery(
+						"SELECT o FROM Order o WHERE o.status=:status AND o.table = :table")
+				.setParameter("status", Order.STATUS_OPEN_DATA)
+				.setParameter("table", table).list().size();		
 	}
 
 	/*

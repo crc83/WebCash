@@ -19,8 +19,6 @@ import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
-import com.siriusif.service.model.SaleDao;
-import com.siriusif.service.model.SuborderDao;
 
 import static com.siriusif.model.helpers.TestHelper.amount;
 
@@ -37,12 +35,6 @@ public class OrderProcessImpl implements OrderProcess {
 	
 	@Autowired
 	private GoodDao goodDao;
-	
-	@Autowired
-	private SaleDao saleDao;
-	
-	@Autowired
-	private SuborderDao suborderDao;
 
 	@Autowired
 	private WorkshiftProcess workshiftProcess;
@@ -129,7 +121,8 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Override
 	public int countOpenedForTableId(long tableId) {
-		return orderDao.countOpenedForTableId(tableId);
+		DinnerTable table = tableDao.find(tableId);
+		return orderDao.countOpenedForTable(table);
 	}
 
 	@Override
