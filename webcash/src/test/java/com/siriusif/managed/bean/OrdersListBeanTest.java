@@ -65,7 +65,7 @@ public class OrdersListBeanTest {
 	 * Then : I can't do it. This list is read only
 	 */
 	@Test
-	public void testSetOrdersForTable() {	
+	public void testSetOrdersForTable() {
 		stub(mockedOrderProcess.listForTableId(any(Long.class))).toReturn(null);
 		ordersList.setOrdersForTable(new ArrayList<Order>());
 		assertNull("this property should be read only",ordersList.getOrdersForTable());

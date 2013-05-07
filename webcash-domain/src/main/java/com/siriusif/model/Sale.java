@@ -2,6 +2,7 @@ package com.siriusif.model;
 
 import java.math.BigDecimal;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +41,7 @@ public class Sale {
 	@Column(name="`printed`", columnDefinition="boolean default false") 
 	private boolean printed;
 	
-	@OneToOne
+	@OneToOne(cascade=CascadeType.REFRESH)
 	private Good salesGood;
 	
 	@ManyToOne
