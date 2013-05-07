@@ -99,8 +99,8 @@ public class ImportDatabase {
 	 */
 	private static final Session initHibernateSession(
 			GenericXmlApplicationContext context) {
-		Properties hibernateProperties = context.getBean("hibernateProperties",Properties.class);
-		hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
+//		Properties hibernateProperties = context.getBean("hibernateProperties",Properties.class);
+//		hibernateProperties.put("hibernate.hbm2ddl.auto", "create-drop");
 				
 		SessionFactory sessionFactory = context.getBean("sessionFactory", SessionFactory.class);
 		

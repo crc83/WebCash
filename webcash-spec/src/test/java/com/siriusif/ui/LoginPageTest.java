@@ -12,7 +12,17 @@ import org.openqa.selenium.By;
  * @author sbelei
  */
 public class LoginPageTest extends AbstractWebDriverTest {
-
+	
+	/**
+	 * Check if it's login page. (login and password inputs should present)
+	 */
+	private void assertIfLoginPage() {
+		assertTrue(isNoFatalErrors());
+		assertNotNull(browser.findElement(By.id("loginForm:username")));
+		assertNotNull(browser.findElement(By.id("loginForm:password")));
+	}
+	
+	
 	/**
 	 * when : I open root path 
 	 * than : I will see login page
@@ -38,22 +48,13 @@ public class LoginPageTest extends AbstractWebDriverTest {
 	}
 
 	/**
-	 * Check if it's login page. (login and password inputs should present)
-	 */
-	private void assertIfLoginPage() {
-		assertTrue(isNoFatalErrors());
-		assertNotNull(browser.findElement(By.id("loginForm:username")));
-		assertNotNull(browser.findElement(By.id("loginForm:password")));
-	}
-
-	/**
 	 * given : I'm on a root path 
 	 * when : I try to open any page without credentials 
 	 * than : I will see login page anyway
 	 */
 	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
-		String[] pages = { "/pages/hall.jsf", "/pages/menu.jsf" };
+		String[] pages = { "/pages/hall.jsf", "/pages/hall_use.jsf", "/pages/order.jsf", "/pages/orders_list.jsf" };
 		for (String page : pages) {
 			get(page);
 			assertTrue(isNoFatalErrors());

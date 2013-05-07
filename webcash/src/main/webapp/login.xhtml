@@ -14,11 +14,11 @@
 				<h:outputLabel for="username" value="#{msgs.login_username}" />
 				<p:inputText value="#{loginBean.username}" id="username"
 					required="true" label="username"/>
-				<h:outputLabel for="password" value="Password:" />
+				<h:outputLabel for="password" value="#{msgs.login_password}" />
 				<h:inputSecret value="#{loginBean.password}" id="password"
 					required="true" label="password" />
 				<f:facet name="footer">
-					<p:commandButton type="submit" id="loginButton" value="Вхід"
+					<p:commandButton type="submit" id="loginButton" value="#{msgs.login_enter}"
 						update=":growl" action="#{loginBean.login}"/>
 				</f:facet>
 			</h:panelGrid>
