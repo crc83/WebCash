@@ -7,6 +7,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ import com.siriusif.service.model.GroupDao;
 //import static com.siriusif.model.helpers.TestHelper.*;
 
 @ManagedBean(name = "orderBean")
+@ViewScoped
 public class OrderBean {
 
 	private static Logger LOGGER = Logger.getLogger(OrderBean.class);
@@ -40,6 +42,8 @@ public class OrderBean {
 	private List<Group> groups;
 
 	private long orderId;
+	
+	private long goodId;
 
 	@PostConstruct
 	public void init() {
@@ -48,7 +52,9 @@ public class OrderBean {
 		HttpServletRequest request = (HttpServletRequest) FacesContext
 				.getCurrentInstance().getExternalContext().getRequest();
 		String orderIdStr = request.getParameter("order_id");
-		orderView(orderIdStr);
+		orderId = Long.parseLong(orderIdStr);
+		LOGGER.info("Recieved order id: " + orderId);
+		order = orderProcess.getOrder(orderId);
 	}
 
 	public List<Group> getGroups() {
@@ -76,34 +82,28 @@ public class OrderBean {
 	// }
 	// }
 
-	/**
-	 * new Order view
-	 * 
-	 * @param orderIdStr
-	 */
-	private void orderView(String orderIdStr) {
-		orderId = Long.parseLong(orderIdStr);
-		LOGGER.info("Recieved order id: " + orderId);
-		order = orderProcess.getOrder(orderId);
-	}
 
 	public void onClick(ActionEvent evt) {
+		LOGGER.info(evt.toString());
 		Good good = (Good) evt.getComponent().getAttributes()
 				.get("selectedGood");
-		Sale sale = new Sale();
-		sale.setSalesGood(good);
-		sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));
-		order.getSuborders().get(0).addSale(sale);
-		// TODO SB : Remove this when we will have DB connection
-		// begin
-		FacesContext facesContext = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) facesContext.getExternalContext()
-				.getSession(true);
-		session.setAttribute("order", order);
-		// end
-
-		// FacesContext.getCurrentInstance().addMessage(null, new
-		// FacesMessage("Welcome " + "!"));
+		goodId = good.getId();
+		LOGGER.info("Good id is: " + goodId);
+		order = orderProcess.addGoodsToOrder(goodId, orderId);
+//		Sale sale = new Sale();
+//		sale.setSalesGood(good);
+//		sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));
+//		order.getSuborders().get(0).addSale(sale);
+//		// TODO SB : Remove this when we will have DB connection
+//		// begin
+//		FacesContext facesContext = FacesContext.getCurrentInstance();
+//		HttpSession session = (HttpSession) facesContext.getExternalContext()
+//				.getSession(true);
+//		session.setAttribute("order", order);
+//		// end
+//
+//		// FacesContext.getCurrentInstance().addMessage(null, new
+//		// FacesMessage("Welcome " + "!"));
 
 	}
 
@@ -133,5 +133,13 @@ public class OrderBean {
 
 	public void setOrderId(long orderId) {
 		this.orderId = orderId;
+	}
+	
+	public long getGoodId() {
+		return goodId;
+	}
+	
+	public void setGoodId(long goodId) {
+		this.goodId = goodId;
 	}
 }
