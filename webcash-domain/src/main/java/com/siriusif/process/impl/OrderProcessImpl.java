@@ -9,13 +9,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.siriusif.model.DinnerTable;
+import com.siriusif.model.Good;
 import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.model.Workshift;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
+import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
+
+import static com.siriusif.model.helpers.TestHelper.amount;
 
 @Component(value="orderProcess")
 public class OrderProcessImpl implements OrderProcess {
@@ -27,6 +32,9 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Autowired
 	private DinnerTableDao tableDao;
+	
+	@Autowired
+	private GoodDao goodDao;
 
 	@Autowired
 	private WorkshiftProcess workshiftProcess;
@@ -47,6 +55,7 @@ public class OrderProcessImpl implements OrderProcess {
 			table = tableDao.find(idTable);
 		} catch (Exception e) {
 			// we can't find table for some reason
+			LOGGER.info("We are waiting stackTrase here.");
 			LOGGER.info("Can't find table in database", e);
 			return null;
 		}
@@ -95,6 +104,19 @@ public class OrderProcessImpl implements OrderProcess {
 
 		orderDao.update(closeOrder);
 		return closeOrder;
+	}
+	
+	@Override
+	public Order addGoodsToOrder(Long goodId, Long orderId){
+		Sale sale = new Sale();
+		Good good = goodDao.find(goodId);
+		Order order = orderDao.find(orderId);
+		sale.setAmount(amount(1.00));
+		sale.setSalesGood(good);
+		order.getSuborders().get(0).addSale(sale);
+		
+		orderDao.update(order);
+		return order;
 	}
 
 	@Override
