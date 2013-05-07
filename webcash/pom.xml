@@ -253,6 +253,9 @@
 				</executions>
 				<configuration>
 					<mainClass>com.siriusif.ImportDatabase</mainClass>
+					<arguments>
+						<argument>import</argument>
+					</arguments>
 				</configuration>
 			</plugin>
 		</plugins>

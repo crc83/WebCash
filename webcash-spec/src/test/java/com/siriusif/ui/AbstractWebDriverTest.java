@@ -24,11 +24,10 @@ import com.google.common.base.Function;
 
 public class AbstractWebDriverTest {
 	private static final String BROWSER_TYPE = "test.browser.type";
-	private static final String DAMP_FOLDER = "test.damp.folder";
+	private static final String DAMP_FOLDER = "test.dump.folder";
 
 	public static Logger LOGGER = Logger.getLogger(AbstractWebDriverTest.class);
 	public static WebDriver browser;
-	public static WebClient webClient;
 
 	@Before
 	public void setUpBrowser() {

@@ -12,7 +12,17 @@ import org.openqa.selenium.By;
  * @author sbelei
  */
 public class LoginPageTest extends AbstractWebDriverTest {
-
+	
+	/**
+	 * Check if it's login page. (login and password inputs should present)
+	 */
+	private void assertIfLoginPage() {
+		assertTrue(isNoFatalErrors());
+		assertNotNull(browser.findElement(By.id("loginForm:username")));
+		assertNotNull(browser.findElement(By.id("loginForm:password")));
+	}
+	
+	
 	/**
 	 * when : I open root path 
 	 * than : I will see login page
@@ -35,15 +45,6 @@ public class LoginPageTest extends AbstractWebDriverTest {
 		doLoginAsAdmin();
 		assertTrue(isNoFatalErrors());
 		isElementPresent(By.id("hall_use"));
-	}
-
-	/**
-	 * Check if it's login page. (login and password inputs should present)
-	 */
-	private void assertIfLoginPage() {
-		assertTrue(isNoFatalErrors());
-		assertNotNull(browser.findElement(By.id("loginForm:username")));
-		assertNotNull(browser.findElement(By.id("loginForm:password")));
 	}
 
 	/**

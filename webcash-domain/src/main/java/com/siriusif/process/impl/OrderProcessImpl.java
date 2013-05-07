@@ -55,8 +55,8 @@ public class OrderProcessImpl implements OrderProcess {
 			table = tableDao.find(idTable);
 		} catch (Exception e) {
 			// we can't find table for some reason
-			LOGGER.info("We are waiting stackTrase here.");
-			LOGGER.info("Can't find table in database", e);
+			LOGGER.info("Can't find table by id="+idTable);
+			LOGGER.debug("Caused by:",e);
 			return null;
 		}
 		Order newOrder = new Order();
@@ -82,8 +82,8 @@ public class OrderProcessImpl implements OrderProcess {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
 		suborder.setIndex(orderDao.countOfSuborders(orderId) + 1);
-		LOGGER.info("CS Order: " + order);
-		LOGGER.info("CS Suborder: " + suborder);
+		LOGGER.debug("Order: " + order);
+		LOGGER.debug("Suborder: " + suborder);
 		order.addSuborder(suborder);
 
 		orderDao.update(order);
@@ -120,9 +120,18 @@ public class OrderProcessImpl implements OrderProcess {
 	}
 
 	@Override
-	public int countOpenedForTableId(long tableId) {
-		DinnerTable table = tableDao.find(tableId);
-		return orderDao.countOpenedForTable(table);
+	public int countOpenedForTableId(long tableId) {		
+		int result = Integer.MAX_VALUE;
+		try {
+			DinnerTable table = tableDao.find(tableId);
+			if (table != null) {
+				result = orderDao.countOpenedForTable(table);
+			}
+		} catch (Exception e){
+			LOGGER.info("Error while counting orders for tableId="+tableId);
+			LOGGER.debug("Caused by", e);
+		}
+		return result;
 	}
 
 	@Override

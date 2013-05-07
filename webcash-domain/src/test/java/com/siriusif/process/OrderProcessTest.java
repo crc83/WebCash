@@ -127,7 +127,8 @@ public class OrderProcessTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: Table set in order Than: Table is not null in Order
+	 * When: Table set in order 
+	 * Than: Table is not null in Order
 	 */
 	@Test
 	public void testIfFindTableId() {
@@ -142,8 +143,8 @@ public class OrderProcessTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When : We get null instead of opened workshift Than : We get null for new
-	 * order
+	 * When : We get null instead of opened workshift 
+	 * Than : We get null for new order
 	 */
 //	@Test
 	public void testIfOpenedWorkshiftIsNull() {
@@ -152,11 +153,13 @@ public class OrderProcessTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: TableDao throws an exception Than: Error should be logged.
-	 * orderProcess should return null instead of order
+	 * Given : Creation of new order
+	 * When  : TableDao throws an exception 
+	 * Than  : Error should be logged.
+	 *         orderProcess should return null instead of order
 	 */
 	@Test
-	public void testIfTableDaoThrowsException() {
+	public void testNewOrderIfTableDaoThrowsException() {
 		stub(tableDao.find(any(Long.class))).toThrow(
 				new org.hibernate.exception.SQLGrammarException(null, null));
 		Order newOrder = orderProcess.newOrder(1l);
@@ -164,7 +167,22 @@ public class OrderProcessTest extends AbstractSpringTest {
 	}
 
 	/**
-	 * When: good add to order Then: good will be add to order
+	 * Given : Request to count orders for table
+	 * When  : TableDao throws an exception 
+	 * Than  : Error should be logged.
+	 *         orderProcess should return null instead of order
+	 */
+	@Test
+	public void testCountOrdersForTableIdIfTableDaoThrowsException() {
+		stub(tableDao.find(any(Long.class))).toThrow(
+				new org.hibernate.exception.SQLGrammarException(null, null));
+		int ordersCount = orderProcess.countOpenedForTableId(1l);
+		assertEquals(Integer.MAX_VALUE, ordersCount);
+	}
+	
+	/**
+	 * When: good add to order 
+	 * Then: good will be add to order
 	 */
 	@Test
 	public void testAddGoodsToOrder() {
