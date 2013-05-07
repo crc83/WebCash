@@ -1,15 +1,15 @@
-#buttonOptions {
+#fold {
 	position: absolute;
 	z-index: 2 !important;
 }
 
-#button {
+#settings {
 	margin-left: 65px !important;
 	margin-top: -13px;
 	position: absolute !important;
 }
 
-#button1 {
+#reports {
 	position: absolute !important;
 	margin-left: 200px;
 	margin-top: -13px;
