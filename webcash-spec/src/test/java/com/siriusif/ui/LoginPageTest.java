@@ -54,7 +54,7 @@ public class LoginPageTest extends AbstractWebDriverTest {
 	 */
 	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
-		String[] pages = { "/pages/hall.jsf", "/pages/menu.jsf" };
+		String[] pages = { "/pages/hall.jsf", "/pages/hall_use.jsf", "/pages/order.jsf", "/pages/orders_list.jsf" };
 		for (String page : pages) {
 			get(page);
 			assertTrue(isNoFatalErrors());
