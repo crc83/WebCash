@@ -22,6 +22,10 @@ import com.siriusif.service.model.OrderDao;
 
 import static com.siriusif.model.helpers.TestHelper.amount;
 
+/**
+ * @author Администратор
+ *
+ */
 @Component(value="orderProcess")
 public class OrderProcessImpl implements OrderProcess {
 
@@ -78,7 +82,8 @@ public class OrderProcessImpl implements OrderProcess {
 	 * @param orderId
 	 * @return new suborder add in open order and doesn't create new Order
 	 */
-	public Order addSuborder(Long orderId) {
+	@Override
+	public Order addSuborder(long orderId) {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
 		suborder.setIndex(orderDao.countOfSuborders(orderId) + 1);
@@ -106,6 +111,10 @@ public class OrderProcessImpl implements OrderProcess {
 		return closeOrder;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.siriusif.process.OrderProcess#addGoodsToOrder(java.lang.Long, java.lang.Long)
+	 * Add goods to Order
+	 */
 	@Override
 	public Order addGoodsToOrder(Long goodId, Long orderId){
 		Sale sale = new Sale();
