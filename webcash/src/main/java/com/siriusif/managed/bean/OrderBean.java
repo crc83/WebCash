@@ -52,6 +52,8 @@ public class OrderBean {
 	private long orderId;
 
 	private long goodId;
+	
+	private long suborderId;
 
 	/**
 	 * get order id from http request
@@ -108,7 +110,7 @@ public class OrderBean {
 				.get("selectedGood");
 		goodId = good.getId();
 		LOGGER.info("Good id is: " + goodId);
-		order = orderProcess.addGoodsToOrder(goodId, orderId);
+		order = orderProcess.addGoodsToOrder(goodId, orderId, suborderId);
 		// Sale sale = new Sale();
 		// sale.setSalesGood(good);
 		// sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));
@@ -124,6 +126,12 @@ public class OrderBean {
 		// // FacesContext.getCurrentInstance().addMessage(null, new
 		// // FacesMessage("Welcome " + "!"));
 
+	}
+	
+	public void suborderId(ActionEvent event){
+		Suborder suborder = (Suborder) event.getComponent().getAttributes().get("selectedSuborder");
+		suborderId = suborder.getId();
+		LOGGER.info("Suborder id: " + suborderId);
 	}
 
 	/**
@@ -167,5 +175,13 @@ public class OrderBean {
 
 	public void setGoodId(long goodId) {
 		this.goodId = goodId;
+	}
+	
+	public long getSuborderId() {
+		return suborderId;
+	}
+	
+	public void setSuborderId(long suborderId) {
+		this.suborderId = suborderId;
 	}
 }

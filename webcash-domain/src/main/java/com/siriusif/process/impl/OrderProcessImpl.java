@@ -19,6 +19,7 @@ import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
+import com.siriusif.service.model.SuborderDao;
 
 import static com.siriusif.model.helpers.TestHelper.amount;
 
@@ -33,6 +34,9 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private SuborderDao suborderDao;
 
 	@Autowired
 	private DinnerTableDao tableDao;
@@ -49,11 +53,11 @@ public class OrderProcessImpl implements OrderProcess {
 	 */
 	@Override
 	public Order newOrder(Long idTable) {
-		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
-		if (currentWorkshift == null){
-			LOGGER.debug("We have some troubles with getting new workshift for some reason");
-			return null;
-		}
+//		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
+//		if (currentWorkshift == null){
+//			LOGGER.debug("We have some troubles with getting new workshift for some reason");
+//			return null;
+//		}
 		DinnerTable table;
 		try {
 			table = tableDao.find(idTable);
@@ -70,7 +74,7 @@ public class OrderProcessImpl implements OrderProcess {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate) + 1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-		newOrder.setWorkShift(currentWorkshift);
+//		newOrder.setWorkShift(currentWorkshift);
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 
@@ -116,13 +120,14 @@ public class OrderProcessImpl implements OrderProcess {
 	 * Add goods to Order
 	 */
 	@Override
-	public Order addGoodsToOrder(Long goodId, Long orderId){
+	public Order addGoodsToOrder(Long goodId, Long orderId, Long suborderId){
 		Sale sale = new Sale();
 		Good good = goodDao.find(goodId);
+		Suborder suborder = suborderDao.find(suborderId);
 		Order order = orderDao.find(orderId);
 		sale.setAmount(amount(1.00));
 		sale.setSalesGood(good);
-		order.getSuborders().get(0).addSale(sale);
+		order.getSuborders().get(suborder.getIndex()-1).addSale(sale);
 		
 		orderDao.update(order);
 		return order;
@@ -153,4 +158,11 @@ public class OrderProcessImpl implements OrderProcess {
 		return orderDao.find(orderId);
 	}
 
+	public SuborderDao getSuborderDao() {
+		return suborderDao;
+	}
+	
+	public void setSuborderDao(SuborderDao suborderDao) {
+		this.suborderDao = suborderDao;
+	}
 }

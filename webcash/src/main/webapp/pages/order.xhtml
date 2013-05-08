@@ -29,7 +29,9 @@
 				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
 					<p:subTable var="sales" value="#{suborder.sales}">
 						<f:facet name="header">  
-              			Подача: #{suborder.index}   
+					<p:commandButton value="Подача: #{suborder.index}" actionListener="#{orderBean.suborderId}">
+              			   <f:attribute name="selectedSuborder" value="#{suborder}" />
+           			</p:commandButton>
            			</f:facet>
 						<p:column>  
                 		#{sales.salesGood.name}  
