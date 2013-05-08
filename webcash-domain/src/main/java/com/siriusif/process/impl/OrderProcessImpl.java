@@ -45,11 +45,11 @@ public class OrderProcessImpl implements OrderProcess {
 	 */
 	@Override
 	public Order newOrder(Long idTable) {
-		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
-		if (currentWorkshift == null){
-			LOGGER.debug("We have some troubles with getting new workshift for some reason");
-			return null;
-		}
+//		Workshift currentWorkshift = workshiftProcess.getOpenWorkshift();
+//		if (currentWorkshift == null){
+//			LOGGER.debug("We have some troubles with getting new workshift for some reason");
+//			return null;
+//		}
 		DinnerTable table;
 		try {
 			table = tableDao.find(idTable);
@@ -66,7 +66,7 @@ public class OrderProcessImpl implements OrderProcess {
 		newOrder.setAuthor("admin");
 		newOrder.setDailyId(orderDao.conutDailyId(workingDate) + 1);
 		newOrder.setStatus(Order.STATUS_OPEN_DATA);
-		newOrder.setWorkShift(currentWorkshift);
+//		newOrder.setWorkShift(currentWorkshift);
 		newOrder.setTable(table);
 		newOrder.addSuborder(new Suborder(1));
 
@@ -78,7 +78,8 @@ public class OrderProcessImpl implements OrderProcess {
 	 * @param orderId
 	 * @return new suborder add in open order and doesn't create new Order
 	 */
-	public Order addSuborder(Long orderId) {
+	@Override
+	public Order addSuborder(long orderId) {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
 		suborder.setIndex(orderDao.countOfSuborders(orderId) + 1);
