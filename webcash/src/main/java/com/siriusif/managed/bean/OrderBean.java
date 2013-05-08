@@ -25,6 +25,14 @@ import com.siriusif.service.model.GroupDao;
 
 //import static com.siriusif.model.helpers.TestHelper.*;
 
+/**
+ * @author Администратор
+ *
+ */
+/**
+ * @author Администратор
+ *
+ */
 @ManagedBean(name = "orderBean")
 @ViewScoped
 public class OrderBean {
@@ -45,6 +53,10 @@ public class OrderBean {
 
 	private long goodId;
 
+	/**
+	 * get order id from http request
+	 * view opened order
+	 */
 	@PostConstruct
 	public void init() {
 		LOGGER.info("starting view");
@@ -57,6 +69,10 @@ public class OrderBean {
 		order = orderProcess.getOrder(orderId);
 	}
 
+	/**
+	 * @return
+	 * view groups and goods
+	 */
 	public List<Group> getGroups() {
 		groups = groupDao.list();
 		for (Group group : groups) {
@@ -82,6 +98,10 @@ public class OrderBean {
 	// }
 	// }
 
+	/**
+	 * @param evt
+	 * add selected good to order
+	 */
 	public void onClick(ActionEvent evt) {
 		LOGGER.info(evt.toString());
 		Good good = (Good) evt.getComponent().getAttributes()
@@ -106,6 +126,9 @@ public class OrderBean {
 
 	}
 
+	/**
+	 * add new suborder to order
+	 */
 	public void addNewSuborder() {
 		order = orderProcess.addSuborder(orderId);
 	}

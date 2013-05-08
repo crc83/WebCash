@@ -20,6 +20,7 @@
 				<h:outputText id="textOrder" value="ЗАМОВЛЕННЯ" />
 			</div>
 			<h:form>
+				<!-- Button add new suborder in active Order -->
 				<p:commandButton value="Нова подача"
 					actionListener="#{orderBean.addNewSuborder}" update=":addGood" />
 			</h:form>
