@@ -26,7 +26,7 @@
 			</h:form>
 			<h:form id="mylink">
 				<ui:repeat var="suborder" value="#{orderBean.order.suborders}">
-					<p:commandLink value="Подача: #{suborder.index}"
+					<p:commandLink id="selectSuborder_#{suborder.id}" value="Подача: #{suborder.index}"
 						actionListener="#{orderBean.activeSuborderId}">
 						<f:attribute name="selectedSuborder" value="#{suborder}" />
 					</p:commandLink>
@@ -50,6 +50,9 @@
                 		#{sales.salesGood.price}  
             		</p:column>
 						<p:column>
+							<p:rowEditor />
+						</p:column>
+						<p:column>
 							<p:cellEditor>
 								<f:facet name="output">
 									<h:outputText value="#{sales.amount}" />
@@ -62,9 +65,6 @@
 						<p:column>  
                 		#{sales.calculatedSum}  
             		</p:column>
-						<p:column>
-							<p:rowEditor />
-						</p:column>
 						<p:columnGroup type="footer">
 							<p:row>
 								<p:column colspan="3" footerText="Сума: "
