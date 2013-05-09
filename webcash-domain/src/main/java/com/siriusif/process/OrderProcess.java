@@ -18,4 +18,6 @@ public interface OrderProcess {
 
 	Order addSuborder(long orderId);
 
+	int countOfSuborders(long orderId);
+
 }

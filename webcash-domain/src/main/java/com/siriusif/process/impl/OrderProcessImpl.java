@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Good;
@@ -120,6 +121,7 @@ public class OrderProcessImpl implements OrderProcess {
 	 * Add goods to Order
 	 */
 	@Override
+	@Transactional
 	public Order addGoodsToOrder(Long goodId, Long orderId, Long suborderId){
 		Sale sale = new Sale();
 		Good good = goodDao.find(goodId);
@@ -157,12 +159,9 @@ public class OrderProcessImpl implements OrderProcess {
 	public Order getOrder(long orderId) {
 		return orderDao.find(orderId);
 	}
-
-	public SuborderDao getSuborderDao() {
-		return suborderDao;
-	}
 	
-	public void setSuborderDao(SuborderDao suborderDao) {
-		this.suborderDao = suborderDao;
+	@Override
+	public int countOfSuborders(long orderId){
+		return orderDao.countOfSuborders(orderId);
 	}
 }
