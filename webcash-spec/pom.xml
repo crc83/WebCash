@@ -48,7 +48,13 @@
 			<artifactId>webcash-domain</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.codeborne</groupId>
+			<artifactId>selenide</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>

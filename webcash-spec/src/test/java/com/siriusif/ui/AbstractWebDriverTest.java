@@ -24,7 +24,7 @@ import com.google.common.base.Function;
 
 public class AbstractWebDriverTest {
 	private static final String BROWSER_TYPE = "test.browser.type";
-	private static final String DAMP_FOLDER = "test.damp.folder";
+	private static final String DUMP_FOLDER = "test.damp.folder";
 
 	public static Logger LOGGER = Logger.getLogger(AbstractWebDriverTest.class);
 	public static WebDriver browser;
@@ -32,7 +32,7 @@ public class AbstractWebDriverTest {
 
 	@Before
 	public void setUpBrowser() {
-		String browserType = "";// System.getenv(BROWSER_TYPE);
+		String browserType = "firefox";// System.getenv(BROWSER_TYPE);
 		if ("firefox".equals(browserType)) {
 			initFirefox();
 		} else if ("iexplorer".equals(browserType)) {
@@ -100,7 +100,7 @@ public class AbstractWebDriverTest {
 		}
 		return result;
 	}
-
+	
 	public boolean isNoFatalErrors() {
 		browser.getPageSource();
 		boolean errorsPresent = isElementPresent(By.id("trace"));
@@ -118,7 +118,7 @@ public class AbstractWebDriverTest {
 	}
 
 	private void saveToFile(String html) {
-		String dampFolder = System.getenv(DAMP_FOLDER);
+		String dampFolder = System.getenv(DUMP_FOLDER);
 		if (dampFolder == null || "".equals(dampFolder)) {
 			return;
 		}

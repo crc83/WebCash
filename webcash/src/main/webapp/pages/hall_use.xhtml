@@ -18,13 +18,24 @@
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
 				<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<h:graphicImage style="
-						margin-top: #{table.top}px;
-						margin-left: #{table.left}px; 
-						position: absolute;" 
-					value="/images/table.png"
-					onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
-					</h:graphicImage>
+					<div style="
+							margin-top: #{table.top}px;
+							margin-left: #{table.left}px; 
+							position: absolute;"
+							
+							onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
+							
+						<p:panel 
+							footer="#{table.description}">
+							<f:facet name="header">
+								<h:graphicImage
+									value="/images/table.png"
+									onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
+								</h:graphicImage>
+							</f:facet>
+							#{table.name}
+						</p:panel >
+					</div>
 				</ui:repeat>
 
 				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="false"
