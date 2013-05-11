@@ -1,29 +1,22 @@
 package com.siriusif.ui;
 
 import java.io.PrintWriter;
-import java.util.NoSuchElementException;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.support.ui.FluentWait;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.common.base.Function;
 
+@Deprecated
 public class AbstractWebDriverTest {
-	private static final String BROWSER_TYPE = "test.browser.type";
 	private static final String DUMP_FOLDER = "test.damp.folder";
 
 	public static Logger LOGGER = Logger.getLogger(AbstractWebDriverTest.class);
@@ -80,6 +73,7 @@ public class AbstractWebDriverTest {
 	 *            related address (i.e. /pages/menu.jsf opens
 	 *            http://localhost:8080/webcash/pages/menu.jsf)
 	 */
+	@Deprecated
 	public void get(String relatedAddress) {
 		browser.get("http://localhost:8080/webcash" + relatedAddress);
 	}
@@ -91,6 +85,7 @@ public class AbstractWebDriverTest {
 	 *            selector of element
 	 * @return true if element present
 	 */
+	@Deprecated
 	public boolean isElementPresent(By by) {
 		boolean result = false;
 		try {
@@ -101,6 +96,7 @@ public class AbstractWebDriverTest {
 		return result;
 	}
 	
+	@Deprecated
 	public boolean isNoFatalErrors() {
 		browser.getPageSource();
 		boolean errorsPresent = isElementPresent(By.id("trace"));
@@ -111,6 +107,7 @@ public class AbstractWebDriverTest {
 		return !errorsPresent;
 	}
 
+	@Deprecated
 	public void debugPageSource() {
 		String html = browser.getPageSource();
 		LOGGER.debug(html);
@@ -143,6 +140,7 @@ public class AbstractWebDriverTest {
 	 *            of caller
 	 * @return caller
 	 */
+	@Deprecated
 	public static StackTraceElement getCaller(int depth) {
 		StackTraceElement[] stackTraceElements = Thread.currentThread()
 				.getStackTrace();
@@ -151,6 +149,7 @@ public class AbstractWebDriverTest {
 		return stackTraceElements[correctedDepth];
 	}
 
+	@Deprecated
 	public void doLoginAsAdmin() {
 		browser.findElement(By.id("loginForm:username")).clear();
 		browser.findElement(By.id("loginForm:username")).sendKeys("admin");

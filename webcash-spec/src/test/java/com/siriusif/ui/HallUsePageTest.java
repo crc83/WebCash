@@ -1,12 +1,22 @@
 package com.siriusif.ui;
 
-import static org.junit.Assert.assertTrue;
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Configuration.baseUrl;
+import static com.codeborne.selenide.Configuration.browser;
+import static com.codeborne.selenide.Configuration.timeout;
+import static com.codeborne.selenide.Selectors.byText;
+import static com.siriusif.ui.helper.SelenideJSFErrorChecker.assertNoErrorss;
+import static com.siriusif.ui.helper.SelenideJSFErrorChecker.errorReportsFolder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+
+import org.apache.log4j.Logger;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+
+import com.codeborne.selenide.Condition;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 
 /**
@@ -14,7 +24,27 @@ import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
  * 
  * @author sbelei
  */
-public class HallUsePageTest extends AbstractWebDriverTest {
+public class HallUsePageTest {
+	
+	public static Logger LOGGER = Logger.getLogger(HallUsePageTest.class);
+	
+	@Before
+	public void setUp() {
+	    timeout = 10000;
+	    baseUrl = "http://localhost:8080/webcash";
+	    browser = "htmlunit";
+	    errorReportsFolder = "d:/temp";
+	    open("/");
+	    login();
+	}
+
+	private void login() {
+		$(By.id("loginForm:username")).clear();
+		$(By.id("loginForm:username")).sendKeys("admin");
+		$(By.id("loginForm:password")).clear();
+		$(By.id("loginForm:password")).sendKeys("admin");
+		$(By.id("loginForm:loginButton")).click();
+	}
 
 	/**
 	 * given : I'm on a root path 
@@ -23,10 +53,10 @@ public class HallUsePageTest extends AbstractWebDriverTest {
 	 */
 //	@Test
 	public void testOpenHallUse() {
-		get("");
-		assertTrue(isNoFatalErrors());
-		doLoginAsAdmin();
-		isElementPresent(By.id("hall_use"));
+//		get("");
+//		assertTrue(isNoFatalErrors());
+//		doLoginAsAdmin();
+//		isElementPresent(By.id("hall_use"));
 	}
 
 	/**
@@ -41,19 +71,10 @@ public class HallUsePageTest extends AbstractWebDriverTest {
 	public void testSelectTableFromFirstHall()
 			throws FailingHttpStatusCodeException, MalformedURLException,
 			IOException {
-		get("");
-		doLoginAsAdmin();
-		isElementPresent(By.id("hall_use"));
-		try{
-			browser.findElement(By.xpath("//div[contains(text(), 'Стіл 1')]")).click();
-		} catch(Exception e){
-			//nop
-		}
-		// http://htmlunit.sourceforge.net/faq.html#AJAXDoesNotWork
-		isElementPresent(By.id("order_list"));
-		debugPageSource();
-		assertTrue(isNoFatalErrors());
-
+		$("#hall_use").shouldBe(Condition.hidden);
+		$(byText("Стіл 1")).click();
+		$("#order_list").shouldBe(Condition.hidden);
+		assertNoErrorss();
 	}
 
 }
