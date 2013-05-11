@@ -71,4 +71,10 @@
 			ignore-resource-not-found="true" 
 			location="classpath:/webcash-database.properties"/>
 	</beans>
+	
+	<beans profile="import">
+		<context:property-placeholder
+			ignore-resource-not-found="true" 
+			location="classpath:/webcash-import.properties"/>
+	</beans>
 </beans>

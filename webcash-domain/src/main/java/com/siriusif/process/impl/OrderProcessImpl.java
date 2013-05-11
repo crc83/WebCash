@@ -9,14 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.siriusif.model.DinnerTable;
+import com.siriusif.model.Good;
 import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.model.Workshift;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
+import com.siriusif.service.model.GoodDao;
 import com.siriusif.service.model.OrderDao;
 
+import static com.siriusif.model.helpers.TestHelper.amount;
+
+/**
+ * @author Администратор
+ *
+ */
 @Component(value="orderProcess")
 public class OrderProcessImpl implements OrderProcess {
 
@@ -27,6 +36,9 @@ public class OrderProcessImpl implements OrderProcess {
 
 	@Autowired
 	private DinnerTableDao tableDao;
+	
+	@Autowired
+	private GoodDao goodDao;
 
 	@Autowired
 	private WorkshiftProcess workshiftProcess;
@@ -47,7 +59,8 @@ public class OrderProcessImpl implements OrderProcess {
 			table = tableDao.find(idTable);
 		} catch (Exception e) {
 			// we can't find table for some reason
-			LOGGER.info("Can't find table in database", e);
+			LOGGER.info("Can't find table by id="+idTable);
+			LOGGER.debug("Caused by:",e);
 			return null;
 		}
 		Order newOrder = new Order();
@@ -69,12 +82,13 @@ public class OrderProcessImpl implements OrderProcess {
 	 * @param orderId
 	 * @return new suborder add in open order and doesn't create new Order
 	 */
-	public Order addSuborder(Long orderId) {
+	@Override
+	public Order addSuborder(long orderId) {
 		Order order = orderDao.find(orderId);
 		Suborder suborder = new Suborder();
 		suborder.setIndex(orderDao.countOfSuborders(orderId) + 1);
-		LOGGER.info("CS Order: " + order);
-		LOGGER.info("CS Suborder: " + suborder);
+		LOGGER.debug("Order: " + order);
+		LOGGER.debug("Suborder: " + suborder);
 		order.addSuborder(suborder);
 
 		orderDao.update(order);
@@ -96,11 +110,37 @@ public class OrderProcessImpl implements OrderProcess {
 		orderDao.update(closeOrder);
 		return closeOrder;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.siriusif.process.OrderProcess#addGoodsToOrder(java.lang.Long, java.lang.Long)
+	 * Add goods to Order
+	 */
+	@Override
+	public Order addGoodsToOrder(Long goodId, Long orderId){
+		Sale sale = new Sale();
+		Good good = goodDao.find(goodId);
+		Order order = orderDao.find(orderId);
+		sale.setAmount(amount(1.00));
+		sale.setSalesGood(good);
+		order.getSuborders().get(0).addSale(sale);
+		
+		orderDao.update(order);
+		return order;
+	}
 
 	@Override
-	public int countOpenedForTableId(long tableId) {
-		DinnerTable table = tableDao.find(tableId);
-		return orderDao.countOpenedForTable(table);
+	public int countOpenedForTableId(long tableId) {		
+		int result = Integer.MAX_VALUE;
+		try {
+			DinnerTable table = tableDao.find(tableId);
+			if (table != null) {
+				result = orderDao.countOpenedForTable(table);
+			}
+		} catch (Exception e){
+			LOGGER.info("Error while counting orders for tableId="+tableId);
+			LOGGER.debug("Caused by", e);
+		}
+		return result;
 	}
 
 	@Override

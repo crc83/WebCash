@@ -21,7 +21,6 @@ public class AbstractWebDriverTest {
 
 	public static Logger LOGGER = Logger.getLogger(AbstractWebDriverTest.class);
 	public static WebDriver browser;
-	public static WebClient webClient;
 
 	@Before
 	public void setUpBrowser() {
