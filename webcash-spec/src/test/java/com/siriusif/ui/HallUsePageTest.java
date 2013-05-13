@@ -1,6 +1,7 @@
 package com.siriusif.ui;
 
 import static com.codeborne.selenide.Selenide.*;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Configuration.browser;
 import static com.codeborne.selenide.Configuration.timeout;
@@ -41,9 +42,9 @@ public class HallUsePageTest extends UITestBase{
 			IOException {
 	    open("/");
 	    Login.asAdmin();
-		$("#hall_use").shouldBe(Condition.hidden);
+		$("#hall_use").should(exist);
 		$(byText("Стіл 1")).click();
-		$("#order_list").shouldBe(Condition.hidden);
+		$("#order_list").should(exist);
 		assertNoErrors();
 	}
 

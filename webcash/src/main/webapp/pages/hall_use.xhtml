@@ -25,16 +25,16 @@
 							
 							onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
 							
-						<p:panel 
-							footer="#{table.description}">
-							<f:facet name="header">
+						<p:panel>
+								#{table.name} -
+								#{table.description}
+							<f:facet name="footer">
 								<h:graphicImage
 									value="/images/table.png"
 									onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
 								</h:graphicImage>
 							</f:facet>
-							#{table.name}
-						</p:panel >
+						</p:panel>
 					</div>
 				</ui:repeat>
 

@@ -17,15 +17,7 @@ import com.siriusif.ui.helper.UITestBase;
  */
 public class LoginPageTest extends UITestBase {
 	
-	/**
-	 * Check if it's login page. (login and password inputs should present)
-	 */
-	private void assertIfLoginPage() {
-		assertNoErrors();
-		$(By.id("loginForm:username")).should(exist);
-		$(By.id("loginForm:password")).should(exist);
-	}
-	
+
 	
 	/**
 	 * when : I open root path 
@@ -34,7 +26,8 @@ public class LoginPageTest extends UITestBase {
 	@Test
 	public void testLoginPageOnRootPath() {
 		open("/");
-		assertIfLoginPage();
+		Login.assertTrue();
+		assertNoErrors();
 	}
 
 	/**
@@ -61,7 +54,8 @@ public class LoginPageTest extends UITestBase {
 		for (String page : pages) {
 			open(page);
 			LOGGER.info("Opening page:"+page);
-			assertIfLoginPage();
+			Login.assertTrue();
+			assertNoErrors();
 		}
 	}
 }
