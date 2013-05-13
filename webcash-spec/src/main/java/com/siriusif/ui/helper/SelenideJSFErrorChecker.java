@@ -43,7 +43,7 @@ public class SelenideJSFErrorChecker {
 	 * Set <code>errorReportsFolder</code> or "test.dump.folder" 
 	 * to define where to save error dumps.
 	 */
-	public static void assertNoErrorss() {
+	public static void assertNoErrors() {
 		if ($("#trace").exists()) {
 			LOGGER.info("Error page detected at:" + getCaller(2));
 			LOGGER.debug(source());
