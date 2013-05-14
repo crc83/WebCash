@@ -1,24 +1,32 @@
 package com.siriusif.managed.bean;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.pattern.LogEvent;
+import org.primefaces.event.CellEditEvent;
 
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
 import com.siriusif.model.Order;
+import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.service.model.GroupDao;
+import com.siriusif.service.model.SaleDao;
+
+import static com.siriusif.model.helpers.TestHelper.amount;
 
 //import static com.siriusif.model.helpers.TestHelper.*;
 
@@ -43,6 +51,9 @@ public class OrderBean {
 
 	@ManagedProperty(value = "#{groupDao}")
 	private GroupDao groupDao;
+	
+	@ManagedProperty(value = "#{saleDao}")
+	private SaleDao saleDao;
 
 	private List<Group> groups;
 
@@ -51,6 +62,8 @@ public class OrderBean {
 	private long goodId;
 
 	private long suborderId;
+	
+	private long saleId;
 
 	/**
 	 * get order id from http request
@@ -114,6 +127,21 @@ public class OrderBean {
 	public void addNewSuborder() {
 		order = orderProcess.addSuborder(orderId);
 		suborderId = order.getSuborders().get(orderProcess.countOfSuborders(orderId)-1).getId();
+	}
+	
+	public void editAmount(ValueChangeEvent event){ 
+		BigDecimal newAmount = (BigDecimal) event.getNewValue();
+        Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
+        saleId = sale.getId();
+        orderProcess.uptadeSale(saleId, newAmount);
+	}
+
+	public SaleDao getSaleDao() {
+		return saleDao;
+	}
+
+	public void setSaleDao(SaleDao saleDao) {
+		this.saleDao = saleDao;
 	}
 
 	public Order getOrder() {

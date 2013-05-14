@@ -26,6 +26,7 @@
 			</h:form>
 			<!-- begin table order view -->
 			<h:form id="addGood">
+			 <p:growl id="messages" showDetail="true"/> 
 				<ui:repeat var="suborder" value="#{orderBean.order.suborders}">
 					<p:dataTable id="order_table" var="sales" value="#{suborder.sales}">
 						<f:facet name="header">
@@ -42,9 +43,11 @@
             			</p:column>
 						<p:column width="20%" headerText="Кількість">
 							<p:inplace editor="true">
-								<p:keyboard value="#{sales.amount}" required="true"
+								<p:keyboard valueChangeListener="#{orderBean.editAmount}" value="#{sales.amount}" required="true"
 									label="text" maxlength="6" size="6" layout="custom"  
-                					layoutTemplate="123-close,456-clear,789-back,0."/>
+                					layoutTemplate="123-close,456-clear,789-back,0." onclick="inplace.clear()">
+                					<f:attribute name="selectedSale" value="#{sales}" />
+                					</p:keyboard>
 							</p:inplace>
 						</p:column>
 						<p:column width="15%" headerText="Сума">  
