@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Web Cash</title>
-	<h:outputStylesheet library="css" name="menu.css" />
+	<h:outputStylesheet library="css" name="order.css" />
 </h:head>
 <h:body>
 	<div id="head">
@@ -26,39 +26,43 @@
 			</h:form>
 			<!-- begin table order view -->
 			<h:form id="addGood">
-				<p:dataTable var="suborder" value="#{orderBean.order.suborders}">
-					<p:subTable var="sales" value="#{suborder.sales}">
-						<f:facet name="header">  
-              			Подача: #{suborder.index}   
-           			</f:facet>
-						<p:column>  
-                		#{sales.salesGood.name}  
-            		</p:column>
-						<p:column>  
-                		#{sales.salesGood.price}  
-            		</p:column>
-						<p:column>  
-                		#{sales.amount}  
-            		</p:column>
-						<p:column>  
-                		#{sales.calculatedSum}  
-            		</p:column>
+				<ui:repeat var="suborder" value="#{orderBean.order.suborders}">
+					<p:dataTable id="order_table" var="sales" value="#{suborder.sales}">
+						<f:facet name="header">
+							<p:commandLink value="Подача: #{suborder.index}"
+								actionListener="#{orderBean.activeSuborderId}">
+								<f:attribute name="selectedSuborder" value="#{suborder}" />
+							</p:commandLink>
+						</f:facet>
+						<p:column width="55%" filterMaxLength="20" headerText="Назва страви"> 
+							#{sales.salesGood.name}
+            			</p:column>
+						<p:column width="10%" headerText="Ціна">  
+                			#{sales.salesGood.price}  
+            			</p:column>
+						<p:column width="20%" headerText="Кількість">
+							<p:inplace editor="true">
+								<p:inputText value="#{sales.amount}" required="true"
+									label="text" maxlength="6" size="6" />
+							</p:inplace>
+						</p:column>
+						<p:column width="15%" headerText="Сума">  
+                			#{sales.calculatedSum}  
+            			</p:column>
 						<p:columnGroup type="footer">
 							<p:row>
-								<p:column colspan="3" footerText="Сума: "
+								<p:column colspan="3" footerText="Сума по чеку: "
 									style="text-align:right" />
 								<p:column footerText="#{suborder.total}" />
 							</p:row>
 						</p:columnGroup>
-					</p:subTable>
-					<p:columnGroup type="footer">
-						<p:row>
-							<p:column colspan="3" footerText="Сума по чеку: "
-								style="text-align:right" />
-							<p:column footerText="#{order.total}" />
-						</p:row>
-					</p:columnGroup>
-				</p:dataTable>
+					</p:dataTable>
+				</ui:repeat>
+				<p:toolbar>
+					<p:toolbarGroup>
+						<h:outputText value="Сума по чеку: #{orderBean.order.total}" styleClass="total"/>
+					</p:toolbarGroup>
+				</p:toolbar>
 			</h:form>
 			<!-- end table order view -->
 			<p:button value="Зберегти" href="/pages/hall.jsf" />

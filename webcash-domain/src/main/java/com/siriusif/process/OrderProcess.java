@@ -14,8 +14,10 @@ public interface OrderProcess {
 
 	Order getOrder(long orderId);
 
-	Order addGoodsToOrder(Long goodId, Long orderId);
+	Order addGoodsToOrder(Long goodId, Long orderId, Long suborderId);
 
 	Order addSuborder(long orderId);
+
+	int countOfSuborders(long orderId);
 
 }
