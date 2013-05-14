@@ -113,6 +113,7 @@ public class OrderBean {
 	 */
 	public void addNewSuborder() {
 		order = orderProcess.addSuborder(orderId);
+		suborderId = order.getSuborders().get(orderProcess.countOfSuborders(orderId)-1).getId();
 	}
 
 	public Order getOrder() {

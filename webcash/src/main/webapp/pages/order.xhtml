@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>Web Cash</title>
-	<h:outputStylesheet library="css" name="menu.css" />
+	<h:outputStylesheet library="css" name="order.css" />
 </h:head>
 <h:body>
 	<div id="head">
@@ -60,7 +60,7 @@
 				</ui:repeat>
 				<p:toolbar>
 					<p:toolbarGroup>
-						<h:outputText value="Сума по чеку: #{orderBean.order.total}" />
+						<h:outputText value="Сума по чеку: #{orderBean.order.total}" styleClass="total"/>
 					</p:toolbarGroup>
 				</p:toolbar>
 			</h:form>
