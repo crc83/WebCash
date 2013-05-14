@@ -42,8 +42,9 @@
             			</p:column>
 						<p:column width="20%" headerText="Кількість">
 							<p:inplace editor="true">
-								<p:inputText value="#{sales.amount}" required="true"
-									label="text" maxlength="6" size="6" />
+								<p:keyboard value="#{sales.amount}" required="true"
+									label="text" maxlength="6" size="6" layout="custom"  
+                					layoutTemplate="123-close,456-clear,789-back,0."/>
 							</p:inplace>
 						</p:column>
 						<p:column width="15%" headerText="Сума">  

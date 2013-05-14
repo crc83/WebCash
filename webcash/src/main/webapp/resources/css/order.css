@@ -39,7 +39,3 @@
 .ui-datatable td,.ui-datatable th {
     white-space: normal !important;
 }
-
-.total{
-	float: right;
-}
