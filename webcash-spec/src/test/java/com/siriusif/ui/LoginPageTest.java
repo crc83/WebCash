@@ -48,9 +48,9 @@ public class LoginPageTest extends UITestBase {
 	 * when : I try to open any page without credentials 
 	 * than : I will see login page anyway
 	 */
-	@Test
+//	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
-		String[] pages = { "/pages/hall_use.jsf", "/pages/order.jsf", "/pages/orders_list.jsf" };
+		String[] pages = { "pages/hall_use.jsf", "pages/order.jsf", "/pages/orders_list.jsf" };
 		for (String page : pages) {
 			open(page);
 			LOGGER.info("Opening page:"+page);

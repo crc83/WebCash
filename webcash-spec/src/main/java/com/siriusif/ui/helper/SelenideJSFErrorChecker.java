@@ -9,8 +9,6 @@ import java.io.PrintWriter;
 
 import org.apache.log4j.Logger;
 
-import com.siriusif.ui.HallUsePageTest;
-
 public class SelenideJSFErrorChecker {
 	
 	/** Folder where to store pages with JSF stacktraces.
@@ -20,7 +18,7 @@ public class SelenideJSFErrorChecker {
 	 */
 	public static String errorReportsFolder;
 	
-	private static Logger LOGGER = Logger.getLogger(HallUsePageTest.class);
+	private static Logger LOGGER = Logger.getLogger(SelenideJSFErrorChecker.class);
 	private static final String DUMP_FOLDER = "test.dump.folder";
 	
 	/**

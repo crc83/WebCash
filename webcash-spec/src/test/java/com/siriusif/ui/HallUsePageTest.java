@@ -2,6 +2,7 @@ package com.siriusif.ui;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.exist;
+import static com.codeborne.selenide.Condition.notPresent;
 import static com.codeborne.selenide.Selectors.withText;
 import static com.siriusif.ui.helper.SelenideJSFErrorChecker.assertNoErrors;
 
@@ -35,10 +36,11 @@ public class HallUsePageTest extends UITestBase{
 			IOException {
 	    open("/");
 	    Login.asAdmin();
+	    assertNoErrors();
 		$("#hall_use").exists();;
-		assertNoErrors();
 		$(withText("Стіл 1")).click();
-		$("#order").should(exist);
+		assertNoErrors();
+		$("#hall_use").should(notPresent);
 	}
 
 }
