@@ -8,7 +8,7 @@
 </h:head>
 <h:body>
 	<p:growl id="growl" showDetail="true" life="3000" />
-	<p:dialog id="modalDialog" header="Login" visible="true">
+	<p:dialog id="modalDialog" header="#{msgs.login_dialog_title}" visible="true">
 		<h:form id="loginForm">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="#{msgs.login_username}" />

@@ -54,8 +54,8 @@ public class LoginPageTest extends UITestBase {
 		for (String page : pages) {
 			open(page);
 			LOGGER.info("Opening page:"+page);
-			Login.assertTrue();
 			assertNoErrors();
+			Login.assertTrue();
 		}
 	}
 }

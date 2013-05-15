@@ -2,21 +2,14 @@ package com.siriusif.ui;
 
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Condition.exist;
-import static com.codeborne.selenide.Configuration.baseUrl;
-import static com.codeborne.selenide.Configuration.browser;
-import static com.codeborne.selenide.Configuration.timeout;
-import static com.codeborne.selenide.Selectors.byText;
+import static com.codeborne.selenide.Selectors.withText;
 import static com.siriusif.ui.helper.SelenideJSFErrorChecker.assertNoErrors;
-import static com.siriusif.ui.helper.SelenideJSFErrorChecker.errorReportsFolder;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
 
-import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.codeborne.selenide.Condition;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.siriusif.ui.helper.Login;
 import com.siriusif.ui.helper.UITestBase;
@@ -42,10 +35,10 @@ public class HallUsePageTest extends UITestBase{
 			IOException {
 	    open("/");
 	    Login.asAdmin();
-		$("#hall_use").should(exist);
-		$(byText("Стіл 1")).click();
-		$("#order_list").should(exist);
+		$("#hall_use").exists();;
 		assertNoErrors();
+		$(withText("Стіл 1")).click();
+		$("#order").should(exist);
 	}
 
 }
