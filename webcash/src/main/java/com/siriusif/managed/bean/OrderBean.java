@@ -1,19 +1,21 @@
 package com.siriusif.managed.bean;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.pattern.LogEvent;
+import org.primefaces.event.CellEditEvent;
 
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
@@ -22,6 +24,9 @@ import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.service.model.GroupDao;
+import com.siriusif.service.model.SaleDao;
+
+import static com.siriusif.model.helpers.TestHelper.amount;
 
 //import static com.siriusif.model.helpers.TestHelper.*;
 
@@ -31,7 +36,7 @@ import com.siriusif.service.model.GroupDao;
  */
 /**
  * @author Администратор
- *
+ * 
  */
 @ManagedBean(name = "orderBean")
 @ViewScoped
@@ -46,12 +51,19 @@ public class OrderBean {
 
 	@ManagedProperty(value = "#{groupDao}")
 	private GroupDao groupDao;
+	
+	@ManagedProperty(value = "#{saleDao}")
+	private SaleDao saleDao;
 
 	private List<Group> groups;
 
 	private long orderId;
 
 	private long goodId;
+
+	private long suborderId;
+	
+	private long saleId;
 
 	/**
 	 * get order id from http request
@@ -67,6 +79,7 @@ public class OrderBean {
 		orderId = Long.parseLong(orderIdStr);
 		LOGGER.info("Recieved order id: " + orderId);
 		order = orderProcess.getOrder(orderId);
+		suborderId = order.getSuborders().get(0).getId();
 	}
 
 	/**
@@ -83,21 +96,6 @@ public class OrderBean {
 		return groups;
 	}
 
-	// public OrderBean(){
-	// //TODO SB : Remove this when we will have DB connection
-	// // begin
-	// FacesContext facesContext = FacesContext.getCurrentInstance();
-	// HttpSession session = (HttpSession)
-	// facesContext.getExternalContext().getSession(false);
-	// Object maybeOrder = session.getAttribute("order");
-	// // end
-	// if (maybeOrder == null) {
-	// orderView(orderIdStr);
-	// } else {
-	// order =(Order)maybeOrder;
-	// }
-	// }
-
 	/**
 	 * @param evt
 	 * add selected good to order
@@ -108,22 +106,19 @@ public class OrderBean {
 				.get("selectedGood");
 		goodId = good.getId();
 		LOGGER.info("Good id is: " + goodId);
-		order = orderProcess.addGoodsToOrder(goodId, orderId);
-		// Sale sale = new Sale();
-		// sale.setSalesGood(good);
-		// sale.setAmount(new BigDecimal(1).setScale(3, RoundingMode.HALF_UP));
-		// order.getSuborders().get(0).addSale(sale);
-		// // TODO SB : Remove this when we will have DB connection
-		// // begin
-		// FacesContext facesContext = FacesContext.getCurrentInstance();
-		// HttpSession session = (HttpSession) facesContext.getExternalContext()
-		// .getSession(true);
-		// session.setAttribute("order", order);
-		// // end
-		//
-		// // FacesContext.getCurrentInstance().addMessage(null, new
-		// // FacesMessage("Welcome " + "!"));
+		LOGGER.info("Suborder id is: " + suborderId);
+		for (Suborder suborder : order.getSuborders()) {
+			LOGGER.info("Suborders of order: " + suborder.getId());
+		}
+		order = orderProcess.addGoodsToOrder(goodId, orderId, suborderId);
+	}
 
+	public void activeSuborderId(ActionEvent event) {
+		LOGGER.info("On click: " + event.toString());
+		Suborder suborder = (Suborder) event.getComponent().getAttributes()
+				.get("selectedSuborder");
+		suborderId = suborder.getId();
+		LOGGER.info("Suborder id: " + suborderId);
 	}
 
 	/**
@@ -131,6 +126,22 @@ public class OrderBean {
 	 */
 	public void addNewSuborder() {
 		order = orderProcess.addSuborder(orderId);
+		suborderId = order.getSuborders().get(orderProcess.countOfSuborders(orderId)-1).getId();
+	}
+	
+	public void editAmount(ValueChangeEvent event){ 
+		BigDecimal newAmount = (BigDecimal) event.getNewValue();
+        Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
+        saleId = sale.getId();
+        orderProcess.uptadeSale(saleId, newAmount);
+	}
+
+	public SaleDao getSaleDao() {
+		return saleDao;
+	}
+
+	public void setSaleDao(SaleDao saleDao) {
+		this.saleDao = saleDao;
 	}
 
 	public Order getOrder() {
@@ -167,5 +178,13 @@ public class OrderBean {
 
 	public void setGoodId(long goodId) {
 		this.goodId = goodId;
+	}
+
+	public long getSuborderId() {
+		return suborderId;
+	}
+
+	public void setSuborderId(long suborderId) {
+		this.suborderId = suborderId;
 	}
 }
