@@ -48,6 +48,7 @@
                 					layoutTemplate="123-close,456-clear,789-back,0." onclick="inplace.clear()">
                 					<f:attribute name="selectedSale" value="#{sales}" />
                 					</p:keyboard>
+                					<p:ajax event="save" update=":addGood"/>
 							</p:inplace>
 						</p:column>
 						<p:column width="15%" headerText="Сума">  
