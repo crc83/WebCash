@@ -8,26 +8,6 @@
 	margin: 0px auto !important;
 }
 
-#head {
-	position: absolute;
-	z-index: 20 !important;
-}
-
-#panelleft {
-	position: absolute;
-}
-
-#panelright {
-	margin-left: 170px;
-}
-
-#hall {
-	position: absolute !important;
-	margin-left: 170px;
-	width: 430px;
-	height: 780px;
-}
-
 .ui-tabs .ui-tabs-panel {
 	padding-bottom: 0 !important;
 	margin-left: -28px !important;
