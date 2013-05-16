@@ -50,7 +50,7 @@ public class LoginPageTest extends UITestBase {
 	 */
 //	@Test
 	public void testAllOtherPagesAccessibleThroughLogin() {
-		String[] pages = { "pages/hall_use.jsf", "pages/order.jsf", "/pages/orders_list.jsf" };
+		String[] pages = { "/pages/hall_use.jsf", "/pages/order.jsf", "/pages/orders_list.jsf" };
 		for (String page : pages) {
 			open(page);
 			LOGGER.info("Opening page:"+page);
