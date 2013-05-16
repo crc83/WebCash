@@ -20,9 +20,11 @@ public class DinnerTableDaoImplTest extends AbstractSpringTest {
 	@Autowired
 	private DinnerTableDao tablesDao;
 
-	/*
-	 * When : I add table to db Then : 1) I should see that number of entities
-	 * in DB increased 2) I should read all fields from DB correctly
+	/**
+	 * When : I add table to db 
+	 * Then : 
+	 * 1) I should see that number of entities in DB increased 
+	 * 2) I should read all fields from DB correctly
 	 */
 	@Test
 	public void testAdd() throws JsonSyntaxException, JsonIOException,

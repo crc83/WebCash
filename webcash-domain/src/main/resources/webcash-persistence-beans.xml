@@ -45,6 +45,7 @@
 				<prop key="hibernate.show_sql">${db.showsql}</prop>
 				<prop key="hibernate.hbm2ddl.auto">${db.schema}</prop>
 				<prop key="org.hibernate.tool.hbm2ddl">true</prop>
+				<prop key="hibernate.query.jpaql_strict_compliance">true</prop>
 			</props>
 		</property>
 	</bean>
@@ -65,16 +66,17 @@
 	<beans profile="dev">
 		<context:property-placeholder location="classpath:/dev-database.properties"/>
 	</beans>
+
+	<beans profile="import">
+		<context:property-placeholder
+			ignore-resource-not-found="true"
+			ignore-unresolvable="true" 
+			location="classpath:/webcash-import.properties"/>
+	</beans>
 	
 	<beans profile="!dev, !test">
 		<context:property-placeholder
 			ignore-resource-not-found="true" 
 			location="classpath:/webcash-database.properties"/>
-	</beans>
-	
-	<beans profile="import">
-		<context:property-placeholder
-			ignore-resource-not-found="true" 
-			location="classpath:/webcash-import.properties"/>
 	</beans>
 </beans>

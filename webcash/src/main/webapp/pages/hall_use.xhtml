@@ -5,7 +5,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Hall</title>
+	<title>#{msgs.hall_use_title}</title>
 	<h:outputStylesheet library="css" name="hall.css" />
 </h:head>
 <DIV style="width: 800px; height: 1280px;">
@@ -18,29 +18,32 @@
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
 				<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<h:graphicImage style="
-						margin-top: #{table.top}px;
-						margin-left: #{table.left}px; 
-						position: absolute;" 
-					value="/images/table.png"
-					onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
-					</h:graphicImage>
+					<div style="
+							margin-top: #{table.top}px;
+							margin-left: #{table.left}px; 
+							position: absolute;"							
+							onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">							
+						<p:panel>
+								#{table.name} -
+								#{table.description}
+							<f:facet name="footer">
+								<h:graphicImage
+									value="/images/table.png"
+									onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
+								</h:graphicImage>
+							</f:facet>
+						</p:panel>
+					</div>
 				</ui:repeat>
 
-				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="false"
-					usemap="#navigation" />
-				<map id="navigation" name="navigation">
-					<ui:repeat var="table" value="#{hallUseBean.tables}">
-						<area shape="rect" coords="#{table.left},#{table.top},#{table.right},#{table.bottom}"
-							onclick="location.href='selectedtable?table=#{table.id}'">
-						</area>
-					</ui:repeat>
-				</map>
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
 				
 			</p:tab>
 			<p:tab title="Зал 2">
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
 			</p:tab>
 			<p:tab title="Зал 3">
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
 			</p:tab>
 		</p:tabView>
 
