@@ -26,6 +26,7 @@ import com.siriusif.process.OrderProcess;
 import com.siriusif.service.model.GroupDao;
 import com.siriusif.service.model.SaleDao;
 
+import static com.siriusif.jsf.utils.JSFHelper.jsf;
 import static com.siriusif.model.helpers.TestHelper.amount;
 
 //import static com.siriusif.model.helpers.TestHelper.*;
@@ -73,8 +74,7 @@ public class OrderBean {
 	public void init() {
 		LOGGER.info("starting view");
 
-		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = jsf().getRequest();
 		String orderIdStr = request.getParameter("order_id");
 		orderId = Long.parseLong(orderIdStr);
 		LOGGER.info("Recieved order id: " + orderId);

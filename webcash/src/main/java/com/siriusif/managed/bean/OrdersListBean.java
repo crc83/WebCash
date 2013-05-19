@@ -1,5 +1,6 @@
 package com.siriusif.managed.bean;
 
+import static com.siriusif.jsf.utils.JSFHelper.jsf;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,13 +32,9 @@ public class OrdersListBean {
 
 	@PostConstruct
 	public void init() {
-		LOGGER.error("starting view");
-		// orderProcess.setCurrentUser(curentUser)
-
-		HttpServletRequest request = (HttpServletRequest) FacesContext
-				.getCurrentInstance().getExternalContext().getRequest();
+		HttpServletRequest request = jsf().getRequest();
 		String tableIdStr = request.getParameter("table");
-		redirectTo(urlToNewOrderIfNoOrdersForTable(tableIdStr));
+		jsf().redirectTo(urlToNewOrderIfNoOrdersForTable(tableIdStr));
 	}
 
 	// TODO SB: Javadoc add here
@@ -82,19 +79,6 @@ public class OrdersListBean {
 
 	private void notifyUser(String message) {
 		// TODO SB : Implement
-	}
-
-	private void redirectTo(String url) {
-		try {
-			if (StringUtils.isNotBlank(url)) {
-				FacesContext.getCurrentInstance().getExternalContext()
-						.redirect(url);
-			}
-		} catch (IOException e) {
-			LOGGER.error("I can't open new order");
-			LOGGER.debug("Error while redirecting to new check", e);
-		}
-
 	}
 
 	/**
