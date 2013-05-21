@@ -18,33 +18,20 @@
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
 				<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<h:graphicImage style="
+					<a href="/webcash/pages/orders_list.jsf?table=#{table.id}"><h:graphicImage style="
 						margin-top: #{table.top}px;
 						margin-left: #{table.left}px; 
 						position: absolute;" 
-					value="/images/table.png"
-					onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
-					</h:graphicImage>
+					value="/images/table.png">
+					</h:graphicImage></a>
 				</ui:repeat>
-
-				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="false"
-					usemap="#navigation" />
-				<map id="navigation" name="navigation">
-					<ui:repeat var="table" value="#{hallUseBean.tables}">
-						<area shape="rect" coords="#{table.left},#{table.top},#{table.right},#{table.bottom}"
-							onclick="location.href='selectedtable?table=#{table.id}'">
-						</area>
-					</ui:repeat>
-				</map>
-				
+				<p:graphicImage value="#{hallUseBean.hallPlan}" />
 			</p:tab>
 			<p:tab title="Зал 2">
 			</p:tab>
 			<p:tab title="Зал 3">
 			</p:tab>
 		</p:tabView>
-
-
 	</h:body>
 </DIV>
 <div id="hall_use"/>
