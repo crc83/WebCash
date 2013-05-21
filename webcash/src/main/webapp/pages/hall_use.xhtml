@@ -18,13 +18,17 @@
 		<p:tabView orientation="bottom">
 			<p:tab title="Зал 1">
 				<ui:repeat var="table" value="#{hallUseBean.tables}">
-					<div style="margin-top: #{table.top">
+					<div style="
+							margin-top: #{table.top}px;
+							margin-left: #{table.left}px; 
+							position: absolute;">							
 						<a href="/webcash/pages/orders_list.jsf?table=#{table.id}">
 							<p:panel>
 									#{table.name} -
 									#{table.description}
 								<f:facet name="footer">
-									<h:graphicImage value="/images/table.png">
+									<h:graphicImage
+									value="/images/table.png">
 									</h:graphicImage>
 								</f:facet>
 							</p:panel>
@@ -32,19 +36,19 @@
 					</div>
 				</ui:repeat>
 
-				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true" />
-
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
+				
 			</p:tab>
 			<p:tab title="Зал 2">
-				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true" />
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
 			</p:tab>
 			<p:tab title="Зал 3">
-				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true" />
+				<p:graphicImage value="#{hallUseBean.hallPlan}" cache="true"/>
 			</p:tab>
 		</p:tabView>
 
 
 	</h:body>
 </DIV>
-<div id="hall_use" />
+<div id="hall_use"/>
 </html>
