@@ -3,12 +3,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
-	<title>Login</title>
+	<title>#{msgs.login_title}</title>
 	<h:outputStylesheet library="css" name="login.css" />
 </h:head>
 <h:body>
 	<p:growl id="growl" showDetail="true" life="3000" />
-	<p:dialog id="modalDialog" header="Login" visible="true">
+	<p:dialog id="modalDialog" header="#{msgs.login_dialog_title}" visible="true">
 		<h:form id="loginForm">
 			<h:panelGrid columns="2" cellpadding="5">
 				<h:outputLabel for="username" value="#{msgs.login_username}" />
@@ -24,5 +24,6 @@
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>
+	<div id="login"/>
 </h:body>
 </html>

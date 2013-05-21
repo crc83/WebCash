@@ -34,6 +34,8 @@
 	</repositories>
 
 	<properties>
+			<project.build.sourceEncoding>Cp1251</project.build.sourceEncoding>
+	
 		<!-- IMPRTANT : Only integration tests aviable -->
 		<skipTests>true</skipTests>
 
@@ -48,7 +50,13 @@
 			<artifactId>webcash-domain</artifactId>
 			<version>0.2-SNAPSHOT</version>
 		</dependency>
-
+		
+		<dependency>
+			<groupId>com.codeborne</groupId>
+			<artifactId>selenide</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-api</artifactId>
