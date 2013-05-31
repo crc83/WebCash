@@ -21,18 +21,18 @@
 					<div style="
 							margin-top: #{table.top}px;
 							margin-left: #{table.left}px; 
-							position: absolute;"							
-							onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">							
-						<p:panel>
-								#{table.name} -
-								#{table.description}
-							<f:facet name="footer">
-								<h:graphicImage
-									value="/images/table.png"
-									onclick="location.href='/webcash/pages/orders_list.jsf?table=#{table.id}'">
-								</h:graphicImage>
-							</f:facet>
-						</p:panel>
+							position: absolute;">							
+						<a href="/webcash/pages/orders_list.jsf?table=#{table.id}">
+							<p:panel>
+									#{table.name} -
+									#{table.description}
+								<f:facet name="footer">
+									<h:graphicImage
+									value="/images/table.png">
+									</h:graphicImage>
+								</f:facet>
+							</p:panel>
+						</a>
 					</div>
 				</ui:repeat>
 
