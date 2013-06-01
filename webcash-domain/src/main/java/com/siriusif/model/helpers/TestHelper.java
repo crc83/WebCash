@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 
 import com.siriusif.model.Good;
 import com.siriusif.model.Sale;
+import com.siriusif.model.Workshift;
+import com.siriusif.service.model.impl.WorkshiftDaoImpl;
 
 public final class TestHelper {
 	
@@ -20,6 +22,15 @@ public final class TestHelper {
 		sale.setSalesGood(new Good(name, price));
 		sale.setAmount(amount);
 		return sale;		
+	}
+	
+	/**
+	 * Helper method to build workshift for the tests
+	 * @return
+	 */
+	public static final Workshift buildWorshift(){
+		Workshift ws = new Workshift();
+		return ws;
 	}
 		
 	public static final BigDecimal money(double money){
