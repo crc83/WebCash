@@ -1,5 +1,6 @@
 package com.siriusif.service.model;
 
+import static com.siriusif.helper.Helper.date;
 import static com.siriusif.model.helpers.TestHelper.money;
 import static org.junit.Assert.*;
 
@@ -61,7 +62,7 @@ public class WorkshiftDaoImplTest extends AbstractSpringTest{
 		workshiftDao.add(workshift);
 		
 		// get this workshift from db
-		Date closedAt = Helper.stringToDate("22/01/2013");
+		Date closedAt = date("22/01/2013");
 		workshift.setClosedAt(closedAt);
 
 		// NOTE: Workshift open date is generated on the db side.

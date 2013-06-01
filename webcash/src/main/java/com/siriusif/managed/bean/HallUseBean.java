@@ -57,5 +57,31 @@ public class HallUseBean {
 	 */
 	public void setTablesDao(DinnerTableDao tablesDao) {
 		this.tablesDao = tablesDao;
-	}          
+	}
+	
+    public StreamedContent getHallPlan() throws IOException {  
+    	StreamedContent background;  
+    	//Graphic Text 
+    	  BufferedImage bufferedImg = readImage("background");  
+    	  Graphics2D g2 = bufferedImg.createGraphics();
+    	      	  
+    	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
+    	  ImageIO.write(bufferedImg, "png", os);  
+    	  background = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
+
+    	  return background;  
+    }   
+    
+	private BufferedImage readImage(String name) {
+		BufferedImage bi = null;
+		try {
+			String tablesImageURL = FacesContext.getCurrentInstance().getExternalContext().getRealPath("/images/"+name+".png");
+	    	File imageSrc = new File(tablesImageURL);
+	    	bi = ImageIO.read(imageSrc);
+		} catch (IOException ioe) {
+			LOGGER.error("Error during loading image : "+ name);
+			LOGGER.debug("",ioe);
+		}
+		return bi;
+	}  
 }  
