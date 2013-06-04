@@ -2,7 +2,7 @@ package com.siriusif.model;
 
 import java.util.Date;
 import org.junit.Test;
-import com.siriusif.helper.Helper;
+import static com.siriusif.helper.Helper.*;
 import static com.siriusif.model.helpers.TestHelper.money;
 import static org.junit.Assert.assertNotNull;
 
@@ -15,7 +15,7 @@ public class WorkshiftTest {
 	 */
 	@Test
 	public void testWorkshiftInitialization() {
-		Date workingDate = Helper.stringToDate("13/11/2013");
+		Date workingDate = date("13/11/2013");
 		
 		Workshift workshift = new Workshift();
 		workshift.setWorkingDate(workingDate);

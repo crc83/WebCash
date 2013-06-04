@@ -19,19 +19,18 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class Helper {
+	private static DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
 	/**
 	 * convert String to date
 	 * 
-	 * @param date
-	 *            "dd/mm/yyyy"
+	 * @param date "dd/mm/yyyy"
 	 * @return Date object
 	 */
-	public static Date stringToDate(String date) {
-		DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+	public static Date date(String date) {
 		Date today = null;
 		try {
-			today = df.parse(date);
+			today = dateFormat.parse(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -73,6 +72,7 @@ public class Helper {
 		return gson.fromJson(getCPFileReader(fileName), classOfT);
 	}
 	
+	//TODO SB : Add javadoc
 	public static Hall fromJsonHall(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
 		Hall hall = fromJson(fileName, Hall.class);
 		//because links aren't set automatically
@@ -80,6 +80,7 @@ public class Helper {
 		return hall;
 	}	
 	
+	//TODO SB : Add javadoc
 	public static Group[] fromJsonGroups(String fileName) throws JsonSyntaxException, JsonIOException, UnsupportedEncodingException{
 		Group[] groups = fromJson(fileName, Group[].class);
 		//because links aren't set automatically

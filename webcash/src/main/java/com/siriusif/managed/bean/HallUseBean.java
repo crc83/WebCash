@@ -30,15 +30,6 @@ public class HallUseBean {
 	//TODO SB : Change logger initialization in spring way
 	private Logger LOGGER = Logger.getLogger(HallUseBean.class);
   
-    private StreamedContent graphicText;  
-    
-    /**
-     * response of click
-     */
-    private String responce;
-    
-      
-
 	@ManagedProperty(value="#{tablesDao}")
     private DinnerTableDao tablesDao;
     
@@ -54,53 +45,33 @@ public class HallUseBean {
 		return tables;
 	}
 
-  
+	/**
+	 * @return the tablesDao
+	 */
+	public DinnerTableDao getTablesDao() {
+		return tablesDao;
+	}
+
+	/**
+	 * @param tablesDao the tablesDao to set
+	 */
+	public void setTablesDao(DinnerTableDao tablesDao) {
+		this.tablesDao = tablesDao;
+	}
+	
     public StreamedContent getHallPlan() throws IOException {  
-    	LOGGER.debug(" >> TablesDao is null? "+(tablesDao==null));
-    	List<DinnerTable> tables = tablesDao.list();
-  
+    	StreamedContent background;  
     	//Graphic Text 
     	  BufferedImage bufferedImg = readImage("background");  
     	  Graphics2D g2 = bufferedImg.createGraphics();
-    	  
-//    	  BufferedImage imageOfTable =readImage("table");
-//		  Font font = new Font("Arial", Font.ITALIC, 18);    	  
-//    	  for (TablesHall table : tables){
-//    		  //let's ajust table height and width
-//    		   table.setWidth(imageOfTable.getWidth());
-//    		   table.setHeight(imageOfTable.getHeight());
-//    		  // TODO CS : Later we will made custom tag for table
-//    		  int textBottom = table.getBottom();
-//    		  int textLeft = table.getLeft();
-//    		  g2.drawImage(imageOfTable, null, table.getLeft(), table.getTop());
-//    		  g2.setFont(font);
-//    		  // color of name table
-//    		  g2.setColor(Color.lightGray);
-//    		  // location of tables name. We can change to top(textBottom to getTop())
-//    		  g2.drawString(table.getName(), textLeft, textBottom);
-//    	  }	
-    	  
+    	      	  
     	  ByteArrayOutputStream os = new ByteArrayOutputStream();  
     	  ImageIO.write(bufferedImg, "png", os);  
-    	  graphicText = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
+    	  background = new DefaultStreamedContent(new ByteArrayInputStream(os.toByteArray()), "image/png");   
 
-    	  return graphicText;  
-    }
+    	  return background;  
+    }   
     
-    /**
-     * Here we will decide what to show after user click on table.
-     * Will it be new check or list of existing checks.
-     * @return
-     */
-    public String getOnSelectTable(){
-    	LOGGER.debug("getOnSelectTable invoked");
-    	String parameter = FacesContext.getCurrentInstance()
-    		    .getExternalContext().getRequestParameterMap()
-    		    .get("selectedTable");
-    	LOGGER.debug("Selected table:"+parameter);
-    	return "./checks.jsf";
-    }
-
 	private BufferedImage readImage(String name) {
 		BufferedImage bi = null;
 		try {
@@ -113,27 +84,4 @@ public class HallUseBean {
 		}
 		return bi;
 	}  
-    
-    public String getResponce() {
-    	responce = "./order.jsf";
-    	return responce;
-    }
-
-
-	/**
-	 * @return the tablesDao
-	 */
-	public DinnerTableDao getTablesDao() {
-		return tablesDao;
-	}
-
-
-	/**
-	 * @param tablesDao the tablesDao to set
-	 */
-	public void setTablesDao(DinnerTableDao tablesDao) {
-		this.tablesDao = tablesDao;
-	}
-    
-      
 }  
