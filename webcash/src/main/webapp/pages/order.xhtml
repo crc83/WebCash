@@ -70,20 +70,23 @@
 				</p:toolbar>
 			</h:form>
 			<!-- end table order view -->
-			<p:button value="Зберегти" href="/pages/hall.jsf" />
-			<p:button value="Надрукувати" href="/pages/hall.jsf" />
+			<p:button value="Оплата" actionListener="#{orderBean.payOrder}"/>
+			<p:button value="Рахунок"/>
+			<p:button value="Кухня"/>
+			<p:button value="Знижка"/>
+			<p:button value="Відкласти" href="/pages/hall_use.jsf" />
 		</p:layoutUnit>
 		<p:layoutUnit id="layoutcenter" position="center" size="300">
-			<!-- bigin menu view Groups and Goods -->
+			<!-- begin menu view Groups and Goods -->
 			<h:form>
 				<p:accordionPanel value="#{orderBean.groups}" var="group"
 					activeIndex="150">
-					<p:tab title="#{group.name}">
+					<p:tab title=" #{group.name} ">
 						<p:dataGrid value="#{group.goods}" var="good" columns="1">
 							<p:column>
 								<p:commandButton styleClass="buttonAccordion"
-									value="#{good.name} - #{good.price}"
-									actionListener="#{orderBean.onClick}" update=":addGood">
+									value=" #{good.name} - #{good.price} "
+									actionListener="#{orderBean.addGood}" update=":addGood">
 									<f:attribute name="selectedGoodName" value="#{good.name}" />
 									<f:attribute name="selectedGood" value="#{good}" />
 								</p:commandButton>

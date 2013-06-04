@@ -23,4 +23,6 @@ public interface OrderProcess {
 
 	void uptadeSale(long saleId, BigDecimal newAmount);
 
+	Order closeOrder(Long orderId, BigDecimal paid);
+
 }

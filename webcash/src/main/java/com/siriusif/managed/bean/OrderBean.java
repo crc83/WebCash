@@ -4,18 +4,14 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.faces.event.ValueChangeEvent;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.pattern.LogEvent;
-import org.primefaces.event.CellEditEvent;
 
 import com.siriusif.model.Good;
 import com.siriusif.model.Group;
@@ -27,16 +23,11 @@ import com.siriusif.service.model.GroupDao;
 import com.siriusif.service.model.SaleDao;
 
 import static com.siriusif.jsf.utils.JSFHelper.jsf;
-import static com.siriusif.model.helpers.TestHelper.amount;
 
 //import static com.siriusif.model.helpers.TestHelper.*;
 
 /**
- * @author Администратор
- *
- */
-/**
- * @author Администратор
+ * @author csurudin
  * 
  */
 @ManagedBean(name = "orderBean")
@@ -95,13 +86,24 @@ public class OrderBean {
 		LOGGER.debug(" || " + groups.size());
 		return groups;
 	}
+	
+	/** 
+	 * Perform payment and close order 
+	 * @param evt
+	 */
+	public void payOrder(ActionEvent evt) {
+		//TODO : Ask if customer has a discount
+		//TODO : Ask about payment amount
+		orderProcess.closeOrder(orderId, BigDecimal.ZERO);
+		jsf().redirectTo("/pages/hall_use.jsf");
+	}
 
 	/**
+	 * Add selected good to order.
 	 * @param evt
-	 * add selected good to order
 	 */
-	public void onClick(ActionEvent evt) {
-		LOGGER.info(evt.toString());
+	public void addGood(ActionEvent evt) {
+		LOGGER.debug(evt.toString());
 		Good good = (Good) evt.getComponent().getAttributes()
 				.get("selectedGood");
 		goodId = good.getId();
@@ -114,7 +116,7 @@ public class OrderBean {
 	}
 
 	public void activeSuborderId(ActionEvent event) {
-		LOGGER.info("On click: " + event.toString());
+		LOGGER.debug("On click: " + event.toString());
 		Suborder suborder = (Suborder) event.getComponent().getAttributes()
 				.get("selectedSuborder");
 		suborderId = suborder.getId();
