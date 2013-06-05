@@ -14,7 +14,6 @@ import com.siriusif.model.Good;
 import com.siriusif.model.Order;
 import com.siriusif.model.Sale;
 import com.siriusif.model.Suborder;
-import com.siriusif.model.Workshift;
 import com.siriusif.process.OrderProcess;
 import com.siriusif.process.WorkshiftProcess;
 import com.siriusif.service.model.DinnerTableDao;
@@ -26,7 +25,7 @@ import com.siriusif.service.model.SuborderDao;
 import static com.siriusif.model.helpers.TestHelper.amount;
 
 /**
- * @author Администратор
+ * @author csurudin
  *
  */
 @Component(value="orderProcess")
@@ -175,4 +174,5 @@ public class OrderProcessImpl implements OrderProcess {
 	public int countOfSuborders(long orderId){
 		return orderDao.countOfSuborders(orderId);
 	}
+
 }

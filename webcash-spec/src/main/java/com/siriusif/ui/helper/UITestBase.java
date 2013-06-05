@@ -20,7 +20,7 @@ public class UITestBase {
 	public void globalSetUp(){
 	    timeout = 10000;
 	    baseUrl = "http://localhost:8080/webcash";
-	    browser = "htmlunit";
+	    browser = "htmlunit:firefox";
 	    holdBrowserOpen = false;
 	    errorReportsFolder = "d:/temp";
 	}

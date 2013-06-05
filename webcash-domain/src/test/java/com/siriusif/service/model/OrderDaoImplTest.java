@@ -13,6 +13,8 @@ import com.siriusif.helper.ModelFactory;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.model.Suborder;
+
+import static com.siriusif.helper.Helper.date;
 import static com.siriusif.model.helpers.TestHelper.money;
 
 public class OrderDaoImplTest extends AbstractSpringTest {
@@ -52,7 +54,7 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
 		orderDao.add(order);
-		Date workingDate = Helper.stringToDate("22/01/2013");
+		Date workingDate = date("22/01/2013");
 		order.setWorkingDate(workingDate);
 		orderDao.update(order);
 
@@ -147,7 +149,7 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 		int size = orderDao.list().size();
 		Order order = new Order();
 
-		Date closeDate = Helper.stringToDate("22/01/2013");
+		Date closeDate = date("22/01/2013");
 		order.setCloseDate(closeDate);
 		order.setAuthor("admin");
 		order.setPaid(money(13.51));
