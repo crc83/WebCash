@@ -3,6 +3,7 @@ package com.siriusif.process;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 
 public interface OrderProcess {
@@ -11,7 +12,7 @@ public interface OrderProcess {
 
 	Order newOrder(Long idTable);
 	
-	List<Order> listForTableId(long tableId);
+	List<Order> listForTableId(DinnerTable table);
 
 	Order getOrder(long orderId);
 

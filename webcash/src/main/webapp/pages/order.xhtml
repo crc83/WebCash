@@ -70,11 +70,13 @@
 				</p:toolbar>
 			</h:form>
 			<!-- end table order view -->
-			<p:button value="Оплата" actionListener="#{orderBean.payOrder}"/>
-			<p:button value="Рахунок"/>
-			<p:button value="Кухня"/>
-			<p:button value="Знижка"/>
-			<p:button value="Відкласти" href="/pages/hall_use.jsf" />
+			<h:form>
+				<p:commandButton value="Оплата" actionListener="#{orderBean.payOrder}"/>
+				<p:button value="Рахунок"/>
+				<p:button value="Кухня"/>
+				<p:button value="Знижка"/>
+				<p:button value="Відкласти" href="/pages/hall_use.jsf" />
+			</h:form>
 		</p:layoutUnit>
 		<p:layoutUnit id="layoutcenter" position="center" size="300">
 			<!-- begin menu view Groups and Goods -->
