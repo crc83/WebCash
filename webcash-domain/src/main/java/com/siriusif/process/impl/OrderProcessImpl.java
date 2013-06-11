@@ -161,7 +161,8 @@ public class OrderProcessImpl implements OrderProcess {
 	}
 
 	@Override
-	public List<Order> listForTableId(DinnerTable table) {
+	public List<Order> listForTableId(long tableId) {
+		DinnerTable table = tableDao.find(tableId);
 		return orderDao.listForTableId(table);
 	}
 

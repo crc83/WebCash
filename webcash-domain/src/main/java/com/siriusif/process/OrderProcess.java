@@ -12,7 +12,7 @@ public interface OrderProcess {
 
 	Order newOrder(Long idTable);
 	
-	List<Order> listForTableId(DinnerTable table);
+	List<Order> listForTableId(long tableId);
 
 	Order getOrder(long orderId);
 
