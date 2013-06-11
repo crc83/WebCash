@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Column;
 import javax.persistence.Version;
 import java.lang.Override;
+import java.math.BigDecimal;
 
 @Entity
 public class BasicDiscount implements Serializable
@@ -23,6 +24,9 @@ public class BasicDiscount implements Serializable
 
    @Column
    private String name;
+
+   @Column
+   private BigDecimal discount;
 
    public Long getId()
    {
@@ -84,6 +88,16 @@ public class BasicDiscount implements Serializable
    public void setName(final String name)
    {
       this.name = name;
+   }
+
+   public BigDecimal getDiscount()
+   {
+      return this.discount;
+   }
+
+   public void setDiscount(final BigDecimal discount)
+   {
+      this.discount = discount;
    }
 
    @Override
