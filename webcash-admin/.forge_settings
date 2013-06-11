@@ -11,4 +11,15 @@
 </forge>
 </jboss>
 </org>
+<forge>
+<analytics>
+<enabled>false</enabled>
+</analytics>
+</forge>
+<jboss-as>
+<as7>
+<configured>PROJECT</configured>
+<jboss-home>c:\JAVA\jboss-as-7.1.1.Final</jboss-home>
+</as7>
+</jboss-as>
 </configuration>
