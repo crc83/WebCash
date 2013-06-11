@@ -9,37 +9,37 @@
 <h:body>
 	<p:toolbar>
 		<p:toolbarGroup>
-			<h:outputText value="Стіл №#{ordersList.tableId}" />
+			<h:outputText value="#{ordersList.tableId}" />
 	<h:form>
 		<!-- button of creating new Order -->
-		<p:commandButton value="Нове замовлення"
+		<p:commandButton value="#{msgs.order_list_new_order_btn}"
 			action="#{ordersList.urlToNewOrder}" />
 	</h:form>
 		</p:toolbarGroup>
 	</p:toolbar>
 	<p:accordionPanel var="order" value="#{ordersList.ordersForTable}">
 		<p:tab
-			title="#{order.author} - Сума по чеку: #{ordersList.order.total}">
+			title="#{order.author} - #{msgs.order_order_total} #{ordersList.order.total}">
 			<ui:repeat var="suborder" value="#{order.suborders}">
-				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}">
+				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}" emptyMessage="">
 					<f:facet name="header">
-							Подача: #{suborder.index}
-						</f:facet>
-					<p:column width="55%" headerText="Назва страви"> 
+						#{msgs.order_suborder} #{suborder.index}
+					</f:facet>
+					<p:column width="55%" headerText="#{msgs.order_sale_name}"> 
 							#{sales.salesGood.name}
             			</p:column>
-					<p:column width="10%" headerText="Ціна">  
+					<p:column width="10%" headerText="#{msgs.order_sale_price}">  
                 			#{sales.salesGood.price}  
             			</p:column>
-					<p:column width="20%" headerText="Кількість">
+					<p:column width="20%" headerText="#{msgs.order_sale_amount}">
 							#{sales.amount}
 						</p:column>
-					<p:column width="15%" headerText="Сума">  
+					<p:column width="15%" headerText="#{msgs.order_sale_sum}">  
                 			#{sales.calculatedSum}  
             			</p:column>
 					<p:columnGroup type="footer">
 						<p:row>
-							<p:column colspan="3" footerText="Сума по чеку: "
+							<p:column colspan="3" footerText="#{msgs.order_suborder_total}"
 								style="text-align:right" />
 							<p:column footerText="#{suborder.total}" />
 						</p:row>
