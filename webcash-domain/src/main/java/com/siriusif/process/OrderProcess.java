@@ -3,6 +3,7 @@ package com.siriusif.process;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 
 public interface OrderProcess {

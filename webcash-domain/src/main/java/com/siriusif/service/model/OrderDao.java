@@ -12,7 +12,7 @@ public interface OrderDao extends GenericDao<Order, Long> {
 
 	int conutDailyId(Date workingDate);
 
-	List<Order> listForTableId(long tableId);
+	List<Order> listForTableId(DinnerTable table);
 	
 	/**
 	 * Counts opened orders for table id.<br>

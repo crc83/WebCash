@@ -28,17 +28,18 @@
 			</h:form>
 			<!-- begin table order view -->
 			<h:form id="addGood">
-			 <p:growl id="messages" showDetail="true"/> 
+				<p:growl id="messages" showDetail="true" />
 				<ui:repeat var="suborder" value="#{orderBean.order.suborders}">
 					<p:dataTable id="order_table" var="sales" value="#{suborder.sales}"
-								emptyMessage="">
+						emptyMessage="">
 						<f:facet name="header">
 							<p:commandLink value="#{msgs.order_suborder} #{suborder.index}"
 								actionListener="#{orderBean.activeSuborderId}">
 								<f:attribute name="selectedSuborder" value="#{suborder}" />
 							</p:commandLink>
 						</f:facet>
-						<p:column width="55%" filterMaxLength="20" headerText="#{msgs.order_sale_name}"> 
+						<p:column width="55%" filterMaxLength="20"
+							headerText="#{msgs.order_sale_name}"> 
 							#{sales.salesGood.name}
             			</p:column>
 						<p:column width="10%" headerText="#{msgs.order_sale_price}">  
@@ -46,12 +47,14 @@
             			</p:column>
 						<p:column width="20%" headerText="#{msgs.order_sale_amount}">
 							<p:inplace editor="true">
-								<p:keyboard valueChangeListener="#{orderBean.editAmount}" value="#{sales.amount}" required="true"
-									label="text" maxlength="6" size="6" layout="custom"  
-                					layoutTemplate="123-close,456-clear,789-back,0." onclick="inplace.clear()">
-                					<f:attribute name="selectedSale" value="#{sales}" />
-                					</p:keyboard>
-                					<p:ajax event="save" update=":addGood"/>
+								<p:keyboard valueChangeListener="#{orderBean.editAmount}"
+									value="#{sales.amount}" required="true" label="text"
+									maxlength="6" size="6" layout="custom"
+									layoutTemplate="123-close,456-clear,789-back,0."
+									onclick="inplace.clear()">
+									<f:attribute name="selectedSale" value="#{sales}" />
+								</p:keyboard>
+								<p:ajax event="save" update=":addGood" />
 							</p:inplace>
 						</p:column>
 						<p:column width="15%" headerText="#{msgs.order_sale_sum}">  
@@ -68,16 +71,21 @@
 				</ui:repeat>
 				<p:toolbar>
 					<p:toolbarGroup>
-						<h:outputText value="#{msgs.order_order_total} #{orderBean.order.total}" styleClass="total"/>
+						<h:outputText
+							value="#{msgs.order_order_total} #{orderBean.order.total}"
+							styleClass="total" />
 					</p:toolbarGroup>
 				</p:toolbar>
 			</h:form>
 			<!-- end table order view -->
-			<p:button value="#{msgs.order_btn_pay}" actionListener="#{orderBean.payOrder}"/>
-			<p:button value="#{msgs.order_btn_print_bill}"/>
-			<p:button value="#{msgs.order_btn_print_kitchen}"/>
-			<p:button value="#{msgs.order_btn_print_discount}"/>
-			<p:button value="#{msgs.order_btn_close}" href="/pages/hall_use.jsf" />
+			<h:form>
+				<p:commandButton value="#{msgs.order_btn_pay}"
+					actionListener="#{orderBean.payOrder}" />
+				<p:button value="#{msgs.order_btn_print_bill}" />
+				<p:button value="#{msgs.order_btn_print_kitchen}" />
+				<p:button value="#{msgs.order_btn_print_discount}" />
+				<p:button value="#{msgs.order_btn_close}" href="/pages/hall_use.jsf" />
+			</h:form>
 		</p:layoutUnit>
 		<p:layoutUnit id="layoutcenter" position="center" size="300">
 			<!-- begin menu view Groups and Goods -->
@@ -102,5 +110,5 @@
 		</p:layoutUnit>
 	</p:layout>
 </h:body>
-<div id="order"/>
+<div id="order" />
 </html>
