@@ -21,6 +21,9 @@ public class BasicDiscount implements Serializable
    @Column(name = "version")
    private int version = 0;
 
+   @Column
+   private String name;
+
    public Long getId()
    {
       return this.id;
@@ -39,15 +42,6 @@ public class BasicDiscount implements Serializable
    public void setVersion(final int version)
    {
       this.version = version;
-   }
-
-   @Override
-   public String toString()
-   {
-      String result = getClass().getSimpleName() + " ";
-      if (id != null)
-         result += "id: " + id;
-      return result;
    }
 
    @Override
@@ -80,5 +74,24 @@ public class BasicDiscount implements Serializable
          return id.hashCode();
       }
       return super.hashCode();
+   }
+
+   public String getName()
+   {
+      return this.name;
+   }
+
+   public void setName(final String name)
+   {
+      this.name = name;
+   }
+
+   @Override
+   public String toString()
+   {
+      String result = getClass().getSimpleName() + " ";
+      if (name != null && !name.trim().isEmpty())
+         result += "name: " + name;
+      return result;
    }
 }
