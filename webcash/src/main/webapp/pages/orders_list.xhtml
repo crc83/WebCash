@@ -1,70 +1,52 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:p="http://primefaces.org/ui">
 <h:head>
 	<title>#{msgs.order_list_title}</title>
 </h:head>
 <h:body>
-	<h:outputLabel>#{ordersList.tableId}</h:outputLabel>
+	<p:toolbar>
+		<p:toolbarGroup>
+			<h:outputText value="Стіл №#{ordersList.tableId}" />
 	<h:form>
 		<!-- button of creating new Order -->
 		<p:commandButton value="Нове замовлення"
 			action="#{ordersList.urlToNewOrder}" />
 	</h:form>
-	<p:accordionPanel multiple="true">
-		<p:tab title="Замовлення I">
-			<h:panelGrid columns="2" cellpadding="10">
-				<h:form>
-					<p:dataTable var="dishe" value="#{checksBean.checksTable}">
-						<p:column>
-							<h:outputText value="#{dishe.dish}" />
+		</p:toolbarGroup>
+	</p:toolbar>
+	<p:accordionPanel var="order" value="#{ordersList.ordersForTable}">
+		<p:tab
+			title="#{order.author} - Сума по чеку: #{ordersList.order.total}">
+			<ui:repeat var="suborder" value="#{order.suborders}">
+				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}">
+					<f:facet name="header">
+							Подача: #{suborder.index}
+						</f:facet>
+					<p:column width="55%" headerText="Назва страви"> 
+							#{sales.salesGood.name}
+            			</p:column>
+					<p:column width="10%" headerText="Ціна">  
+                			#{sales.salesGood.price}  
+            			</p:column>
+					<p:column width="20%" headerText="Кількість">
+							#{sales.amount}
 						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.number}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.price}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
-			</h:panelGrid>
-		</p:tab>
-		<p:tab title="Замовлення II">
-			<h:panelGrid columns="2" cellpadding="10">
-				<h:form>
-					<p:dataTable var="dishe" value="#{checksBean.checksTableTwo}">
-						<p:column>
-							<h:outputText value="#{dishe.dish}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.number}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.price}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
-			</h:panelGrid>
-		</p:tab>
-		<p:tab title="Замовлення III">
-			<h:panelGrid columns="2" cellpadding="10">
-				<h:form>
-					<p:dataTable var="dishe" value="#{checksBean.checksTableThree}">
-						<p:column>
-							<h:outputText value="#{dishe.dish}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.number}" />
-						</p:column>
-						<p:column>
-							<h:outputText value="#{dishe.price}" />
-						</p:column>
-					</p:dataTable>
-				</h:form>
-			</h:panelGrid>
+					<p:column width="15%" headerText="Сума">  
+                			#{sales.calculatedSum}  
+            			</p:column>
+					<p:columnGroup type="footer">
+						<p:row>
+							<p:column colspan="3" footerText="Сума по чеку: "
+								style="text-align:right" />
+							<p:column footerText="#{suborder.total}" />
+						</p:row>
+					</p:columnGroup>
+				</p:dataTable>
+			</ui:repeat>
 		</p:tab>
 	</p:accordionPanel>
 </h:body>
-<div id="order_list"/>
 </html>

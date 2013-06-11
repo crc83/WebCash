@@ -15,8 +15,10 @@ import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.process.OrderProcess;
+import com.siriusif.service.model.DinnerTableDao;
 
 @ManagedBean(name = "ordersList")
 @ViewScoped
@@ -29,6 +31,10 @@ public class OrdersListBean {
 
 	@ManagedProperty(value = "#{orderProcess}")
 	private OrderProcess orderProcess;
+	
+	private List<Order> orders;
+
+	private Order order;
 
 	@PostConstruct
 	public void init() {
@@ -97,7 +103,8 @@ public class OrdersListBean {
 	}
 
 	public List<Order> getOrdersForTable() {
-		return orderProcess.listForTableId(getTableId());
+		orders = orderProcess.listForTableId(getTableId());
+		return orders;
 	}
 
 	public void setOrdersForTable(List<Order> orders) {
@@ -110,6 +117,22 @@ public class OrdersListBean {
 
 	public void setOrderProcess(OrderProcess orderProcess) {
 		this.orderProcess = orderProcess;
+	}
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+	
+	public void setOrders(List<Order> orders) {
+		this.orders = orders;
+	}
+	
+	public Order getOrder() {
+		return order;
+	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 }

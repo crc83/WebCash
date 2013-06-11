@@ -45,7 +45,7 @@ public class Order {
 	 * date and time of order closed
 	 */
 	@Column(name = "closedate", nullable = true, columnDefinition = "TIMESTAMP", insertable = false)
-	@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.TIMESTAMP)
 	private Date closeDate;
 
 	@Column(name = "`author`", nullable = false, length = 100)

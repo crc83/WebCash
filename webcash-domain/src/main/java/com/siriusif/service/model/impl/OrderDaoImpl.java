@@ -1,5 +1,6 @@
 package com.siriusif.service.model.impl;
 
+import java.util.Collections;
 import java.util.List;
 
 import java.util.Date;
@@ -10,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 import com.siriusif.service.HibernateDaoImpl;
+import com.siriusif.service.model.DinnerTableDao;
 import com.siriusif.service.model.OrderDao;
 
 /**
@@ -45,9 +47,17 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 	 * @see com.siriusif.service.model.OrderDao#listForTableId(long)
 	 */
 	@Override
-	public List<Order> listForTableId(long tableId) {
-		// TODO SB : Implement
-		return null;
+	public List<Order> listForTableId(DinnerTable table) {
+		@SuppressWarnings("rawtypes")
+		List rawOrders = currentSession()
+				.createQuery(
+						"SELECT o FROM Order o WHERE o.status=:status AND o.table = :table")
+				.setParameter("status", Order.STATUS_OPEN_DATA)
+				.setParameter("table", table).list();
+		@SuppressWarnings("unchecked")
+		List<Order> orders = Collections.checkedList(rawOrders, Order.class);
+
+		return orders;
 	}
 
 	/*
@@ -60,11 +70,12 @@ public class OrderDaoImpl extends HibernateDaoImpl<Order, Long> implements
 				.createQuery(
 						"SELECT o FROM Order o WHERE o.status=:status AND o.table = :table")
 				.setParameter("status", Order.STATUS_OPEN_DATA)
-				.setParameter("table", table).list().size();		
+				.setParameter("table", table).list().size();
 	}
 
 	/*
-	 * SQL query: SELECT order_id, COUNT(order_id) FROM suborder GROUP BY order_id HAVING
+	 * SQL query: SELECT order_id, COUNT(order_id) FROM suborder GROUP BY
+	 * order_id HAVING
 	 * order_id=163840
 	 * 
 	 * SELECT o, COUNT(s) FROM Order o JOIN o.suborders s GROUP BY o HAVING id:
