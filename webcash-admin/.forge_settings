@@ -1,2 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<configuration/>
+<configuration>
+<org>
+<jboss>
+<forge>
+<scaffold>
+<faces>
+<FacesScaffold_targetDir>entities</FacesScaffold_targetDir>
+</faces>
+</scaffold>
+</forge>
+</jboss>
+</org>
+</configuration>
