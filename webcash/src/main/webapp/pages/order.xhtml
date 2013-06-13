@@ -60,6 +60,11 @@
 						<p:column width="15%" headerText="#{msgs.order_sale_sum}">  
                 			#{sales.calculatedSum}  
             			</p:column>
+            			<p:column>
+            				<p:commandButton actionListener="#{orderBean.deleteSale}" icon="ui-icon-close">
+            					<f:attribute name="selectedSale" value="#{sales}" />
+            				</p:commandButton>
+            			</p:column>
 						<p:columnGroup type="footer">
 							<p:row>
 								<p:column colspan="3" footerText="#{msgs.order_suborder_total}"

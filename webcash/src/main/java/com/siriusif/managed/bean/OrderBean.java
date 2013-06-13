@@ -137,6 +137,12 @@ public class OrderBean {
         saleId = sale.getId();
         orderProcess.uptadeSale(saleId, newAmount);
 	}
+	
+	public void deleteSale(ActionEvent event){
+		Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
+        saleId = sale.getId();
+		orderProcess.deleteSale(saleId);
+	}
 
 	public SaleDao getSaleDao() {
 		return saleDao;
