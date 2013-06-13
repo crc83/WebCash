@@ -18,7 +18,7 @@
 		</p:toolbarGroup>
 	</p:toolbar>
 	<p:accordionPanel var="order" value="#{ordersList.ordersForTable}">
-		<p:tab title="#{order.author} - #{msgs.order_order_total} #{ordersList.order.total}">
+		<p:tab title="#{order.author} - #{msgs.order_order_total} #{order.total}">
 			<ui:repeat var="suborder" value="#{order.suborders}">
 				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}"
 					emptyMessage="">
