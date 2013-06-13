@@ -40,17 +40,7 @@ public class WorkshiftProcessImpl implements WorkshiftProcess {
 			//we should log the state and continue work
 			LOGGER.warn("There is more than one opened workshift. Closing them all anyway.");
 		}
-		//we should close all opened workshifts
-		for (Workshift ws : openedWorkshifts){
-			LOGGER.debug("Automatically closing workshift :"+ws);
-			closeWorkshift(ws);
-		}
-		//we should create new workshift
-		Workshift ws = new Workshift();
-		ws.setOpenedAt(new Date());
-		ws.setWorkingDate(getCurrentWorkshiftDate());
-		ws.setDailyId(getTodayWorkshiftsCount());
-		LOGGER.debug("Opened workshift :"+ws);
+		Workshift ws = null;
 		return ws;
 	}
 	
