@@ -3,7 +3,6 @@ package com.siriusif.process;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.siriusif.model.DinnerTable;
 import com.siriusif.model.Order;
 
 public interface OrderProcess {
@@ -25,5 +24,7 @@ public interface OrderProcess {
 	void uptadeSale(long saleId, BigDecimal newAmount);
 
 	Order closeOrder(Long orderId, BigDecimal paid);
+
+	void deleteSale(long saleId);
 
 }
