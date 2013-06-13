@@ -19,11 +19,10 @@ public class SaleTest {
 	  **/
 	@Test
 	public void testPriceAmount(){
-		Good good = new Good("Some name", new BigDecimal(42));
+		Good good = new Good("Some name", money(35.44));
 		Sale sale = new Sale();
 		
 		sale.setSalesGood(good);
-		good.setPrice(money(35.44));
 		sale.setAmount(amount(0.505));
 		LOGGER.info(sale.getAmount());
 		LOGGER.info(good.getPrice());

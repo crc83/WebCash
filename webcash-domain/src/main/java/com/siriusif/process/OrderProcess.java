@@ -25,4 +25,6 @@ public interface OrderProcess {
 
 	Order closeOrder(Long orderId, BigDecimal paid);
 
+	void deleteSale(long saleId);
+
 }

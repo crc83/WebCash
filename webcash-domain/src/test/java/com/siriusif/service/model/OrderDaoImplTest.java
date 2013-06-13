@@ -21,6 +21,9 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private DinnerTableDao tableDao;
 
 	/**
 	 * When: add order 
@@ -161,5 +164,33 @@ public class OrderDaoImplTest extends AbstractSpringTest {
 
 		Order orFromDb = orderDao.find(order.getId());
 		assertEquals(closeDate, orFromDb.getCloseDate());
+	}
+	
+	@Test
+	public void testListForTableId(){
+		int size = orderDao.list().size();
+		DinnerTable table = new DinnerTable();
+		table.setName("bar");
+		
+		Order order = new Order();
+		order.setAuthor("admin");
+		order.setDailyId(size);
+		order.setStatus(Order.STATUS_OPEN_DATA);
+		table.addOrder(order);
+		
+		Order order1 = new Order();
+		order1.setAuthor("admin");
+		order1.setDailyId(size);
+		order1.setStatus(Order.STATUS_CLOSE_DATA);
+		table.addOrder(order1);
+		
+		Order order2 = new Order();
+		order2.setAuthor("admin");
+		order2.setDailyId(size);
+		order2.setStatus(Order.STATUS_OPEN_DATA);
+		table.addOrder(order2);
+		tableDao.add(table);
+		
+		assertEquals(2, orderDao.listForTableId(table).size());
 	}
 }

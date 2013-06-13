@@ -95,7 +95,7 @@ public class OrderBean {
 		//TODO : Ask if customer has a discount
 		//TODO : Ask about payment amount
 		orderProcess.closeOrder(orderId, BigDecimal.ZERO);
-		jsf().redirectTo("/pages/hall_use.jsf");
+		jsf().redirectTo("/webcash/pages/hall_use.jsf");
 	}
 
 	/**
@@ -136,6 +136,12 @@ public class OrderBean {
         Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
         saleId = sale.getId();
         orderProcess.uptadeSale(saleId, newAmount);
+	}
+	
+	public void deleteSale(ActionEvent event){
+		Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
+        saleId = sale.getId();
+		orderProcess.deleteSale(saleId);
 	}
 
 	public SaleDao getSaleDao() {

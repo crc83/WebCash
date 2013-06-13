@@ -11,19 +11,11 @@
 	z-index: 2 !important;
 }
 
-#layout {
-	width: 800px;
-	height: 1280px;
-}
-
-#textOrder {
-	font-weight: bold;
-	font-size: 15pt;
-}
-
 .textOrder {
 	margin-left: 10px;
 	margin-top: 50px;
+	font-weight: bold;
+	font-size: 15pt;
 }
 
 .ui-datagrid-content {

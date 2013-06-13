@@ -159,10 +159,17 @@ public class OrderProcessImpl implements OrderProcess {
 		sale.setAmount(newAmount);
 		saleDao.update(sale);
 	}
+	
+	@Override
+	public void deleteSale(long saleId){
+		Sale sale = saleDao.find(saleId);
+		saleDao.remove(sale);
+	}
 
 	@Override
 	public List<Order> listForTableId(long tableId) {
-		return orderDao.listForTableId(tableId);
+		DinnerTable table = tableDao.find(tableId);
+		return orderDao.listForTableId(table);
 	}
 
 	@Override
