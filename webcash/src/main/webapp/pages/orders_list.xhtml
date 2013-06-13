@@ -10,18 +10,18 @@
 	<p:toolbar>
 		<p:toolbarGroup>
 			<h:outputText value="#{ordersList.tableId}" />
-	<h:form>
-		<!-- button of creating new Order -->
-		<p:commandButton value="#{msgs.order_list_new_order_btn}"
-			action="#{ordersList.urlToNewOrder}" />
-	</h:form>
+			<h:form>
+				<!-- button of creating new Order -->
+				<p:commandButton value="#{msgs.order_list_new_order_btn}"
+					action="#{ordersList.urlToNewOrder}" />
+			</h:form>
 		</p:toolbarGroup>
 	</p:toolbar>
 	<p:accordionPanel var="order" value="#{ordersList.ordersForTable}">
-		<p:tab
-			title="#{order.author} - #{msgs.order_order_total} #{ordersList.order.total}">
+		<p:tab title="#{order.author} - #{msgs.order_order_total} #{ordersList.order.total}">
 			<ui:repeat var="suborder" value="#{order.suborders}">
-				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}" emptyMessage="">
+				<p:dataTable id="order_table" var="sales" value="#{suborder.sales}"
+					emptyMessage="">
 					<f:facet name="header">
 						#{msgs.order_suborder} #{suborder.index}
 					</f:facet>
@@ -46,6 +46,7 @@
 					</p:columnGroup>
 				</p:dataTable>
 			</ui:repeat>
+			<a href="/webcash/pages/order.jsf?order_id=#{order.id}"><p:button value="#{msgs.order_list_edit_order_btn}" /></a>
 		</p:tab>
 	</p:accordionPanel>
 </h:body>
