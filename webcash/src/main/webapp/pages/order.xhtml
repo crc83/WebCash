@@ -64,6 +64,7 @@
 							<p:commandButton actionListener="#{orderBean.deleteSale}"
 								icon="ui-icon-close">
 								<f:attribute name="selectedSale" value="#{sales}" />
+								<f:ajax event="action" update=":addGood"/>
 							</p:commandButton>
 						</p:column>
 						<p:columnGroup type="footer">
@@ -82,7 +83,6 @@
 							styleClass="total" />
 					</p:toolbarGroup>
 				</p:toolbar>
-			</h:form>
 			<h:form id="form_dialog">
 				<p:dialog id="paidDialog" header="#{msgs.order_paid_of_order}"
 					widgetVar="paidDialog">
@@ -92,12 +92,12 @@
 					<h:outputText value="#{msgs.order_input_pay}" />
 					<p:inplace editor="true">
 						<p:keyboard valueChangeListener="#{orderBean.calculateChange}"
-							value="0" required="true" label="text"
+							value="#{orderBean.moneyFromClient}" required="true" label="text"
 							maxlength="6" size="6" layout="custom"
 							layoutTemplate="123-close,456-clear,789-back,0."
 							onclick="inplace.clear()">
 						</p:keyboard>
-						<p:ajax event="save" update=":form_dialog" />
+							<p:ajax event="save" update=":addGood:form_dialog:change" />
 					</p:inplace>
 					<br />
 					<h:outputText id="change"
@@ -108,6 +108,7 @@
 					<p:commandButton value="#{msgs.order_btn_cancel}"
 						onclick="paidDialog.hide();" />
 				</p:dialog>
+			</h:form>
 			</h:form>
 			<!-- end table order view -->
 			<h:form>
