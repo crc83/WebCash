@@ -60,11 +60,12 @@
 						<p:column width="15%" headerText="#{msgs.order_sale_sum}">  
                 			#{sales.calculatedSum}  
             			</p:column>
-            			<p:column>
-            				<p:commandButton actionListener="#{orderBean.deleteSale}" icon="ui-icon-close">
-            					<f:attribute name="selectedSale" value="#{sales}" />
-            				</p:commandButton>
-            			</p:column>
+						<p:column>
+							<p:commandButton actionListener="#{orderBean.deleteSale}"
+								icon="ui-icon-close">
+								<f:attribute name="selectedSale" value="#{sales}" />
+							</p:commandButton>
+						</p:column>
 						<p:columnGroup type="footer">
 							<p:row>
 								<p:column colspan="3" footerText="#{msgs.order_suborder_total}"
@@ -82,10 +83,36 @@
 					</p:toolbarGroup>
 				</p:toolbar>
 			</h:form>
+			<h:form id="form_dialog">
+				<p:dialog id="paidDialog" header="#{msgs.order_paid_of_order}"
+					widgetVar="paidDialog">
+					<h:outputText
+						value="#{msgs.order_order_total} #{orderBean.order.total}" />
+					<br />
+					<h:outputText value="#{msgs.order_input_pay}" />
+					<p:inplace editor="true">
+						<p:keyboard valueChangeListener="#{orderBean.calculateChange}"
+							value="0" required="true" label="text"
+							maxlength="6" size="6" layout="custom"
+							layoutTemplate="123-close,456-clear,789-back,0."
+							onclick="inplace.clear()">
+						</p:keyboard>
+						<p:ajax event="save" update=":form_dialog" />
+					</p:inplace>
+					<br />
+					<h:outputText id="change"
+						value="#{msgs.order_output_change} #{orderBean.change}" />
+					<br />
+					<p:commandButton value="#{msgs.order_btn_pay}"
+						actionListener="#{orderBean.payOrder}" />
+					<p:commandButton value="#{msgs.order_btn_cancel}"
+						onclick="paidDialog.hide();" />
+				</p:dialog>
+			</h:form>
 			<!-- end table order view -->
 			<h:form>
 				<p:commandButton value="#{msgs.order_btn_pay}"
-					actionListener="#{orderBean.payOrder}" />
+					onclick="paidDialog.show();" />
 				<p:button value="#{msgs.order_btn_print_bill}" />
 				<p:button value="#{msgs.order_btn_print_kitchen}" />
 				<p:button value="#{msgs.order_btn_print_discount}" />

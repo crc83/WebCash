@@ -4,11 +4,11 @@
 }
 
 #layoutcenter {
-	z-index: 3 !important;
+	z-index: 2 !important;
 }
 
-#layoutwest {
-	z-index: 2 !important;
+#layoutLeft {
+	z-index: 3 !important;
 }
 
 .textOrder {

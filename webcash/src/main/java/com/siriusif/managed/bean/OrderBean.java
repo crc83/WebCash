@@ -56,6 +56,18 @@ public class OrderBean {
 	private long suborderId;
 	
 	private long saleId;
+	
+	private BigDecimal change;
+	
+	private BigDecimal moneyFromClient;
+
+	public BigDecimal getMoneyFromClient() {
+		return moneyFromClient;
+	}
+
+	public void setMoneyFromClient(BigDecimal moneyFromClient) {
+		this.moneyFromClient = moneyFromClient;
+	}
 
 	/**
 	 * get order id from http request
@@ -94,7 +106,8 @@ public class OrderBean {
 	public void payOrder(ActionEvent evt) {
 		//TODO : Ask if customer has a discount
 		//TODO : Ask about payment amount
-		orderProcess.closeOrder(orderId, BigDecimal.ZERO);
+		orderProcess.closeOrder(orderId, order.getTotal());
+		LOGGER.info("   ||  " + getChange());
 		jsf().redirectTo("/webcash/pages/hall_use.jsf");
 	}
 
@@ -138,10 +151,29 @@ public class OrderBean {
         orderProcess.uptadeSale(saleId, newAmount);
 	}
 	
+	public BigDecimal calculateChange(ValueChangeEvent event){
+		moneyFromClient = BigDecimal.ZERO;
+		moneyFromClient = (BigDecimal) event.getNewValue();
+		moneyFromClient.setScale(2, BigDecimal.ROUND_HALF_UP);
+		change = BigDecimal.ZERO;
+		LOGGER.info("money From Client " + moneyFromClient);
+		change = moneyFromClient.subtract(order.getTotal()).setScale(2, BigDecimal.ROUND_HALF_UP);
+		LOGGER.info("change " + change);
+		return change;
+	}
+
 	public void deleteSale(ActionEvent event){
 		Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
         saleId = sale.getId();
 		orderProcess.deleteSale(saleId);
+	}
+	
+	public BigDecimal getChange() {
+		return change;
+	}
+	
+	public void setChange(BigDecimal change) {
+		this.change = change;
 	}
 
 	public SaleDao getSaleDao() {
