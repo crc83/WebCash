@@ -23,7 +23,7 @@ public interface OrderProcess {
 
 	void uptadeSale(long saleId, BigDecimal newAmount);
 
-	Order closeOrder(Long orderId, BigDecimal paid);
+	Order closeOrder(Long orderId, BigDecimal paid, boolean isCard);
 
 	void deleteSale(long saleId);
 

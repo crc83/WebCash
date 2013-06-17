@@ -43,7 +43,7 @@ public class OrderBean {
 
 	@ManagedProperty(value = "#{groupDao}")
 	private GroupDao groupDao;
-	
+
 	@ManagedProperty(value = "#{saleDao}")
 	private SaleDao saleDao;
 
@@ -54,8 +54,14 @@ public class OrderBean {
 	private long goodId;
 
 	private long suborderId;
-	
+
 	private long saleId;
+
+	private BigDecimal change;
+
+	private BigDecimal moneyFromClient;
+
+	private boolean card;
 
 	/**
 	 * get order id from http request
@@ -75,7 +81,7 @@ public class OrderBean {
 
 	/**
 	 * @return
-	 * view groups and goods
+	 *         view groups and goods
 	 */
 	public List<Group> getGroups() {
 		groups = groupDao.list();
@@ -86,20 +92,39 @@ public class OrderBean {
 		LOGGER.debug(" || " + groups.size());
 		return groups;
 	}
-	
-	/** 
-	 * Perform payment and close order 
+
+	/**
+	 * Perform payment and close order
+	 * 
 	 * @param evt
 	 */
 	public void payOrder(ActionEvent evt) {
-		//TODO : Ask if customer has a discount
-		//TODO : Ask about payment amount
-		orderProcess.closeOrder(orderId, BigDecimal.ZERO);
+		// TODO : Ask if customer has a discount
+		// TODO : Ask about payment amount
+		orderProcess.closeOrder(orderId, order.getTotal(), isCard());
 		jsf().redirectTo("/webcash/pages/hall_use.jsf");
 	}
 
 	/**
+	 * Payment choose of Order: cash or credit card
+	 * 
+	 * @param event
+	 */
+	public void choosePaymentOrder(ValueChangeEvent event) {
+		String choice = (String) event.getNewValue();
+		LOGGER.info("Payment choose of Order: " + choice);
+		if ("payCard".equals(choice)) {
+			card = true;
+			LOGGER.info("Is card: " + card);
+		}else{
+			LOGGER.info("Is card: " + card);
+			LOGGER.info("Payment choose of Order: " + choice);
+		}
+	}
+
+	/**
 	 * Add selected good to order.
+	 * 
 	 * @param evt
 	 */
 	public void addGood(ActionEvent evt) {
@@ -128,20 +153,38 @@ public class OrderBean {
 	 */
 	public void addNewSuborder() {
 		order = orderProcess.addSuborder(orderId);
-		suborderId = order.getSuborders().get(orderProcess.countOfSuborders(orderId)-1).getId();
+		suborderId = order.getSuborders()
+				.get(orderProcess.countOfSuborders(orderId) - 1).getId();
 	}
-	
-	public void editAmount(ValueChangeEvent event){ 
+
+	public void editAmount(ValueChangeEvent event) {
 		BigDecimal newAmount = (BigDecimal) event.getNewValue();
-        Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
-        saleId = sale.getId();
-        orderProcess.uptadeSale(saleId, newAmount);
+		Sale sale = (Sale) event.getComponent().getAttributes()
+				.get("selectedSale");
+		saleId = sale.getId();
+		orderProcess.uptadeSale(saleId, newAmount);
 	}
-	
-	public void deleteSale(ActionEvent event){
-		Sale sale = (Sale) event.getComponent().getAttributes().get("selectedSale");
-        saleId = sale.getId();
+
+	public void calculateChange(ValueChangeEvent event) {
+		moneyFromClient = (BigDecimal) event.getNewValue();
+		LOGGER.info("money From Client " + moneyFromClient);
+		change = moneyFromClient.subtract(order.getTotal());
+		LOGGER.info("change" + change);
+	}
+
+	public void deleteSale(ActionEvent event) {
+		Sale sale = (Sale) event.getComponent().getAttributes()
+				.get("selectedSale");
+		saleId = sale.getId();
 		orderProcess.deleteSale(saleId);
+	}
+
+	public BigDecimal getChange() {
+		return change;
+	}
+
+	public void setChange(BigDecimal change) {
+		this.change = change;
 	}
 
 	public SaleDao getSaleDao() {
@@ -194,5 +237,22 @@ public class OrderBean {
 
 	public void setSuborderId(long suborderId) {
 		this.suborderId = suborderId;
+	}
+
+	public BigDecimal getMoneyFromClient() {
+		moneyFromClient = order.getTotal();
+		return moneyFromClient;
+	}
+
+	public void setMoneyFromClient(BigDecimal moneyFromClient) {
+		this.moneyFromClient = moneyFromClient;
+	}
+
+	public boolean isCard() {
+		return card;
+	}
+
+	public void setCard(boolean card) {
+		this.card = card;
 	}
 }

@@ -121,7 +121,7 @@ public class OrderProcessTest extends AbstractSpringTest {
 	public void testCloseOrder() {
 		Order order = new Order();
 		stub(orderDao.find(any(Long.class))).toReturn(order);
-		Order closeOrder = orderProcess.closeOrder(order.getId(), money(10.00));
+		Order closeOrder = orderProcess.closeOrder(order.getId(), money(10.00), true);
 
 		assertEquals(Order.STATUS_CLOSE_DATA, closeOrder.getStatus());
 	}
