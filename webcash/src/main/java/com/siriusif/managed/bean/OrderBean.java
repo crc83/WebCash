@@ -177,6 +177,7 @@ public class OrderBean {
 				.get("selectedSale");
 		saleId = sale.getId();
 		orderProcess.deleteSale(saleId);
+		order = orderProcess.getOrder(orderId);
 	}
 
 	public BigDecimal getChange() {
