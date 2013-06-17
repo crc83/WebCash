@@ -108,12 +108,13 @@ public class OrderProcessImpl implements OrderProcess {
 	 * @param paid
 	 * @return closing of open order
 	 */
-	public Order closeOrder(Long orderId, BigDecimal paid) {
+	public Order closeOrder(Long orderId, BigDecimal paid, boolean isCard) {
 		Order closeOrder = orderDao.find(orderId);
 		Date closeDate = new Date();
 		closeOrder.setCloseDate(closeDate);
 		closeOrder.setStatus(Order.STATUS_CLOSE_DATA);
 		closeOrder.setPaid(paid);
+		closeOrder.setCard(isCard);
 
 		orderDao.update(closeOrder);
 		return closeOrder;

@@ -58,8 +58,10 @@ public class OrderBean {
 	private long saleId;
 
 	private BigDecimal change;
-	
+
 	private BigDecimal moneyFromClient;
+
+	private boolean card;
 
 	/**
 	 * get order id from http request
@@ -99,8 +101,25 @@ public class OrderBean {
 	public void payOrder(ActionEvent evt) {
 		// TODO : Ask if customer has a discount
 		// TODO : Ask about payment amount
-		orderProcess.closeOrder(orderId, order.getTotal());
+		orderProcess.closeOrder(orderId, order.getTotal(), isCard());
 		jsf().redirectTo("/webcash/pages/hall_use.jsf");
+	}
+
+	/**
+	 * Payment choose of Order: cash or credit card
+	 * 
+	 * @param event
+	 */
+	public void choosePaymentOrder(ValueChangeEvent event) {
+		String choice = (String) event.getNewValue();
+		LOGGER.info("Payment choose of Order: " + choice);
+		if ("payCard".equals(choice)) {
+			card = true;
+			LOGGER.info("Is card: " + card);
+		}else{
+			LOGGER.info("Is card: " + card);
+			LOGGER.info("Payment choose of Order: " + choice);
+		}
 	}
 
 	/**
@@ -146,7 +165,7 @@ public class OrderBean {
 		orderProcess.uptadeSale(saleId, newAmount);
 	}
 
-	public void calculateChange(ValueChangeEvent event) { 
+	public void calculateChange(ValueChangeEvent event) {
 		moneyFromClient = (BigDecimal) event.getNewValue();
 		LOGGER.info("money From Client " + moneyFromClient);
 		change = moneyFromClient.subtract(order.getTotal());
@@ -219,13 +238,21 @@ public class OrderBean {
 	public void setSuborderId(long suborderId) {
 		this.suborderId = suborderId;
 	}
-	
+
 	public BigDecimal getMoneyFromClient() {
 		moneyFromClient = order.getTotal();
 		return moneyFromClient;
 	}
-	
+
 	public void setMoneyFromClient(BigDecimal moneyFromClient) {
 		this.moneyFromClient = moneyFromClient;
+	}
+
+	public boolean isCard() {
+		return card;
+	}
+
+	public void setCard(boolean card) {
+		this.card = card;
 	}
 }

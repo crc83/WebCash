@@ -86,6 +86,10 @@
 			<h:form id="form_dialog">
 				<p:dialog id="paidDialog" header="#{msgs.order_paid_of_order}"
 					widgetVar="paidDialog">
+					 <p:selectOneButton valueChangeListener="#{orderBean.choosePaymentOrder}" >  
+            			<f:selectItem itemLabel="#{msgs.order_paid_credit_card}" itemValue="payCard" />
+            			<f:selectItem itemLabel="#{msgs.order_paid_cash}" itemValue="payCash" />
+        			</p:selectOneButton>  
 					<h:outputText
 						value="#{msgs.order_order_total} #{orderBean.order.total}" />
 					<br />
